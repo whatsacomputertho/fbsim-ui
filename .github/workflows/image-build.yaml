@@ -1,0 +1,30 @@
+name: FBSim UI build
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build and push the FBSim UI image
+      run: |
+        # Get the package version from package.json
+        echo "[INFO] Getting node package version from package.json"
+        NODE_PACKAGE_VERSION=$(
+          echo package.json | jq -r .version
+        );
+        echo "[DEBU] Package version: ${NODE_PACKAGE_VERSION}"
+        
+        # Build the FBSim UI image
+        echo "[INFO] Building and pushing ghcr.io/whatsacomputertho/fbsim-ui:${NODE_PACKAGE_VERSION}"
+        docker login \
+          -u whatsacomputertho \
+          -p ${{ secrets.GITHUB_TOKEN }} \
+          ghcr.io/whatsacomputertho
+        docker build . \
+          -f Containerfile \
+          --tag ghcr.io/whatsacomputertho/fbsim-ui:v${NODE_PACKAGE_VERSION}
+        docker push \
+          ghcr.io/whatsacomputertho/fbsim-ui:v${NODE_PACKAGE_VERSION}
