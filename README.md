@@ -31,8 +31,8 @@ Alternatively, to run the server as a container, one can `podman run` / `docker 
 ghcr.io/whatsacomputertho/fbsim-ui:v1.0.0-alpha.1
 ```
 
-Or one can build locally and run like so
-```
+Or one can build locally by cloning this repository and running the following (here, `podman` can optionally be replaced with `docker`).
+```sh
 # Build the container image
 podman build -f Containerfile . -t fbsim-ui:latest
 
