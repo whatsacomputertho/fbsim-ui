@@ -1,11 +1,32 @@
-const express = require('express')
-express.static.mime.types['wasm'] = 'application/wasm'
+// Load environment variables from .env if dev server
+const dotenv = require('dotenv');
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
+
+// Initialize express server
+const express = require('express');
 const app = express()
-const port = 8080
+const host = process.env.FBSIM_UI_DOMAIN || "0.0.0.0";
+const port = process.env.FBSIM_UI_PORT || 8081;
+const apiHost = process.env.FBSIM_API_HOST || "http://localhost:8080";
+const config = {
+  "net": {
+    "simServiceHost": apiHost
+  }
+}
 
+// Initialize server routes
+app.set('view engine', 'hbs')
+app.set('views', 'static/views')
 app.use(express.static('static'))
-app.route('/', express.static('index.html'))
+app.get('/', (req, res) => {
+  res.render("index", config)
+})
 
-app.listen(port, () => {
-  console.log(`FBSim UI server listening on port ${port}`)
+// Listen on the configured port
+const server = app.listen(port, host, () => {
+  const address = server.address();
+  console.log(`FBSim UI server listening on ${address.address}:${address.port}`);
+  console.log(`Given host and port are: ${host}:${port}`);
 })

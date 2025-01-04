@@ -187,7 +187,12 @@ class WACTTeamSelect extends HTMLElement {
         }
     }
 
-    // Serve the team in JSON format
+    // Get the team logo
+    get logo() {
+        return this.root.getElementById("team-select__logo").getAttribute("src");
+    }
+
+    // Get the team in JSON format
     get team() {
         const name = this.root.getElementById("team-select__name-input").value;
         const offenseOverall = parseInt(this.root.getElementById("team-select__offense-input").value);

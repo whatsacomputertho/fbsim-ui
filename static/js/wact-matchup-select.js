@@ -30,7 +30,17 @@ class WACTMatchupSelect extends HTMLElement {
         this.root.append(clone);
     }
 
-    // Serve the matchup in JSON format
+    // Get the home logo
+    get homeLogo() {
+        return this.root.getElementById("matchup-select__home").logo;
+    }
+
+    // Get the away logo
+    get awayLogo() {
+        return this.root.getElementById("matchup-select__away").logo;
+    }
+
+    // Get the matchup in JSON format
     get matchup() {
         const home = this.root.getElementById("matchup-select__home").team;
         const away = this.root.getElementById("matchup-select__away").team;
