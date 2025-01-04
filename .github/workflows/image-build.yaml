@@ -18,7 +18,7 @@ jobs:
         echo "[DEBU] Package version: ${NODE_PACKAGE_VERSION}"
         
         # Build the FBSim UI image
-        echo "[INFO] Building and pushing ghcr.io/whatsacomputertho/fbsim-ui:${NODE_PACKAGE_VERSION}"
+        echo "[INFO] Building and pushing ghcr.io/whatsacomputertho/fbsim-ui:v${NODE_PACKAGE_VERSION}"
         docker login \
           -u whatsacomputertho \
           -p ${{ secrets.GITHUB_TOKEN }} \
