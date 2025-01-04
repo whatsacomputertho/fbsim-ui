@@ -1,0 +1,10 @@
+body {
+    margin: auto;
+    background-color: #e0e0e0;
+    font-family: sans-serif;
+}
+
+#main-wrapper {
+    padding-left: 20%;
+    padding-right: 20%;
+}
