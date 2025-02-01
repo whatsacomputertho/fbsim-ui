@@ -14,7 +14,13 @@ wactMatchupSelect.innerHTML = `
             width: 100%;
             padding-left: 1%;
         }
-    </style>
+
+        @media only screen and (max-width: 600px) {
+            #matchup-select__wrapper {
+                display: block;
+            }
+        }
+    </style> 
     <div id="matchup-select__wrapper" class="matchup-select__wrapper">
         <wact-team-select id="matchup-select__home" class="matchup-select__home"></wact-team-select>
         <wact-team-select away id="matchup-select__away" class="matchup-select__away"></wact-team-select>

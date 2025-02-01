@@ -61,6 +61,16 @@ wactBoxScoreTemplate.innerHTML = `
             margin-left: 5%;
             margin-right: 5%;
         }
+
+        @media only screen and (max-width: 600px) {
+            #box-score__wrapper {
+                display: block;
+            }
+
+            #box-score__away-score-wrapper {
+                border-width: 0 0 0 16px;
+            }
+        }
     </style>
     <div id="box-score__wrapper" class="box-score__wrapper">
         <div id="box-score__home-wrapper" class="box-score__home-wrapper">
