@@ -30,6 +30,10 @@ wactGameSimTemplate.innerHTML = `
             display: none;
             margin-top: 1%;
         }
+
+        #game-sim__wrapper {
+            margin-bottom: 3%;
+        }
     </style>
     <div id="game-sim__wrapper" class="game-sim__wrapper">
         <wact-matchup-select id="game-sim__select" class="game-sim__select"></wact-matchup-select>
