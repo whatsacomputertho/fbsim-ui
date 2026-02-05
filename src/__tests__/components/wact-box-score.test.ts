@@ -15,7 +15,7 @@ describe('WACTBoxScore', () => {
 
   afterEach(() => {
     el.remove();
-  })
+  });
 
   it('should have the correct tag name', () => {
     expect(WACTBoxScore.tagName).toBe('wact-box-score');

@@ -230,13 +230,13 @@ export class WACTBoxScore extends HTMLElement {
   connectedCallback() {
     if (this._initialized) return;
     this._initialized = true;
-    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();
   }
 
   whenReady(): Promise<void> {
     if (!this._readyPromise) {
-      this._readyPromise = new Promise(resolve => {
+      this._readyPromise = new Promise((resolve) => {
         this._resolveReady = resolve;
       });
     }

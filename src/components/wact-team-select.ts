@@ -247,13 +247,13 @@ export class WACTTeamSelect extends HTMLElement {
       'team-select__logo-url-input',
     ) as HTMLInputElement;
     imageUrlInput.addEventListener('input', this.refreshImageUrl.bind(this));
-    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();
   }
 
   whenReady(): Promise<void> {
     if (!this._readyPromise) {
-      this._readyPromise = new Promise(resolve => {
+      this._readyPromise = new Promise((resolve) => {
         this._resolveReady = resolve;
       });
     }

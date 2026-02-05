@@ -91,9 +91,9 @@ export class WACTGameSim extends HTMLElement {
 
     const matchup = this.getMatchup();
     if (!matchup) {
-      console.error("Matchup select not yet loaded");
+      console.error('Matchup select not yet loaded');
       return;
-    };
+    }
 
     try {
       const result = await this.simService.simulateGame(matchup);
@@ -127,13 +127,13 @@ export class WACTGameSim extends HTMLElement {
     this._initialized = true;
     const simButton = this.root.getElementById('game-sim__sim-button') as HTMLButtonElement;
     simButton.addEventListener('click', () => void this.getBoxScore());
-    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();
   }
 
   whenReady(): Promise<void> {
     if (!this._readyPromise) {
-      this._readyPromise = new Promise(resolve => {
+      this._readyPromise = new Promise((resolve) => {
         this._resolveReady = resolve;
       });
     }

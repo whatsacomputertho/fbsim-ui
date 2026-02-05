@@ -15,7 +15,7 @@ describe('WACTFeedbackRibbon', () => {
 
   afterEach(() => {
     el.remove();
-  })
+  });
 
   it('should have the correct tag name', () => {
     expect(WACTFeedbackRibbon.tagName).toBe('wact-feedback-ribbon');
