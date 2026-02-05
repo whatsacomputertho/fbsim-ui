@@ -1,0 +1,16 @@
+src/
+server/
+.github/
+doc/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+Containerfile
+Makefile
+index.html
+vite.config.ts
+tsconfig.json
+eslint.config.js
+.prettierrc.json
+.prettierignore

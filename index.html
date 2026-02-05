@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBSim UI</title>
+    <link rel="icon" type="image/x-icon" href="/server/static/img/wactfavicon.png">
+    <style>
+      body {
+        margin: auto;
+        background-color: #e0e0e0;
+        font-family: sans-serif;
+      }
+      #main-wrapper {
+        padding-left: 20%;
+        padding-right: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <wact-nav>
+      <img src="/server/static/img/wactlogo.jpg" height="50%">
+    </wact-nav>
+    <div id="main-wrapper">
+      <wact-game-sim></wact-game-sim>
+    </div>
+    <script type="module" src="/src/dev.ts"></script>
+  </body>
+</html>

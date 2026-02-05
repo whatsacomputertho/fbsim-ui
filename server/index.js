@@ -18,8 +18,8 @@ const config = {
 
 // Initialize server routes
 app.set('view engine', 'hbs')
-app.set('views', 'static/views')
-app.use(express.static('static'))
+app.set('views', 'server/static/views')
+app.use(express.static('server/static'))
 app.get('/', (req, res) => {
   res.render("index", config)
 })
