@@ -211,9 +211,7 @@ export class WACTTeamSelect extends HTMLElement {
 
   private toggleAway(): void {
     const homeAwayText = this.away ? 'Away' : 'Home';
-    const header = this.root.getElementById(
-      'team-select__name-input-label',
-    ) as HTMLLabelElement;
+    const header = this.root.getElementById('team-select__name-input-label') as HTMLLabelElement;
     header.innerHTML = homeAwayText;
     const nameInput = this.root.getElementById('team-select__name-input') as HTMLInputElement;
     nameInput.value = `${homeAwayText} Team`;

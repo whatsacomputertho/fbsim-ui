@@ -58,9 +58,7 @@ describe('WACTGameSim', () => {
     // Wait for async click handler
     await new Promise((r) => setTimeout(r, 0));
 
-    expect(errorSpy).toHaveBeenCalledWith(
-      'No simulation service configured for wact-game-sim.',
-    );
+    expect(errorSpy).toHaveBeenCalledWith('No simulation service configured for wact-game-sim.');
 
     errorSpy.mockRestore();
     el.remove();

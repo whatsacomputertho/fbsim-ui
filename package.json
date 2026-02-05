@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "dev:server": "cross-env NODE_ENV=development node server/index.js",
+    "dev:server": "cross-env NODE_ENV=development node server/index.cjs",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src/",
@@ -33,7 +33,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prod:server": "cross-env NODE_ENV=production node server/index.js"
+    "prod:server": "cross-env NODE_ENV=production node server/index.cjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
@@ -41,7 +41,7 @@
     "@whatsacomputertho/fbsim-core": "file:../fbsim-core",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^10.0.0",
-    "happy-dom": "^16.0.0",
+    "happy-dom": "^20.5.0",
     "prettier": "^3.4.0",
     "typescript": "^5.7.0",
     "typescript-eslint": "^8.0.0",

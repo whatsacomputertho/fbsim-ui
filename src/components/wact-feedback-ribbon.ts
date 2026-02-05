@@ -176,10 +176,7 @@ export class WACTFeedbackRibbon extends HTMLElement {
     }
   }
 
-  private static getChildrenRecursive(
-    element: Element,
-    includeElement: boolean = true,
-  ): Element[] {
+  private static getChildrenRecursive(element: Element, includeElement: boolean = true): Element[] {
     const recursiveChildren: Element[] = [];
 
     if (includeElement) {
