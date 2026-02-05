@@ -1,11 +1,20 @@
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { WACTTeamSelect } from '../../components/wact-team-select.js';
 
 describe('WACTTeamSelect', () => {
-  beforeAll(() => {
+  let el: WACTTeamSelect;
+
+  beforeEach(async () => {
     if (!customElements.get('wact-team-select')) {
       customElements.define('wact-team-select', WACTTeamSelect);
     }
+    el = document.createElement('wact-team-select') as WACTTeamSelect;
+    document.body.appendChild(el);
+    await el.whenReady();
+  });
+
+  afterEach(() => {
+    el.remove();
   });
 
   it('should have the correct tag name', () => {
@@ -13,32 +22,22 @@ describe('WACTTeamSelect', () => {
   });
 
   it('should create a shadow root', () => {
-    const el = document.createElement('wact-team-select') as WACTTeamSelect;
     expect(el.root).toBeDefined();
     expect(el.root.mode).toBe('open');
   });
 
   it('should return default home team values', () => {
-    const el = document.createElement('wact-team-select') as WACTTeamSelect;
-    document.body.appendChild(el);
-
     const team = el.team;
     expect(team.name).toBe('Home Team');
     expect(team.offense_overall).toBe(50);
     expect(team.defense_overall).toBe(50);
-
-    el.remove();
   });
 
   it('should default to home mode', () => {
-    const el = document.createElement('wact-team-select') as WACTTeamSelect;
     expect(el.away).toBe(false);
   });
 
   it('should toggle to away mode via attribute', () => {
-    const el = document.createElement('wact-team-select') as WACTTeamSelect;
-    document.body.appendChild(el);
-
     el.away = true;
     expect(el.away).toBe(true);
 
@@ -47,12 +46,9 @@ describe('WACTTeamSelect', () => {
 
     const nameInput = el.root.getElementById('team-select__name-input') as HTMLInputElement;
     expect(nameInput.value).toBe('Away Team');
-
-    el.remove();
   });
 
   it('should return a valid TeamInput shape', () => {
-    const el = document.createElement('wact-team-select') as WACTTeamSelect;
     const team = el.team;
     expect(team).toHaveProperty('name');
     expect(team).toHaveProperty('offense_overall');
@@ -63,7 +59,6 @@ describe('WACTTeamSelect', () => {
   });
 
   it('should return logo src', () => {
-    const el = document.createElement('wact-team-select') as WACTTeamSelect;
     expect(el.logo).toContain('default-club-picture.png');
   });
 });

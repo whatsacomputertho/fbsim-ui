@@ -26,6 +26,10 @@ export class WACTNav extends HTMLElement {
 
   readonly root: ShadowRoot;
 
+  private _readyPromise: Promise<void> | null = null;
+  private _resolveReady: (() => void) | null = null;
+  private _initialized = false;
+
   constructor() {
     super();
     this.root = this.attachShadow({ mode: 'open' });
@@ -34,5 +38,21 @@ export class WACTNav extends HTMLElement {
 
   static get observedAttributes(): string[] {
     return [];
+  }
+
+  connectedCallback() {
+    if (this._initialized) return;
+    this._initialized = true;
+    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._resolveReady?.();
+  }
+
+  whenReady(): Promise<void> {
+    if (!this._readyPromise) {
+      this._readyPromise = new Promise(resolve => {
+        this._resolveReady = resolve;
+      });
+    }
+    return this._readyPromise;
   }
 }

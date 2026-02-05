@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@types/jest": "^30.0.0",
     "@vitest/coverage-v8": "^3.0.0",
     "@whatsacomputertho/fbsim-core": "file:../fbsim-core",
     "eslint": "^9.0.0",

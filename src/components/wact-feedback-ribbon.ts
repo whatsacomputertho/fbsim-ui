@@ -112,21 +112,14 @@ export class WACTFeedbackRibbon extends HTMLElement {
   readonly root: ShadowRoot;
   private incrementTimeout: ReturnType<typeof setTimeout> | null = null;
 
+  private _readyPromise: Promise<void> | null = null;
+  private _resolveReady: (() => void) | null = null;
+  private _initialized = false;
+
   constructor() {
     super();
     this.root = this.attachShadow({ mode: 'open' });
     this.root.append(template.content.cloneNode(true));
-
-    const removeButton = this.root.getElementById('remove-button') as HTMLButtonElement;
-    removeButton.addEventListener('click', this.removeElement.bind(this));
-
-    if (this.duration == null) {
-      this.removeProgressbar();
-    }
-
-    if (!this.removable) {
-      this.removeRemoveButton();
-    }
   }
 
   static get observedAttributes(): string[] {
@@ -312,5 +305,32 @@ export class WACTFeedbackRibbon extends HTMLElement {
         }
         break;
     }
+  }
+
+  connectedCallback() {
+    if (this._initialized) return;
+    this._initialized = true;
+
+    const removeButton = this.root.getElementById('remove-button') as HTMLButtonElement;
+    removeButton.addEventListener('click', this.removeElement.bind(this));
+
+    if (this.duration == null) {
+      this.removeProgressbar();
+    }
+
+    if (!this.removable) {
+      this.removeRemoveButton();
+    }
+    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._resolveReady?.();
+  }
+
+  whenReady(): Promise<void> {
+    if (!this._readyPromise) {
+      this._readyPromise = new Promise(resolve => {
+        this._resolveReady = resolve;
+      });
+    }
+    return this._readyPromise;
   }
 }

@@ -90,6 +90,10 @@ export class WACTBoxScore extends HTMLElement {
 
   readonly root: ShadowRoot;
 
+  private _readyPromise: Promise<void> | null = null;
+  private _resolveReady: (() => void) | null = null;
+  private _initialized = false;
+
   constructor() {
     super();
     this.root = this.attachShadow({ mode: 'open' });
@@ -188,6 +192,7 @@ export class WACTBoxScore extends HTMLElement {
     _previousValue: string | null,
     newValue: string | null,
   ): void {
+    if (!this.root) return;
     switch (attribute.toLowerCase()) {
       case 'home-team':
         (this.root.getElementById('box-score__home-team') as HTMLParagraphElement).innerHTML =
@@ -220,5 +225,21 @@ export class WACTBoxScore extends HTMLElement {
         this.calculateWinner();
         break;
     }
+  }
+
+  connectedCallback() {
+    if (this._initialized) return;
+    this._initialized = true;
+    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._resolveReady?.();
+  }
+
+  whenReady(): Promise<void> {
+    if (!this._readyPromise) {
+      this._readyPromise = new Promise(resolve => {
+        this._resolveReady = resolve;
+      });
+    }
+    return this._readyPromise;
   }
 }

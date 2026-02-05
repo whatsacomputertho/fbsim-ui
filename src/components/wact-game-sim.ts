@@ -1,4 +1,4 @@
-import type { SimService, SimResult } from '../services/types.js';
+import type { MatchupInput, SimService, SimResult } from '../services/types.js';
 import type { WACTMatchupSelect } from './wact-matchup-select.js';
 import type { WACTBoxScore } from './wact-box-score.js';
 
@@ -56,13 +56,14 @@ export class WACTGameSim extends HTMLElement {
   readonly root: ShadowRoot;
   private simService: SimService | null = null;
 
+  private _readyPromise: Promise<void> | null = null;
+  private _resolveReady: (() => void) | null = null;
+  private _initialized = false;
+
   constructor() {
     super();
     this.root = this.attachShadow({ mode: 'open' });
     this.root.append(template.content.cloneNode(true));
-
-    const simButton = this.root.getElementById('game-sim__sim-button') as HTMLButtonElement;
-    simButton.addEventListener('click', () => void this.getBoxScore());
   }
 
   static get observedAttributes(): string[] {
@@ -71,6 +72,11 @@ export class WACTGameSim extends HTMLElement {
 
   setSimService(service: SimService): void {
     this.simService = service;
+  }
+
+  private getMatchup(): MatchupInput | null {
+    const matchupSelect = this.root.getElementById('game-sim__select') as WACTMatchupSelect | null;
+    return matchupSelect?.matchup ?? null;
   }
 
   private async getBoxScore(): Promise<void> {
@@ -83,8 +89,11 @@ export class WACTGameSim extends HTMLElement {
       await this.simService.initialize();
     }
 
-    const matchupSelect = this.root.getElementById('game-sim__select') as WACTMatchupSelect;
-    const matchup = matchupSelect.matchup;
+    const matchup = this.getMatchup();
+    if (!matchup) {
+      console.error("Matchup select not yet loaded");
+      return;
+    };
 
     try {
       const result = await this.simService.simulateGame(matchup);
@@ -111,5 +120,23 @@ export class WACTGameSim extends HTMLElement {
     boxScore.setAttribute('away-logo', awayLogo);
 
     resultWrapper.style.display = 'block';
+  }
+
+  connectedCallback() {
+    if (this._initialized) return;
+    this._initialized = true;
+    const simButton = this.root.getElementById('game-sim__sim-button') as HTMLButtonElement;
+    simButton.addEventListener('click', () => void this.getBoxScore());
+    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._resolveReady?.();
+  }
+
+  whenReady(): Promise<void> {
+    if (!this._readyPromise) {
+      this._readyPromise = new Promise(resolve => {
+        this._resolveReady = resolve;
+      });
+    }
+    return this._readyPromise;
   }
 }

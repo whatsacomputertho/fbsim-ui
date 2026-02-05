@@ -161,15 +161,14 @@ export class WACTTeamSelect extends HTMLElement {
   readonly root: ShadowRoot;
   private imageUrlTimeout: ReturnType<typeof setTimeout> | null = null;
 
+  private _readyPromise: Promise<void> | null = null;
+  private _resolveReady: (() => void) | null = null;
+  private _initialized = false;
+
   constructor() {
     super();
     this.root = this.attachShadow({ mode: 'open' });
     this.root.append(template.content.cloneNode(true));
-
-    const imageUrlInput = this.root.getElementById(
-      'team-select__logo-url-input',
-    ) as HTMLInputElement;
-    imageUrlInput.addEventListener('input', this.refreshImageUrl.bind(this));
   }
 
   static get observedAttributes(): string[] {
@@ -235,8 +234,29 @@ export class WACTTeamSelect extends HTMLElement {
     _previousValue: string | null,
     _newValue: string | null,
   ): void {
-    if (attribute.toLowerCase() === 'away') {
-      this.toggleAway();
+    if (attribute.toLowerCase() !== 'away') return;
+    if (!this.isConnected) return;
+    if (typeof this.toggleAway !== 'function') return;
+    this.toggleAway();
+  }
+
+  connectedCallback(): void {
+    if (this._initialized || !this.root) return;
+    this._initialized = true;
+    const imageUrlInput = this.root.getElementById(
+      'team-select__logo-url-input',
+    ) as HTMLInputElement;
+    imageUrlInput.addEventListener('input', this.refreshImageUrl.bind(this));
+    this._readyPromise = new Promise(r => (this._resolveReady = r));
+    this._resolveReady?.();
+  }
+
+  whenReady(): Promise<void> {
+    if (!this._readyPromise) {
+      this._readyPromise = new Promise(resolve => {
+        this._resolveReady = resolve;
+      });
     }
+    return this._readyPromise;
   }
 }

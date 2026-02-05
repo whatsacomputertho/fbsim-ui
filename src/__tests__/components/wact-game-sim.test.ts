@@ -1,9 +1,14 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { WACTTeamSelect } from '../../components/wact-team-select.js';
 import { WACTMatchupSelect } from '../../components/wact-matchup-select.js';
 import { WACTBoxScore } from '../../components/wact-box-score.js';
 import { WACTGameSim } from '../../components/wact-game-sim.js';
-import type { SimService, MatchupInput, SimResult } from '../../services/types.js';
+import type { SimService, SimResult } from '../../services/types.js';
+
+const defaultMatchup = {
+  home: { name: 'Home Team', offense_overall: 50, defense_overall: 50 },
+  away: { name: 'Away Team', offense_overall: 50, defense_overall: 50 },
+};
 
 function createMockService(result?: SimResult): SimService {
   return {
@@ -21,7 +26,9 @@ function createMockService(result?: SimResult): SimService {
 }
 
 describe('WACTGameSim', () => {
-  beforeAll(() => {
+  let el: WACTGameSim;
+
+  beforeEach(async () => {
     if (!customElements.get('wact-team-select')) {
       customElements.define('wact-team-select', WACTTeamSelect);
     }
@@ -34,6 +41,14 @@ describe('WACTGameSim', () => {
     if (!customElements.get('wact-game-sim')) {
       customElements.define('wact-game-sim', WACTGameSim);
     }
+    el = document.createElement('wact-game-sim') as WACTGameSim;
+    document.body.appendChild(el);
+    await el.whenReady();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    el.remove();
   });
 
   it('should have the correct tag name', () => {
@@ -41,32 +56,26 @@ describe('WACTGameSim', () => {
   });
 
   it('should create a shadow root with a simulate button', () => {
-    const el = document.createElement('wact-game-sim') as WACTGameSim;
     const button = el.root.getElementById('game-sim__sim-button') as HTMLButtonElement;
     expect(button).not.toBeNull();
     expect(button.textContent).toBe('Simulate');
   });
 
   it('should log error when simulate clicked without a service', async () => {
-    const el = document.createElement('wact-game-sim') as WACTGameSim;
-    document.body.appendChild(el);
-
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const button = el.root.getElementById('game-sim__sim-button') as HTMLButtonElement;
     button.click();
 
-    // Wait for async click handler
     await new Promise((r) => setTimeout(r, 0));
 
     expect(errorSpy).toHaveBeenCalledWith('No simulation service configured for wact-game-sim.');
-
-    errorSpy.mockRestore();
-    el.remove();
   });
 
   it('should call simulateGame on the service when simulate is clicked', async () => {
-    const el = document.createElement('wact-game-sim') as WACTGameSim;
-    document.body.appendChild(el);
+    // Spy on getMatchup to bypass happy-dom template upgrade limitation
+    vi.spyOn(el as unknown as { getMatchup: () => unknown }, 'getMatchup').mockReturnValue(
+      defaultMatchup,
+    );
 
     const mockService = createMockService();
     el.setSimService(mockService);
@@ -77,17 +86,13 @@ describe('WACTGameSim', () => {
     await new Promise((r) => setTimeout(r, 0));
 
     expect(mockService.simulateGame).toHaveBeenCalledTimes(1);
-    const callArg = (mockService.simulateGame as ReturnType<typeof vi.fn>).mock
-      .calls[0][0] as MatchupInput;
-    expect(callArg).toHaveProperty('home');
-    expect(callArg).toHaveProperty('away');
-
-    el.remove();
+    expect(mockService.simulateGame).toHaveBeenCalledWith(defaultMatchup);
   });
 
   it('should display box score after successful simulation', async () => {
-    const el = document.createElement('wact-game-sim') as WACTGameSim;
-    document.body.appendChild(el);
+    vi.spyOn(el as unknown as { getMatchup: () => unknown }, 'getMatchup').mockReturnValue(
+      defaultMatchup,
+    );
 
     const mockService = createMockService({
       home_team: 'Eagles',
@@ -110,13 +115,12 @@ describe('WACTGameSim', () => {
     expect(boxScore.getAttribute('away-team')).toBe('Cowboys');
     expect(boxScore.getAttribute('home-score')).toBe('31');
     expect(boxScore.getAttribute('away-score')).toBe('17');
-
-    el.remove();
   });
 
   it('should initialize service if not ready when simulate is clicked', async () => {
-    const el = document.createElement('wact-game-sim') as WACTGameSim;
-    document.body.appendChild(el);
+    vi.spyOn(el as unknown as { getMatchup: () => unknown }, 'getMatchup').mockReturnValue(
+      defaultMatchup,
+    );
 
     const mockService = createMockService();
     (mockService.isReady as ReturnType<typeof vi.fn>).mockReturnValue(false);
@@ -128,7 +132,5 @@ describe('WACTGameSim', () => {
     await new Promise((r) => setTimeout(r, 0));
 
     expect(mockService.initialize).toHaveBeenCalledTimes(1);
-
-    el.remove();
   });
 });
