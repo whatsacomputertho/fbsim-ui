@@ -1,4 +1,4 @@
-.PHONY: dependencies lint test build sec dev
+.PHONY: dependencies lint test build release sec dev
 
 dependencies:
 	npm ci
@@ -16,6 +16,9 @@ build: dependencies
 	test -f dist/fbsim-ui.cjs
 	test -f dist/register.js
 	test -f dist/register.cjs
+
+release: dependencies build
+	npm publish
 
 sec: dependencies
 	npm audit --audit-level=high

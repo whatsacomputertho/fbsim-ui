@@ -15,6 +15,10 @@ template.innerHTML = `
       width: 100%;
       z-index: 1000;
     }
+    ::slotted(img) {
+      max-height: 100%;
+      object-fit: contain;
+    }
   </style>
   <nav id="navbar-wrapper" class="navbar-wrapper">
     <slot></slot>
