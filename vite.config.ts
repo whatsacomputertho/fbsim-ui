@@ -22,13 +22,6 @@ export default defineConfig({
       },
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
-      external: [
-        '@whatsacomputertho/fbsim-core',
-        '@whatsacomputertho/fbsim-core/web',
-        '@whatsacomputertho/fbsim-core/node',
-      ],
-    },
     outDir: 'dist',
     sourcemap: true,
   },
