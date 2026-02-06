@@ -6,9 +6,14 @@ export default defineConfig({
   plugins: [
     dts({
       include: ['src'],
-      exclude: ['src/__tests__', 'src/dev.ts'],
+      exclude: ['src/__tests__', 'src/dev.ts', 'src/demo'],
     }),
   ],
+  server: {
+    fs: {
+      allow: ['.', resolve(__dirname, '../fbsim-core')],
+    },
+  },
   build: {
     lib: {
       entry: {
@@ -34,7 +39,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/**/*.ts'],
-      exclude: ['src/**/*.test.ts', 'src/register.ts', 'src/dev.ts'],
+      exclude: ['src/**/*.test.ts', 'src/register.ts', 'src/dev.ts', 'src/demo/**'],
     },
   },
 });

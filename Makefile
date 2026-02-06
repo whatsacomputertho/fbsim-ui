@@ -1,4 +1,4 @@
-.PHONY: dependencies lint test build sec
+.PHONY: dependencies lint test build sec dev
 
 dependencies:
 	npm ci
@@ -19,3 +19,6 @@ build: dependencies
 
 sec: dependencies
 	npm audit --audit-level=high
+
+dev: dependencies
+	npx vite

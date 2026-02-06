@@ -307,7 +307,7 @@ export class WACTFeedbackRibbon extends HTMLElement {
     }
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     if (this._initialized) return;
     this._initialized = true;
 

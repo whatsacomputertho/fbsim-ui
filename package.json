@@ -1,7 +1,7 @@
 {
   "name": "@whatsacomputertho/fbsim-ui",
   "version": "1.0.0-beta.1",
-  "description": "Football simulation web components library",
+  "description": "FBSim web component library",
   "type": "module",
   "main": "dist/fbsim-ui.cjs",
   "module": "dist/fbsim-ui.js",
@@ -23,7 +23,6 @@
   ],
   "scripts": {
     "dev": "vite",
-    "dev:server": "cross-env NODE_ENV=development node server/index.cjs",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src/",
@@ -32,8 +31,7 @@
     "format:check": "prettier --check \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "prod:server": "cross-env NODE_ENV=production node server/index.cjs"
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
@@ -51,18 +49,7 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "hbs": "^4.2.0"
-  },
-  "peerDependencies": {
     "@whatsacomputertho/fbsim-core": "^1.0.0-beta.1"
-  },
-  "peerDependenciesMeta": {
-    "@whatsacomputertho/fbsim-core": {
-      "optional": true
-    }
   },
   "license": "GPL-3.0",
   "repository": {

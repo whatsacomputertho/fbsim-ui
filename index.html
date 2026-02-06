@@ -3,27 +3,42 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FBSim UI</title>
-    <link rel="icon" type="image/x-icon" href="/server/static/img/wactfavicon.png">
+    <title>FBSim UI - Component Demos</title>
     <style>
       body {
         margin: auto;
         background-color: #e0e0e0;
         font-family: sans-serif;
       }
-      #main-wrapper {
-        padding-left: 20%;
-        padding-right: 20%;
+      .index-wrapper {
+        padding: 2em;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        margin: 0.5em 0;
+      }
+      a {
+        font-size: 1.1em;
       }
     </style>
   </head>
   <body>
-    <wact-nav>
-      <img src="/server/static/img/wactlogo.jpg" height="50%">
-    </wact-nav>
-    <div id="main-wrapper">
-      <wact-game-sim></wact-game-sim>
+    <div class="index-wrapper">
+      <h1>FBSim UI</h1>
+      <p>Component demo pages. Select a component below to view it in isolation.</p>
+      <ul>
+        <li><a href="/demo/wact-nav.html">wact-nav</a> &mdash; Sticky navigation bar</li>
+        <li><a href="/demo/wact-team-select.html">wact-team-select</a> &mdash; Team selection inputs</li>
+        <li><a href="/demo/wact-matchup-select.html">wact-matchup-select</a> &mdash; Home/away matchup selection</li>
+        <li><a href="/demo/wact-box-score.html">wact-box-score</a> &mdash; Game score display</li>
+        <li><a href="/demo/wact-game-sim.html">wact-game-sim</a> &mdash; Full simulation orchestrator</li>
+        <li><a href="/demo/wact-feedback-ribbon.html">wact-feedback-ribbon</a> &mdash; Feedback/notification ribbon</li>
+      </ul>
     </div>
-    <script type="module" src="/src/dev.ts"></script>
   </body>
 </html>

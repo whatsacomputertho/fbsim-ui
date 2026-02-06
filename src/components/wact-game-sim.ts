@@ -122,7 +122,7 @@ export class WACTGameSim extends HTMLElement {
     resultWrapper.style.display = 'block';
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     if (this._initialized) return;
     this._initialized = true;
     const simButton = this.root.getElementById('game-sim__sim-button') as HTMLButtonElement;
