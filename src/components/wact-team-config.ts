@@ -1,0 +1,466 @@
+import type { TeamConfig } from '../services/types.js';
+
+const template = document.createElement('template');
+template.innerHTML = `
+  <style>
+    :host {
+      display: block;
+      font-family: sans-serif;
+    }
+
+    #team-config__wrapper {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    #team-config__header-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    #team-config__header-label {
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+
+    .team-config__row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .team-config__row > * {
+      flex: 1;
+    }
+
+    .team-config__input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 6px;
+    }
+
+    .team-config__input-group label {
+      font-size: 0.8em;
+      color: #666;
+      margin-bottom: 2px;
+    }
+
+    .team-config__input-group input {
+      background-color: rgba(0, 0, 0, 0);
+      border: none;
+      border-bottom: 2px solid #ccc;
+      padding: 4px 2px;
+      font-size: 1em;
+      transition: border-color 200ms ease;
+    }
+
+    .team-config__input-group input:focus,
+    .team-config__input-group input:hover {
+      border-color: royalblue;
+      outline: none;
+    }
+
+    #team-config__image-wrapper {
+      position: relative;
+      height: 25vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      transition: all 100ms ease-in-out;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    #team-config__image-wrapper:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    #team-config__logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      z-index: -1;
+    }
+
+    #team-config__logo-url-wrapper {
+      width: 100%;
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    #team-config__logo-url-label {
+      color: white;
+      font-size: 0.9em;
+      margin-left: 4px;
+    }
+
+    #team-config__logo-url-input {
+      flex: 1;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      border-bottom: 2px solid gray;
+      color: white;
+      padding: 4px;
+      font-size: 0.9em;
+      transition: border-color 200ms ease;
+    }
+
+    #team-config__logo-url-input:focus,
+    #team-config__logo-url-input:hover {
+      border-color: royalblue;
+      outline: none;
+    }
+
+    .team-config__section-header {
+      font-weight: bold;
+      font-size: 1em;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      color: #333;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .team-config__section-header:hover {
+      color: royalblue;
+    }
+
+    .team-config__section-chevron {
+      font-size: 0.7em;
+      transition: transform 200ms ease;
+    }
+
+    .team-config__section-chevron--collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .team-config__section-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 12px;
+    }
+
+    .team-config__section-content--collapsed {
+      display: none;
+    }
+
+    #team-config__load-btn {
+      margin-top: 8px;
+      padding: 6px 16px;
+      font-size: 0.9em;
+      background-color: #162267;
+      color: yellow;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 150ms ease;
+    }
+
+    #team-config__load-btn:hover {
+      background-color: rgb(44, 63, 170);
+    }
+
+    #team-config__file-input {
+      display: none;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .team-config__section-content {
+        grid-template-columns: 1fr;
+      }
+
+      #team-config__image-wrapper {
+        height: 20vh;
+      }
+    }
+  </style>
+  <div id="team-config__wrapper">
+    <div id="team-config__header-wrapper">
+      <span id="team-config__header-label">Home</span>
+    </div>
+    <div class="team-config__row">
+      <div class="team-config__input-group">
+        <label for="team-config__name">Team Name</label>
+        <input id="team-config__name" type="text" value="Home Team">
+      </div>
+      <div class="team-config__input-group">
+        <label for="team-config__short-name">Abbreviation</label>
+        <input id="team-config__short-name" type="text" value="HOME" maxlength="4">
+      </div>
+    </div>
+    <div id="team-config__image-wrapper">
+      <img id="team-config__logo" src="https://official-flc.com/img/default-club-picture.png" alt="">
+      <div id="team-config__logo-url-wrapper">
+        <label id="team-config__logo-url-label" for="team-config__logo-url-input">Url:</label>
+        <input id="team-config__logo-url-input" type="text" value="https://official-flc.com/img/default-club-picture.png">
+      </div>
+    </div>
+    <button id="team-config__load-btn">Load from File</button>
+    <input id="team-config__file-input" type="file" accept=".json">
+
+    <div class="team-config__section-header" data-section="offense">
+      <span>Offense</span>
+      <span class="team-config__section-chevron">&#9660;</span>
+    </div>
+    <div id="team-config__offense" class="team-config__section-content">
+      <div class="team-config__input-group"><label>Passing</label><input data-field="offense.passing" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Blocking</label><input data-field="offense.blocking" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Rushing</label><input data-field="offense.rushing" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Receiving</label><input data-field="offense.receiving" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Scrambling</label><input data-field="offense.scrambling" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Turnovers</label><input data-field="offense.turnovers" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Field Goals</label><input data-field="offense.field_goals" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Punting</label><input data-field="offense.punting" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Kickoffs</label><input data-field="offense.kickoffs" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Kick Return Def</label><input data-field="offense.kick_return_defense" type="number" value="50" min="0" max="100"></div>
+    </div>
+
+    <div class="team-config__section-header" data-section="defense">
+      <span>Defense</span>
+      <span class="team-config__section-chevron">&#9660;</span>
+    </div>
+    <div id="team-config__defense" class="team-config__section-content">
+      <div class="team-config__input-group"><label>Blitzing</label><input data-field="defense.blitzing" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Rush Defense</label><input data-field="defense.rush_defense" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Pass Defense</label><input data-field="defense.pass_defense" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Coverage</label><input data-field="defense.coverage" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Turnovers</label><input data-field="defense.turnovers" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Kick Returning</label><input data-field="defense.kick_returning" type="number" value="50" min="0" max="100"></div>
+    </div>
+
+    <div class="team-config__section-header" data-section="coach">
+      <span>Coach</span>
+      <span class="team-config__section-chevron">&#9660;</span>
+    </div>
+    <div id="team-config__coach" class="team-config__section-content">
+      <div class="team-config__input-group"><label>Risk Taking</label><input data-field="coach.risk_taking" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Run/Pass</label><input data-field="coach.run_pass" type="number" value="50" min="0" max="100"></div>
+      <div class="team-config__input-group"><label>Up Tempo</label><input data-field="coach.up_tempo" type="number" value="50" min="0" max="100"></div>
+    </div>
+  </div>
+`;
+
+export class WACTTeamConfig extends HTMLElement {
+  static readonly tagName = 'wact-team-config' as const;
+
+  readonly root: ShadowRoot;
+  private imageUrlTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  private _readyPromise: Promise<void> | null = null;
+  private _resolveReady: (() => void) | null = null;
+  private _initialized = false;
+
+  constructor() {
+    super();
+    this.root = this.attachShadow({ mode: 'open' });
+    this.root.append(template.content.cloneNode(true));
+  }
+
+  static get observedAttributes(): string[] {
+    return ['away'];
+  }
+
+  get away(): boolean {
+    return this.hasAttribute('away');
+  }
+
+  set away(value: boolean) {
+    if (value) {
+      this.setAttribute('away', '');
+    } else {
+      this.removeAttribute('away');
+    }
+  }
+
+  get logo(): string {
+    return (
+      (this.root.getElementById('team-config__logo') as HTMLImageElement).getAttribute('src') ??
+      ''
+    );
+  }
+
+  get teamConfig(): TeamConfig {
+    const name = (this.root.getElementById('team-config__name') as HTMLInputElement).value;
+    const shortName = (this.root.getElementById('team-config__short-name') as HTMLInputElement)
+      .value;
+    const logo =
+      (this.root.getElementById('team-config__logo') as HTMLImageElement).getAttribute('src') ??
+      '';
+
+    const getField = (field: string): number => {
+      const input = this.root.querySelector(`[data-field="${field}"]`) as HTMLInputElement;
+      return parseInt(input.value) || 50;
+    };
+
+    return {
+      name,
+      short_name: shortName,
+      logo,
+      offense: {
+        passing: getField('offense.passing'),
+        blocking: getField('offense.blocking'),
+        rushing: getField('offense.rushing'),
+        receiving: getField('offense.receiving'),
+        scrambling: getField('offense.scrambling'),
+        turnovers: getField('offense.turnovers'),
+        field_goals: getField('offense.field_goals'),
+        punting: getField('offense.punting'),
+        kickoffs: getField('offense.kickoffs'),
+        kick_return_defense: getField('offense.kick_return_defense'),
+      },
+      defense: {
+        blitzing: getField('defense.blitzing'),
+        rush_defense: getField('defense.rush_defense'),
+        pass_defense: getField('defense.pass_defense'),
+        coverage: getField('defense.coverage'),
+        turnovers: getField('defense.turnovers'),
+        kick_returning: getField('defense.kick_returning'),
+      },
+      coach: {
+        risk_taking: getField('coach.risk_taking'),
+        run_pass: getField('coach.run_pass'),
+        up_tempo: getField('coach.up_tempo'),
+      },
+    };
+  }
+
+  private toggleAway(): void {
+    const homeAwayText = this.away ? 'Away' : 'Home';
+    const header = this.root.getElementById('team-config__header-label') as HTMLSpanElement;
+    header.textContent = homeAwayText;
+    const nameInput = this.root.getElementById('team-config__name') as HTMLInputElement;
+    nameInput.value = `${homeAwayText} Team`;
+    const shortInput = this.root.getElementById('team-config__short-name') as HTMLInputElement;
+    shortInput.value = homeAwayText.substring(0, 4).toUpperCase();
+  }
+
+  private refreshImageUrl(): void {
+    if (this.imageUrlTimeout) {
+      clearTimeout(this.imageUrlTimeout);
+    }
+    this.imageUrlTimeout = setTimeout(() => {
+      const imageDisplay = this.root.getElementById('team-config__logo') as HTMLImageElement;
+      const imageInput = this.root.getElementById(
+        'team-config__logo-url-input',
+      ) as HTMLInputElement;
+      imageDisplay.setAttribute('src', imageInput.value);
+    }, 1000);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private populateFromJSON(data: any): void {
+    if (data.name) {
+      (this.root.getElementById('team-config__name') as HTMLInputElement).value = data.name;
+    }
+    if (data.short_name) {
+      (this.root.getElementById('team-config__short-name') as HTMLInputElement).value =
+        data.short_name;
+    }
+
+    const sections = ['offense', 'defense', 'coach'] as const;
+    for (const section of sections) {
+      if (data[section]) {
+        for (const [key, value] of Object.entries(data[section])) {
+          const input = this.root.querySelector(
+            `[data-field="${section}.${key}"]`,
+          ) as HTMLInputElement | null;
+          if (input && typeof value === 'number') {
+            input.value = String(value);
+          }
+        }
+      }
+    }
+  }
+
+  private handleFileLoad(): void {
+    const fileInput = this.root.getElementById('team-config__file-input') as HTMLInputElement;
+    fileInput.click();
+  }
+
+  private handleFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e): void => {
+      try {
+        const data = JSON.parse(e.target?.result as string);
+        this.populateFromJSON(data);
+      } catch (err) {
+        console.error('Invalid JSON file:', err);
+      }
+    };
+    reader.readAsText(file);
+    input.value = '';
+  }
+
+  private setupSectionToggles(): void {
+    const headers = this.root.querySelectorAll(
+      '.team-config__section-header',
+    ) as NodeListOf<HTMLDivElement>;
+    for (const header of headers) {
+      header.addEventListener('click', () => {
+        const sectionName = header.dataset.section;
+        if (!sectionName) return;
+        const content = this.root.getElementById(
+          `team-config__${sectionName}`,
+        ) as HTMLDivElement;
+        const chevron = header.querySelector('.team-config__section-chevron') as HTMLSpanElement;
+        content.classList.toggle('team-config__section-content--collapsed');
+        chevron.classList.toggle('team-config__section-chevron--collapsed');
+      });
+    }
+  }
+
+  attributeChangedCallback(
+    attribute: string,
+    _previousValue: string | null,
+    _newValue: string | null,
+  ): void {
+    if (attribute.toLowerCase() !== 'away') return;
+    if (!this.isConnected) return;
+    if (typeof this.toggleAway !== 'function') return;
+    this.toggleAway();
+  }
+
+  connectedCallback(): void {
+    if (this._initialized || !this.root) return;
+    this._initialized = true;
+
+    const imageUrlInput = this.root.getElementById(
+      'team-config__logo-url-input',
+    ) as HTMLInputElement;
+    imageUrlInput.addEventListener('input', this.refreshImageUrl.bind(this));
+
+    const loadBtn = this.root.getElementById('team-config__load-btn') as HTMLButtonElement;
+    loadBtn.addEventListener('click', () => this.handleFileLoad());
+
+    const fileInput = this.root.getElementById('team-config__file-input') as HTMLInputElement;
+    fileInput.addEventListener('change', (e) => this.handleFileChange(e));
+
+    this.setupSectionToggles();
+
+    this._readyPromise = new Promise((r) => (this._resolveReady = r));
+    this._resolveReady?.();
+  }
+
+  whenReady(): Promise<void> {
+    if (!this._readyPromise) {
+      this._readyPromise = new Promise((resolve) => {
+        this._resolveReady = resolve;
+      });
+    }
+    return this._readyPromise;
+  }
+}

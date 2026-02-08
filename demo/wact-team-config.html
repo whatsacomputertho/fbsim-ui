@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo: wact-game-sim</title>
+    <title>Demo: wact-team-config</title>
     <style>
       body {
         margin: auto;
@@ -12,7 +12,7 @@
       }
       .demo-wrapper {
         padding: 2em;
-        max-width: 1100px;
+        max-width: 900px;
         margin: 0 auto;
       }
     </style>
@@ -20,10 +20,10 @@
   <body>
     <div class="demo-wrapper">
       <p><a href="/">&larr; Back to index</a></p>
-      <h2>wact-game-sim</h2>
-      <p>Full play-by-play simulation orchestrator. Configure teams, start the game, and watch the simulation play out with real-time scoreboard, field display, and game log. Requires <code>@whatsacomputertho/fbsim-core</code> for WASM simulation.</p>
-      <wact-game-sim></wact-game-sim>
+      <h2>wact-team-config</h2>
+      <p>Full team configuration with offense, defense, and coach attributes. Supports loading from JSON files.</p>
+      <wact-team-config></wact-team-config>
     </div>
-    <script type="module" src="/src/demo/wact-game-sim.ts"></script>
+    <script type="module" src="/src/demo/wact-team-config.ts"></script>
   </body>
 </html>

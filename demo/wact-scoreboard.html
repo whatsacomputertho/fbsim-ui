@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: wact-scoreboard</title>
+    <style>
+      body {
+        margin: auto;
+        background-color: #e0e0e0;
+        font-family: sans-serif;
+      }
+      .demo-wrapper {
+        padding: 2em;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-wrapper">
+      <p><a href="/">&larr; Back to index</a></p>
+      <h2>wact-scoreboard</h2>
+      <p>Displays live game scoreboard with team info, scores, possession, quarter, clock, and down &amp; distance.</p>
+      <wact-scoreboard
+        home-team="PHI"
+        away-team="DAL"
+        home-score="21"
+        away-score="14"
+        home-logo="https://official-flc.com/img/default-club-picture.png"
+        away-logo="https://official-flc.com/img/default-club-picture.png"
+        home-possession
+        quarter="3"
+        clock="924"
+        yard-line="35"
+        down="2"
+        distance="8"
+      ></wact-scoreboard>
+      <br>
+      <wact-scoreboard
+        home-team="NYG"
+        away-team="WAS"
+        home-score="0"
+        away-score="0"
+        status="Pregame"
+      ></wact-scoreboard>
+    </div>
+    <script type="module" src="/src/demo/wact-scoreboard.ts"></script>
+  </body>
+</html>
