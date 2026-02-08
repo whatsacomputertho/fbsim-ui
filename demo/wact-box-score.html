@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: wact-box-score</title>
+    <style>
+      body {
+        margin: auto;
+        background-color: #e0e0e0;
+        font-family: sans-serif;
+      }
+      .demo-wrapper {
+        padding: 2em;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-wrapper">
+      <p><a href="/">&larr; Back to index</a></p>
+      <h2>wact-box-score</h2>
+      <h3>Home win</h3>
+      <wact-box-score
+        home-team="Eagles"
+        away-team="Cowboys"
+        home-score="28"
+        away-score="14"
+      ></wact-box-score>
+      <h3>Away win</h3>
+      <wact-box-score
+        home-team="Giants"
+        away-team="Commanders"
+        home-score="10"
+        away-score="24"
+      ></wact-box-score>
+      <h3>Tie</h3>
+      <wact-box-score
+        home-team="Team A"
+        away-team="Team B"
+        home-score="17"
+        away-score="17"
+      ></wact-box-score>
+    </div>
+    <script type="module" src="/src/demo/wact-box-score.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: wact-feedback-ribbon</title>
+    <style>
+      body {
+        margin: auto;
+        background-color: #e0e0e0;
+        font-family: sans-serif;
+      }
+      .demo-wrapper {
+        padding: 2em;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .dark-bg {
+        background-color: #1a1a1a;
+        padding: 1em;
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-wrapper">
+      <p><a href="/">&larr; Back to index</a></p>
+      <h2>wact-feedback-ribbon</h2>
+
+      <h3>Default</h3>
+      <wact-feedback-ribbon>This is a default feedback ribbon.</wact-feedback-ribbon>
+
+      <h3>Removable</h3>
+      <wact-feedback-ribbon removable>Click the &times; button to dismiss this ribbon.</wact-feedback-ribbon>
+
+      <h3>Custom color</h3>
+      <wact-feedback-ribbon color="green" removable>A green feedback ribbon.</wact-feedback-ribbon>
+
+      <h3>With duration (auto-dismiss after 10s)</h3>
+      <wact-feedback-ribbon duration="10" removable color="orange">This ribbon will disappear in 10 seconds.</wact-feedback-ribbon>
+
+      <h3>Dark mode</h3>
+      <div class="dark-bg">
+        <wact-feedback-ribbon dark removable>Dark mode feedback ribbon.</wact-feedback-ribbon>
+      </div>
+    </div>
+    <script type="module" src="/src/demo/wact-feedback-ribbon.ts"></script>
+  </body>
+</html>

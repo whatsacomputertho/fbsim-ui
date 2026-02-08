@@ -1,0 +1,15 @@
+src/
+.github/
+doc/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+Makefile
+index.html
+vite.config.ts
+tsconfig.json
+eslint.config.js
+.prettierrc.json
+.prettierignore
+demo/
