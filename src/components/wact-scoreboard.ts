@@ -60,11 +60,17 @@ template.innerHTML = `
       font-size: 1.8em;
       font-weight: bold;
       margin-left: auto;
+      transition: color 300ms ease, text-shadow 300ms ease;
     }
 
     .scoreboard__team--away .scoreboard__team-score {
       margin-left: 0;
       margin-right: auto;
+    }
+
+    .scoreboard__team-score--flash {
+      color: #ffd700;
+      text-shadow: 0 0 8px #ffd700;
     }
 
     #scoreboard__divider {
@@ -87,6 +93,7 @@ template.innerHTML = `
 
     .scoreboard__context-item {
       white-space: nowrap;
+      transition: opacity 150ms ease;
     }
 
     #scoreboard__status {
@@ -168,6 +175,7 @@ export class WACTScoreboard extends HTMLElement {
       'away-logo',
       'away-score',
       'home-possession',
+      'home-positive-direction',
       'quarter',
       'clock',
       'yard-line',
@@ -262,6 +270,28 @@ export class WACTScoreboard extends HTMLElement {
     }
   }
 
+  private formatYardLine(yardLine: number): string {
+    const homeTeam = this.getAttribute('home-team') ?? 'HOME';
+    const awayTeam = this.getAttribute('away-team') ?? 'AWAY';
+    const homePositiveDirection = this.hasAttribute('home-positive-direction');
+
+    if (yardLine === 50) {
+      return 'Ball on 50';
+    }
+
+    if (yardLine < 50) {
+      // Ball is on the home-endzone side (yard_line 0 = home endzone)
+      const displayYard = yardLine;
+      const sideName = homePositiveDirection ? homeTeam : awayTeam;
+      return `Ball on ${sideName} ${displayYard}`;
+    }
+
+    // yardLine > 50: ball is on the away-endzone side
+    const displayYard = 100 - yardLine;
+    const sideName = homePositiveDirection ? awayTeam : homeTeam;
+    return `Ball on ${sideName} ${displayYard}`;
+  }
+
   private updatePossession(): void {
     const homePoss = this.hasAttribute('home-possession');
     const homeEl = this.root.getElementById('scoreboard__home') as HTMLDivElement;
@@ -286,15 +316,26 @@ export class WACTScoreboard extends HTMLElement {
 
     quarterEl.textContent = quarter ? this.formatQuarter(parseInt(quarter)) : '';
     clockEl.textContent = clock ? this.formatClock(parseInt(clock)) : '';
-    yardLineEl.textContent = yardLine ? `Ball on ${yardLine}` : '';
 
-    if (down && distance) {
-      downDistEl.textContent = `${this.formatDown(parseInt(down))} & ${distance}`;
+    if (down) {
+      yardLineEl.style.display = '';
+      downDistEl.style.display = '';
+      yardLineEl.textContent = yardLine ? this.formatYardLine(parseInt(yardLine)) : '';
+      downDistEl.textContent =
+        down && distance ? `${this.formatDown(parseInt(down))} & ${distance}` : '';
     } else {
-      downDistEl.textContent = '';
+      yardLineEl.style.display = 'none';
+      downDistEl.style.display = 'none';
     }
 
     statusEl.textContent = status ?? '';
+  }
+
+  private flashScore(scoreEl: HTMLSpanElement): void {
+    scoreEl.classList.add('scoreboard__team-score--flash');
+    setTimeout(() => {
+      scoreEl.classList.remove('scoreboard__team-score--flash');
+    }, 300);
   }
 
   attributeChangedCallback(
@@ -307,30 +348,41 @@ export class WACTScoreboard extends HTMLElement {
       case 'home-team':
         (this.root.getElementById('scoreboard__home-name') as HTMLSpanElement).textContent =
           newValue ?? '';
+        this.updateContextBar();
         break;
       case 'home-logo':
         (this.root.getElementById('scoreboard__home-logo') as HTMLImageElement).src =
           newValue ?? '';
         break;
-      case 'home-score':
-        (this.root.getElementById('scoreboard__home-score') as HTMLSpanElement).textContent =
-          newValue ?? '0';
+      case 'home-score': {
+        const homeScoreEl = this.root.getElementById('scoreboard__home-score') as HTMLSpanElement;
+        homeScoreEl.textContent = newValue ?? '0';
+        if (_previousValue !== null && _previousValue !== newValue) {
+          this.flashScore(homeScoreEl);
+        }
         break;
+      }
       case 'away-team':
         (this.root.getElementById('scoreboard__away-name') as HTMLSpanElement).textContent =
           newValue ?? '';
+        this.updateContextBar();
         break;
       case 'away-logo':
         (this.root.getElementById('scoreboard__away-logo') as HTMLImageElement).src =
           newValue ?? '';
         break;
-      case 'away-score':
-        (this.root.getElementById('scoreboard__away-score') as HTMLSpanElement).textContent =
-          newValue ?? '0';
+      case 'away-score': {
+        const awayScoreEl = this.root.getElementById('scoreboard__away-score') as HTMLSpanElement;
+        awayScoreEl.textContent = newValue ?? '0';
+        if (_previousValue !== null && _previousValue !== newValue) {
+          this.flashScore(awayScoreEl);
+        }
         break;
+      }
       case 'home-possession':
         this.updatePossession();
         break;
+      case 'home-positive-direction':
       case 'quarter':
       case 'clock':
       case 'yard-line':

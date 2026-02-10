@@ -174,6 +174,16 @@ template.innerHTML = `
       display: none;
     }
 
+    #team-config__error {
+      display: none;
+      color: #cc0000;
+      font-size: 0.85em;
+      margin-top: 6px;
+      padding: 4px 8px;
+      background-color: #ffe6e6;
+      border-radius: 4px;
+    }
+
     @media only screen and (max-width: 600px) {
       .team-config__section-content {
         grid-template-columns: 1fr;
@@ -207,6 +217,7 @@ template.innerHTML = `
     </div>
     <button id="team-config__load-btn">Load from File</button>
     <input id="team-config__file-input" type="file" accept=".json">
+    <div id="team-config__error"></div>
 
     <div class="team-config__section-header" data-section="offense">
       <span>Offense</span>
@@ -352,7 +363,18 @@ export class WACTTeamConfig extends HTMLElement {
         'team-config__logo-url-input',
       ) as HTMLInputElement;
       imageDisplay.setAttribute('src', imageInput.value);
-    }, 1000);
+    }, 500);
+  }
+
+  private setErrorMessage(message: string): void {
+    const errorEl = this.root.getElementById('team-config__error') as HTMLDivElement;
+    if (message) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    } else {
+      errorEl.textContent = '';
+      errorEl.style.display = 'none';
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -363,6 +385,15 @@ export class WACTTeamConfig extends HTMLElement {
     if (data.short_name) {
       (this.root.getElementById('team-config__short-name') as HTMLInputElement).value =
         data.short_name;
+    }
+
+    if (data.logo) {
+      const imageInput = this.root.getElementById(
+        'team-config__logo-url-input',
+      ) as HTMLInputElement;
+      imageInput.value = data.logo;
+      const imageDisplay = this.root.getElementById('team-config__logo') as HTMLImageElement;
+      imageDisplay.setAttribute('src', data.logo);
     }
 
     const sections = ['offense', 'defense', 'coach'] as const;
@@ -394,9 +425,20 @@ export class WACTTeamConfig extends HTMLElement {
     reader.onload = (e): void => {
       try {
         const data = JSON.parse(e.target?.result as string);
+
+        if (!data.offense && !data.defense && !data.coach) {
+          const msg = `Invalid team config in "${file.name}": missing offense, defense, or coach sections.`;
+          console.error(msg);
+          this.setErrorMessage(msg);
+          return;
+        }
+
         this.populateFromJSON(data);
+        this.setErrorMessage('');
       } catch (err) {
-        console.error('Invalid JSON file:', err);
+        const msg = `Failed to load "${file.name}": invalid JSON format.`;
+        console.error(msg, err);
+        this.setErrorMessage(msg);
       }
     };
     reader.readAsText(file);
@@ -438,6 +480,7 @@ export class WACTTeamConfig extends HTMLElement {
       'team-config__logo-url-input',
     ) as HTMLInputElement;
     imageUrlInput.addEventListener('input', this.refreshImageUrl.bind(this));
+    imageUrlInput.addEventListener('change', this.refreshImageUrl.bind(this));
 
     const loadBtn = this.root.getElementById('team-config__load-btn') as HTMLButtonElement;
     loadBtn.addEventListener('click', () => this.handleFileLoad());

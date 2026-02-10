@@ -45,23 +45,44 @@ describe('WACTPlaybackControls', () => {
     expect(el.playing).toBe(false);
   });
 
-  it('should cycle through speeds on speed button click', () => {
+  it('should dispatch speed-change event when speed option is clicked', () => {
     const handler = vi.fn();
     el.addEventListener('speed-change', handler);
-    const button = el.root.getElementById('playback__speed') as HTMLButtonElement;
+    const menu = el.root.getElementById('playback__speed-menu') as HTMLDivElement;
+    const options = menu.querySelectorAll(
+      '.playback__speed-option',
+    ) as NodeListOf<HTMLButtonElement>;
 
-    // Default is 2x (index 1), clicking should go to 4x
-    button.click();
+    // Click 5x option (index 2)
+    options[2].click();
     expect(handler).toHaveBeenCalledTimes(1);
-    expect(button.textContent).toBe('4x');
+    expect((handler.mock.calls[0][0] as CustomEvent).detail).toBe(5);
 
-    // Click again should go to 1x
-    button.click();
-    expect(button.textContent).toBe('1x');
+    const display = el.root.getElementById('playback__speed-display') as HTMLButtonElement;
+    expect(display.textContent).toBe('5x');
+  });
 
-    // Click again should go to 2x
-    button.click();
-    expect(button.textContent).toBe('2x');
+  it('should render speed menu with correct options', () => {
+    const menu = el.root.getElementById('playback__speed-menu') as HTMLDivElement;
+    const options = menu.querySelectorAll(
+      '.playback__speed-option',
+    ) as NodeListOf<HTMLButtonElement>;
+    expect(options.length).toBe(5);
+    expect(options[0].textContent).toBe('1x');
+    expect(options[1].textContent).toBe('2x');
+    expect(options[2].textContent).toBe('5x');
+    expect(options[3].textContent).toBe('10x');
+    expect(options[4].textContent).toBe('100x');
+  });
+
+  it('should highlight the active speed option', () => {
+    const menu = el.root.getElementById('playback__speed-menu') as HTMLDivElement;
+    const options = menu.querySelectorAll(
+      '.playback__speed-option',
+    ) as NodeListOf<HTMLButtonElement>;
+    // Default is 2x (index 1)
+    expect(options[1].classList.contains('playback__speed-option--active')).toBe(true);
+    expect(options[0].classList.contains('playback__speed-option--active')).toBe(false);
   });
 
   it('should dispatch skip-to-end event', () => {
@@ -78,6 +99,8 @@ describe('WACTPlaybackControls', () => {
     for (const button of buttons) {
       expect(button.disabled).toBe(true);
     }
+    const speedDisplay = el.root.getElementById('playback__speed-display') as HTMLButtonElement;
+    expect(speedDisplay.disabled).toBe(true);
   });
 
   it('should enable buttons when disabled attribute is removed', () => {

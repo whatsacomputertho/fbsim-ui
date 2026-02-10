@@ -76,6 +76,7 @@ template.innerHTML = `
 
     #game-sim__game-right {
       flex: 1;
+      display: none;
     }
 
     /* Postgame overlay */
@@ -259,10 +260,13 @@ export class WACTGameSim extends HTMLElement {
     ) as HTMLDivElement;
     const controls = this.root.getElementById('game-sim__controls') as WACTPlaybackControls;
 
+    const gameRight = this.root.getElementById('game-sim__game-right') as HTMLDivElement;
+
     configView.style.display = 'none';
     gameView.style.display = 'none';
     statsView.style.display = 'none';
     postgameOverlay.style.display = 'none';
+    gameRight.style.display = 'none';
 
     switch (newState) {
       case 'config':
@@ -285,6 +289,7 @@ export class WACTGameSim extends HTMLElement {
         break;
       case 'postgame':
         gameView.style.display = 'flex';
+        gameRight.style.display = 'block';
         postgameOverlay.style.display = 'block';
         controls.disabled = true;
         controls.playing = false;
@@ -356,6 +361,10 @@ export class WACTGameSim extends HTMLElement {
     scoreboard.setAttribute('down', String(gameState.context.down));
     scoreboard.setAttribute('distance', String(gameState.context.distance));
     scoreboard.setAttribute('yard-line', String(gameState.context.yard_line));
+    scoreboard.setAttribute(
+      'home-positive-direction',
+      String(gameState.context.home_positive_direction),
+    );
     scoreboard.setAttribute('status', '');
 
     if (gameState.context.home_possession) {

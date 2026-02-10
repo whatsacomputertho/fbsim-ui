@@ -20,7 +20,15 @@ template.innerHTML = `
 
     @media only screen and (max-width: 600px) {
       #matchup-config__wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      #matchup-config__home {
+        padding-right: 0;
+      }
+      #matchup-config__away {
+        padding-left: 0;
       }
     }
   </style>

@@ -107,4 +107,55 @@ describe('WACTScoreboard', () => {
     const logo = el.root.getElementById('scoreboard__home-logo') as HTMLImageElement;
     expect(logo.src).toBe('https://example.com/home.png');
   });
+
+  it('should display yard line with team side indicator at 50', () => {
+    el.setAttribute('down', '1');
+    el.setAttribute('yard-line', '50');
+    const yardLine = el.root.getElementById('scoreboard__yard-line') as HTMLSpanElement;
+    expect(yardLine.textContent).toBe('Ball on 50');
+  });
+
+  it('should display yard line with home team name when on home side (home-positive-direction)', () => {
+    el.setAttribute('home-team', 'PHI');
+    el.setAttribute('away-team', 'DAL');
+    el.setAttribute('home-positive-direction', '');
+    el.setAttribute('down', '1');
+    el.setAttribute('yard-line', '25');
+    const yardLine = el.root.getElementById('scoreboard__yard-line') as HTMLSpanElement;
+    expect(yardLine.textContent).toBe('Ball on PHI 25');
+  });
+
+  it('should display yard line with away team name when on away side (home-positive-direction)', () => {
+    el.setAttribute('home-team', 'PHI');
+    el.setAttribute('away-team', 'DAL');
+    el.setAttribute('home-positive-direction', '');
+    el.setAttribute('down', '1');
+    el.setAttribute('yard-line', '75');
+    const yardLine = el.root.getElementById('scoreboard__yard-line') as HTMLSpanElement;
+    expect(yardLine.textContent).toBe('Ball on DAL 25');
+  });
+
+  it('should hide yard-line and down-distance when down is absent', () => {
+    el.setAttribute('status', 'Pregame');
+    el.setAttribute('quarter', '1');
+    el.setAttribute('clock', '1800');
+    const yardLine = el.root.getElementById('scoreboard__yard-line') as HTMLSpanElement;
+    const downDist = el.root.getElementById('scoreboard__down-distance') as HTMLSpanElement;
+    expect(yardLine.style.display).toBe('none');
+    expect(downDist.style.display).toBe('none');
+  });
+
+  it('should show yard-line and down-distance when down is present', () => {
+    el.setAttribute('down', '2');
+    el.setAttribute('distance', '8');
+    el.setAttribute('yard-line', '40');
+    const yardLine = el.root.getElementById('scoreboard__yard-line') as HTMLSpanElement;
+    const downDist = el.root.getElementById('scoreboard__down-distance') as HTMLSpanElement;
+    expect(yardLine.style.display).not.toBe('none');
+    expect(downDist.style.display).not.toBe('none');
+  });
+
+  it('should have home-positive-direction in observedAttributes', () => {
+    expect(WACTScoreboard.observedAttributes).toContain('home-positive-direction');
+  });
 });

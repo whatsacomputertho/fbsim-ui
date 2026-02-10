@@ -43,6 +43,11 @@ template.innerHTML = `
       cursor: not-allowed;
     }
 
+    #playback__play-pause {
+      min-width: 48px;
+      text-align: center;
+    }
+
     #playback__left {
       display: flex;
       align-items: center;
@@ -55,10 +60,78 @@ template.innerHTML = `
       gap: 8px;
     }
 
-    #playback__speed {
-      font-size: 0.9em;
-      min-width: 32px;
+    #playback__speed-wrapper {
+      position: relative;
+    }
+
+    #playback__speed-display {
+      background: none;
+      border: 2px solid #555;
+      color: white;
+      font-size: 1.1em;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 150ms ease;
+      font-family: sans-serif;
+      min-width: 48px;
       text-align: center;
+    }
+
+    #playback__speed-display:hover:not(:disabled) {
+      background-color: #16213e;
+      border-color: #ffd700;
+    }
+
+    #playback__speed-display:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    #playback__speed-menu {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #1a1a2e;
+      border: 1px solid #555;
+      border-radius: 6px;
+      padding: 4px 0;
+      margin-bottom: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 150ms ease, visibility 150ms ease;
+      z-index: 10;
+      min-width: 60px;
+    }
+
+    #playback__speed-wrapper:hover #playback__speed-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .playback__speed-option {
+      display: block;
+      width: 100%;
+      padding: 6px 12px;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 0.95em;
+      cursor: pointer;
+      text-align: center;
+      font-family: sans-serif;
+      white-space: nowrap;
+    }
+
+    .playback__speed-option:hover {
+      background-color: #16213e;
+      color: #ffd700;
+    }
+
+    .playback__speed-option--active {
+      color: #ffd700;
+      font-weight: bold;
     }
 
     @media only screen and (max-width: 600px) {
@@ -70,6 +143,11 @@ template.innerHTML = `
         font-size: 0.9em;
         padding: 4px 10px;
       }
+
+      #playback__speed-display {
+        font-size: 0.9em;
+        padding: 4px 10px;
+      }
     }
   </style>
   <div id="playback__wrapper">
@@ -77,13 +155,16 @@ template.innerHTML = `
       <button id="playback__play-pause" class="playback__button" title="Play">&#9654;</button>
     </div>
     <div id="playback__right">
-      <button id="playback__speed" class="playback__button" title="Change speed">2x</button>
+      <div id="playback__speed-wrapper">
+        <button id="playback__speed-display" title="Change speed">2x</button>
+        <div id="playback__speed-menu"></div>
+      </div>
       <button id="playback__skip" class="playback__button" title="Skip to end">&#9197;</button>
     </div>
   </div>
 `;
 
-const SPEEDS = [1, 2, 4];
+const SPEEDS = [1, 2, 5, 10, 100];
 
 export class WACTPlaybackControls extends HTMLElement {
   static readonly tagName = 'wact-playback-controls' as const;
@@ -153,8 +234,28 @@ export class WACTPlaybackControls extends HTMLElement {
   }
 
   private updateSpeedDisplay(): void {
-    const button = this.root.getElementById('playback__speed') as HTMLButtonElement;
-    button.textContent = `${this.speed}x`;
+    const display = this.root.getElementById('playback__speed-display') as HTMLButtonElement;
+    display.textContent = `${this.speed}x`;
+    this.renderSpeedMenu();
+  }
+
+  private renderSpeedMenu(): void {
+    const menu = this.root.getElementById('playback__speed-menu') as HTMLDivElement;
+    menu.innerHTML = '';
+    for (let i = 0; i < SPEEDS.length; i++) {
+      const option = document.createElement('button');
+      option.className = 'playback__speed-option';
+      if (i === this.currentSpeedIndex) {
+        option.classList.add('playback__speed-option--active');
+      }
+      option.textContent = `${SPEEDS[i]}x`;
+      option.addEventListener('click', () => {
+        this.currentSpeedIndex = i;
+        this.setAttribute('speed', String(SPEEDS[i]));
+        this.dispatchEvent(new CustomEvent('speed-change', { detail: SPEEDS[i] }));
+      });
+      menu.appendChild(option);
+    }
   }
 
   private updateDisabledState(): void {
@@ -164,6 +265,8 @@ export class WACTPlaybackControls extends HTMLElement {
     for (const button of buttons) {
       button.disabled = this.disabled;
     }
+    const speedDisplay = this.root.getElementById('playback__speed-display') as HTMLButtonElement;
+    speedDisplay.disabled = this.disabled;
   }
 
   attributeChangedCallback(
@@ -204,19 +307,12 @@ export class WACTPlaybackControls extends HTMLElement {
       }
     });
 
-    const speedButton = this.root.getElementById('playback__speed') as HTMLButtonElement;
-    speedButton.addEventListener('click', () => {
-      this.currentSpeedIndex = (this.currentSpeedIndex + 1) % SPEEDS.length;
-      this.setAttribute('speed', String(SPEEDS[this.currentSpeedIndex]));
-      this.dispatchEvent(
-        new CustomEvent('speed-change', { detail: SPEEDS[this.currentSpeedIndex] }),
-      );
-    });
-
     const skipButton = this.root.getElementById('playback__skip') as HTMLButtonElement;
     skipButton.addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('skip-to-end'));
     });
+
+    this.renderSpeedMenu();
 
     this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();

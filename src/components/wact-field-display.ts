@@ -82,6 +82,7 @@ template.innerHTML = `
       background-color: #ffd700;
       display: none;
       z-index: 3;
+      transition: left 300ms ease;
     }
 
     #field__ball-marker {
@@ -95,6 +96,7 @@ template.innerHTML = `
       transform: translate(-50%, -50%);
       display: none;
       z-index: 5;
+      transition: left 300ms ease;
     }
 
     #field__drive-overlay {
@@ -112,6 +114,7 @@ template.innerHTML = `
       height: 70%;
       opacity: 0.5;
       border-radius: 2px;
+      transition: opacity 200ms ease;
     }
 
     @media only screen and (max-width: 600px) {
@@ -187,54 +190,55 @@ export class WACTFieldDisplay extends HTMLElement {
     const awayColor = this.getAttribute('away-color') ?? '#922b21';
     const offenseColor = context.home_possession ? homeColor : awayColor;
 
-    let currentYard = plays.length > 0 ? plays[0].context.yard_line : context.yard_line;
+    const displayPlays = plays.filter(
+      (p) =>
+        p.result.type !== 'Kickoff' && p.result.type !== 'Punt' && p.result.type !== 'BetweenPlay',
+    );
 
-    for (const play of plays) {
-      if (
-        play.result.type === 'Kickoff' ||
-        play.result.type === 'Punt' ||
-        play.result.type === 'BetweenPlay'
-      ) {
-        continue;
-      }
+    for (let i = 0; i < displayPlays.length; i++) {
+      const play = displayPlays[i];
+      const startYard = play.context.yard_line;
+      const endYard =
+        i < displayPlays.length - 1 ? displayPlays[i + 1].context.yard_line : context.yard_line;
 
-      const netYards = play.result_computed.net_yards;
-      if (netYards === 0) {
-        currentYard = play.context.yard_line + netYards;
-        continue;
-      }
+      if (startYard === endYard) continue;
 
       const isTurnover = play.result_computed.turnover;
-      const isNegative = netYards < 0;
-      const color = isNegative || isTurnover ? '#cc0000' : offenseColor;
+      const isLoss = play.result_computed.net_yards < 0;
+      const color = isTurnover || isLoss ? '#cc0000' : offenseColor;
 
-      const startPercent = this.yardLineToPercent(currentYard);
-      const endPercent = this.yardLineToPercent(currentYard + netYards);
+      const startPct = this.yardLineToPercent(startYard);
+      const endPct = this.yardLineToPercent(endYard);
+      const leftPct = Math.min(startPct, endPct);
+      const widthPct = Math.abs(endPct - startPct);
 
-      const leftPercent = Math.min(startPercent, endPercent);
-      const widthPercent = Math.abs(endPercent - startPercent);
-
-      if (widthPercent > 0) {
+      if (widthPct > 0) {
         const rect = document.createElement('div');
         rect.className = 'field__play-rect';
-        rect.style.left = `${leftPercent}%`;
-        rect.style.width = `${Math.max(widthPercent, 0.5)}%`;
+        rect.style.left = `${leftPct}%`;
+        rect.style.width = `${Math.max(widthPct, 0.5)}%`;
         rect.style.backgroundColor = color;
         overlay.appendChild(rect);
       }
-
-      currentYard = currentYard + netYards;
     }
 
     this.setBallPosition(context.yard_line, context.home_positive_direction);
 
-    if (!context.next_play_kickoff) {
+    const firstDownLine = this.root.getElementById('field__first-down-line') as HTMLDivElement;
+    if (
+      !context.next_play_kickoff &&
+      !context.game_over &&
+      !context.end_of_half &&
+      !context.next_play_extra_point
+    ) {
       const firstDownYard =
         context.yard_line +
         (context.home_positive_direction === context.home_possession
           ? context.distance
           : -context.distance);
       this.setFirstDownLine(firstDownYard);
+    } else {
+      firstDownLine.style.display = 'none';
     }
   }
 

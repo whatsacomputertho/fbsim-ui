@@ -80,12 +80,26 @@ template.innerHTML = `
     }
 
     .game-log__drive-plays {
-      display: none;
-      padding: 0 16px 8px 16px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease;
+      padding: 0 16px;
     }
 
     .game-log__drive-plays--expanded {
-      display: block;
+      max-height: 2000px;
+      padding: 0 16px 8px 16px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .game-log__play {
@@ -93,6 +107,7 @@ template.innerHTML = `
       border-top: 1px solid #2a2a3e;
       font-size: 0.85em;
       line-height: 1.4;
+      animation: fadeIn 200ms ease;
     }
 
     .game-log__play-context {
@@ -230,11 +245,16 @@ export class WACTGameLog extends HTMLElement {
       '.game-log__drive-plays',
     ) as HTMLDivElement;
 
+    let desc = play.description;
+    if (desc.startsWith(play.context_description)) {
+      desc = desc.slice(play.context_description.length).replace(/^[\s\-\u2013\u2014:]+/, '');
+    }
+
     const playEl = document.createElement('div');
     playEl.className = 'game-log__play';
     playEl.innerHTML = `
       <div class="game-log__play-context">${this.escapeHtml(play.context_description)}</div>
-      <div class="game-log__play-description">${this.escapeHtml(play.description)}</div>
+      <div class="game-log__play-description">${this.escapeHtml(desc)}</div>
     `;
 
     playsContainer.insertBefore(playEl, playsContainer.firstChild);
