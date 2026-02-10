@@ -74,9 +74,7 @@ describe('WACTPlaybackControls', () => {
 
   it('should disable buttons when disabled attribute is set', () => {
     el.disabled = true;
-    const buttons = el.root.querySelectorAll(
-      '.playback__button',
-    ) as NodeListOf<HTMLButtonElement>;
+    const buttons = el.root.querySelectorAll('.playback__button') as NodeListOf<HTMLButtonElement>;
     for (const button of buttons) {
       expect(button.disabled).toBe(true);
     }
@@ -85,9 +83,7 @@ describe('WACTPlaybackControls', () => {
   it('should enable buttons when disabled attribute is removed', () => {
     el.disabled = true;
     el.disabled = false;
-    const buttons = el.root.querySelectorAll(
-      '.playback__button',
-    ) as NodeListOf<HTMLButtonElement>;
+    const buttons = el.root.querySelectorAll('.playback__button') as NodeListOf<HTMLButtonElement>;
     for (const button of buttons) {
       expect(button.disabled).toBe(false);
     }

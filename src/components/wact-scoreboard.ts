@@ -281,9 +281,7 @@ export class WACTScoreboard extends HTMLElement {
     const quarterEl = this.root.getElementById('scoreboard__quarter') as HTMLSpanElement;
     const clockEl = this.root.getElementById('scoreboard__clock') as HTMLSpanElement;
     const yardLineEl = this.root.getElementById('scoreboard__yard-line') as HTMLSpanElement;
-    const downDistEl = this.root.getElementById(
-      'scoreboard__down-distance',
-    ) as HTMLSpanElement;
+    const downDistEl = this.root.getElementById('scoreboard__down-distance') as HTMLSpanElement;
     const statusEl = this.root.getElementById('scoreboard__status') as HTMLSpanElement;
 
     quarterEl.textContent = quarter ? this.formatQuarter(parseInt(quarter)) : '';

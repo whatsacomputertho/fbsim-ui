@@ -229,7 +229,11 @@ export class WACTFieldDisplay extends HTMLElement {
     this.setBallPosition(context.yard_line, context.home_positive_direction);
 
     if (!context.next_play_kickoff) {
-      const firstDownYard = context.yard_line + (context.home_positive_direction === context.home_possession ? context.distance : -context.distance);
+      const firstDownYard =
+        context.yard_line +
+        (context.home_positive_direction === context.home_possession
+          ? context.distance
+          : -context.distance);
       this.setFirstDownLine(firstDownYard);
     }
   }

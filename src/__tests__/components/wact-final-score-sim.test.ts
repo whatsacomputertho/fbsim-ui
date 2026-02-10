@@ -56,18 +56,14 @@ describe('WACTFinalScoreSim', () => {
   });
 
   it('should create a shadow root with a simulate button', () => {
-    const button = el.root.getElementById(
-      'final-score-sim__sim-button',
-    ) as HTMLButtonElement;
+    const button = el.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
     expect(button).not.toBeNull();
     expect(button.textContent).toBe('Simulate');
   });
 
   it('should log error when simulate clicked without a service', async () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const button = el.root.getElementById(
-      'final-score-sim__sim-button',
-    ) as HTMLButtonElement;
+    const button = el.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
     button.click();
 
     await new Promise((r) => setTimeout(r, 0));
@@ -85,9 +81,7 @@ describe('WACTFinalScoreSim', () => {
     const mockService = createMockService();
     el.setSimService(mockService);
 
-    const button = el.root.getElementById(
-      'final-score-sim__sim-button',
-    ) as HTMLButtonElement;
+    const button = el.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
     button.click();
 
     await new Promise((r) => setTimeout(r, 0));
@@ -109,9 +103,7 @@ describe('WACTFinalScoreSim', () => {
     });
     el.setSimService(mockService);
 
-    const button = el.root.getElementById(
-      'final-score-sim__sim-button',
-    ) as HTMLButtonElement;
+    const button = el.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
     button.click();
 
     await new Promise((r) => setTimeout(r, 0));
@@ -137,9 +129,7 @@ describe('WACTFinalScoreSim', () => {
     (mockService.isReady as ReturnType<typeof vi.fn>).mockReturnValue(false);
     el.setSimService(mockService);
 
-    const button = el.root.getElementById(
-      'final-score-sim__sim-button',
-    ) as HTMLButtonElement;
+    const button = el.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
     button.click();
 
     await new Promise((r) => setTimeout(r, 0));

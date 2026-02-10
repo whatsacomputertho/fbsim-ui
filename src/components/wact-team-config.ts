@@ -284,8 +284,7 @@ export class WACTTeamConfig extends HTMLElement {
 
   get logo(): string {
     return (
-      (this.root.getElementById('team-config__logo') as HTMLImageElement).getAttribute('src') ??
-      ''
+      (this.root.getElementById('team-config__logo') as HTMLImageElement).getAttribute('src') ?? ''
     );
   }
 
@@ -294,8 +293,7 @@ export class WACTTeamConfig extends HTMLElement {
     const shortName = (this.root.getElementById('team-config__short-name') as HTMLInputElement)
       .value;
     const logo =
-      (this.root.getElementById('team-config__logo') as HTMLImageElement).getAttribute('src') ??
-      '';
+      (this.root.getElementById('team-config__logo') as HTMLImageElement).getAttribute('src') ?? '';
 
     const getField = (field: string): number => {
       const input = this.root.querySelector(`[data-field="${field}"]`) as HTMLInputElement;
@@ -413,9 +411,7 @@ export class WACTTeamConfig extends HTMLElement {
       header.addEventListener('click', () => {
         const sectionName = header.dataset.section;
         if (!sectionName) return;
-        const content = this.root.getElementById(
-          `team-config__${sectionName}`,
-        ) as HTMLDivElement;
+        const content = this.root.getElementById(`team-config__${sectionName}`) as HTMLDivElement;
         const chevron = header.querySelector('.team-config__section-chevron') as HTMLSpanElement;
         content.classList.toggle('team-config__section-content--collapsed');
         chevron.classList.toggle('team-config__section-chevron--collapsed');

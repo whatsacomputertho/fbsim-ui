@@ -111,9 +111,7 @@ export class WACTFinalScoreSim extends HTMLElement {
     ) as HTMLDivElement;
     resultWrapper.style.display = 'none';
 
-    const matchupSelect = this.root.getElementById(
-      'final-score-sim__select',
-    ) as WACTMatchupSelect;
+    const matchupSelect = this.root.getElementById('final-score-sim__select') as WACTMatchupSelect;
     const homeLogo = matchupSelect.homeLogo;
     const awayLogo = matchupSelect.awayLogo;
 
@@ -131,9 +129,7 @@ export class WACTFinalScoreSim extends HTMLElement {
   connectedCallback(): void {
     if (this._initialized) return;
     this._initialized = true;
-    const simButton = this.root.getElementById(
-      'final-score-sim__sim-button',
-    ) as HTMLButtonElement;
+    const simButton = this.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
     simButton.addEventListener('click', () => void this.getBoxScore());
     this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();

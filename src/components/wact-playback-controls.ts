@@ -158,7 +158,9 @@ export class WACTPlaybackControls extends HTMLElement {
   }
 
   private updateDisabledState(): void {
-    const buttons = this.root.querySelectorAll('.playback__button') as NodeListOf<HTMLButtonElement>;
+    const buttons = this.root.querySelectorAll(
+      '.playback__button',
+    ) as NodeListOf<HTMLButtonElement>;
     for (const button of buttons) {
       button.disabled = this.disabled;
     }

@@ -618,9 +618,7 @@ export class WACTGameSim extends HTMLElement {
     });
 
     // Postgame buttons
-    const summaryButton = this.root.getElementById(
-      'game-sim__summary-button',
-    ) as HTMLButtonElement;
+    const summaryButton = this.root.getElementById('game-sim__summary-button') as HTMLButtonElement;
     summaryButton.addEventListener('click', () => this.showStats());
 
     const newGameButton = this.root.getElementById(

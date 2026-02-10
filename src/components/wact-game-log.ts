@@ -241,12 +241,8 @@ export class WACTGameLog extends HTMLElement {
   }
 
   private updateDriveHeader(driveData: DriveData): void {
-    const resultEl = driveData.element.querySelector(
-      '.game-log__drive-result',
-    ) as HTMLSpanElement;
-    const statsEl = driveData.element.querySelector(
-      '.game-log__drive-stats',
-    ) as HTMLSpanElement;
+    const resultEl = driveData.element.querySelector('.game-log__drive-result') as HTMLSpanElement;
+    const statsEl = driveData.element.querySelector('.game-log__drive-stats') as HTMLSpanElement;
 
     const resultText = driveData.result ?? 'In Progress';
     resultEl.textContent = `Drive ${driveData.index + 1} - ${resultText}`;

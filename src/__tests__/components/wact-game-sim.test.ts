@@ -1,11 +1,4 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { WACTScoreboard } from '../../components/wact-scoreboard.js';
-import { WACTGameLog } from '../../components/wact-game-log.js';
-import { WACTGameContext } from '../../components/wact-game-context.js';
-import { WACTFieldDisplay } from '../../components/wact-field-display.js';
-import { WACTPlaybackControls } from '../../components/wact-playback-controls.js';
-import { WACTTeamConfig } from '../../components/wact-team-config.js';
-import { WACTMatchupConfig } from '../../components/wact-matchup-config.js';
 import { WACTGameSim } from '../../components/wact-game-sim.js';
 import type { PlayByPlaySimService, SimResult } from '../../services/types.js';
 
@@ -133,28 +126,19 @@ function createMockService(): PlayByPlaySimService {
   };
 }
 
-// Register all child custom elements first
-const deps = [
-  ['wact-scoreboard', WACTScoreboard],
-  ['wact-game-log', WACTGameLog],
-  ['wact-game-context', WACTGameContext],
-  ['wact-field-display', WACTFieldDisplay],
-  ['wact-playback-controls', WACTPlaybackControls],
-  ['wact-team-config', WACTTeamConfig],
-  ['wact-matchup-config', WACTMatchupConfig],
-  ['wact-game-sim', WACTGameSim],
-] as const;
-
-for (const [tag, Ctor] of deps) {
-  if (!customElements.get(tag)) {
-    customElements.define(tag, Ctor);
-  }
-}
-
 describe('WACTGameSim', () => {
   let el: WACTGameSim;
 
   beforeEach(async () => {
+    // Only register wact-game-sim itself, not child custom elements.
+    // Registering children (wact-matchup-config, wact-game-context, etc.) causes
+    // happy-dom to fail with cascading shadow DOM construction during template cloning.
+    // Child tags in the template will be treated as plain HTMLElements, which is fine
+    // for testing the parent component's structure. Child behavior is verified in
+    // their own test files.
+    if (!customElements.get('wact-game-sim')) {
+      customElements.define('wact-game-sim', WACTGameSim);
+    }
     el = document.createElement('wact-game-sim') as WACTGameSim;
     document.body.appendChild(el);
     await el.whenReady();
@@ -189,9 +173,7 @@ describe('WACTGameSim', () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const button = el.root.getElementById('game-sim__start-button') as HTMLButtonElement;
     button.click();
-    expect(errorSpy).toHaveBeenCalledWith(
-      'No simulation service configured for wact-game-sim.',
-    );
+    expect(errorSpy).toHaveBeenCalledWith('No simulation service configured for wact-game-sim.');
   });
 
   it('should have playback controls', () => {
