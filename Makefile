@@ -18,7 +18,7 @@ build: dependencies
 	test -f dist/register.cjs
 
 release: dependencies build
-	npm publish
+	npm publish --access public
 
 sec: dependencies
 	npm audit --audit-level=high
