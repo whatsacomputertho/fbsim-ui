@@ -48,7 +48,8 @@ template.innerHTML = `
       margin-bottom: 2px;
     }
 
-    .team-config__input-group input {
+    .team-config__input-group input[type="text"],
+    .team-config__input-group input[type="number"] {
       background-color: rgba(0, 0, 0, 0);
       border: none;
       border-bottom: 2px solid #ccc;
@@ -57,24 +58,35 @@ template.innerHTML = `
       transition: border-color 200ms ease;
     }
 
-    .team-config__input-group input:focus,
-    .team-config__input-group input:hover {
+    .team-config__input-group input[type="text"]:focus,
+    .team-config__input-group input[type="text"]:hover,
+    .team-config__input-group input[type="number"]:focus,
+    .team-config__input-group input[type="number"]:hover {
       border-color: royalblue;
       outline: none;
+    }
+
+    .team-config__input-group input[type="color"] {
+      width: 100%;
+      height: 32px;
+      padding: 0;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .team-config__input-group input[type="color"]:hover {
+      border-color: royalblue;
     }
 
     #team-config__image-wrapper {
       position: relative;
       height: 25vh;
-      background-color: rgba(0, 0, 0, 0.7);
       transition: all 100ms ease-in-out;
       margin-bottom: 12px;
       border-radius: 4px;
       overflow: hidden;
-    }
-
-    #team-config__image-wrapper:hover {
-      background-color: rgba(0, 0, 0, 0.2);
     }
 
     #team-config__logo {
@@ -82,13 +94,29 @@ template.innerHTML = `
       height: 100%;
       object-fit: cover;
       position: absolute;
-      z-index: -1;
+      z-index: 0;
+    }
+
+    #team-config__image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: rgba(0, 0, 0, 0.7);
+      transition: background-color 100ms ease-in-out;
+      pointer-events: none;
+    }
+
+    #team-config__image-wrapper:hover #team-config__image-overlay {
+      background-color: rgba(0, 0, 0, 0.2);
     }
 
     #team-config__logo-url-wrapper {
       width: 100%;
       position: absolute;
-      z-index: 1;
+      z-index: 2;
       left: 0;
       bottom: 0;
       display: flex;
@@ -207,9 +235,14 @@ template.innerHTML = `
         <label for="team-config__short-name">Abbreviation</label>
         <input id="team-config__short-name" type="text" value="HOME" maxlength="4">
       </div>
+      <div class="team-config__input-group">
+        <label for="team-config__color">Color</label>
+        <input id="team-config__color" type="color" value="#1a5276">
+      </div>
     </div>
     <div id="team-config__image-wrapper">
       <img id="team-config__logo" src="https://official-flc.com/img/default-club-picture.png" alt="">
+      <div id="team-config__image-overlay"></div>
       <div id="team-config__logo-url-wrapper">
         <label id="team-config__logo-url-label" for="team-config__logo-url-input">Url:</label>
         <input id="team-config__logo-url-input" type="text" value="https://official-flc.com/img/default-club-picture.png">
@@ -305,6 +338,7 @@ export class WACTTeamConfig extends HTMLElement {
       .value;
     const logo =
       (this.root.getElementById('team-config__logo') as HTMLImageElement).getAttribute('src') ?? '';
+    const color = (this.root.getElementById('team-config__color') as HTMLInputElement).value;
 
     const getField = (field: string): number => {
       const input = this.root.querySelector(`[data-field="${field}"]`) as HTMLInputElement;
@@ -315,6 +349,7 @@ export class WACTTeamConfig extends HTMLElement {
       name,
       short_name: shortName,
       logo,
+      color,
       offense: {
         passing: getField('offense.passing'),
         blocking: getField('offense.blocking'),
@@ -351,6 +386,8 @@ export class WACTTeamConfig extends HTMLElement {
     nameInput.value = `${homeAwayText} Team`;
     const shortInput = this.root.getElementById('team-config__short-name') as HTMLInputElement;
     shortInput.value = homeAwayText.substring(0, 4).toUpperCase();
+    const colorInput = this.root.getElementById('team-config__color') as HTMLInputElement;
+    colorInput.value = this.away ? '#922b21' : '#1a5276';
   }
 
   private refreshImageUrl(): void {
@@ -387,7 +424,15 @@ export class WACTTeamConfig extends HTMLElement {
         data.short_name;
     }
 
+    if (data.color) {
+      (this.root.getElementById('team-config__color') as HTMLInputElement).value = data.color;
+    }
+
     if (data.logo) {
+      if (this.imageUrlTimeout) {
+        clearTimeout(this.imageUrlTimeout);
+        this.imageUrlTimeout = null;
+      }
       const imageInput = this.root.getElementById(
         'team-config__logo-url-input',
       ) as HTMLInputElement;
@@ -489,6 +534,7 @@ export class WACTTeamConfig extends HTMLElement {
     fileInput.addEventListener('change', (e) => this.handleFileChange(e));
 
     this.setupSectionToggles();
+    this.refreshImageUrl();
 
     this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();

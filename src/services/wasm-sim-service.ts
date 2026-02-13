@@ -120,6 +120,8 @@ export class WasmSimService implements SimService, PlayByPlaySimService {
     this.simulator = new GameSimulator();
     this.game = new Game();
     this.context = createGameContext() as GameContext;
+    this.context.home_team_short = config.home.short_name;
+    this.context.away_team_short = config.away.short_name;
 
     return this.buildGameState();
   }

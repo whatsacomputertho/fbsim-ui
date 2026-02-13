@@ -44,8 +44,39 @@ template.innerHTML = `
     }
 
     #playback__play-pause {
-      min-width: 48px;
+      width: 48px;
       text-align: center;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .playback__button[data-tooltip],
+    #playback__speed-display[data-tooltip] {
+      position: relative;
+    }
+
+    .playback__button[data-tooltip]::after,
+    #playback__speed-display[data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 8px;
+      background: #333;
+      color: white;
+      font-size: 0.75em;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 150ms ease;
+      margin-bottom: 4px;
+    }
+
+    .playback__button[data-tooltip]:hover::after,
+    #playback__speed-display[data-tooltip]:hover::after {
+      opacity: 1;
     }
 
     #playback__left {
@@ -152,14 +183,14 @@ template.innerHTML = `
   </style>
   <div id="playback__wrapper">
     <div id="playback__left">
-      <button id="playback__play-pause" class="playback__button" title="Play">&#9654;</button>
+      <button id="playback__play-pause" class="playback__button" data-tooltip="Play">&#9654;</button>
     </div>
     <div id="playback__right">
       <div id="playback__speed-wrapper">
-        <button id="playback__speed-display" title="Change speed">2x</button>
+        <button id="playback__speed-display" data-tooltip="Change speed">2x</button>
         <div id="playback__speed-menu"></div>
       </div>
-      <button id="playback__skip" class="playback__button" title="Skip to end">&#9197;</button>
+      <button id="playback__skip" class="playback__button" data-tooltip="Skip to end">&#9197;</button>
     </div>
   </div>
 `;
@@ -226,10 +257,10 @@ export class WACTPlaybackControls extends HTMLElement {
     const button = this.root.getElementById('playback__play-pause') as HTMLButtonElement;
     if (this.playing) {
       button.innerHTML = '&#9646;&#9646;';
-      button.title = 'Pause';
+      button.dataset.tooltip = 'Pause';
     } else {
       button.innerHTML = '&#9654;';
-      button.title = 'Play';
+      button.dataset.tooltip = 'Play';
     }
   }
 

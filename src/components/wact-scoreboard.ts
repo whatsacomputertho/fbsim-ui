@@ -233,41 +233,43 @@ export class WACTScoreboard extends HTMLElement {
     this.setAttribute('away-score', value);
   }
 
-  private formatClock(halfSeconds: number): string {
-    const totalSeconds = Math.floor(halfSeconds / 2);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
+  private formatClock(quarter: number, halfSeconds: number): string {
+    let clockTotal: number;
+    if (halfSeconds < 900 || (halfSeconds == 900 && quarter % 2 == 0 && quarter <= 4)) {
+      clockTotal = halfSeconds;
+    } else {
+      clockTotal = halfSeconds - 900
+    }
+    const minutes = Math.floor(clockTotal / 60);
+    const seconds = clockTotal % 60;
     return `${minutes}:${String(seconds).padStart(2, '0')}`;
   }
 
   private formatQuarter(q: number): string {
-    switch (q) {
-      case 1:
-        return '1Q';
-      case 2:
-        return '2Q';
-      case 3:
-        return '3Q';
-      case 4:
-        return '4Q';
-      default:
-        return `OT${q - 4}`;
+    if (q < 5) {
+      return `${q}Q`
+    } else {
+      return `OT${q-4}`;
     }
   }
 
   private formatDown(down: number): string {
+    let downPrefix: string;
     switch (down) {
       case 1:
-        return '1st';
+        downPrefix = 'st';
+        break;
       case 2:
-        return '2nd';
+        downPrefix = 'nd';
+        break;
       case 3:
-        return '3rd';
-      case 4:
-        return '4th';
+        downPrefix = 'rd';
+        break;
       default:
-        return `${down}th`;
+        downPrefix = 'th';
+        break;
     }
+    return `${down}${downPrefix}`;
   }
 
   private formatYardLine(yardLine: number): string {
@@ -314,8 +316,9 @@ export class WACTScoreboard extends HTMLElement {
     const downDistEl = this.root.getElementById('scoreboard__down-distance') as HTMLSpanElement;
     const statusEl = this.root.getElementById('scoreboard__status') as HTMLSpanElement;
 
-    quarterEl.textContent = quarter ? this.formatQuarter(parseInt(quarter)) : '';
-    clockEl.textContent = clock ? this.formatClock(parseInt(clock)) : '';
+    let quarterValue = quarter ? parseInt(quarter) : 0;
+    quarterEl.textContent = quarter ? this.formatQuarter(quarterValue) : '';
+    clockEl.textContent = clock ? this.formatClock(quarterValue, parseInt(clock)) : '';
 
     if (down) {
       yardLineEl.style.display = '';

@@ -36,6 +36,7 @@ export interface TeamConfig {
   name: string;
   short_name: string;
   logo: string;
+  color: string;
   offense: {
     passing: number;
     blocking: number;

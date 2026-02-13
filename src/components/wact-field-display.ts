@@ -117,6 +117,68 @@ template.innerHTML = `
       transition: opacity 200ms ease;
     }
 
+    @keyframes endzoneFlash {
+      0%, 100% { opacity: 0; }
+      25%, 75% { opacity: 0.6; }
+    }
+
+    @keyframes textOverlay {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+      80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes fadeOutRects {
+      from { opacity: 0.5; }
+      to { opacity: 0; }
+    }
+
+    #field__animation-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 8;
+      pointer-events: none;
+    }
+
+    #field__text-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9;
+      pointer-events: none;
+      font-size: 1.4em;
+      font-weight: bold;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+      white-space: nowrap;
+      opacity: 0;
+    }
+
+    .field__endzone-flash {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      animation: endzoneFlash 1.2s ease forwards;
+    }
+
+    .field__endzone-flash--home {
+      left: 0;
+      width: 8%;
+    }
+
+    .field__endzone-flash--away {
+      right: 0;
+      width: 8%;
+    }
+
+    .field__drive-fade-out {
+      animation: fadeOutRects 400ms ease forwards;
+    }
+
     @media only screen and (max-width: 600px) {
       #field__wrapper {
         height: 80px;
@@ -135,6 +197,8 @@ template.innerHTML = `
       <div id="field__ball-marker"></div>
     </div>
     <div id="field__endzone-away">AWAY</div>
+    <div id="field__animation-overlay"></div>
+    <div id="field__text-overlay"></div>
   </div>
 `;
 
@@ -188,18 +252,47 @@ export class WACTFieldDisplay extends HTMLElement {
 
     const homeColor = this.getAttribute('home-color') ?? '#1a5276';
     const awayColor = this.getAttribute('away-color') ?? '#922b21';
-    const offenseColor = context.home_possession ? homeColor : awayColor;
 
-    const displayPlays = plays.filter(
-      (p) =>
-        p.result.type !== 'Kickoff' && p.result.type !== 'Punt' && p.result.type !== 'BetweenPlay',
-    );
+    const resetTypes = new Set(['Kickoff', 'Punt', 'BetweenPlay', 'FieldGoal', 'ExtraPoint']);
 
-    for (let i = 0; i < displayPlays.length; i++) {
-      const play = displayPlays[i];
-      const startYard = play.context.yard_line;
-      const endYard =
-        i < displayPlays.length - 1 ? displayPlays[i + 1].context.yard_line : context.yard_line;
+    // Determine offense color from the drive's first scrimmage play, not from
+    // the post-play context which may already reflect flipped possession after
+    // a punt/kickoff.
+    const firstScrimmagePlay = plays.find((p) => !resetTypes.has(p.result.type));
+    const driveHomePossession = firstScrimmagePlay
+      ? firstScrimmagePlay.context.home_possession
+      : context.home_possession;
+    const offenseColor = driveHomePossession ? homeColor : awayColor;
+
+    const currentDirection = context.home_positive_direction;
+
+    for (let i = 0; i < plays.length; i++) {
+      const play = plays[i];
+      if (resetTypes.has(play.result.type)) continue;
+
+      // Use the next play in the *unfiltered* array for endYard so that
+      // when a reset-type play follows (e.g. Punt), we get the pre-punt
+      // yard line (= correct end of this play) instead of context.yard_line
+      // which reflects the post-punt position.
+      const nextPlay = i < plays.length - 1 ? plays[i + 1] : null;
+
+      // Mirror each yard line independently based on whether its source's
+      // direction matches the current field direction.
+      let startYard = play.context.yard_line;
+      if (play.context.home_positive_direction !== currentDirection) {
+        startYard = 100 - startYard;
+      }
+
+      let endYard: number;
+      if (nextPlay) {
+        endYard = nextPlay.context.yard_line;
+        if (nextPlay.context.home_positive_direction !== currentDirection) {
+          endYard = 100 - endYard;
+        }
+      } else {
+        // context is always in the current direction
+        endYard = context.yard_line;
+      }
 
       if (startYard === endYard) continue;
 
@@ -222,6 +315,9 @@ export class WACTFieldDisplay extends HTMLElement {
       }
     }
 
+  }
+
+  updateMarkers(context: GameContext): void {
     this.setBallPosition(context.yard_line, context.home_positive_direction);
 
     const firstDownLine = this.root.getElementById('field__first-down-line') as HTMLDivElement;
@@ -258,6 +354,93 @@ export class WACTFieldDisplay extends HTMLElement {
     line.style.display = 'block';
   }
 
+  showAnimation(type: string, details: { possession?: boolean; yardLine?: number; fromYard?: number; toYard?: number; type?: string }): void {
+    const homeColor = this.getAttribute('home-color') ?? '#1a5276';
+    const awayColor = this.getAttribute('away-color') ?? '#922b21';
+
+    switch (type) {
+      case 'touchdown': {
+        const isHome = details.possession ?? true;
+        const color = isHome ? homeColor : awayColor;
+        this.flashEndzone(isHome ? 'away' : 'home', color, 1200);
+        this.showTextOverlay('TOUCHDOWN!', '#ffd700', 1200);
+        break;
+      }
+      case 'field-goal-made':
+        this.showTextOverlay('Field goal GOOD!', '#00cc44', 1000);
+        break;
+      case 'field-goal-missed':
+        this.showTextOverlay('Field goal NO GOOD!', '#cc4444', 1000);
+        break;
+      case 'punt':
+        this.showTextOverlay('Punt', '#cc4444', 800);
+        break;
+      case 'extra-point-made':
+        this.showTextOverlay('Extra Point GOOD!', '#00cc44', 800);
+        break;
+      case 'extra-point-missed':
+        this.showTextOverlay('Extra Point NO GOOD!', '#cc4444', 800);
+        break;
+      case 'safety': {
+        const safetyIsHome = details.possession ?? true;
+        const safetyColor = safetyIsHome ? homeColor : awayColor;
+        this.flashEndzone(safetyIsHome ? 'home' : 'away', safetyColor, 1200);
+        this.showTextOverlay('SAFETY!', '#ffd700', 1200);
+        break;
+      }
+      case 'turnover': {
+        const label = details.type === 'Interception' ? 'INTERCEPTION' : 'FUMBLE';
+        this.showTextOverlay(label, '#cc4444', 1000);
+        break;
+      }
+    }
+  }
+
+  showTextOverlay(text: string, color: string, duration: number): void {
+    const overlay = this.root.getElementById('field__text-overlay') as HTMLDivElement;
+    overlay.textContent = text;
+    overlay.style.color = color;
+    overlay.style.animation = 'none';
+    // Force reflow
+    void overlay.offsetWidth;
+    overlay.style.animation = `textOverlay ${duration}ms ease forwards`;
+  }
+
+  flashEndzone(side: 'home' | 'away', color: string, duration: number): void {
+    const animOverlay = this.root.getElementById('field__animation-overlay') as HTMLDivElement;
+    const flash = document.createElement('div');
+    flash.className = `field__endzone-flash field__endzone-flash--${side}`;
+    flash.style.backgroundColor = color;
+    flash.style.animationDuration = `${duration}ms`;
+    animOverlay.appendChild(flash);
+    setTimeout(() => flash.remove(), duration);
+  }
+
+  fadeOutDrive(callback?: () => void): void {
+    const overlay = this.root.getElementById('field__drive-overlay') as HTMLDivElement;
+    const rects = overlay.querySelectorAll('.field__play-rect');
+    if (rects.length === 0) {
+      callback?.();
+      return;
+    }
+    for (const rect of rects) {
+      rect.classList.add('field__drive-fade-out');
+    }
+    setTimeout(() => {
+      overlay.innerHTML = '';
+      callback?.();
+    }, 400);
+  }
+
+  clearAnimations(): void {
+    const textOverlay = this.root.getElementById('field__text-overlay') as HTMLDivElement;
+    textOverlay.style.animation = 'none';
+    textOverlay.textContent = '';
+
+    const animOverlay = this.root.getElementById('field__animation-overlay') as HTMLDivElement;
+    animOverlay.innerHTML = '';
+  }
+
   clear(): void {
     const overlay = this.root.getElementById('field__drive-overlay') as HTMLDivElement;
     overlay.innerHTML = '';
@@ -267,6 +450,21 @@ export class WACTFieldDisplay extends HTMLElement {
 
     const line = this.root.getElementById('field__first-down-line') as HTMLDivElement;
     line.style.display = 'none';
+
+    this.clearAnimations();
+  }
+
+  flipEndzones(): void {
+    const left = this.root.getElementById('field__endzone-home') as HTMLDivElement;
+    const right = this.root.getElementById('field__endzone-away') as HTMLDivElement;
+
+    const tmpText = left.textContent;
+    left.textContent = right.textContent;
+    right.textContent = tmpText;
+
+    const tmpColor = left.style.backgroundColor;
+    left.style.backgroundColor = right.style.backgroundColor;
+    right.style.backgroundColor = tmpColor;
   }
 
   attributeChangedCallback(

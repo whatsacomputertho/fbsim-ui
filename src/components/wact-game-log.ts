@@ -45,10 +45,24 @@ template.innerHTML = `
       cursor: pointer;
       transition: background-color 150ms ease;
       user-select: none;
+      gap: 10px;
     }
 
     .game-log__drive-header:hover {
       background-color: #16213e;
+    }
+
+    .game-log__drive-logo {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .game-log__drive-info {
+      flex: 1;
+      min-width: 0;
     }
 
     .game-log__drive-result {
@@ -60,13 +74,7 @@ template.innerHTML = `
     .game-log__drive-stats {
       font-size: 0.8em;
       color: #999;
-      margin-left: 12px;
-    }
-
-    .game-log__drive-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      margin-top: 2px;
     }
 
     .game-log__chevron {
@@ -126,6 +134,7 @@ template.innerHTML = `
       color: #666;
       font-style: italic;
     }
+
   </style>
   <div id="game-log__wrapper">
     <div id="game-log__header">Game Log</div>
@@ -153,6 +162,8 @@ export class WACTGameLog extends HTMLElement {
   private _initialized = false;
 
   private drives: DriveData[] = [];
+  private homeLogo = '';
+  private awayLogo = '';
 
   constructor() {
     super();
@@ -162,6 +173,11 @@ export class WACTGameLog extends HTMLElement {
 
   static get observedAttributes(): string[] {
     return [];
+  }
+
+  setTeamLogos(homeLogo: string, awayLogo: string): void {
+    this.homeLogo = homeLogo;
+    this.awayLogo = awayLogo;
   }
 
   addPlay(play: Play, driveIndex: number): void {
@@ -211,9 +227,10 @@ export class WACTGameLog extends HTMLElement {
 
     driveEl.innerHTML = `
       <div class="game-log__drive-header">
-        <div class="game-log__drive-left">
-          <span class="game-log__drive-result">Drive ${driveIndex + 1} - In Progress</span>
-          <span class="game-log__drive-stats"></span>
+        <img class="game-log__drive-logo" src="" alt="">
+        <div class="game-log__drive-info">
+          <div class="game-log__drive-result">Drive ${driveIndex + 1} - In Progress</div>
+          <div class="game-log__drive-stats"></div>
         </div>
         <span class="game-log__chevron game-log__chevron--expanded">&#9660;</span>
       </div>
@@ -261,36 +278,56 @@ export class WACTGameLog extends HTMLElement {
   }
 
   private updateDriveHeader(driveData: DriveData): void {
-    const resultEl = driveData.element.querySelector('.game-log__drive-result') as HTMLSpanElement;
-    const statsEl = driveData.element.querySelector('.game-log__drive-stats') as HTMLSpanElement;
+    const resultEl = driveData.element.querySelector('.game-log__drive-result') as HTMLDivElement;
+    const statsEl = driveData.element.querySelector('.game-log__drive-stats') as HTMLDivElement;
 
     const resultText = driveData.result ?? 'In Progress';
     resultEl.textContent = `Drive ${driveData.index + 1} - ${resultText}`;
 
     const stats = this.calculateDriveStats(driveData.plays);
     statsEl.textContent = stats;
+
+    // Update logo based on most recent play's possession
+    if (driveData.plays.length > 0) {
+      const latestPlay = driveData.plays[driveData.plays.length - 1];
+      const logoEl = driveData.element.querySelector('.game-log__drive-logo') as HTMLImageElement;
+      logoEl.src = latestPlay.context.home_possession ? this.homeLogo : this.awayLogo;
+    }
   }
 
   private calculateDriveStats(plays: Play[]): string {
     let passYards = 0;
     let rushYards = 0;
     let passAttempts = 0;
+    let passCompletions = 0;
     let rushAttempts = 0;
+    let totalYards = 0;
+    let playCount = 0;
 
     for (const play of plays) {
       if (play.result.type === 'Pass' || play.result.type === 'QbSpike') {
         passAttempts++;
         passYards += play.result_computed.net_yards;
+        if (play.result.type === 'Pass' && play.result.data.complete) {
+          passCompletions++;
+        }
+        totalYards += play.result_computed.net_yards;
+        playCount++;
       } else if (play.result.type === 'Run' || play.result.type === 'QbKneel') {
         rushAttempts++;
         rushYards += play.result_computed.net_yards;
+        totalYards += play.result_computed.net_yards;
+        playCount++;
       }
     }
 
+    if (playCount === 0) return '';
+
     const parts: string[] = [];
-    if (passAttempts > 0) parts.push(`${passYards} pass yds`);
-    if (rushAttempts > 0) parts.push(`${rushYards} rush yds`);
-    return parts.join(', ');
+    parts.push(`${playCount} play${playCount !== 1 ? 's' : ''}, ${totalYards} yards`);
+    if (passAttempts > 0) parts.push(`Passing: ${passCompletions}/${passAttempts}, ${passYards} yards`);
+    if (rushAttempts > 0) parts.push(`Rushing: ${rushAttempts} rush, ${rushYards} yards`);
+    return parts.join(' | ');
   }
 
   private formatDriveResult(result: string): string {

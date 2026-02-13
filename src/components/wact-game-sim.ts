@@ -230,6 +230,7 @@ export class WACTGameSim extends HTMLElement {
   private playbackSpeed = 2;
   private matchupConfig: MatchupConfig | null = null;
   private lastDriveCount = 0;
+  private lastHomePositiveDirection: boolean | null = null;
 
   private _readyPromise: Promise<void> | null = null;
   private _resolveReady: (() => void) | null = null;
@@ -317,11 +318,12 @@ export class WACTGameSim extends HTMLElement {
     this.lastDriveCount = 0;
 
     this.setupScoreboard(gameState);
-    this.setupField();
+    this.setupField(gameState.context.home_positive_direction);
 
     const context = this.root.getElementById('game-sim__context') as WACTGameContext;
     context.scoreboard.setAttribute('status', 'Pregame');
     context.gameLog.clear();
+    context.gameLog.setTeamLogos(this.matchupConfig!.home.logo, this.matchupConfig!.away.logo);
 
     this.transitionTo('pregame');
   }
@@ -338,13 +340,48 @@ export class WACTGameSim extends HTMLElement {
     scoreboard.setAttribute('away-score', String(gameState.context.away_score));
     scoreboard.setAttribute('quarter', String(gameState.context.quarter));
     scoreboard.setAttribute('clock', String(gameState.context.half_seconds));
+    scoreboard.setAttribute('down', String(gameState.context.down));
+    scoreboard.setAttribute('distance', String(gameState.context.distance));
+    scoreboard.setAttribute('yard-line', String(gameState.context.yard_line));
+    scoreboard.setAttribute(
+      'home-positive-direction',
+      String(gameState.context.home_positive_direction),
+    );
+    if (gameState.context.home_possession) {
+      scoreboard.setAttribute('home-possession', '');
+    } else {
+      scoreboard.removeAttribute('home-possession');
+    }
   }
 
-  private setupField(): void {
+  private setupField(homePositiveDirection: boolean): void {
     const field = this.root.getElementById('game-sim__field') as WACTFieldDisplay;
     field.clear();
-    field.setAttribute('home-color', '#1a5276');
-    field.setAttribute('away-color', '#922b21');
+
+    const homeColor = this.matchupConfig!.home.color;
+    const awayColor = this.matchupConfig!.away.color;
+
+    // setAttribute stores colors for use in drive rect coloring
+    field.setAttribute('home-color', homeColor);
+    field.setAttribute('away-color', awayColor);
+
+    // Set endzone labels and colors. Left endzone is yard 0, right is yard 100.
+    // When home_positive_direction is true, home scores toward yard 100,
+    // so left (yard 0) = home's own endzone, right (yard 100) = away's.
+    // When false, away is on the left, home on the right.
+    const leftEndzone = field.root.getElementById('field__endzone-home') as HTMLDivElement;
+    const rightEndzone = field.root.getElementById('field__endzone-away') as HTMLDivElement;
+    if (homePositiveDirection) {
+      leftEndzone.textContent = this.matchupConfig!.home.short_name;
+      leftEndzone.style.backgroundColor = homeColor;
+      rightEndzone.textContent = this.matchupConfig!.away.short_name;
+      rightEndzone.style.backgroundColor = awayColor;
+    } else {
+      leftEndzone.textContent = this.matchupConfig!.away.short_name;
+      leftEndzone.style.backgroundColor = awayColor;
+      rightEndzone.textContent = this.matchupConfig!.home.short_name;
+      rightEndzone.style.backgroundColor = homeColor;
+    }
   }
 
   private updateFromGameState(gameState: GameState): void {
@@ -373,25 +410,102 @@ export class WACTGameSim extends HTMLElement {
       scoreboard.removeAttribute('home-possession');
     }
 
+    // Always update ball position and first-down line immediately
+    field.updateMarkers(gameState.context);
+
     // Update game log
     if (gameState.latestPlay) {
       const currentDriveIndex = Math.max(0, gameState.driveCount - 1);
       gameLog.addPlay(gameState.latestPlay, currentDriveIndex);
 
-      // Check if a drive completed (drive count increased)
-      if (gameState.driveCount > this.lastDriveCount && this.lastDriveCount > 0) {
-        const completedDriveIndex = this.lastDriveCount - 1;
-        const completedDrive = this.simService!.getDrive(completedDriveIndex);
-        gameLog.completeDrive(completedDriveIndex, completedDrive);
+      // Check if a drive completed based on drive result
+      const currentDrive = this.simService!.getDrive(currentDriveIndex);
+      if (currentDrive.result !== "None") {
+        gameLog.completeDrive(currentDriveIndex, currentDrive);
       }
+
+      // Detect field flip at quarter change
+      if (
+        this.lastHomePositiveDirection !== null &&
+        gameState.latestPlay.context.home_positive_direction !==
+          gameState.context.home_positive_direction
+      ) {
+        if (gameState.complete || gameState.context.game_over) {
+          field.showTextOverlay('End of Game', '#ffffff', 1000);
+        } else {
+          field.showTextOverlay('End of Quarter', '#ffffff', 1000);
+        }
+        field.flipEndzones();
+      }
+      this.lastHomePositiveDirection = gameState.context.home_positive_direction;
+
+      // Trigger field animations based on play result
+      this.triggerPlayAnimation(field, gameState);
+
+      // Fade out drive rects on drive change
+      if (gameState.driveCount > this.lastDriveCount && this.lastDriveCount > 0) {
+        field.fadeOutDrive(() => {
+          if (gameState.driveCount > 0) {
+            const idx = gameState.driveCount - 1;
+            const drive = this.simService!.getDrive(idx);
+            field.setDrive(drive.plays, gameState.context);
+          }
+        });
+        this.lastDriveCount = gameState.driveCount;
+        return;
+      }
+
       this.lastDriveCount = gameState.driveCount;
+
+      // Fade out rects immediately when ball resets (punt, kickoff, FG, XP)
+      // rather than waiting for driveCount to change on the next simPlay()
+      const resetTypes = ['Punt', 'Kickoff', 'FieldGoal', 'ExtraPoint'];
+      if (resetTypes.includes(gameState.latestPlay.result.type)) {
+        field.fadeOutDrive();
+        return;
+      }
     }
 
-    // Update field
-    if (gameState.driveCount > 0) {
+    // Update field rects (skip at game over / end of half to avoid phantom rects after direction flip)
+    if (gameState.driveCount > 0 && !gameState.complete && !gameState.context.game_over && !gameState.context.end_of_half) {
       const currentDriveIndex = gameState.driveCount - 1;
       const currentDrive = this.simService!.getDrive(currentDriveIndex);
       field.setDrive(currentDrive.plays, gameState.context);
+    }
+  }
+
+  private triggerPlayAnimation(field: WACTFieldDisplay, gameState: GameState): void {
+    if (!gameState.latestPlay) return;
+    const play = gameState.latestPlay;
+    const rc = play.result_computed;
+
+    if (rc.offense_score === 'Touchdown') {
+      field.showAnimation('touchdown', { possession: play.context.home_possession });
+    } else if (rc.offense_score === 'FieldGoal') {
+      field.showAnimation('field-goal-made', { yardLine: play.context.yard_line });
+    } else if (play.result.type === 'FieldGoal' && !play.result.data.made) {
+      field.showAnimation('field-goal-missed', { yardLine: play.context.yard_line });
+    } else if (rc.offense_score === 'ExtraPoint') {
+      field.showAnimation('extra-point-made', {});
+    } else if (play.result.type === 'ExtraPoint' && !play.result.data.made) {
+      field.showAnimation('extra-point-missed', {});
+    } else if (rc.defense_score === 'Safety') {
+      field.showAnimation('safety', { possession: play.context.home_possession });
+    } else if (play.result.type === 'Pass' && play.result.data.interception) {
+      field.showAnimation('turnover', { type: 'Interception' });
+    } else if (play.result.type === 'Pass' && play.result.data.fumble) {
+      field.showAnimation('turnover', { type: 'Fumble' });
+    } else if (play.result.type === 'Run' && play.result.data.fumble) {
+      field.showAnimation('turnover', { type: 'Fumble' });
+    } else if (play.result.type === 'Punt' && play.result.data.fumble) {
+      field.showAnimation('turnover', { type: 'Fumble' });
+    } else if (play.result.type === 'Kickoff' && play.result.data.fumble) {
+      field.showAnimation('turnover', { type: 'Fumble' });
+    } else if (rc.punt) {
+      field.showAnimation('punt', {
+        fromYard: play.context.yard_line,
+        toYard: gameState.context.yard_line,
+      });
     }
   }
 
@@ -416,7 +530,7 @@ export class WACTGameSim extends HTMLElement {
     const gameState = this.simService.simPlay();
     this.updateFromGameState(gameState);
 
-    if (gameState.complete) {
+    if (gameState.complete || gameState.context.game_over) {
       this.onGameComplete(gameState);
       return;
     }
@@ -435,6 +549,10 @@ export class WACTGameSim extends HTMLElement {
       context.gameLog.collapseAll();
       context.scoreboard.setAttribute('status', 'Final');
     }
+
+    // Clear any lingering field animations so they don't replay on view toggle
+    const field = this.root.getElementById('game-sim__field') as WACTFieldDisplay;
+    field.clearAnimations();
 
     this.showPostgame(gameState);
   }
@@ -575,6 +693,10 @@ export class WACTGameSim extends HTMLElement {
     const statsView = this.root.getElementById('game-sim__stats-view') as HTMLDivElement;
     gameView.style.display = 'flex';
     statsView.style.display = 'none';
+
+    // Clear field animations so they don't replay when game view reappears
+    const field = this.root.getElementById('game-sim__field') as WACTFieldDisplay;
+    field.clearAnimations();
   }
 
   private newGame(): void {
@@ -583,6 +705,7 @@ export class WACTGameSim extends HTMLElement {
       this.simService.destroyGame();
     }
     this.lastDriveCount = 0;
+    this.lastHomePositiveDirection = null;
     this.matchupConfig = null;
     this.transitionTo('config');
   }

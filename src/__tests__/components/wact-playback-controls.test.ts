@@ -118,12 +118,12 @@ describe('WACTPlaybackControls', () => {
 
   it('should update play/pause button text based on playing state', () => {
     const button = el.root.getElementById('playback__play-pause') as HTMLButtonElement;
-    expect(button.title).toBe('Play');
+    expect(button.dataset.tooltip).toBe('Play');
 
     el.playing = true;
-    expect(button.title).toBe('Pause');
+    expect(button.dataset.tooltip).toBe('Pause');
 
     el.playing = false;
-    expect(button.title).toBe('Play');
+    expect(button.dataset.tooltip).toBe('Play');
   });
 });
