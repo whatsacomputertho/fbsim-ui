@@ -238,7 +238,7 @@ export class WACTScoreboard extends HTMLElement {
     if (halfSeconds < 900 || (halfSeconds == 900 && quarter % 2 == 0 && quarter <= 4)) {
       clockTotal = halfSeconds;
     } else {
-      clockTotal = halfSeconds - 900
+      clockTotal = halfSeconds - 900;
     }
     const minutes = Math.floor(clockTotal / 60);
     const seconds = clockTotal % 60;
@@ -247,9 +247,9 @@ export class WACTScoreboard extends HTMLElement {
 
   private formatQuarter(q: number): string {
     if (q < 5) {
-      return `${q}Q`
+      return `${q}Q`;
     } else {
-      return `OT${q-4}`;
+      return `OT${q - 4}`;
     }
   }
 
@@ -316,7 +316,7 @@ export class WACTScoreboard extends HTMLElement {
     const downDistEl = this.root.getElementById('scoreboard__down-distance') as HTMLSpanElement;
     const statusEl = this.root.getElementById('scoreboard__status') as HTMLSpanElement;
 
-    let quarterValue = quarter ? parseInt(quarter) : 0;
+    const quarterValue = quarter ? parseInt(quarter) : 0;
     quarterEl.textContent = quarter ? this.formatQuarter(quarterValue) : '';
     clockEl.textContent = clock ? this.formatClock(quarterValue, parseInt(clock)) : '';
 

@@ -314,7 +314,6 @@ export class WACTFieldDisplay extends HTMLElement {
         overlay.appendChild(rect);
       }
     }
-
   }
 
   updateMarkers(context: GameContext): void {
@@ -354,7 +353,16 @@ export class WACTFieldDisplay extends HTMLElement {
     line.style.display = 'block';
   }
 
-  showAnimation(type: string, details: { possession?: boolean; yardLine?: number; fromYard?: number; toYard?: number; type?: string }): void {
+  showAnimation(
+    type: string,
+    details: {
+      possession?: boolean;
+      yardLine?: number;
+      fromYard?: number;
+      toYard?: number;
+      type?: string;
+    },
+  ): void {
     const homeColor = this.getAttribute('home-color') ?? '#1a5276';
     const awayColor = this.getAttribute('away-color') ?? '#922b21';
 

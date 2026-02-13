@@ -325,7 +325,8 @@ export class WACTGameLog extends HTMLElement {
 
     const parts: string[] = [];
     parts.push(`${playCount} play${playCount !== 1 ? 's' : ''}, ${totalYards} yards`);
-    if (passAttempts > 0) parts.push(`Passing: ${passCompletions}/${passAttempts}, ${passYards} yards`);
+    if (passAttempts > 0)
+      parts.push(`Passing: ${passCompletions}/${passAttempts}, ${passYards} yards`);
     if (rushAttempts > 0) parts.push(`Rushing: ${rushAttempts} rush, ${rushYards} yards`);
     return parts.join(' | ');
   }

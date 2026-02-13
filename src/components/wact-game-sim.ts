@@ -420,7 +420,7 @@ export class WACTGameSim extends HTMLElement {
 
       // Check if a drive completed based on drive result
       const currentDrive = this.simService!.getDrive(currentDriveIndex);
-      if (currentDrive.result !== "None") {
+      if (currentDrive.result !== 'None') {
         gameLog.completeDrive(currentDriveIndex, currentDrive);
       }
 
@@ -467,7 +467,12 @@ export class WACTGameSim extends HTMLElement {
     }
 
     // Update field rects (skip at game over / end of half to avoid phantom rects after direction flip)
-    if (gameState.driveCount > 0 && !gameState.complete && !gameState.context.game_over && !gameState.context.end_of_half) {
+    if (
+      gameState.driveCount > 0 &&
+      !gameState.complete &&
+      !gameState.context.game_over &&
+      !gameState.context.end_of_half
+    ) {
       const currentDriveIndex = gameState.driveCount - 1;
       const currentDrive = this.simService!.getDrive(currentDriveIndex);
       field.setDrive(currentDrive.plays, gameState.context);
