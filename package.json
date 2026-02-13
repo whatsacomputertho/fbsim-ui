@@ -1,6 +1,6 @@
 {
   "name": "@whatsacomputertho/fbsim-ui",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "FBSim web component library",
   "type": "module",
   "main": "dist/fbsim-ui.cjs",
