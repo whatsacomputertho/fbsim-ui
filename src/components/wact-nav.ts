@@ -28,6 +28,13 @@ template.innerHTML = `
     ::slotted(img) {
       max-height: 100%;
       object-fit: contain;
+      filter: brightness(0) invert(1) brightness(0.2);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      ::slotted(img) {
+        filter: none;
+      }
     }
   </style>
   <nav id="navbar-wrapper" class="navbar-wrapper">

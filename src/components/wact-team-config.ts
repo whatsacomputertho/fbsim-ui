@@ -12,11 +12,6 @@ template.innerHTML = `
       --tc-input-border: #ccc;
       --tc-input-color: inherit;
       --tc-section-header: #333;
-      --tc-btn-bg: #3355aa;
-      --tc-btn-hover-bg: #2a4a8f;
-      --tc-btn-text: white;
-      --tc-btn-border: #999;
-      --tc-btn-hover-border: #c5a200;
       --tc-error-text: #cc0000;
       --tc-error-bg: #ffe6e6;
     }
@@ -29,11 +24,6 @@ template.innerHTML = `
         --tc-input-border: #555;
         --tc-input-color: #e0e0e0;
         --tc-section-header: #ccc;
-        --tc-btn-bg: #162267;
-        --tc-btn-hover-bg: rgb(44, 63, 170);
-        --tc-btn-text: yellow;
-        --tc-btn-border: #555;
-        --tc-btn-hover-border: #ffd700;
         --tc-error-text: #ff6666;
         --tc-error-bg: #3a1a1a;
       }
@@ -223,23 +213,8 @@ template.innerHTML = `
 
     #team-config__load-btn {
       margin-top: 8px;
-      padding: 6px 16px;
+      --btn-padding: 6px 16px;
       font-size: 0.9em;
-      background: none;
-      color: var(--tc-text);
-      border: 2px solid var(--tc-btn-border);
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 150ms ease;
-    }
-
-    #team-config__load-btn:hover {
-      background-color: rgba(128, 128, 128, 0.1);
-      border-color: var(--tc-btn-hover-border);
-    }
-
-    #team-config__load-btn:active {
-      background-color: rgba(128, 128, 128, 0.25);
     }
 
     #team-config__file-input {
@@ -292,7 +267,7 @@ template.innerHTML = `
         <input id="team-config__logo-url-input" type="text" value="https://official-flc.com/img/default-club-picture.png">
       </div>
     </div>
-    <button id="team-config__load-btn">Load from File</button>
+    <wact-button id="team-config__load-btn">Load from File</wact-button>
     <input id="team-config__file-input" type="file" accept=".json">
     <div id="team-config__error"></div>
 
@@ -571,7 +546,7 @@ export class WACTTeamConfig extends HTMLElement {
     imageUrlInput.addEventListener('input', this.refreshImageUrl.bind(this));
     imageUrlInput.addEventListener('change', this.refreshImageUrl.bind(this));
 
-    const loadBtn = this.root.getElementById('team-config__load-btn') as HTMLButtonElement;
+    const loadBtn = this.root.getElementById('team-config__load-btn') as HTMLElement;
     loadBtn.addEventListener('click', () => this.handleFileLoad());
 
     const fileInput = this.root.getElementById('team-config__file-input') as HTMLInputElement;

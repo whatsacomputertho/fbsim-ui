@@ -5,22 +5,6 @@ import type { WACTBoxScore } from './wact-box-score.js';
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      --fss-btn-bg: #3355aa;
-      --fss-btn-text: white;
-      --fss-btn-hover-bg: #2a4a8f;
-      --fss-btn-active-bg: rgb(71, 95, 231);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --fss-btn-bg: #162267;
-        --fss-btn-text: yellow;
-        --fss-btn-hover-bg: rgb(44, 63, 170);
-        --fss-btn-active-bg: rgb(71, 95, 231);
-      }
-    }
-
     #final-score-sim__sim-button-wrapper {
       display: flex;
       align-items: center;
@@ -31,19 +15,6 @@ template.innerHTML = `
       margin-top: 1%;
       width: 50%;
       font-size: 1.5rem;
-      color: var(--fss-btn-text);
-      background-color: var(--fss-btn-bg);
-      border-radius: 8px;
-      transition: all 100ms ease-in-out;
-    }
-
-    #final-score-sim__sim-button:hover {
-      background-color: var(--fss-btn-hover-bg);
-      cursor: pointer;
-    }
-
-    #final-score-sim__sim-button:active {
-      background-color: var(--fss-btn-active-bg);
     }
 
     #final-score-sim__result-wrapper {
@@ -58,7 +29,7 @@ template.innerHTML = `
   <div id="final-score-sim__wrapper" class="final-score-sim__wrapper">
     <wact-matchup-select id="final-score-sim__select" class="final-score-sim__select"></wact-matchup-select>
     <div id="final-score-sim__sim-button-wrapper" class="final-score-sim__sim-button-wrapper">
-      <button id="final-score-sim__sim-button" class="final-score-sim__sim-button">Simulate</button>
+      <wact-button id="final-score-sim__sim-button" class="final-score-sim__sim-button" variant="primary">Simulate</wact-button>
     </div>
     <div id="final-score-sim__result-wrapper" class="final-score-sim__result-wrapper">
       <wact-box-score id="final-score-sim__result" class="final-score-sim__result"></wact-box-score>
@@ -145,7 +116,7 @@ export class WACTFinalScoreSim extends HTMLElement {
   connectedCallback(): void {
     if (this._initialized) return;
     this._initialized = true;
-    const simButton = this.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
+    const simButton = this.root.getElementById('final-score-sim__sim-button') as HTMLElement;
     simButton.addEventListener('click', () => void this.getBoxScore());
     this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();

@@ -121,7 +121,7 @@ template.innerHTML = `
     .game-log__drive-plays {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 300ms ease;
+      transition: max-height 300ms ease, padding-bottom 300ms ease;
       padding: 0 16px;
     }
 

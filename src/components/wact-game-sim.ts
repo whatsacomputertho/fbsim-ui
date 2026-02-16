@@ -8,6 +8,7 @@ import type { WACTMatchupConfig } from './wact-matchup-config.js';
 import type { WACTFieldDisplay } from './wact-field-display.js';
 import type { WACTPlaybackControls } from './wact-playback-controls.js';
 import type { WACTGameContext } from './wact-game-context.js';
+import type { WACTButton } from './wact-button.js';
 
 type SimState = 'config' | 'pregame' | 'playing' | 'paused' | 'postgame';
 
@@ -17,15 +18,9 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
-      --gs-btn-bg: #2c4494;
-      --gs-btn-text: white;
-      --gs-btn-hover-bg: #3a58b0;
-      --gs-btn-active-bg: #1e3070;
-      --gs-btn-border: #999;
-      --gs-btn-hover-border: #c5a200;
-      --gs-postgame-bg: rgba(0, 0, 0, 0.85);
-      --gs-postgame-text: white;
-      --gs-postgame-score: #ccc;
+      --gs-postgame-bg: #f0f0f5;
+      --gs-postgame-text: #333;
+      --gs-postgame-score: #555;
       --gs-stats-bg: #f0f0f5;
       --gs-stats-text: #1a1a2e;
       --gs-stats-border: #ccc;
@@ -36,13 +31,7 @@ template.innerHTML = `
 
     @media (prefers-color-scheme: dark) {
       :host {
-        --gs-btn-bg: #162267;
-        --gs-btn-text: yellow;
-        --gs-btn-hover-bg: rgb(44, 63, 170);
-        --gs-btn-active-bg: rgb(71, 95, 231);
-        --gs-btn-border: #555;
-        --gs-btn-hover-border: #ffd700;
-        --gs-postgame-bg: rgba(0, 0, 0, 0.85);
+        --gs-postgame-bg: #1a1a2e;
         --gs-postgame-text: white;
         --gs-postgame-score: #ccc;
         --gs-stats-bg: #1a1a2e;
@@ -73,21 +62,7 @@ template.innerHTML = `
     #game-sim__start-button {
       width: 50%;
       font-size: 1.5rem;
-      color: var(--gs-btn-text);
-      background-color: var(--gs-btn-bg);
-      border-radius: 8px;
-      transition: all 100ms ease-in-out;
-      padding: 8px;
-      border: none;
-      cursor: pointer;
-    }
-
-    #game-sim__start-button:hover {
-      background-color: var(--gs-btn-hover-bg);
-    }
-
-    #game-sim__start-button:active {
-      background-color: var(--gs-btn-active-bg);
+      --btn-padding: 8px;
     }
 
     /* Game view */
@@ -138,23 +113,8 @@ template.innerHTML = `
 
     .game-sim__postgame-button {
       font-size: 1rem;
-      padding: 8px 20px;
+      --btn-padding: 8px 20px;
       margin: 6px;
-      border: 2px solid var(--gs-btn-border);
-      background: none;
-      color: var(--gs-postgame-text);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 100ms ease-in-out;
-    }
-
-    .game-sim__postgame-button:hover {
-      background-color: rgba(128, 128, 128, 0.15);
-      border-color: var(--gs-btn-hover-border);
-    }
-
-    .game-sim__postgame-button:active {
-      background-color: rgba(128, 128, 128, 0.3);
     }
 
     /* Stats view */
@@ -192,22 +152,7 @@ template.innerHTML = `
       display: block;
       margin: 12px auto 0 auto;
       font-size: 0.9rem;
-      padding: 6px 16px;
-      border: 2px solid var(--gs-btn-border);
-      background: none;
-      color: var(--gs-stats-text);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 100ms ease-in-out;
-    }
-
-    #game-sim__stats-back-button:hover {
-      background-color: rgba(128, 128, 128, 0.1);
-      border-color: var(--gs-btn-hover-border);
-    }
-
-    #game-sim__stats-back-button:active {
-      background-color: rgba(128, 128, 128, 0.25);
+      --btn-padding: 6px 16px;
     }
 
     #game-sim__error {
@@ -232,7 +177,7 @@ template.innerHTML = `
     <div id="game-sim__config-view">
       <wact-matchup-config id="game-sim__matchup-config"></wact-matchup-config>
       <div id="game-sim__start-button-wrapper">
-        <button id="game-sim__start-button">Start Game</button>
+        <wact-button id="game-sim__start-button" variant="primary">Start Game</wact-button>
       </div>
       <div id="game-sim__error"></div>
     </div>
@@ -250,8 +195,8 @@ template.innerHTML = `
           <div id="game-sim__postgame-overlay">
             <div id="game-sim__winner-banner"></div>
             <div id="game-sim__final-score"></div>
-            <button id="game-sim__summary-button" class="game-sim__postgame-button">Game Summary</button>
-            <button id="game-sim__new-game-button" class="game-sim__postgame-button">Simulate New Game</button>
+            <wact-button id="game-sim__summary-button" class="game-sim__postgame-button">Game Summary</wact-button>
+            <wact-button id="game-sim__new-game-button" class="game-sim__postgame-button">Simulate New Game</wact-button>
           </div>
         </div>
       </div>
@@ -270,7 +215,7 @@ template.innerHTML = `
         </thead>
         <tbody id="game-sim__stats-body"></tbody>
       </table>
-      <button id="game-sim__stats-back-button">Back</button>
+      <wact-button id="game-sim__stats-back-button">Back</wact-button>
     </div>
   </div>
 `;
@@ -354,44 +299,53 @@ export class WACTGameSim extends HTMLElement {
   }
 
   private async startGame(): Promise<void> {
+    const startButton = this.root.getElementById('game-sim__start-button') as WACTButton;
     const errorEl = this.root.getElementById('game-sim__error') as HTMLDivElement;
 
-    if (!this.simService) {
-      const { WasmSimService } = await import('../services/wasm-sim-service.js');
-      this.simService = new WasmSimService();
-    }
+    startButton.startLoading();
 
-    if (!this.simService.isReady()) {
-      await this.simService.initialize();
-    }
-
-    const matchupConfigEl = this.root.getElementById(
-      'game-sim__matchup-config',
-    ) as WACTMatchupConfig;
-    this.matchupConfig = matchupConfigEl.matchupConfig;
-
-    let gameState: GameState;
     try {
-      gameState = this.simService.createGame(this.matchupConfig);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err);
-      errorEl.textContent = message;
-      errorEl.style.display = 'block';
-      return;
+      if (!this.simService) {
+        const { WasmSimService } = await import('../services/wasm-sim-service.js');
+        this.simService = new WasmSimService();
+      }
+
+      if (!this.simService.isReady()) {
+        await this.simService.initialize();
+      }
+
+      const matchupConfigEl = this.root.getElementById(
+        'game-sim__matchup-config',
+      ) as WACTMatchupConfig;
+      this.matchupConfig = matchupConfigEl.matchupConfig;
+
+      let gameState: GameState;
+      try {
+        gameState = this.simService.createGame(this.matchupConfig);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        startButton.stopLoading();
+        return;
+      }
+      errorEl.textContent = '';
+      errorEl.style.display = 'none';
+      this.lastDriveCount = 0;
+
+      this.setupScoreboard(gameState);
+      this.setupField(gameState.context.home_positive_direction);
+
+      const context = this.root.getElementById('game-sim__context') as WACTGameContext;
+      context.scoreboard.setAttribute('status', 'Pregame');
+      context.gameLog.clear();
+      context.gameLog.setTeamLogos(this.matchupConfig!.home.logo, this.matchupConfig!.away.logo);
+
+      startButton.reset();
+      this.transitionTo('pregame');
+    } catch {
+      startButton.stopLoading();
     }
-    errorEl.textContent = '';
-    errorEl.style.display = 'none';
-    this.lastDriveCount = 0;
-
-    this.setupScoreboard(gameState);
-    this.setupField(gameState.context.home_positive_direction);
-
-    const context = this.root.getElementById('game-sim__context') as WACTGameContext;
-    context.scoreboard.setAttribute('status', 'Pregame');
-    context.gameLog.clear();
-    context.gameLog.setTeamLogos(this.matchupConfig!.home.logo, this.matchupConfig!.away.logo);
-
-    this.transitionTo('pregame');
   }
 
   private setupScoreboard(gameState: GameState): void {
@@ -793,7 +747,7 @@ export class WACTGameSim extends HTMLElement {
     this._initialized = true;
 
     // Start button
-    const startButton = this.root.getElementById('game-sim__start-button') as HTMLButtonElement;
+    const startButton = this.root.getElementById('game-sim__start-button') as HTMLElement;
     startButton.addEventListener('click', () => this.startGame());
 
     // Playback controls
@@ -821,18 +775,14 @@ export class WACTGameSim extends HTMLElement {
     });
 
     // Postgame buttons
-    const summaryButton = this.root.getElementById('game-sim__summary-button') as HTMLButtonElement;
+    const summaryButton = this.root.getElementById('game-sim__summary-button') as HTMLElement;
     summaryButton.addEventListener('click', () => this.showStats());
 
-    const newGameButton = this.root.getElementById(
-      'game-sim__new-game-button',
-    ) as HTMLButtonElement;
+    const newGameButton = this.root.getElementById('game-sim__new-game-button') as HTMLElement;
     newGameButton.addEventListener('click', () => this.newGame());
 
     // Stats back button
-    const statsBackButton = this.root.getElementById(
-      'game-sim__stats-back-button',
-    ) as HTMLButtonElement;
+    const statsBackButton = this.root.getElementById('game-sim__stats-back-button') as HTMLElement;
     statsBackButton.addEventListener('click', () => this.hideStats());
 
     this._readyPromise = new Promise((r) => (this._resolveReady = r));

@@ -6,10 +6,6 @@ template.innerHTML = `
       width: 100%;
       --fr-bg: #d3d3d3;
       --fr-text: inherit;
-      --fr-btn-bg: #d3d3d3;
-      --fr-btn-hover-bg: #c3c3c3;
-      --fr-btn-active-bg: #b3b3b3;
-      --fr-btn-text: inherit;
       --fr-progress-bg: #c0c0c0;
     }
 
@@ -17,10 +13,6 @@ template.innerHTML = `
       :host {
         --fr-bg: #282828;
         --fr-text: #f5f5f5;
-        --fr-btn-bg: #282828;
-        --fr-btn-hover-bg: #383838;
-        --fr-btn-active-bg: #484848;
-        --fr-btn-text: #f5f5f5;
         --fr-progress-bg: #383838;
       }
     }
@@ -45,18 +37,13 @@ template.innerHTML = `
     }
 
     .feedback-ribbon__remove-button {
-      border: none;
-      background-color: var(--fr-btn-bg);
-      color: var(--fr-btn-text);
+      display: block;
+      --btn-padding: 0;
     }
 
-    .feedback-ribbon__remove-button:hover {
-      cursor: pointer;
-      background-color: var(--fr-btn-hover-bg);
-    }
-
-    .feedback-ribbon__remove-button:active {
-      background-color: var(--fr-btn-active-bg);
+    .feedback-ribbon__remove-button::part(button) {
+      border-radius: 0;
+      height: 100%;
     }
 
     .feedback-ribbon__progress-bar-wrapper {
@@ -78,9 +65,9 @@ template.innerHTML = `
       <div class="feedback-ribbon__feedback-text-wrapper">
         <slot class="feedback-ribbon__feedback-text">Put your feedback here</slot>
       </div>
-      <button id="remove-button" class="feedback-ribbon__remove-button">
+      <wact-button id="remove-button" class="feedback-ribbon__remove-button" variant="destructive">
         &times;
-      </button>
+      </wact-button>
     </div>
     <div id="progress-bar-wrapper" class="feedback-ribbon__progress-bar-wrapper">
       <div id="progress-bar" class="feedback-ribbon__progress-bar"></div>
@@ -185,14 +172,14 @@ export class WACTFeedbackRibbon extends HTMLElement {
   }
 
   private addRemoveButton(): void {
-    const removeButton = this.root.getElementById('remove-button') as HTMLButtonElement;
+    const removeButton = this.root.getElementById('remove-button') as HTMLElement;
     removeButton.style.display = 'block';
     const ribbonWrapper = this.root.getElementById('ribbon-wrapper') as HTMLDivElement;
     ribbonWrapper.style.gridTemplateColumns = '2% 90% 8%';
   }
 
   private removeRemoveButton(): void {
-    const removeButton = this.root.getElementById('remove-button') as HTMLButtonElement;
+    const removeButton = this.root.getElementById('remove-button') as HTMLElement;
     removeButton.style.display = 'none';
     const ribbonWrapper = this.root.getElementById('ribbon-wrapper') as HTMLDivElement;
     ribbonWrapper.style.gridTemplateColumns = '2% 98%';
@@ -240,7 +227,7 @@ export class WACTFeedbackRibbon extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
 
-    const removeButton = this.root.getElementById('remove-button') as HTMLButtonElement;
+    const removeButton = this.root.getElementById('remove-button') as HTMLElement;
     removeButton.addEventListener('click', this.removeElement.bind(this));
 
     if (this.duration == null) {
