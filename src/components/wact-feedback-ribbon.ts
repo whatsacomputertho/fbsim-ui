@@ -4,83 +4,67 @@ template.innerHTML = `
     :host {
       display: block;
       width: 100%;
+      --fr-bg: #d3d3d3;
+      --fr-text: inherit;
+      --fr-btn-bg: #d3d3d3;
+      --fr-btn-hover-bg: #c3c3c3;
+      --fr-btn-active-bg: #b3b3b3;
+      --fr-btn-text: inherit;
+      --fr-progress-bg: #c0c0c0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --fr-bg: #282828;
+        --fr-text: #f5f5f5;
+        --fr-btn-bg: #282828;
+        --fr-btn-hover-bg: #383838;
+        --fr-btn-active-bg: #484848;
+        --fr-btn-text: #f5f5f5;
+        --fr-progress-bg: #383838;
+      }
     }
 
     .feedback-ribbon__ribbon-progress-wrapper {
       box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.7);
     }
 
-    .feedback-ribbon__ribbon-wrapper, .feedback-ribbon__ribbon-wrapper-dark {
+    .feedback-ribbon__ribbon-wrapper {
       display: grid;
       grid-template-columns: 2% 90% 8%;
+      background-color: var(--fr-bg);
     }
 
-    .feedback-ribbon__ribbon-wrapper {
-      background-color: #d3d3d3;
-    }
-
-    .feedback-ribbon__ribbon-wrapper-dark {
-      background-color: #282828;
-    }
-
-    .feedback-ribbon__color-sidebar, .feedback-ribbon__color-sidebar-dark {
+    .feedback-ribbon__color-sidebar {
       background-color: #C00000;
     }
 
-    .feedback-ribbon__feedback-text-wrapper, .feedback-ribbon__feedback-text-wrapper-dark {
+    .feedback-ribbon__feedback-text-wrapper {
       padding: 2%;
-    }
-
-    .feedback-ribbon__feedback-text-dark {
-      color: #f5f5f5;
-    }
-
-    .feedback-ribbon__remove-button, .feedback-ribbon__remove-button-dark {
-      border: none;
-    }
-
-    .feedback-ribbon__remove-button:hover, .feedback-ribbon__remove-button-dark:hover {
-      cursor: pointer;
+      color: var(--fr-text);
     }
 
     .feedback-ribbon__remove-button {
-      background-color: #d3d3d3;
+      border: none;
+      background-color: var(--fr-btn-bg);
+      color: var(--fr-btn-text);
     }
 
     .feedback-ribbon__remove-button:hover {
-      background-color: #c3c3c3;
+      cursor: pointer;
+      background-color: var(--fr-btn-hover-bg);
     }
 
     .feedback-ribbon__remove-button:active {
-      background-color: #b3b3b3;
-    }
-
-    .feedback-ribbon__remove-button-dark {
-      background-color: #282828;
-      color: #f5f5f5;
-    }
-
-    .feedback-ribbon__remove-button-dark:hover {
-      background-color: #383838;
-    }
-
-    .feedback-ribbon__remove-button-dark:active {
-      background-color: #484848;
-    }
-
-    .feedback-ribbon__progress-bar-wrapper, .feedback-ribbon__progress-bar-wrapper-dark {
-      height: 10px;
+      background-color: var(--fr-btn-active-bg);
     }
 
     .feedback-ribbon__progress-bar-wrapper {
-      background-color: #c0c0c0;
+      height: 10px;
+      background-color: var(--fr-progress-bg);
     }
 
-    .feedback-ribbon__progress-bar-wrapper-dark {
-      background-color: #383838;
-    }
-
-    .feedback-ribbon__progress-bar, .feedback-ribbon__progress-bar-dark {
+    .feedback-ribbon__progress-bar {
       background-color: #C00000;
       height: 10px;
       width: 0px;
@@ -104,7 +88,7 @@ template.innerHTML = `
   </div>
 `;
 
-const OBSERVED_ATTRIBUTES = ['color', 'dark', 'duration', 'removable'] as const;
+const OBSERVED_ATTRIBUTES = ['color', 'duration', 'removable'] as const;
 
 export class WACTFeedbackRibbon extends HTMLElement {
   static readonly tagName = 'wact-feedback-ribbon' as const;
@@ -134,18 +118,6 @@ export class WACTFeedbackRibbon extends HTMLElement {
     this.setAttribute('color', value);
   }
 
-  get dark(): boolean {
-    return this.hasAttribute('dark');
-  }
-
-  set dark(value: boolean) {
-    if (value) {
-      this.setAttribute('dark', '');
-    } else {
-      this.removeAttribute('dark');
-    }
-  }
-
   get duration(): number | null {
     if (!this.hasAttribute('duration')) {
       return null;
@@ -166,46 +138,6 @@ export class WACTFeedbackRibbon extends HTMLElement {
       this.setAttribute('removable', '');
     } else {
       this.removeAttribute('removable');
-    }
-  }
-
-  private static getChildrenRecursive(element: Element, includeElement: boolean = true): Element[] {
-    const recursiveChildren: Element[] = [];
-
-    if (includeElement) {
-      recursiveChildren.push(element);
-    }
-
-    if (element.children.length === 0) {
-      return recursiveChildren;
-    }
-
-    for (let i = 0; i < element.children.length; i++) {
-      recursiveChildren.push(element.children[i]);
-      const subChildren = WACTFeedbackRibbon.getChildrenRecursive(element.children[i], false);
-      recursiveChildren.push(...subChildren);
-    }
-
-    return recursiveChildren;
-  }
-
-  private toggleDarkMode(): void {
-    const wrapper = this.root.getElementById('ribbon-progress-wrapper') as HTMLDivElement;
-    const wrapperChildren = WACTFeedbackRibbon.getChildrenRecursive(wrapper);
-
-    for (const child of wrapperChildren) {
-      const childClass = child.getAttribute('class');
-      if (!childClass) continue;
-
-      if (this.dark) {
-        if (!childClass.endsWith('-dark')) {
-          child.setAttribute('class', childClass + '-dark');
-        }
-      } else {
-        if (childClass.endsWith('-dark')) {
-          child.setAttribute('class', childClass.replace(/-dark$/, ''));
-        }
-      }
     }
   }
 
@@ -279,9 +211,6 @@ export class WACTFeedbackRibbon extends HTMLElement {
     newValue: string | null,
   ): void {
     switch (attribute.toLowerCase()) {
-      case 'dark':
-        this.toggleDarkMode();
-        break;
       case 'color':
         this.toggleColor(previousValue, newValue);
         break;

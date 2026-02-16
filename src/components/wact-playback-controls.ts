@@ -4,6 +4,37 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
+      --pb-bg: #e8eaf6;
+      --pb-text: #1a1a2e;
+      --pb-btn-border: #999;
+      --pb-btn-hover-bg: #cfd2e8;
+      --pb-btn-hover-border: #c5a200;
+      --pb-btn-active-bg: #b8bce0;
+      --pb-tooltip-bg: #555;
+      --pb-tooltip-text: white;
+      --pb-menu-bg: #e8eaf6;
+      --pb-menu-border: #999;
+      --pb-menu-text: #555;
+      --pb-menu-hover-bg: #cfd2e8;
+      --pb-menu-active: #b8860b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --pb-bg: #1a1a2e;
+        --pb-text: white;
+        --pb-btn-border: #555;
+        --pb-btn-hover-bg: #16213e;
+        --pb-btn-hover-border: #ffd700;
+        --pb-btn-active-bg: #0f3460;
+        --pb-tooltip-bg: #333;
+        --pb-tooltip-text: white;
+        --pb-menu-bg: #1a1a2e;
+        --pb-menu-border: #555;
+        --pb-menu-text: #ccc;
+        --pb-menu-hover-bg: #16213e;
+        --pb-menu-active: #ffd700;
+      }
     }
 
     #playback__wrapper {
@@ -11,16 +42,16 @@ template.innerHTML = `
       align-items: center;
       justify-content: space-between;
       padding: 8px 16px;
-      background-color: #1a1a2e;
+      background-color: var(--pb-bg);
       border-radius: 8px;
-      color: white;
+      color: var(--pb-text);
       gap: 12px;
     }
 
     .playback__button {
       background: none;
-      border: 2px solid #555;
-      color: white;
+      border: 2px solid var(--pb-btn-border);
+      color: var(--pb-text);
       font-size: 1.1em;
       padding: 6px 14px;
       border-radius: 6px;
@@ -30,12 +61,12 @@ template.innerHTML = `
     }
 
     .playback__button:hover:not(:disabled) {
-      background-color: #16213e;
-      border-color: #ffd700;
+      background-color: var(--pb-btn-hover-bg);
+      border-color: var(--pb-btn-hover-border);
     }
 
     .playback__button:active:not(:disabled) {
-      background-color: #0f3460;
+      background-color: var(--pb-btn-active-bg);
     }
 
     .playback__button:disabled {
@@ -63,8 +94,8 @@ template.innerHTML = `
       left: 50%;
       transform: translateX(-50%);
       padding: 4px 8px;
-      background: #333;
-      color: white;
+      background: var(--pb-tooltip-bg);
+      color: var(--pb-tooltip-text);
       font-size: 0.75em;
       border-radius: 4px;
       white-space: nowrap;
@@ -97,8 +128,8 @@ template.innerHTML = `
 
     #playback__speed-display {
       background: none;
-      border: 2px solid #555;
-      color: white;
+      border: 2px solid var(--pb-btn-border);
+      color: var(--pb-text);
       font-size: 1.1em;
       padding: 6px 14px;
       border-radius: 6px;
@@ -110,8 +141,8 @@ template.innerHTML = `
     }
 
     #playback__speed-display:hover:not(:disabled) {
-      background-color: #16213e;
-      border-color: #ffd700;
+      background-color: var(--pb-btn-hover-bg);
+      border-color: var(--pb-btn-hover-border);
     }
 
     #playback__speed-display:disabled {
@@ -124,8 +155,8 @@ template.innerHTML = `
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #1a1a2e;
-      border: 1px solid #555;
+      background-color: var(--pb-menu-bg);
+      border: 1px solid var(--pb-menu-border);
       border-radius: 6px;
       padding: 4px 0;
       margin-bottom: 4px;
@@ -147,7 +178,7 @@ template.innerHTML = `
       padding: 6px 12px;
       background: none;
       border: none;
-      color: #ccc;
+      color: var(--pb-menu-text);
       font-size: 0.95em;
       cursor: pointer;
       text-align: center;
@@ -156,12 +187,12 @@ template.innerHTML = `
     }
 
     .playback__speed-option:hover {
-      background-color: #16213e;
-      color: #ffd700;
+      background-color: var(--pb-menu-hover-bg);
+      color: var(--pb-menu-active);
     }
 
     .playback__speed-option--active {
-      color: #ffd700;
+      color: var(--pb-menu-active);
       font-weight: bold;
     }
 
@@ -256,7 +287,7 @@ export class WACTPlaybackControls extends HTMLElement {
   private updatePlayPauseButton(): void {
     const button = this.root.getElementById('playback__play-pause') as HTMLButtonElement;
     if (this.playing) {
-      button.innerHTML = '&#9646;&#9646;';
+      button.innerHTML = '&#9208;';
       button.dataset.tooltip = 'Pause';
     } else {
       button.innerHTML = '&#9654;';

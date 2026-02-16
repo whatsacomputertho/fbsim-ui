@@ -6,12 +6,44 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
+      --tc-bg: #f5f5f5;
+      --tc-text: #333;
+      --tc-label: #666;
+      --tc-input-border: #ccc;
+      --tc-input-color: inherit;
+      --tc-section-header: #333;
+      --tc-btn-bg: #3355aa;
+      --tc-btn-hover-bg: #2a4a8f;
+      --tc-btn-text: white;
+      --tc-btn-border: #999;
+      --tc-btn-hover-border: #c5a200;
+      --tc-error-text: #cc0000;
+      --tc-error-bg: #ffe6e6;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --tc-bg: #1e1e2e;
+        --tc-text: #e0e0e0;
+        --tc-label: #aaa;
+        --tc-input-border: #555;
+        --tc-input-color: #e0e0e0;
+        --tc-section-header: #ccc;
+        --tc-btn-bg: #162267;
+        --tc-btn-hover-bg: rgb(44, 63, 170);
+        --tc-btn-text: yellow;
+        --tc-btn-border: #555;
+        --tc-btn-hover-border: #ffd700;
+        --tc-error-text: #ff6666;
+        --tc-error-bg: #3a1a1a;
+      }
     }
 
     #team-config__wrapper {
-      background-color: #f5f5f5;
+      background-color: var(--tc-bg);
       border-radius: 8px;
       padding: 16px;
+      color: var(--tc-text);
     }
 
     #team-config__header-wrapper {
@@ -44,7 +76,7 @@ template.innerHTML = `
 
     .team-config__input-group label {
       font-size: 0.8em;
-      color: #666;
+      color: var(--tc-label);
       margin-bottom: 2px;
     }
 
@@ -52,9 +84,10 @@ template.innerHTML = `
     .team-config__input-group input[type="number"] {
       background-color: rgba(0, 0, 0, 0);
       border: none;
-      border-bottom: 2px solid #ccc;
+      border-bottom: 2px solid var(--tc-input-border);
       padding: 4px 2px;
       font-size: 1em;
+      color: var(--tc-input-color);
       transition: border-color 200ms ease;
     }
 
@@ -66,11 +99,17 @@ template.innerHTML = `
       outline: none;
     }
 
+    @media (prefers-color-scheme: dark) {
+      .team-config__input-group input[type="number"] {
+        color-scheme: dark;
+      }
+    }
+
     .team-config__input-group input[type="color"] {
       width: 100%;
       height: 32px;
       padding: 0;
-      border: 2px solid #ccc;
+      border: 2px solid var(--tc-input-border);
       border-radius: 4px;
       cursor: pointer;
       background: none;
@@ -151,7 +190,7 @@ template.innerHTML = `
       font-size: 1em;
       margin-top: 12px;
       margin-bottom: 6px;
-      color: #333;
+      color: var(--tc-section-header);
       cursor: pointer;
       user-select: none;
       display: flex;
@@ -186,16 +225,21 @@ template.innerHTML = `
       margin-top: 8px;
       padding: 6px 16px;
       font-size: 0.9em;
-      background-color: #162267;
-      color: yellow;
-      border: none;
+      background: none;
+      color: var(--tc-text);
+      border: 2px solid var(--tc-btn-border);
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 150ms ease;
+      transition: all 150ms ease;
     }
 
     #team-config__load-btn:hover {
-      background-color: rgb(44, 63, 170);
+      background-color: rgba(128, 128, 128, 0.1);
+      border-color: var(--tc-btn-hover-border);
+    }
+
+    #team-config__load-btn:active {
+      background-color: rgba(128, 128, 128, 0.25);
     }
 
     #team-config__file-input {
@@ -204,11 +248,11 @@ template.innerHTML = `
 
     #team-config__error {
       display: none;
-      color: #cc0000;
+      color: var(--tc-error-text);
       font-size: 0.85em;
       margin-top: 6px;
       padding: 4px 8px;
-      background-color: #ffe6e6;
+      background-color: var(--tc-error-bg);
       border-radius: 4px;
     }
 

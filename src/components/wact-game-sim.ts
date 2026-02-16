@@ -17,6 +17,41 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
+      --gs-btn-bg: #2c4494;
+      --gs-btn-text: white;
+      --gs-btn-hover-bg: #3a58b0;
+      --gs-btn-active-bg: #1e3070;
+      --gs-btn-border: #999;
+      --gs-btn-hover-border: #c5a200;
+      --gs-postgame-bg: rgba(0, 0, 0, 0.85);
+      --gs-postgame-text: white;
+      --gs-postgame-score: #ccc;
+      --gs-stats-bg: #f0f0f5;
+      --gs-stats-text: #1a1a2e;
+      --gs-stats-border: #ccc;
+      --gs-stats-header: #b8860b;
+      --gs-error-text: #cc0000;
+      --gs-error-bg: #ffe6e6;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --gs-btn-bg: #162267;
+        --gs-btn-text: yellow;
+        --gs-btn-hover-bg: rgb(44, 63, 170);
+        --gs-btn-active-bg: rgb(71, 95, 231);
+        --gs-btn-border: #555;
+        --gs-btn-hover-border: #ffd700;
+        --gs-postgame-bg: rgba(0, 0, 0, 0.85);
+        --gs-postgame-text: white;
+        --gs-postgame-score: #ccc;
+        --gs-stats-bg: #1a1a2e;
+        --gs-stats-text: white;
+        --gs-stats-border: #333;
+        --gs-stats-header: #ffd700;
+        --gs-error-text: #ff6666;
+        --gs-error-bg: #3a1a1a;
+      }
     }
 
     #game-sim__wrapper {
@@ -38,8 +73,8 @@ template.innerHTML = `
     #game-sim__start-button {
       width: 50%;
       font-size: 1.5rem;
-      color: yellow;
-      background-color: #162267;
+      color: var(--gs-btn-text);
+      background-color: var(--gs-btn-bg);
       border-radius: 8px;
       transition: all 100ms ease-in-out;
       padding: 8px;
@@ -48,11 +83,11 @@ template.innerHTML = `
     }
 
     #game-sim__start-button:hover {
-      background-color: rgb(44, 63, 170);
+      background-color: var(--gs-btn-hover-bg);
     }
 
     #game-sim__start-button:active {
-      background-color: rgb(71, 95, 231);
+      background-color: var(--gs-btn-active-bg);
     }
 
     /* Game view */
@@ -82,11 +117,11 @@ template.innerHTML = `
     /* Postgame overlay */
     #game-sim__postgame-overlay {
       display: none;
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: var(--gs-postgame-bg);
       border-radius: 8px;
       padding: 24px;
       text-align: center;
-      color: white;
+      color: var(--gs-postgame-text);
     }
 
     #game-sim__winner-banner {
@@ -97,7 +132,7 @@ template.innerHTML = `
 
     #game-sim__final-score {
       font-size: 1.2em;
-      color: #ccc;
+      color: var(--gs-postgame-score);
       margin-bottom: 20px;
     }
 
@@ -105,26 +140,30 @@ template.innerHTML = `
       font-size: 1rem;
       padding: 8px 20px;
       margin: 6px;
-      border: 2px solid #555;
-      background-color: #162267;
-      color: yellow;
+      border: 2px solid var(--gs-btn-border);
+      background: none;
+      color: var(--gs-postgame-text);
       border-radius: 8px;
       cursor: pointer;
       transition: all 100ms ease-in-out;
     }
 
     .game-sim__postgame-button:hover {
-      background-color: rgb(44, 63, 170);
-      border-color: #ffd700;
+      background-color: rgba(128, 128, 128, 0.15);
+      border-color: var(--gs-btn-hover-border);
+    }
+
+    .game-sim__postgame-button:active {
+      background-color: rgba(128, 128, 128, 0.3);
     }
 
     /* Stats view */
     #game-sim__stats-view {
       display: none;
-      background-color: #1a1a2e;
+      background-color: var(--gs-stats-bg);
       border-radius: 8px;
       padding: 16px;
-      color: white;
+      color: var(--gs-stats-text);
     }
 
     #game-sim__stats-view h3 {
@@ -142,11 +181,11 @@ template.innerHTML = `
     #game-sim__stats-table td {
       padding: 6px 12px;
       text-align: center;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--gs-stats-border);
     }
 
     #game-sim__stats-table th {
-      color: #ffd700;
+      color: var(--gs-stats-header);
     }
 
     #game-sim__stats-back-button {
@@ -154,17 +193,32 @@ template.innerHTML = `
       margin: 12px auto 0 auto;
       font-size: 0.9rem;
       padding: 6px 16px;
-      border: 2px solid #555;
-      background-color: #162267;
-      color: yellow;
+      border: 2px solid var(--gs-btn-border);
+      background: none;
+      color: var(--gs-stats-text);
       border-radius: 8px;
       cursor: pointer;
       transition: all 100ms ease-in-out;
     }
 
     #game-sim__stats-back-button:hover {
-      background-color: rgb(44, 63, 170);
-      border-color: #ffd700;
+      background-color: rgba(128, 128, 128, 0.1);
+      border-color: var(--gs-btn-hover-border);
+    }
+
+    #game-sim__stats-back-button:active {
+      background-color: rgba(128, 128, 128, 0.25);
+    }
+
+    #game-sim__error {
+      display: none;
+      color: var(--gs-error-text);
+      font-size: 0.85em;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: var(--gs-error-bg);
+      border-radius: 6px;
+      text-align: center;
     }
 
     @media only screen and (max-width: 600px) {
@@ -180,6 +234,7 @@ template.innerHTML = `
       <div id="game-sim__start-button-wrapper">
         <button id="game-sim__start-button">Start Game</button>
       </div>
+      <div id="game-sim__error"></div>
     </div>
 
     <!-- Game view -->
@@ -298,10 +353,16 @@ export class WACTGameSim extends HTMLElement {
     }
   }
 
-  private startGame(): void {
+  private async startGame(): Promise<void> {
+    const errorEl = this.root.getElementById('game-sim__error') as HTMLDivElement;
+
     if (!this.simService) {
-      console.error('No simulation service configured for wact-game-sim.');
-      return;
+      const { WasmSimService } = await import('../services/wasm-sim-service.js');
+      this.simService = new WasmSimService();
+    }
+
+    if (!this.simService.isReady()) {
+      await this.simService.initialize();
     }
 
     const matchupConfigEl = this.root.getElementById(
@@ -309,12 +370,17 @@ export class WACTGameSim extends HTMLElement {
     ) as WACTMatchupConfig;
     this.matchupConfig = matchupConfigEl.matchupConfig;
 
-    if (!this.simService.isReady()) {
-      console.error('Simulation service not ready.');
+    let gameState: GameState;
+    try {
+      gameState = this.simService.createGame(this.matchupConfig);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
       return;
     }
-
-    const gameState = this.simService.createGame(this.matchupConfig);
+    errorEl.textContent = '';
+    errorEl.style.display = 'none';
     this.lastDriveCount = 0;
 
     this.setupScoreboard(gameState);

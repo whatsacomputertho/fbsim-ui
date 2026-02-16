@@ -5,6 +5,22 @@ import type { WACTBoxScore } from './wact-box-score.js';
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    :host {
+      --fss-btn-bg: #3355aa;
+      --fss-btn-text: white;
+      --fss-btn-hover-bg: #2a4a8f;
+      --fss-btn-active-bg: rgb(71, 95, 231);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --fss-btn-bg: #162267;
+        --fss-btn-text: yellow;
+        --fss-btn-hover-bg: rgb(44, 63, 170);
+        --fss-btn-active-bg: rgb(71, 95, 231);
+      }
+    }
+
     #final-score-sim__sim-button-wrapper {
       display: flex;
       align-items: center;
@@ -15,19 +31,19 @@ template.innerHTML = `
       margin-top: 1%;
       width: 50%;
       font-size: 1.5rem;
-      color: yellow;
-      background-color: #162267;
+      color: var(--fss-btn-text);
+      background-color: var(--fss-btn-bg);
       border-radius: 8px;
       transition: all 100ms ease-in-out;
     }
 
     #final-score-sim__sim-button:hover {
-      background-color: rgb(44, 63, 170);
+      background-color: var(--fss-btn-hover-bg);
       cursor: pointer;
     }
 
     #final-score-sim__sim-button:active {
-      background-color: rgb(71, 95, 231);
+      background-color: var(--fss-btn-active-bg);
     }
 
     #final-score-sim__result-wrapper {

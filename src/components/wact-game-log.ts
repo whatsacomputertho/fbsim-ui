@@ -6,11 +6,42 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
+      --gl-bg: #f0f0f5;
+      --gl-text: #444;
+      --gl-header-bg: #dde0ed;
+      --gl-header-text: #1a1a2e;
+      --gl-border: #ccc;
+      --gl-drive-hover: #e0e3f0;
+      --gl-result-text: #1a1a2e;
+      --gl-stats-text: #777;
+      --gl-chevron: #999;
+      --gl-play-border: #ddd;
+      --gl-play-context: #888;
+      --gl-play-desc: #333;
+      --gl-empty: #999;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --gl-bg: #1a1a2e;
+        --gl-text: #ccc;
+        --gl-header-bg: #16213e;
+        --gl-header-text: white;
+        --gl-border: #333;
+        --gl-drive-hover: #16213e;
+        --gl-result-text: white;
+        --gl-stats-text: #999;
+        --gl-chevron: #666;
+        --gl-play-border: #2a2a3e;
+        --gl-play-context: #888;
+        --gl-play-desc: #ddd;
+        --gl-empty: #666;
+      }
     }
 
     #game-log__wrapper {
-      background-color: #1a1a2e;
-      color: #ccc;
+      background-color: var(--gl-bg);
+      color: var(--gl-text);
       border-radius: 8px;
       overflow: hidden;
     }
@@ -19,9 +50,9 @@ template.innerHTML = `
       padding: 10px 16px;
       font-size: 1.1em;
       font-weight: bold;
-      color: white;
-      background-color: #16213e;
-      border-bottom: 1px solid #333;
+      color: var(--gl-header-text);
+      background-color: var(--gl-header-bg);
+      border-bottom: 1px solid var(--gl-border);
     }
 
     #game-log__drives {
@@ -30,7 +61,7 @@ template.innerHTML = `
     }
 
     .game-log__drive {
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--gl-border);
     }
 
     .game-log__drive:last-child {
@@ -49,7 +80,7 @@ template.innerHTML = `
     }
 
     .game-log__drive-header:hover {
-      background-color: #16213e;
+      background-color: var(--gl-drive-hover);
     }
 
     .game-log__drive-logo {
@@ -67,20 +98,20 @@ template.innerHTML = `
 
     .game-log__drive-result {
       font-weight: bold;
-      color: white;
+      color: var(--gl-result-text);
       font-size: 0.95em;
     }
 
     .game-log__drive-stats {
       font-size: 0.8em;
-      color: #999;
+      color: var(--gl-stats-text);
       margin-top: 2px;
     }
 
     .game-log__chevron {
       font-size: 0.8em;
       transition: transform 200ms ease;
-      color: #666;
+      color: var(--gl-chevron);
     }
 
     .game-log__chevron--expanded {
@@ -112,26 +143,26 @@ template.innerHTML = `
 
     .game-log__play {
       padding: 6px 0;
-      border-top: 1px solid #2a2a3e;
+      border-top: 1px solid var(--gl-play-border);
       font-size: 0.85em;
       line-height: 1.4;
       animation: fadeIn 200ms ease;
     }
 
     .game-log__play-context {
-      color: #888;
+      color: var(--gl-play-context);
       font-size: 0.9em;
     }
 
     .game-log__play-description {
-      color: #ddd;
+      color: var(--gl-play-desc);
       margin-top: 2px;
     }
 
     .game-log__empty {
       padding: 20px 16px;
       text-align: center;
-      color: #666;
+      color: var(--gl-empty);
       font-style: italic;
     }
 

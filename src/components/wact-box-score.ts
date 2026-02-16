@@ -1,6 +1,20 @@
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    :host {
+      --bs-overlay-bg: rgba(0, 0, 0, 0.7);
+      --bs-border-color: gray;
+      --bs-text: white;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --bs-overlay-bg: rgba(0, 0, 0, 0.7);
+        --bs-border-color: #666;
+        --bs-text: white;
+      }
+    }
+
     #box-score__wrapper {
       display: flex;
     }
@@ -9,7 +23,7 @@ template.innerHTML = `
       position: relative;
       width: 100%;
       height: 20vh;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: var(--bs-overlay-bg);
     }
 
     #box-score__home-logo, #box-score__away-logo {
@@ -27,7 +41,7 @@ template.innerHTML = `
       justify-content: center;
       align-items: center;
       border-style: solid;
-      border-color: gray;
+      border-color: var(--bs-border-color);
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
@@ -42,7 +56,7 @@ template.innerHTML = `
     }
 
     #box-score__home-team, #box-score__away-team {
-      color: white;
+      color: var(--bs-text);
       font-size: 2em;
       margin: 0;
       margin-left: 5%;
@@ -50,7 +64,7 @@ template.innerHTML = `
     }
 
     #box-score__home-score, #box-score__away-score {
-      color: white;
+      color: var(--bs-text);
       font-size: 2em;
       margin: 0;
       margin-left: 5%;
