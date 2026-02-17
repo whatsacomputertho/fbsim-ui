@@ -6,6 +6,13 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
+      --fd-border: #999;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --fd-border: #444;
+      }
     }
 
     #field__wrapper {
@@ -15,7 +22,7 @@ template.innerHTML = `
       background-color: #2d7a2d;
       border-radius: 8px;
       overflow: hidden;
-      border: 2px solid #444;
+      border: 2px solid var(--fd-border);
     }
 
     #field__endzone-home {
