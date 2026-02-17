@@ -8,6 +8,7 @@ import type { WACTMatchupConfig } from './wact-matchup-config.js';
 import type { WACTFieldDisplay } from './wact-field-display.js';
 import type { WACTPlaybackControls } from './wact-playback-controls.js';
 import type { WACTGameContext } from './wact-game-context.js';
+import type { WACTButton } from './wact-button.js';
 
 type SimState = 'config' | 'pregame' | 'playing' | 'paused' | 'postgame';
 
@@ -17,6 +18,29 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
+      --gs-postgame-bg: #f0f0f5;
+      --gs-postgame-text: #333;
+      --gs-postgame-score: #555;
+      --gs-stats-bg: #f0f0f5;
+      --gs-stats-text: #1a1a2e;
+      --gs-stats-border: #ccc;
+      --gs-stats-header: #b8860b;
+      --gs-error-text: #cc0000;
+      --gs-error-bg: #ffe6e6;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --gs-postgame-bg: #1a1a2e;
+        --gs-postgame-text: white;
+        --gs-postgame-score: #ccc;
+        --gs-stats-bg: #1a1a2e;
+        --gs-stats-text: white;
+        --gs-stats-border: #333;
+        --gs-stats-header: #ffd700;
+        --gs-error-text: #ff6666;
+        --gs-error-bg: #3a1a1a;
+      }
     }
 
     #game-sim__wrapper {
@@ -38,21 +62,7 @@ template.innerHTML = `
     #game-sim__start-button {
       width: 50%;
       font-size: 1.5rem;
-      color: yellow;
-      background-color: #162267;
-      border-radius: 8px;
-      transition: all 100ms ease-in-out;
-      padding: 8px;
-      border: none;
-      cursor: pointer;
-    }
-
-    #game-sim__start-button:hover {
-      background-color: rgb(44, 63, 170);
-    }
-
-    #game-sim__start-button:active {
-      background-color: rgb(71, 95, 231);
+      --btn-padding: 8px;
     }
 
     /* Game view */
@@ -82,11 +92,11 @@ template.innerHTML = `
     /* Postgame overlay */
     #game-sim__postgame-overlay {
       display: none;
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: var(--gs-postgame-bg);
       border-radius: 8px;
       padding: 24px;
       text-align: center;
-      color: white;
+      color: var(--gs-postgame-text);
     }
 
     #game-sim__winner-banner {
@@ -97,34 +107,23 @@ template.innerHTML = `
 
     #game-sim__final-score {
       font-size: 1.2em;
-      color: #ccc;
+      color: var(--gs-postgame-score);
       margin-bottom: 20px;
     }
 
     .game-sim__postgame-button {
       font-size: 1rem;
-      padding: 8px 20px;
+      --btn-padding: 8px 20px;
       margin: 6px;
-      border: 2px solid #555;
-      background-color: #162267;
-      color: yellow;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 100ms ease-in-out;
-    }
-
-    .game-sim__postgame-button:hover {
-      background-color: rgb(44, 63, 170);
-      border-color: #ffd700;
     }
 
     /* Stats view */
     #game-sim__stats-view {
       display: none;
-      background-color: #1a1a2e;
+      background-color: var(--gs-stats-bg);
       border-radius: 8px;
       padding: 16px;
-      color: white;
+      color: var(--gs-stats-text);
     }
 
     #game-sim__stats-view h3 {
@@ -142,29 +141,29 @@ template.innerHTML = `
     #game-sim__stats-table td {
       padding: 6px 12px;
       text-align: center;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--gs-stats-border);
     }
 
     #game-sim__stats-table th {
-      color: #ffd700;
+      color: var(--gs-stats-header);
     }
 
     #game-sim__stats-back-button {
       display: block;
       margin: 12px auto 0 auto;
       font-size: 0.9rem;
-      padding: 6px 16px;
-      border: 2px solid #555;
-      background-color: #162267;
-      color: yellow;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 100ms ease-in-out;
+      --btn-padding: 6px 16px;
     }
 
-    #game-sim__stats-back-button:hover {
-      background-color: rgb(44, 63, 170);
-      border-color: #ffd700;
+    #game-sim__error {
+      display: none;
+      color: var(--gs-error-text);
+      font-size: 0.85em;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: var(--gs-error-bg);
+      border-radius: 6px;
+      text-align: center;
     }
 
     @media only screen and (max-width: 600px) {
@@ -178,8 +177,9 @@ template.innerHTML = `
     <div id="game-sim__config-view">
       <wact-matchup-config id="game-sim__matchup-config"></wact-matchup-config>
       <div id="game-sim__start-button-wrapper">
-        <button id="game-sim__start-button">Start Game</button>
+        <wact-button id="game-sim__start-button" variant="primary">Start Game</wact-button>
       </div>
+      <div id="game-sim__error"></div>
     </div>
 
     <!-- Game view -->
@@ -195,8 +195,8 @@ template.innerHTML = `
           <div id="game-sim__postgame-overlay">
             <div id="game-sim__winner-banner"></div>
             <div id="game-sim__final-score"></div>
-            <button id="game-sim__summary-button" class="game-sim__postgame-button">Game Summary</button>
-            <button id="game-sim__new-game-button" class="game-sim__postgame-button">Simulate New Game</button>
+            <wact-button id="game-sim__summary-button" class="game-sim__postgame-button">Game Summary</wact-button>
+            <wact-button id="game-sim__new-game-button" class="game-sim__postgame-button">Simulate New Game</wact-button>
           </div>
         </div>
       </div>
@@ -215,7 +215,7 @@ template.innerHTML = `
         </thead>
         <tbody id="game-sim__stats-body"></tbody>
       </table>
-      <button id="game-sim__stats-back-button">Back</button>
+      <wact-button id="game-sim__stats-back-button">Back</wact-button>
     </div>
   </div>
 `;
@@ -298,34 +298,54 @@ export class WACTGameSim extends HTMLElement {
     }
   }
 
-  private startGame(): void {
-    if (!this.simService) {
-      console.error('No simulation service configured for wact-game-sim.');
-      return;
+  private async startGame(): Promise<void> {
+    const startButton = this.root.getElementById('game-sim__start-button') as WACTButton;
+    const errorEl = this.root.getElementById('game-sim__error') as HTMLDivElement;
+
+    startButton.startLoading();
+
+    try {
+      if (!this.simService) {
+        const { WasmSimService } = await import('../services/wasm-sim-service.js');
+        this.simService = new WasmSimService();
+      }
+
+      if (!this.simService.isReady()) {
+        await this.simService.initialize();
+      }
+
+      const matchupConfigEl = this.root.getElementById(
+        'game-sim__matchup-config',
+      ) as WACTMatchupConfig;
+      this.matchupConfig = matchupConfigEl.matchupConfig;
+
+      let gameState: GameState;
+      try {
+        gameState = this.simService.createGame(this.matchupConfig);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        startButton.stopLoading();
+        return;
+      }
+      errorEl.textContent = '';
+      errorEl.style.display = 'none';
+      this.lastDriveCount = 0;
+
+      this.setupScoreboard(gameState);
+      this.setupField(gameState.context.home_positive_direction);
+
+      const context = this.root.getElementById('game-sim__context') as WACTGameContext;
+      context.scoreboard.setAttribute('status', 'Pregame');
+      context.gameLog.clear();
+      context.gameLog.setTeamLogos(this.matchupConfig!.home.logo, this.matchupConfig!.away.logo);
+
+      startButton.reset();
+      this.transitionTo('pregame');
+    } catch {
+      startButton.stopLoading();
     }
-
-    const matchupConfigEl = this.root.getElementById(
-      'game-sim__matchup-config',
-    ) as WACTMatchupConfig;
-    this.matchupConfig = matchupConfigEl.matchupConfig;
-
-    if (!this.simService.isReady()) {
-      console.error('Simulation service not ready.');
-      return;
-    }
-
-    const gameState = this.simService.createGame(this.matchupConfig);
-    this.lastDriveCount = 0;
-
-    this.setupScoreboard(gameState);
-    this.setupField(gameState.context.home_positive_direction);
-
-    const context = this.root.getElementById('game-sim__context') as WACTGameContext;
-    context.scoreboard.setAttribute('status', 'Pregame');
-    context.gameLog.clear();
-    context.gameLog.setTeamLogos(this.matchupConfig!.home.logo, this.matchupConfig!.away.logo);
-
-    this.transitionTo('pregame');
   }
 
   private setupScoreboard(gameState: GameState): void {
@@ -727,7 +747,7 @@ export class WACTGameSim extends HTMLElement {
     this._initialized = true;
 
     // Start button
-    const startButton = this.root.getElementById('game-sim__start-button') as HTMLButtonElement;
+    const startButton = this.root.getElementById('game-sim__start-button') as HTMLElement;
     startButton.addEventListener('click', () => this.startGame());
 
     // Playback controls
@@ -755,18 +775,14 @@ export class WACTGameSim extends HTMLElement {
     });
 
     // Postgame buttons
-    const summaryButton = this.root.getElementById('game-sim__summary-button') as HTMLButtonElement;
+    const summaryButton = this.root.getElementById('game-sim__summary-button') as HTMLElement;
     summaryButton.addEventListener('click', () => this.showStats());
 
-    const newGameButton = this.root.getElementById(
-      'game-sim__new-game-button',
-    ) as HTMLButtonElement;
+    const newGameButton = this.root.getElementById('game-sim__new-game-button') as HTMLElement;
     newGameButton.addEventListener('click', () => this.newGame());
 
     // Stats back button
-    const statsBackButton = this.root.getElementById(
-      'game-sim__stats-back-button',
-    ) as HTMLButtonElement;
+    const statsBackButton = this.root.getElementById('game-sim__stats-back-button') as HTMLElement;
     statsBackButton.addEventListener('click', () => this.hideStats());
 
     this._readyPromise = new Promise((r) => (this._resolveReady = r));

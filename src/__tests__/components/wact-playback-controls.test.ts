@@ -95,9 +95,9 @@ describe('WACTPlaybackControls', () => {
 
   it('should disable buttons when disabled attribute is set', () => {
     el.disabled = true;
-    const buttons = el.root.querySelectorAll('.playback__button') as NodeListOf<HTMLButtonElement>;
+    const buttons = el.root.querySelectorAll('.playback__button') as NodeListOf<HTMLElement>;
     for (const button of buttons) {
-      expect(button.disabled).toBe(true);
+      expect(button.hasAttribute('disabled')).toBe(true);
     }
     const speedDisplay = el.root.getElementById('playback__speed-display') as HTMLButtonElement;
     expect(speedDisplay.disabled).toBe(true);
@@ -106,9 +106,9 @@ describe('WACTPlaybackControls', () => {
   it('should enable buttons when disabled attribute is removed', () => {
     el.disabled = true;
     el.disabled = false;
-    const buttons = el.root.querySelectorAll('.playback__button') as NodeListOf<HTMLButtonElement>;
+    const buttons = el.root.querySelectorAll('.playback__button') as NodeListOf<HTMLElement>;
     for (const button of buttons) {
-      expect(button.disabled).toBe(false);
+      expect(button.hasAttribute('disabled')).toBe(false);
     }
   });
 
@@ -117,13 +117,13 @@ describe('WACTPlaybackControls', () => {
   });
 
   it('should update play/pause button text based on playing state', () => {
-    const button = el.root.getElementById('playback__play-pause') as HTMLButtonElement;
-    expect(button.dataset.tooltip).toBe('Play');
+    const button = el.root.getElementById('playback__play-pause') as HTMLElement;
+    expect(button.getAttribute('tooltip')).toBe('Play');
 
     el.playing = true;
-    expect(button.dataset.tooltip).toBe('Pause');
+    expect(button.getAttribute('tooltip')).toBe('Pause');
 
     el.playing = false;
-    expect(button.dataset.tooltip).toBe('Play');
+    expect(button.getAttribute('tooltip')).toBe('Play');
   });
 });

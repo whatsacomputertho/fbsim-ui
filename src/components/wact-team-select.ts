@@ -3,6 +3,20 @@ import type { TeamInput } from '../services/types.js';
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    :host {
+      --ts-text: #000000;
+      --ts-input-border: black;
+      --ts-input-color: inherit;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --ts-text: #e0e0e0;
+        --ts-input-border: #888;
+        --ts-input-color: #e0e0e0;
+      }
+    }
+
     #team-select__header-wrapper {
       width: 100%;
       display: flex;
@@ -15,6 +29,7 @@ template.innerHTML = `
       width: 100%;
       font-weight: bold;
       font-size: 2em;
+      color: var(--ts-text);
     }
 
     #team-select__name-input {
@@ -23,7 +38,8 @@ template.innerHTML = `
       border-style: solid;
       border-width: 0 0 3px 0;
       transition: all 200ms ease-in-out;
-      border-color: black;
+      border-color: var(--ts-input-border);
+      color: var(--ts-input-color);
       font-size: 1.5em;
     }
 
@@ -92,6 +108,7 @@ template.innerHTML = `
 
     #team-select__offense-input-label {
       font-size: 1.5em;
+      color: var(--ts-text);
     }
 
     #team-select__offense-input {
@@ -99,7 +116,8 @@ template.innerHTML = `
       border-style: solid;
       border-width: 0 0 3px 0;
       transition: all 200ms ease-in-out;
-      border-color: black;
+      border-color: var(--ts-input-border);
+      color: var(--ts-input-color);
       font-size: 1.5em;
     }
 
@@ -117,6 +135,7 @@ template.innerHTML = `
 
     #team-select__defense-input-label {
       font-size: 1.5em;
+      color: var(--ts-text);
     }
 
     #team-select__defense-input {
@@ -124,7 +143,8 @@ template.innerHTML = `
       border-style: solid;
       border-width: 0 0 3px 0;
       transition: all 200ms ease-in-out;
-      border-color: black;
+      border-color: var(--ts-input-border);
+      color: var(--ts-input-color);
       font-size: 1.5em;
     }
 

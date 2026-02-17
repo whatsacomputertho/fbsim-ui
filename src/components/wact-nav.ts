@@ -1,9 +1,19 @@
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    :host {
+      --nav-bg: #162267;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --nav-bg: #020210;
+      }
+    }
+
     .navbar-wrapper {
       height: 10vh;
-      background-color: #162267;
+      background-color: var(--nav-bg);
       display: flex;
       text-align: center;
       align-items: center;

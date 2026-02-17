@@ -4,11 +4,34 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: sans-serif;
+      --sb-bg: #e8eaf6;
+      --sb-text: #1a1a2e;
+      --sb-context-bg: #cfd2e8;
+      --sb-context-text: #555;
+      --sb-divider: #bbb;
+      --sb-border: #bbb;
+      --sb-possession: #c5a200;
+      --sb-status: #b8860b;
+      --sb-flash: #c5a200;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --sb-bg: #1a1a2e;
+        --sb-text: white;
+        --sb-context-bg: #16213e;
+        --sb-context-text: #ccc;
+        --sb-divider: #333;
+        --sb-border: #333;
+        --sb-possession: #ffd700;
+        --sb-status: #ffd700;
+        --sb-flash: #ffd700;
+      }
     }
 
     #scoreboard__wrapper {
-      background-color: #1a1a2e;
-      color: white;
+      background-color: var(--sb-bg);
+      color: var(--sb-text);
       border-radius: 8px;
       overflow: hidden;
     }
@@ -41,7 +64,7 @@ template.innerHTML = `
     }
 
     .scoreboard__team--possession {
-      border-color: #ffd700;
+      border-color: var(--sb-possession);
     }
 
     .scoreboard__team-logo {
@@ -69,13 +92,13 @@ template.innerHTML = `
     }
 
     .scoreboard__team-score--flash {
-      color: #ffd700;
-      text-shadow: 0 0 8px #ffd700;
+      color: var(--sb-flash);
+      text-shadow: 0 0 8px var(--sb-flash);
     }
 
     #scoreboard__divider {
       width: 2px;
-      background-color: #333;
+      background-color: var(--sb-divider);
       align-self: stretch;
     }
 
@@ -85,10 +108,10 @@ template.innerHTML = `
       align-items: center;
       gap: 16px;
       padding: 8px 16px;
-      background-color: #16213e;
+      background-color: var(--sb-context-bg);
       font-size: 0.9em;
-      color: #ccc;
-      border-top: 1px solid #333;
+      color: var(--sb-context-text);
+      border-top: 1px solid var(--sb-border);
     }
 
     .scoreboard__context-item {
@@ -98,7 +121,7 @@ template.innerHTML = `
 
     #scoreboard__status {
       font-weight: bold;
-      color: #ffd700;
+      color: var(--sb-status);
     }
 
     @media only screen and (max-width: 600px) {
