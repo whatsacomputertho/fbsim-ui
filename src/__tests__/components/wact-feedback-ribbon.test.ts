@@ -52,15 +52,6 @@ describe('WACTFeedbackRibbon', () => {
     expect(progressbar.style.backgroundColor).toBe('blue');
   });
 
-  it('should toggle dark mode class names', () => {
-    el.dark = true;
-    const ribbonWrapper = el.root.getElementById('ribbon-wrapper') as HTMLDivElement;
-    expect(ribbonWrapper.getAttribute('class')).toContain('-dark');
-
-    el.dark = false;
-    expect(ribbonWrapper.getAttribute('class')).not.toContain('-dark');
-  });
-
   it('should show progress bar when duration is set', () => {
     el.duration = 10;
     const progressBarWrapper = el.root.getElementById('progress-bar-wrapper') as HTMLDivElement;

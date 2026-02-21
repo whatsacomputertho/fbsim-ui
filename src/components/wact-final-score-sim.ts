@@ -15,19 +15,6 @@ template.innerHTML = `
       margin-top: 1%;
       width: 50%;
       font-size: 1.5rem;
-      color: yellow;
-      background-color: #162267;
-      border-radius: 8px;
-      transition: all 100ms ease-in-out;
-    }
-
-    #final-score-sim__sim-button:hover {
-      background-color: rgb(44, 63, 170);
-      cursor: pointer;
-    }
-
-    #final-score-sim__sim-button:active {
-      background-color: rgb(71, 95, 231);
     }
 
     #final-score-sim__result-wrapper {
@@ -42,7 +29,7 @@ template.innerHTML = `
   <div id="final-score-sim__wrapper" class="final-score-sim__wrapper">
     <wact-matchup-select id="final-score-sim__select" class="final-score-sim__select"></wact-matchup-select>
     <div id="final-score-sim__sim-button-wrapper" class="final-score-sim__sim-button-wrapper">
-      <button id="final-score-sim__sim-button" class="final-score-sim__sim-button">Simulate</button>
+      <wact-button id="final-score-sim__sim-button" class="final-score-sim__sim-button" variant="primary">Simulate</wact-button>
     </div>
     <div id="final-score-sim__result-wrapper" class="final-score-sim__result-wrapper">
       <wact-box-score id="final-score-sim__result" class="final-score-sim__result"></wact-box-score>
@@ -129,7 +116,7 @@ export class WACTFinalScoreSim extends HTMLElement {
   connectedCallback(): void {
     if (this._initialized) return;
     this._initialized = true;
-    const simButton = this.root.getElementById('final-score-sim__sim-button') as HTMLButtonElement;
+    const simButton = this.root.getElementById('final-score-sim__sim-button') as HTMLElement;
     simButton.addEventListener('click', () => void this.getBoxScore());
     this._readyPromise = new Promise((r) => (this._resolveReady = r));
     this._resolveReady?.();

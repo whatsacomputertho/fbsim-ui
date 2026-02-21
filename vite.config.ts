@@ -10,6 +10,9 @@ export default defineConfig({
       exclude: ['src/__tests__', 'src/dev.ts', 'src/demo'],
     }),
   ],
+  optimizeDeps: {
+    exclude: ['@whatsacomputertho/fbsim-core'],
+  },
   server: {
     fs: {
       allow: ['.', resolve(__dirname, '../fbsim-core')],

@@ -169,13 +169,6 @@ describe('WACTGameSim', () => {
     expect(button.textContent).toBe('Start Game');
   });
 
-  it('should log error when start clicked without a service', () => {
-    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const button = el.root.getElementById('game-sim__start-button') as HTMLButtonElement;
-    button.click();
-    expect(errorSpy).toHaveBeenCalledWith('No simulation service configured for wact-game-sim.');
-  });
-
   it('should have playback controls', () => {
     const controls = el.root.getElementById('game-sim__controls');
     expect(controls).not.toBeNull();

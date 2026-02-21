@@ -1,3 +1,4 @@
+export { WACTButton } from './wact-button.js';
 export { WACTNav } from './wact-nav.js';
 export { WACTTeamSelect } from './wact-team-select.js';
 export { WACTMatchupSelect } from './wact-matchup-select.js';
