@@ -1,7 +1,7 @@
 .PHONY: dependencies lint test build release sec dev
 
 dependencies:
-	npm ci
+	npm install
 
 lint: dependencies
 	npx prettier --check "src/**/*.ts"
