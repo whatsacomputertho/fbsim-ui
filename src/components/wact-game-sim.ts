@@ -3,14 +3,16 @@ import type {
   GameState,
   MatchupConfig,
   OffensiveStats,
+  Drive,
 } from '../services/types.js';
+import type { GameFile } from '../services/game-file.js';
 import type { WACTMatchupConfig } from './wact-matchup-config.js';
 import type { WACTFieldDisplay } from './wact-field-display.js';
 import type { WACTPlaybackControls } from './wact-playback-controls.js';
 import type { WACTGameContext } from './wact-game-context.js';
 import type { WACTButton } from './wact-button.js';
 
-type SimState = 'config' | 'pregame' | 'playing' | 'paused' | 'postgame';
+type SimState = 'select' | 'config' | 'pregame' | 'playing' | 'paused' | 'postgame';
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -27,6 +29,11 @@ template.innerHTML = `
       --gs-stats-header: #b8860b;
       --gs-error-text: #cc0000;
       --gs-error-bg: #ffe6e6;
+      --gs-card-bg: #f0f0f5;
+      --gs-card-border: #d0d0d8;
+      --gs-card-hover-bg: #e8e8f0;
+      --gs-card-active-bg: #b8bce0;
+      --gs-card-placeholder: #aaa;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -40,6 +47,11 @@ template.innerHTML = `
         --gs-stats-header: #ffd700;
         --gs-error-text: #ff6666;
         --gs-error-bg: #3a1a1a;
+        --gs-card-bg: #1e1e2e;
+        --gs-card-border: #3a3a4e;
+        --gs-card-hover-bg: #22223a;
+        --gs-card-active-bg: #4f4f5f;
+        --gs-card-placeholder: #555;
       }
     }
 
@@ -47,9 +59,138 @@ template.innerHTML = `
       margin-bottom: 3%;
     }
 
+    /* Select view */
+    #game-sim__select-view {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .game-sim__mode-card {
+      flex: 1;
+      flex-wrap: wrap;
+      border-radius: 12px;
+      padding: 20px 24px;
+      cursor: default;
+      transition: background-color 0.15s;
+    }
+
+    #game-sim__start-card {
+      background-color: var(--gs-card-bg);
+      cursor: pointer;
+    }
+
+    #game-sim__start-card:hover {
+      background-color: var(--gs-card-hover-bg);
+    }
+
+    #game-sim__start-card:active {
+      background-color: var(--gs-card-active-bg);
+    }
+
+    #game-sim__replay-card {
+      background-color: var(--gs-card-bg);
+    }
+
+    #game-sim__replay-card.game-sim__mode-card--active {
+      cursor: pointer;
+    }
+
+    #game-sim__replay-card.game-sim__mode-card--active:hover {
+      background-color: var(--gs-card-hover-bg);
+    }
+
+    #game-sim__replay-card.game-sim__mode-card--active:active {
+      background-color: var(--gs-card-active-bg);
+    }
+
+    #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-title,
+    #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-subtitle,
+    #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-icon {
+      opacity: 0.45;
+    }
+
+    .game-sim__mode-card-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: var(--gs-postgame-text);
+    }
+
+    .game-sim__mode-card-subtitle {
+      font-size: 0.9rem;
+      color: var(--gs-postgame-score);
+    }
+
+    .game-sim__mode-card-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .game-sim__replay-status {
+      flex: 1;
+      min-width: 0;
+      font-size: 0.9rem;
+      color: var(--gs-card-placeholder);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #game-sim__replay-upload-btn {
+      flex-shrink: 0;
+      --btn-padding: 12px;
+      line-height: 0;
+    }
+
+    .game-sim__mode-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gs-postgame-text);
+    }
+
+    .game-sim__mode-card-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    @keyframes game-sim-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .game-sim__card-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: game-sim-spin 600ms linear infinite;
+    }
+
+    #game-sim__file-error {
+      display: none;
+      color: var(--gs-error-text);
+      font-size: 0.8em;
+      margin-top: 10px;
+      padding: 6px 10px;
+      background-color: var(--gs-error-bg);
+      border-radius: 6px;
+    }
+
     /* Config view */
     #game-sim__config-view {
-      display: block;
+      display: none;
     }
 
     #game-sim__start-button-wrapper {
@@ -111,10 +252,30 @@ template.innerHTML = `
       margin-bottom: 20px;
     }
 
-    .game-sim__postgame-button {
+    #game-sim__postgame-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .game-sim__postgame-icon-btn {
+      font-size: 0.95rem;
+      --btn-padding: 8px 14px;
+    }
+
+    .game-sim__postgame-icon-btn span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1;
+    }
+
+    #game-sim__new-game-button {
+      display: block;
+      width: 100%;
       font-size: 1rem;
-      --btn-padding: 8px 20px;
-      margin: 6px;
+      --btn-padding: 10px;
     }
 
     /* Stats view */
@@ -167,12 +328,54 @@ template.innerHTML = `
     }
 
     @media only screen and (max-width: 600px) {
+      #game-sim__select-view {
+        flex-direction: column;
+      }
+
       #game-sim__game-layout {
         flex-direction: column;
       }
     }
   </style>
   <div id="game-sim__wrapper">
+    <!-- Select view -->
+    <div id="game-sim__select-view">
+      <!-- Start card -->
+      <div id="game-sim__start-card" class="game-sim__mode-card" role="button" tabindex="0">
+        <div class="game-sim__mode-card-title">New Game</div>
+        <div class="game-sim__mode-card-subtitle">Simulate a new game</div>
+        <div class="game-sim__mode-card-row">
+          <div class="game-sim__mode-card-icons">
+            <div class="game-sim__mode-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Replay card -->
+      <div id="game-sim__replay-card" class="game-sim__mode-card">
+        <div class="game-sim__mode-card-title">Replay</div>
+        <div class="game-sim__mode-card-subtitle">Play-back a game that has already been simulated</div>
+        <div class="game-sim__mode-card-row">
+          <wact-button id="game-sim__replay-upload-btn" aria-label="Upload game file" tooltip="upload game">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </wact-button>
+          <span id="game-sim__replay-status" class="game-sim__replay-status">No game selected</span>
+          <div class="game-sim__mode-card-icons">
+            <div id="game-sim__replay-arrow" class="game-sim__mode-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+            <div id="game-sim__replay-spinner" class="game-sim__mode-icon" aria-hidden="true" style="display:none">
+              <div class="game-sim__card-spinner"></div>
+            </div>
+          </div>
+        </div>
+        <input type="file" id="game-sim__file-input" accept=".json,application/json" style="display:none">
+        <div id="game-sim__file-error"></div>
+      </div>
+    </div>
+
     <!-- Config view -->
     <div id="game-sim__config-view">
       <wact-matchup-config id="game-sim__matchup-config"></wact-matchup-config>
@@ -195,8 +398,21 @@ template.innerHTML = `
           <div id="game-sim__postgame-overlay">
             <div id="game-sim__winner-banner"></div>
             <div id="game-sim__final-score"></div>
-            <wact-button id="game-sim__summary-button" class="game-sim__postgame-button">Game Summary</wact-button>
-            <wact-button id="game-sim__new-game-button" class="game-sim__postgame-button">Simulate New Game</wact-button>
+            <div id="game-sim__postgame-actions">
+              <wact-button id="game-sim__export-button" class="game-sim__postgame-icon-btn">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Export
+                </span>
+              </wact-button>
+              <wact-button id="game-sim__summary-button" class="game-sim__postgame-icon-btn">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="20" x2="22" y2="20"/><polyline points="4 16 10 9 16 13 22 7"/></svg>
+                  Game Summary
+                </span>
+              </wact-button>
+            </div>
+            <wact-button id="game-sim__new-game-button" variant="primary">New Game</wact-button>
           </div>
         </div>
       </div>
@@ -225,12 +441,15 @@ export class WACTGameSim extends HTMLElement {
 
   readonly root: ShadowRoot;
   private simService: PlayByPlaySimService | null = null;
-  private state: SimState = 'config';
+  private state: SimState = 'select';
   private playbackTimer: ReturnType<typeof setTimeout> | null = null;
   private playbackSpeed = 2;
   private matchupConfig: MatchupConfig | null = null;
   private lastDriveCount = 0;
   private lastHomePositiveDirection: boolean | null = null;
+  private mode: 'simulate' | 'playback' = 'simulate';
+  private finalGameState: GameState | null = null;
+  private selectedGameFile: File | null = null;
 
   private _readyPromise: Promise<void> | null = null;
   private _resolveReady: (() => void) | null = null;
@@ -250,9 +469,136 @@ export class WACTGameSim extends HTMLElement {
     this.simService = service;
   }
 
+  // --- Public API ---
+
+  async loadMatchup(config: MatchupConfig): Promise<void> {
+    this.clearTimer();
+    if (this.simService?.hasActiveGame()) {
+      this.simService.destroyGame();
+    }
+
+    if (!this.simService || this.mode === 'playback') {
+      const { WasmSimService } = await import('../services/wasm-sim-service.js');
+      this.simService = new WasmSimService();
+    }
+
+    if (!this.simService.isReady()) {
+      await this.simService.initialize();
+    }
+
+    const gameState = this.simService.createGame(config);
+
+    this.matchupConfig = config;
+    this.mode = 'simulate';
+    this.lastDriveCount = 0;
+    this.lastHomePositiveDirection = null;
+    this.finalGameState = null;
+
+    this.setupScoreboard(gameState);
+    this.setupField(gameState.context.home_positive_direction);
+
+    const context = this.root.getElementById('game-sim__context') as WACTGameContext;
+    context.scoreboard.setAttribute('status', 'Pregame');
+    context.gameLog.clear();
+    context.gameLog.setTeamLogos(this.matchupConfig.home.logo, this.matchupConfig.away.logo);
+
+    this.transitionTo('pregame');
+  }
+
+  async loadGameFile(source: File | GameFile): Promise<void> {
+    let gameFile: GameFile;
+
+    if (source instanceof File) {
+      const text = await source.text();
+      let parsed: GameFile;
+      try {
+        parsed = JSON.parse(text) as GameFile;
+      } catch {
+        throw new Error('Invalid game file: not valid JSON.');
+      }
+      if (!parsed || parsed.version !== 1) {
+        throw new Error('Invalid game file: unsupported version or format.');
+      }
+      gameFile = parsed;
+    } else {
+      gameFile = source;
+    }
+
+    this.clearTimer();
+    if (this.simService?.hasActiveGame()) {
+      this.simService.destroyGame();
+    }
+
+    const { PlaybackSimService } = await import('../services/playback-sim-service.js');
+    const svc = new PlaybackSimService();
+    this.simService = svc;
+    this.mode = 'playback';
+    this.matchupConfig = gameFile.matchupConfig;
+    this.lastDriveCount = 0;
+    this.lastHomePositiveDirection = null;
+    this.finalGameState = null;
+
+    const gameState = svc.loadGame(gameFile);
+
+    this.setupScoreboard(gameState);
+    this.setupField(gameState.context.home_positive_direction);
+
+    const context = this.root.getElementById('game-sim__context') as WACTGameContext;
+    context.scoreboard.setAttribute('status', 'Pregame');
+    context.gameLog.clear();
+    context.gameLog.setTeamLogos(this.matchupConfig.home.logo, this.matchupConfig.away.logo);
+
+    this.transitionTo('pregame');
+  }
+
+  async exportGame(filename?: string): Promise<void> {
+    if (!this.simService || !this.matchupConfig || !this.finalGameState) return;
+
+    const drives: Drive[] = [];
+    for (let i = 0; i < this.finalGameState.driveCount; i++) {
+      drives.push(this.simService.getDrive(i));
+    }
+
+    const gameFile: GameFile = {
+      version: 1,
+      matchupConfig: this.matchupConfig,
+      drives,
+      finalContext: this.finalGameState.context,
+      homeStats: this.simService.getHomeStats(),
+      awayStats: this.simService.getAwayStats(),
+    };
+
+    const { downloadGameFile } = await import('../services/game-file.js');
+    downloadGameFile(gameFile, filename);
+  }
+
+  // --- Internal UI methods ---
+
+  private resetSelectView(): void {
+    this.selectedGameFile = null;
+    const replayCard = this.root.getElementById('game-sim__replay-card') as HTMLElement | null;
+    const statusEl = this.root.getElementById('game-sim__replay-status') as HTMLElement | null;
+    const fileError = this.root.getElementById('game-sim__file-error') as HTMLElement | null;
+    const arrow = this.root.getElementById('game-sim__replay-arrow') as HTMLElement | null;
+    const spinner = this.root.getElementById('game-sim__replay-spinner') as HTMLElement | null;
+    if (replayCard) {
+      replayCard.classList.remove('game-sim__mode-card--active');
+      replayCard.removeAttribute('role');
+      replayCard.removeAttribute('tabindex');
+    }
+    if (statusEl) statusEl.textContent = 'No game selected';
+    if (fileError) {
+      fileError.style.display = 'none';
+      fileError.textContent = '';
+    }
+    if (arrow) arrow.style.display = 'flex';
+    if (spinner) spinner.style.display = 'none';
+  }
+
   private transitionTo(newState: SimState): void {
     this.state = newState;
 
+    const selectView = this.root.getElementById('game-sim__select-view') as HTMLDivElement;
     const configView = this.root.getElementById('game-sim__config-view') as HTMLDivElement;
     const gameView = this.root.getElementById('game-sim__game-view') as HTMLDivElement;
     const statsView = this.root.getElementById('game-sim__stats-view') as HTMLDivElement;
@@ -263,6 +609,7 @@ export class WACTGameSim extends HTMLElement {
 
     const gameRight = this.root.getElementById('game-sim__game-right') as HTMLDivElement;
 
+    selectView.style.display = 'none';
     configView.style.display = 'none';
     gameView.style.display = 'none';
     statsView.style.display = 'none';
@@ -270,6 +617,10 @@ export class WACTGameSim extends HTMLElement {
     gameRight.style.display = 'none';
 
     switch (newState) {
+      case 'select':
+        selectView.style.display = 'flex';
+        this.resetSelectView();
+        break;
       case 'config':
         configView.style.display = 'block';
         break;
@@ -304,48 +655,51 @@ export class WACTGameSim extends HTMLElement {
 
     startButton.startLoading();
 
+    const matchupConfigEl = this.root.getElementById(
+      'game-sim__matchup-config',
+    ) as WACTMatchupConfig;
+    const config = matchupConfigEl.matchupConfig;
+
     try {
-      if (!this.simService) {
-        const { WasmSimService } = await import('../services/wasm-sim-service.js');
-        this.simService = new WasmSimService();
-      }
-
-      if (!this.simService.isReady()) {
-        await this.simService.initialize();
-      }
-
-      const matchupConfigEl = this.root.getElementById(
-        'game-sim__matchup-config',
-      ) as WACTMatchupConfig;
-      this.matchupConfig = matchupConfigEl.matchupConfig;
-
-      let gameState: GameState;
-      try {
-        gameState = this.simService.createGame(this.matchupConfig);
-      } catch (err) {
-        const message = err instanceof Error ? err.message : String(err);
-        errorEl.textContent = message;
-        errorEl.style.display = 'block';
-        startButton.stopLoading();
-        return;
-      }
-      errorEl.textContent = '';
-      errorEl.style.display = 'none';
-      this.lastDriveCount = 0;
-
-      this.setupScoreboard(gameState);
-      this.setupField(gameState.context.home_positive_direction);
-
-      const context = this.root.getElementById('game-sim__context') as WACTGameContext;
-      context.scoreboard.setAttribute('status', 'Pregame');
-      context.gameLog.clear();
-      context.gameLog.setTeamLogos(this.matchupConfig!.home.logo, this.matchupConfig!.away.logo);
-
-      startButton.reset();
-      this.transitionTo('pregame');
-    } catch {
+      await this.loadMatchup(config);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
       startButton.stopLoading();
+      return;
     }
+
+    errorEl.textContent = '';
+    errorEl.style.display = 'none';
+    startButton.reset();
+  }
+
+  private async startPlaybackFromFile(file: File): Promise<void> {
+    const arrow = this.root.getElementById('game-sim__replay-arrow') as HTMLDivElement;
+    const spinner = this.root.getElementById('game-sim__replay-spinner') as HTMLDivElement;
+    const fileError = this.root.getElementById('game-sim__file-error') as HTMLDivElement;
+
+    fileError.style.display = 'none';
+    arrow.style.display = 'none';
+    spinner.style.display = 'flex';
+
+    try {
+      await this.loadGameFile(file);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      fileError.textContent = message;
+      fileError.style.display = 'block';
+      spinner.style.display = 'none';
+      arrow.style.display = 'flex';
+    }
+  }
+
+  private async handleExportClick(): Promise<void> {
+    const exportBtn = this.root.getElementById('game-sim__export-button') as WACTButton;
+    exportBtn.startLoading();
+    await this.exportGame();
+    exportBtn.stopLoading('Exported!', 1500);
   }
 
   private setupScoreboard(gameState: GameState): void {
@@ -583,6 +937,8 @@ export class WACTGameSim extends HTMLElement {
   }
 
   private showPostgame(gameState: GameState): void {
+    this.finalGameState = gameState;
+
     const winnerBanner = this.root.getElementById('game-sim__winner-banner') as HTMLDivElement;
     const finalScore = this.root.getElementById('game-sim__final-score') as HTMLDivElement;
 
@@ -729,10 +1085,13 @@ export class WACTGameSim extends HTMLElement {
     if (this.simService?.hasActiveGame()) {
       this.simService.destroyGame();
     }
+    this.simService = null;
     this.lastDriveCount = 0;
     this.lastHomePositiveDirection = null;
     this.matchupConfig = null;
-    this.transitionTo('config');
+    this.finalGameState = null;
+    this.mode = 'simulate';
+    this.transitionTo('select');
   }
 
   private clearTimer(): void {
@@ -746,9 +1105,68 @@ export class WACTGameSim extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
 
+    // Initialize display state via inline styles
+    this.transitionTo(this.state);
+
+    // Select view — Start card
+    const startCard = this.root.getElementById('game-sim__start-card') as HTMLElement;
+    startCard.addEventListener('click', () => this.transitionTo('config'));
+    startCard.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.transitionTo('config');
+      }
+    });
+
+    // Select view — Replay card
+    const replayCard = this.root.getElementById('game-sim__replay-card') as HTMLElement;
+    const fileInput = this.root.getElementById('game-sim__file-input') as HTMLInputElement;
+    const uploadBtn = this.root.getElementById('game-sim__replay-upload-btn') as WACTButton;
+
+    uploadBtn.addEventListener('click', (e: MouseEvent) => {
+      e.stopPropagation();
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('click', (e: MouseEvent) => {
+      e.stopPropagation();
+    });
+
+    fileInput.addEventListener('change', () => {
+      const statusEl = this.root.getElementById('game-sim__replay-status') as HTMLElement;
+      const fileError = this.root.getElementById('game-sim__file-error') as HTMLDivElement;
+      fileError.style.display = 'none';
+      if (fileInput.files && fileInput.files.length > 0) {
+        this.selectedGameFile = fileInput.files[0];
+        statusEl.textContent = fileInput.files[0].name;
+        replayCard.classList.add('game-sim__mode-card--active');
+        replayCard.setAttribute('role', 'button');
+        replayCard.setAttribute('tabindex', '0');
+      } else {
+        this.selectedGameFile = null;
+        statusEl.textContent = 'No game selected';
+        replayCard.classList.remove('game-sim__mode-card--active');
+        replayCard.removeAttribute('role');
+        replayCard.removeAttribute('tabindex');
+      }
+      fileInput.value = '';
+    });
+
+    replayCard.addEventListener('click', () => {
+      if (!this.selectedGameFile) return;
+      void this.startPlaybackFromFile(this.selectedGameFile);
+    });
+
+    replayCard.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      if (!this.selectedGameFile) return;
+      e.preventDefault();
+      void this.startPlaybackFromFile(this.selectedGameFile);
+    });
+
     // Start button
     const startButton = this.root.getElementById('game-sim__start-button') as HTMLElement;
-    startButton.addEventListener('click', () => this.startGame());
+    startButton.addEventListener('click', () => void this.startGame());
 
     // Playback controls
     const controls = this.root.getElementById('game-sim__controls') as WACTPlaybackControls;
@@ -780,6 +1198,9 @@ export class WACTGameSim extends HTMLElement {
 
     const newGameButton = this.root.getElementById('game-sim__new-game-button') as HTMLElement;
     newGameButton.addEventListener('click', () => this.newGame());
+
+    const exportButton = this.root.getElementById('game-sim__export-button') as HTMLElement;
+    exportButton.addEventListener('click', () => void this.handleExportClick());
 
     // Stats back button
     const statsBackButton = this.root.getElementById('game-sim__stats-back-button') as HTMLElement;

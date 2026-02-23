@@ -158,9 +158,18 @@ describe('WACTGameSim', () => {
     expect(el.root.mode).toBe('open');
   });
 
-  it('should show config view by default', () => {
+  it('should show select view by default with config view hidden', () => {
+    const selectView = el.root.getElementById('game-sim__select-view') as HTMLDivElement;
     const configView = el.root.getElementById('game-sim__config-view') as HTMLDivElement;
-    expect(configView.style.display).not.toBe('none');
+    expect(selectView.style.display).not.toBe('none');
+    expect(configView.style.display).toBe('none');
+  });
+
+  it('should have select view mode cards', () => {
+    const startCard = el.root.getElementById('game-sim__start-card');
+    const replayCard = el.root.getElementById('game-sim__replay-card');
+    expect(startCard).not.toBeNull();
+    expect(replayCard).not.toBeNull();
   });
 
   it('should have a start button', () => {
@@ -187,8 +196,10 @@ describe('WACTGameSim', () => {
   it('should have postgame buttons', () => {
     const summaryBtn = el.root.getElementById('game-sim__summary-button');
     const newGameBtn = el.root.getElementById('game-sim__new-game-button');
+    const exportBtn = el.root.getElementById('game-sim__export-button');
     expect(summaryBtn).not.toBeNull();
     expect(newGameBtn).not.toBeNull();
+    expect(exportBtn).not.toBeNull();
   });
 
   it('should accept a PlayByPlaySimService', () => {
