@@ -29,5 +29,6 @@ export type {
   Drive,
   DriveResult,
   OffensiveStats,
+  GameFile,
 } from './services/index.js';
-export { WasmSimService, ApiSimService } from './services/index.js';
+export { WasmSimService, ApiSimService, downloadGameFile, PlaybackSimService } from './services/index.js';

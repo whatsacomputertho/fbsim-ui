@@ -15,3 +15,6 @@ export type {
 } from './types.js';
 export { WasmSimService } from './wasm-sim-service.js';
 export { ApiSimService } from './api-sim-service.js';
+export type { GameFile } from './game-file.js';
+export { downloadGameFile } from './game-file.js';
+export { PlaybackSimService } from './playback-sim-service.js';
