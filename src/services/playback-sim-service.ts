@@ -67,9 +67,7 @@ export class PlaybackSimService implements PlayByPlaySimService {
 
     const driveIndex = this._playDriveMap[idx];
     const prevDriveIndex =
-      this._currentPlayGlobalIndex >= 0
-        ? this._playDriveMap[this._currentPlayGlobalIndex]
-        : -1;
+      this._currentPlayGlobalIndex >= 0 ? this._playDriveMap[this._currentPlayGlobalIndex] : -1;
 
     if (driveIndex !== prevDriveIndex) {
       this._currentPlayIndexWithinDrive = 0;
@@ -127,9 +125,7 @@ export class PlaybackSimService implements PlayByPlaySimService {
 
   getDrive(index: number): Drive {
     const currentDriveIndex =
-      this._currentPlayGlobalIndex >= 0
-        ? this._playDriveMap[this._currentPlayGlobalIndex]
-        : -1;
+      this._currentPlayGlobalIndex >= 0 ? this._playDriveMap[this._currentPlayGlobalIndex] : -1;
 
     const isComplete = this._currentPlayGlobalIndex === this._allPlays.length - 1;
 

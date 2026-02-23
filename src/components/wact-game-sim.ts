@@ -1085,6 +1085,7 @@ export class WACTGameSim extends HTMLElement {
     if (this.simService?.hasActiveGame()) {
       this.simService.destroyGame();
     }
+    this.simService = null;
     this.lastDriveCount = 0;
     this.lastHomePositiveDirection = null;
     this.matchupConfig = null;

@@ -31,4 +31,9 @@ export type {
   OffensiveStats,
   GameFile,
 } from './services/index.js';
-export { WasmSimService, ApiSimService, downloadGameFile, PlaybackSimService } from './services/index.js';
+export {
+  WasmSimService,
+  ApiSimService,
+  downloadGameFile,
+  PlaybackSimService,
+} from './services/index.js';

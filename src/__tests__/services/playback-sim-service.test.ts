@@ -1,7 +1,13 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { PlaybackSimService } from '../../services/playback-sim-service.js';
 import type { GameFile } from '../../services/game-file.js';
-import type { GameContext, Play, Drive, OffensiveStats, MatchupConfig } from '../../services/types.js';
+import type {
+  GameContext,
+  Play,
+  Drive,
+  OffensiveStats,
+  MatchupConfig,
+} from '../../services/types.js';
 
 function makeContext(overrides?: Partial<GameContext>): GameContext {
   return {
@@ -114,12 +120,24 @@ const minimalMatchupConfig: MatchupConfig = {
     logo: '',
     color: '#ff0000',
     offense: {
-      passing: 75, blocking: 70, rushing: 72, receiving: 73, scrambling: 60,
-      turnovers: 80, field_goals: 78, punting: 70, kickoffs: 72, kick_return_defense: 68,
+      passing: 75,
+      blocking: 70,
+      rushing: 72,
+      receiving: 73,
+      scrambling: 60,
+      turnovers: 80,
+      field_goals: 78,
+      punting: 70,
+      kickoffs: 72,
+      kick_return_defense: 68,
     },
     defense: {
-      blitzing: 70, rush_defense: 72, pass_defense: 75, coverage: 73,
-      turnovers: 68, kick_returning: 65,
+      blitzing: 70,
+      rush_defense: 72,
+      pass_defense: 75,
+      coverage: 73,
+      turnovers: 68,
+      kick_returning: 65,
     },
     coach: { risk_taking: 50, run_pass: 50, up_tempo: 50 },
   },
@@ -129,12 +147,24 @@ const minimalMatchupConfig: MatchupConfig = {
     logo: '',
     color: '#0000ff',
     offense: {
-      passing: 70, blocking: 68, rushing: 65, receiving: 70, scrambling: 58,
-      turnovers: 75, field_goals: 72, punting: 68, kickoffs: 70, kick_return_defense: 65,
+      passing: 70,
+      blocking: 68,
+      rushing: 65,
+      receiving: 70,
+      scrambling: 58,
+      turnovers: 75,
+      field_goals: 72,
+      punting: 68,
+      kickoffs: 70,
+      kick_return_defense: 65,
     },
     defense: {
-      blitzing: 68, rush_defense: 70, pass_defense: 72, coverage: 70,
-      turnovers: 65, kick_returning: 62,
+      blitzing: 68,
+      rush_defense: 70,
+      pass_defense: 72,
+      coverage: 70,
+      turnovers: 65,
+      kick_returning: 62,
     },
     coach: { risk_taking: 50, run_pass: 50, up_tempo: 50 },
   },
