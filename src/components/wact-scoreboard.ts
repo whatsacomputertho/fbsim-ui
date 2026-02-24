@@ -1,38 +1,27 @@
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     :host {
       display: block;
       font-family: sans-serif;
-      --sb-bg: #e8eaf6;
-      --sb-text: #1a1a2e;
-      --sb-context-bg: #cfd2e8;
-      --sb-context-text: #555;
-      --sb-divider: #bbb;
-      --sb-border: #bbb;
-      --sb-possession: #c5a200;
-      --sb-status: #b8860b;
-      --sb-flash: #c5a200;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --sb-bg: #1a1a2e;
-        --sb-text: white;
-        --sb-context-bg: #16213e;
-        --sb-context-text: #ccc;
-        --sb-divider: #333;
-        --sb-border: #333;
-        --sb-possession: #ffd700;
-        --sb-status: #ffd700;
-        --sb-flash: #ffd700;
-      }
+      --wact-comp-scoreboard-container-color:        var(--wact-sys-color-surface-raised);
+      --wact-comp-scoreboard-on-container-color:     var(--wact-sys-color-on-surface);
+      --wact-comp-scoreboard-context-container-color: var(--wact-sys-color-surface-recessed);
+      --wact-comp-scoreboard-on-context-color:       var(--wact-sys-color-on-surface-variant);
+      --wact-comp-scoreboard-divider-color:          var(--wact-sys-color-outline-variant);
+      --wact-comp-scoreboard-possession-color:       var(--wact-sys-color-tertiary);
+      --wact-comp-scoreboard-status-color:           var(--wact-sys-color-tertiary-status);
+      --wact-comp-scoreboard-container-shape:        var(--wact-sys-shape-corner-medium);
     }
 
     #scoreboard__wrapper {
-      background-color: var(--sb-bg);
-      color: var(--sb-text);
-      border-radius: 8px;
+      background-color: var(--wact-comp-scoreboard-container-color);
+      color: var(--wact-comp-scoreboard-on-container-color);
+      border-radius: var(--wact-comp-scoreboard-container-shape);
       overflow: hidden;
     }
 
@@ -64,7 +53,7 @@ template.innerHTML = `
     }
 
     .scoreboard__team--possession {
-      border-color: var(--sb-possession);
+      border-color: var(--wact-comp-scoreboard-possession-color);
     }
 
     .scoreboard__team-logo {
@@ -92,13 +81,13 @@ template.innerHTML = `
     }
 
     .scoreboard__team-score--flash {
-      color: var(--sb-flash);
-      text-shadow: 0 0 8px var(--sb-flash);
+      color: var(--wact-comp-scoreboard-possession-color);
+      text-shadow: 0 0 8px var(--wact-comp-scoreboard-possession-color);
     }
 
     #scoreboard__divider {
       width: 2px;
-      background-color: var(--sb-divider);
+      background-color: var(--wact-comp-scoreboard-divider-color);
       align-self: stretch;
     }
 
@@ -108,10 +97,10 @@ template.innerHTML = `
       align-items: center;
       gap: 16px;
       padding: 8px 16px;
-      background-color: var(--sb-context-bg);
+      background-color: var(--wact-comp-scoreboard-context-container-color);
       font-size: 0.9em;
-      color: var(--sb-context-text);
-      border-top: 1px solid var(--sb-border);
+      color: var(--wact-comp-scoreboard-on-context-color);
+      border-top: 1px solid var(--wact-comp-scoreboard-divider-color);
     }
 
     .scoreboard__context-item {
@@ -121,7 +110,7 @@ template.innerHTML = `
 
     #scoreboard__status {
       font-weight: bold;
-      color: var(--sb-status);
+      color: var(--wact-comp-scoreboard-status-color);
     }
 
     @media only screen and (max-width: 600px) {

@@ -1,32 +1,24 @@
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     :host {
       display: block;
       font-family: sans-serif;
-      --pb-bg: #e8eaf6;
-      --pb-text: #1a1a2e;
-      --pb-speed-bg: #dde0ed;
-      --pb-speed-hover-bg: #cfd2e8;
-      --pb-speed-active-bg: #b8bce0;
-      --pb-menu-bg: #dde0ed;
-      --pb-menu-text: #555;
-      --pb-menu-hover-bg: #cfd2e8;
-      --pb-menu-active: #b8860b;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --pb-bg: #1a1a2e;
-        --pb-text: white;
-        --pb-speed-bg: #2f2f3f;
-        --pb-speed-hover-bg: #3f3f4f;
-        --pb-speed-active-bg: #4f4f5f;
-        --pb-menu-bg: #2f2f3f;
-        --pb-menu-text: #ccc;
-        --pb-menu-hover-bg: #3f3f4f;
-        --pb-menu-active: #ffd700;
-      }
+      --wact-comp-playback-controls-container-color:       var(--wact-sys-color-surface-raised);
+      --wact-comp-playback-controls-on-container-color:    var(--wact-sys-color-on-surface);
+      --wact-comp-playback-controls-speed-container-color: var(--wact-sys-color-interactive);
+      --wact-comp-playback-controls-speed-hover-color:     var(--wact-sys-color-interactive-hover);
+      --wact-comp-playback-controls-speed-active-color:    var(--wact-sys-color-interactive-active);
+      --wact-comp-playback-controls-menu-container-color:  var(--wact-sys-color-interactive);
+      --wact-comp-playback-controls-menu-label-color:      var(--wact-sys-color-on-surface-variant);
+      --wact-comp-playback-controls-menu-hover-color:      var(--wact-sys-color-interactive-hover);
+      --wact-comp-playback-controls-menu-active-label-color: var(--wact-sys-color-tertiary-status);
+      --wact-comp-playback-controls-container-shape:       var(--wact-sys-shape-corner-medium);
+      --wact-comp-playback-controls-menu-shadow:           var(--wact-sys-elevation-level1);
     }
 
     #playback__wrapper {
@@ -34,9 +26,9 @@ template.innerHTML = `
       align-items: center;
       justify-content: space-between;
       padding: 8px 16px;
-      background-color: var(--pb-bg);
-      border-radius: 8px;
-      color: var(--pb-text);
+      background-color: var(--wact-comp-playback-controls-container-color);
+      border-radius: var(--wact-comp-playback-controls-container-shape);
+      color: var(--wact-comp-playback-controls-on-container-color);
       gap: 12px;
     }
 
@@ -69,29 +61,29 @@ template.innerHTML = `
     }
 
     #playback__speed-display {
-      background-color: var(--pb-speed-bg);
+      background-color: var(--wact-comp-playback-controls-speed-container-color);
       border: none;
-      color: var(--pb-text);
+      color: var(--wact-comp-playback-controls-on-container-color);
       font-size: 1.1em;
       padding: 6px 14px;
-      border-radius: 8px;
+      border-radius: var(--wact-comp-playback-controls-container-shape);
       cursor: pointer;
-      transition: all 150ms ease;
+      transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
       font-family: sans-serif;
       min-width: 48px;
       text-align: center;
     }
 
     #playback__speed-display:hover:not(:disabled) {
-      background-color: var(--pb-speed-hover-bg);
+      background-color: var(--wact-comp-playback-controls-speed-hover-color);
     }
 
     #playback__speed-display:active:not(:disabled) {
-      background-color: var(--pb-speed-active-bg);
+      background-color: var(--wact-comp-playback-controls-speed-active-color);
     }
 
     #playback__speed-display:disabled {
-      opacity: 0.4;
+      opacity: var(--wact-sys-state-layer-opacity-disabled);
       cursor: not-allowed;
     }
 
@@ -100,17 +92,17 @@ template.innerHTML = `
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      background-color: var(--pb-menu-bg);
+      background-color: var(--wact-comp-playback-controls-menu-container-color);
       border: none;
-      border-radius: 8px;
+      border-radius: var(--wact-comp-playback-controls-container-shape);
       padding: 4px 0;
       margin-bottom: 4px;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 150ms ease, visibility 150ms ease;
+      transition: opacity var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard), visibility var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
       z-index: 10;
       min-width: 60px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--wact-comp-playback-controls-menu-shadow);
     }
 
     #playback__speed-wrapper:hover #playback__speed-menu {
@@ -124,23 +116,23 @@ template.innerHTML = `
       padding: 6px 12px;
       background: none;
       border: none;
-      color: var(--pb-menu-text);
+      color: var(--wact-comp-playback-controls-menu-label-color);
       font-size: 0.95em;
       cursor: pointer;
       text-align: center;
       font-family: sans-serif;
       white-space: nowrap;
-      transition: background-color 150ms ease;
-      border-radius: 4px;
+      transition: background-color var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
+      border-radius: var(--wact-sys-shape-corner-extra-small);
     }
 
     .playback__speed-option:hover {
-      background-color: var(--pb-menu-hover-bg);
-      color: var(--pb-menu-active);
+      background-color: var(--wact-comp-playback-controls-menu-hover-color);
+      color: var(--wact-comp-playback-controls-menu-active-label-color);
     }
 
     .playback__speed-option--active {
-      color: var(--pb-menu-active);
+      color: var(--wact-comp-playback-controls-menu-active-label-color);
       font-weight: bold;
     }
 

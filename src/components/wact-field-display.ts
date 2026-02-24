@@ -1,28 +1,28 @@
 import type { Play, GameContext } from '../services/types.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     :host {
       display: block;
       font-family: sans-serif;
-      --fd-border: #999;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --fd-border: #444;
-      }
+      --wact-comp-field-display-surface-color:   var(--wact-sys-color-field);
+      --wact-comp-field-display-outline-color:   var(--wact-sys-color-outline-field);
+      --wact-comp-field-display-first-down-color: var(--wact-sys-color-tertiary);
+      --wact-comp-field-display-container-shape: var(--wact-sys-shape-corner-medium);
     }
 
     #field__wrapper {
       position: relative;
       width: 100%;
       height: 120px;
-      background-color: #2d7a2d;
-      border-radius: 8px;
+      background-color: var(--wact-comp-field-display-surface-color);
+      border-radius: var(--wact-comp-field-display-container-shape);
       overflow: hidden;
-      border: 2px solid var(--fd-border);
+      border: 2px solid var(--wact-comp-field-display-outline-color);
     }
 
     #field__endzone-home {
@@ -86,7 +86,7 @@ template.innerHTML = `
       top: 0;
       width: 2px;
       height: 100%;
-      background-color: #ffd700;
+      background-color: var(--wact-comp-field-display-first-down-color);
       display: none;
       z-index: 3;
       transition: left 300ms ease;

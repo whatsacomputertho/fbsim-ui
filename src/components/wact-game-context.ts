@@ -1,9 +1,12 @@
 import type { WACTScoreboard } from './wact-scoreboard.js';
 import type { WACTGameLog } from './wact-game-log.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     :host {
       display: block;
     }
@@ -11,7 +14,7 @@ template.innerHTML = `
     #game-context__wrapper {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
     }
   </style>
   <div id="game-context__wrapper">

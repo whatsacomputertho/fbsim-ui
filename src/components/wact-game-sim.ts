@@ -11,48 +11,36 @@ import type { WACTFieldDisplay } from './wact-field-display.js';
 import type { WACTPlaybackControls } from './wact-playback-controls.js';
 import type { WACTGameContext } from './wact-game-context.js';
 import type { WACTButton } from './wact-button.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 type SimState = 'select' | 'config' | 'pregame' | 'playing' | 'paused' | 'postgame';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     :host {
       display: block;
       font-family: sans-serif;
-      --gs-postgame-bg: #f0f0f5;
-      --gs-postgame-text: #333;
-      --gs-postgame-score: #555;
-      --gs-stats-bg: #f0f0f5;
-      --gs-stats-text: #1a1a2e;
-      --gs-stats-border: #ccc;
-      --gs-stats-header: #b8860b;
-      --gs-error-text: #cc0000;
-      --gs-error-bg: #ffe6e6;
-      --gs-card-bg: #f0f0f5;
-      --gs-card-border: #d0d0d8;
-      --gs-card-hover-bg: #e8e8f0;
-      --gs-card-active-bg: #b8bce0;
-      --gs-card-placeholder: #aaa;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --gs-postgame-bg: #1a1a2e;
-        --gs-postgame-text: white;
-        --gs-postgame-score: #ccc;
-        --gs-stats-bg: #1a1a2e;
-        --gs-stats-text: white;
-        --gs-stats-border: #333;
-        --gs-stats-header: #ffd700;
-        --gs-error-text: #ff6666;
-        --gs-error-bg: #3a1a1a;
-        --gs-card-bg: #1e1e2e;
-        --gs-card-border: #3a3a4e;
-        --gs-card-hover-bg: #22223a;
-        --gs-card-active-bg: #4f4f5f;
-        --gs-card-placeholder: #555;
-      }
+      --wact-comp-game-sim-card-container-color:        var(--wact-sys-color-surface);
+      --wact-comp-game-sim-card-outline-color:          var(--wact-sys-color-outline-card);
+      --wact-comp-game-sim-card-hover-color:            var(--wact-sys-color-surface-container-hover);
+      --wact-comp-game-sim-card-active-color:           var(--wact-sys-color-interactive-active);
+      --wact-comp-game-sim-card-title-color:            var(--wact-sys-color-on-surface);
+      --wact-comp-game-sim-card-subtitle-color:         var(--wact-sys-color-on-surface-variant);
+      --wact-comp-game-sim-card-placeholder-color:      var(--wact-sys-color-on-surface-muted);
+      --wact-comp-game-sim-card-shape:                  var(--wact-sys-shape-corner-large);
+      --wact-comp-game-sim-postgame-container-color:    var(--wact-sys-color-surface);
+      --wact-comp-game-sim-postgame-on-container-color: var(--wact-sys-color-on-surface);
+      --wact-comp-game-sim-postgame-score-color:        var(--wact-sys-color-on-surface-variant);
+      --wact-comp-game-sim-stats-container-color:       var(--wact-sys-color-surface);
+      --wact-comp-game-sim-stats-on-container-color:    var(--wact-sys-color-on-surface);
+      --wact-comp-game-sim-stats-outline-color:         var(--wact-sys-color-outline);
+      --wact-comp-game-sim-stats-header-color:          var(--wact-sys-color-tertiary-status);
+      --wact-comp-game-sim-error-label-color:           var(--wact-sys-color-error);
+      --wact-comp-game-sim-error-container-color:       var(--wact-sys-color-error-container);
+      --wact-comp-game-sim-container-shape:             var(--wact-sys-shape-corner-medium);
     }
 
     #game-sim__wrapper {
@@ -70,27 +58,27 @@ template.innerHTML = `
     .game-sim__mode-card {
       flex: 1;
       flex-wrap: wrap;
-      border-radius: 12px;
+      border-radius: var(--wact-comp-game-sim-card-shape);
       padding: 20px 24px;
       cursor: default;
       transition: background-color 0.15s;
     }
 
     #game-sim__start-card {
-      background-color: var(--gs-card-bg);
+      background-color: var(--wact-comp-game-sim-card-container-color);
       cursor: pointer;
     }
 
     #game-sim__start-card:hover {
-      background-color: var(--gs-card-hover-bg);
+      background-color: var(--wact-comp-game-sim-card-hover-color);
     }
 
     #game-sim__start-card:active {
-      background-color: var(--gs-card-active-bg);
+      background-color: var(--wact-comp-game-sim-card-active-color);
     }
 
     #game-sim__replay-card {
-      background-color: var(--gs-card-bg);
+      background-color: var(--wact-comp-game-sim-card-container-color);
     }
 
     #game-sim__replay-card.game-sim__mode-card--active {
@@ -98,29 +86,29 @@ template.innerHTML = `
     }
 
     #game-sim__replay-card.game-sim__mode-card--active:hover {
-      background-color: var(--gs-card-hover-bg);
+      background-color: var(--wact-comp-game-sim-card-hover-color);
     }
 
     #game-sim__replay-card.game-sim__mode-card--active:active {
-      background-color: var(--gs-card-active-bg);
+      background-color: var(--wact-comp-game-sim-card-active-color);
     }
 
     #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-title,
     #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-subtitle,
     #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-icon {
-      opacity: 0.45;
+      opacity: var(--wact-sys-state-layer-opacity-inactive);
     }
 
     .game-sim__mode-card-title {
       font-size: 1.4rem;
       font-weight: bold;
       margin-bottom: 6px;
-      color: var(--gs-postgame-text);
+      color: var(--wact-comp-game-sim-card-title-color);
     }
 
     .game-sim__mode-card-subtitle {
       font-size: 0.9rem;
-      color: var(--gs-postgame-score);
+      color: var(--wact-comp-game-sim-card-subtitle-color);
     }
 
     .game-sim__mode-card-row {
@@ -134,7 +122,7 @@ template.innerHTML = `
       flex: 1;
       min-width: 0;
       font-size: 0.9rem;
-      color: var(--gs-card-placeholder);
+      color: var(--wact-comp-game-sim-card-placeholder-color);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -154,7 +142,7 @@ template.innerHTML = `
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gs-postgame-text);
+      color: var(--wact-comp-game-sim-card-title-color);
     }
 
     .game-sim__mode-card-icons {
@@ -180,12 +168,12 @@ template.innerHTML = `
 
     #game-sim__file-error {
       display: none;
-      color: var(--gs-error-text);
+      color: var(--wact-comp-game-sim-error-label-color);
       font-size: 0.8em;
       margin-top: 10px;
       padding: 6px 10px;
-      background-color: var(--gs-error-bg);
-      border-radius: 6px;
+      background-color: var(--wact-comp-game-sim-error-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
     }
 
     /* Config view */
@@ -233,11 +221,11 @@ template.innerHTML = `
     /* Postgame overlay */
     #game-sim__postgame-overlay {
       display: none;
-      background-color: var(--gs-postgame-bg);
-      border-radius: 8px;
+      background-color: var(--wact-comp-game-sim-postgame-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
       padding: 24px;
       text-align: center;
-      color: var(--gs-postgame-text);
+      color: var(--wact-comp-game-sim-postgame-on-container-color);
     }
 
     #game-sim__winner-banner {
@@ -248,7 +236,7 @@ template.innerHTML = `
 
     #game-sim__final-score {
       font-size: 1.2em;
-      color: var(--gs-postgame-score);
+      color: var(--wact-comp-game-sim-postgame-score-color);
       margin-bottom: 20px;
     }
 
@@ -281,10 +269,10 @@ template.innerHTML = `
     /* Stats view */
     #game-sim__stats-view {
       display: none;
-      background-color: var(--gs-stats-bg);
-      border-radius: 8px;
+      background-color: var(--wact-comp-game-sim-stats-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
       padding: 16px;
-      color: var(--gs-stats-text);
+      color: var(--wact-comp-game-sim-stats-on-container-color);
     }
 
     #game-sim__stats-view h3 {
@@ -302,11 +290,11 @@ template.innerHTML = `
     #game-sim__stats-table td {
       padding: 6px 12px;
       text-align: center;
-      border-bottom: 1px solid var(--gs-stats-border);
+      border-bottom: 1px solid var(--wact-comp-game-sim-stats-outline-color);
     }
 
     #game-sim__stats-table th {
-      color: var(--gs-stats-header);
+      color: var(--wact-comp-game-sim-stats-header-color);
     }
 
     #game-sim__stats-back-button {
@@ -318,12 +306,12 @@ template.innerHTML = `
 
     #game-sim__error {
       display: none;
-      color: var(--gs-error-text);
+      color: var(--wact-comp-game-sim-error-label-color);
       font-size: 0.85em;
       margin-top: 10px;
       padding: 8px 12px;
-      background-color: var(--gs-error-bg);
-      border-radius: 6px;
+      background-color: var(--wact-comp-game-sim-error-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
       text-align: center;
     }
 

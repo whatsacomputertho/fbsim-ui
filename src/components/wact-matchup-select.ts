@@ -1,9 +1,12 @@
 import type { MatchupInput } from '../services/types.js';
 import type { WACTTeamSelect } from './wact-team-select.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     #matchup-select__wrapper {
       display: flex;
     }

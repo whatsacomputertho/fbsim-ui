@@ -1,19 +1,17 @@
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      --nav-bg: #162267;
-    }
+    ${DESIGN_TOKENS_CSS}
 
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --nav-bg: #020210;
-      }
+    :host {
+      --wact-comp-nav-container-color: var(--wact-sys-color-nav);
     }
 
     .navbar-wrapper {
       height: 10vh;
-      background-color: var(--nav-bg);
+      background-color: var(--wact-comp-nav-container-color);
       display: flex;
       text-align: center;
       align-items: center;

@@ -1,9 +1,12 @@
 import type { MatchupConfig } from '../services/types.js';
 import type { WACTTeamConfig } from './wact-team-config.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     #matchup-config__wrapper {
       display: flex;
     }
@@ -22,7 +25,7 @@ template.innerHTML = `
       #matchup-config__wrapper {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: var(--wact-sys-spacing-lg);
       }
       #matchup-config__home {
         padding-right: 0;

@@ -1,20 +1,15 @@
 import type { TeamInput } from '../services/types.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      --ts-text: #000000;
-      --ts-input-border: black;
-      --ts-input-color: inherit;
-    }
+    ${DESIGN_TOKENS_CSS}
 
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --ts-text: #e0e0e0;
-        --ts-input-border: #888;
-        --ts-input-color: #e0e0e0;
-      }
+    :host {
+      --wact-comp-team-select-on-surface-color:    var(--wact-sys-color-on-surface);
+      --wact-comp-team-select-input-outline-color: var(--wact-sys-color-outline);
+      --wact-comp-team-select-input-focus-color:   var(--wact-sys-color-primary);
     }
 
     #team-select__header-wrapper {
@@ -29,7 +24,7 @@ template.innerHTML = `
       width: 100%;
       font-weight: bold;
       font-size: 2em;
-      color: var(--ts-text);
+      color: var(--wact-comp-team-select-on-surface-color);
     }
 
     #team-select__name-input {
@@ -37,14 +32,14 @@ template.innerHTML = `
       background-color: rgba(0, 0, 0, 0);
       border-style: solid;
       border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      border-color: var(--ts-input-border);
-      color: var(--ts-input-color);
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      border-color: var(--wact-comp-team-select-input-outline-color);
+      color: inherit;
       font-size: 1.5em;
     }
 
     #team-select__name-input:focus, #team-select__name-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
 
     #team-select__image-wrapper {
@@ -89,7 +84,7 @@ template.innerHTML = `
     }
 
     #team-select__logo-url-input:focus, #team-select__logo-url-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
 
     #team-select__logo-url-input-label {
@@ -108,21 +103,21 @@ template.innerHTML = `
 
     #team-select__offense-input-label {
       font-size: 1.5em;
-      color: var(--ts-text);
+      color: var(--wact-comp-team-select-on-surface-color);
     }
 
     #team-select__offense-input {
       background-color: rgba(0, 0, 0, 0);
       border-style: solid;
       border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      border-color: var(--ts-input-border);
-      color: var(--ts-input-color);
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      border-color: var(--wact-comp-team-select-input-outline-color);
+      color: inherit;
       font-size: 1.5em;
     }
 
     #team-select__offense-input:focus, #team-select__offense-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
 
     #team-select__defense-wrapper {
@@ -135,21 +130,21 @@ template.innerHTML = `
 
     #team-select__defense-input-label {
       font-size: 1.5em;
-      color: var(--ts-text);
+      color: var(--wact-comp-team-select-on-surface-color);
     }
 
     #team-select__defense-input {
       background-color: rgba(0, 0, 0, 0);
       border-style: solid;
       border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      border-color: var(--ts-input-border);
-      color: var(--ts-input-color);
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      border-color: var(--wact-comp-team-select-input-outline-color);
+      color: inherit;
       font-size: 1.5em;
     }
 
     #team-select__defense-input:focus, #team-select__defense-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
   </style>
   <div id="team-select__wrapper" class="team-select__wrapper">

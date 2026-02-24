@@ -1,39 +1,37 @@
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     :host {
       display: block;
       width: 100%;
-      --fr-bg: #d3d3d3;
-      --fr-text: inherit;
-      --fr-progress-bg: #c0c0c0;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --fr-bg: #282828;
-        --fr-text: #f5f5f5;
-        --fr-progress-bg: #383838;
-      }
+      --wact-comp-feedback-ribbon-container-color:    var(--wact-sys-color-feedback);
+      --wact-comp-feedback-ribbon-on-container-color: var(--wact-sys-color-on-surface);
+      --wact-comp-feedback-ribbon-progress-color:     var(--wact-sys-color-feedback-progress);
+      --wact-comp-feedback-ribbon-accent-color:       var(--wact-sys-color-feedback-accent);
+      --wact-comp-feedback-ribbon-shadow:             var(--wact-sys-elevation-level2);
     }
 
     .feedback-ribbon__ribbon-progress-wrapper {
-      box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.7);
+      box-shadow: var(--wact-comp-feedback-ribbon-shadow);
     }
 
     .feedback-ribbon__ribbon-wrapper {
       display: grid;
       grid-template-columns: 2% 90% 8%;
-      background-color: var(--fr-bg);
+      background-color: var(--wact-comp-feedback-ribbon-container-color);
     }
 
     .feedback-ribbon__color-sidebar {
-      background-color: #C00000;
+      background-color: var(--wact-comp-feedback-ribbon-accent-color);
     }
 
     .feedback-ribbon__feedback-text-wrapper {
       padding: 2%;
-      color: var(--fr-text);
+      color: var(--wact-comp-feedback-ribbon-on-container-color);
     }
 
     .feedback-ribbon__remove-button {
@@ -48,11 +46,11 @@ template.innerHTML = `
 
     .feedback-ribbon__progress-bar-wrapper {
       height: 10px;
-      background-color: var(--fr-progress-bg);
+      background-color: var(--wact-comp-feedback-ribbon-progress-color);
     }
 
     .feedback-ribbon__progress-bar {
-      background-color: #C00000;
+      background-color: var(--wact-comp-feedback-ribbon-accent-color);
       height: 10px;
       width: 0px;
       transition-duration: 1000ms;

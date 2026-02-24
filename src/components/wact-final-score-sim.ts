@@ -1,10 +1,13 @@
 import type { MatchupInput, SimService, SimResult } from '../services/types.js';
 import type { WACTMatchupSelect } from './wact-matchup-select.js';
 import type { WACTBoxScore } from './wact-box-score.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
     #final-score-sim__sim-button-wrapper {
       display: flex;
       align-items: center;

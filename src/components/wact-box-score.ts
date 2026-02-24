@@ -1,18 +1,13 @@
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      --bs-overlay-bg: rgba(0, 0, 0, 0.7);
-      --bs-border-color: gray;
-      --bs-text: white;
-    }
+    ${DESIGN_TOKENS_CSS}
 
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --bs-overlay-bg: rgba(0, 0, 0, 0.7);
-        --bs-border-color: #666;
-        --bs-text: white;
-      }
+    :host {
+      --wact-comp-box-score-overlay-color: var(--wact-sys-color-overlay);
+      --wact-comp-box-score-outline-color: var(--wact-sys-color-outline-variant);
     }
 
     #box-score__wrapper {
@@ -23,7 +18,7 @@ template.innerHTML = `
       position: relative;
       width: 100%;
       height: 20vh;
-      background-color: var(--bs-overlay-bg);
+      background-color: var(--wact-comp-box-score-overlay-color);
     }
 
     #box-score__home-logo, #box-score__away-logo {
@@ -41,7 +36,7 @@ template.innerHTML = `
       justify-content: center;
       align-items: center;
       border-style: solid;
-      border-color: var(--bs-border-color);
+      border-color: var(--wact-comp-box-score-outline-color);
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
