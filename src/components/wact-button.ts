@@ -73,8 +73,8 @@ template.innerHTML = `
       height: 1em;
       border: 2px solid var(--wact-comp-button-label-color);
       border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 600ms linear infinite;
+      border-radius: var(--wact-sys-shape-corner-full);
+      animation: spin var(--wact-sys-motion-duration-long1) var(--wact-sys-motion-easing-linear) infinite;
       display: inline-block;
       vertical-align: middle;
     }
@@ -89,7 +89,7 @@ template.innerHTML = `
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      padding: 4px 8px;
+      padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-sm);
       background: var(--wact-comp-button-tooltip-container-color);
       color: var(--wact-comp-button-tooltip-label-color);
       font-size: var(--wact-comp-button-tooltip-label-size);
@@ -98,7 +98,7 @@ template.innerHTML = `
       opacity: 0;
       pointer-events: none;
       transition: opacity var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
-      margin-bottom: 4px;
+      margin-bottom: var(--wact-sys-spacing-xs);
     }
 
     #btn:hover:not(:disabled)[data-tooltip]::after {

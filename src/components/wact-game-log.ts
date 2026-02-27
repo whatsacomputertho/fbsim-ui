@@ -8,7 +8,7 @@ template.innerHTML = `
 
     :host {
       display: block;
-      font-family: sans-serif;
+      font-family: var(--wact-sys-typescale-font-family);
       --wact-comp-game-log-container-color:        var(--wact-sys-color-surface);
       --wact-comp-game-log-on-container-color:     var(--wact-sys-color-on-surface-variant);
       --wact-comp-game-log-header-container-color: var(--wact-sys-color-interactive);
@@ -33,8 +33,8 @@ template.innerHTML = `
     }
 
     #game-log__header {
-      padding: 10px 16px;
-      font-size: 1.1em;
+      padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
+      font-size: var(--wact-sys-typescale-body-large-size);
       font-weight: bold;
       color: var(--wact-comp-game-log-on-header-color);
       background-color: var(--wact-comp-game-log-header-container-color);
@@ -58,11 +58,11 @@ template.innerHTML = `
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 16px;
+      padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
       cursor: pointer;
-      transition: background-color 150ms ease;
+      transition: background-color var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
       user-select: none;
-      gap: 10px;
+      gap: var(--wact-sys-spacing-sm);
     }
 
     .game-log__drive-header:hover {
@@ -73,7 +73,7 @@ template.innerHTML = `
       width: 28px;
       height: 28px;
       object-fit: contain;
-      border-radius: 4px;
+      border-radius: var(--wact-sys-shape-corner-extra-small);
       flex-shrink: 0;
     }
 
@@ -85,18 +85,18 @@ template.innerHTML = `
     .game-log__drive-result {
       font-weight: bold;
       color: var(--wact-comp-game-log-drive-result-color);
-      font-size: 0.95em;
+      font-size: var(--wact-sys-typescale-body-medium-size);
     }
 
     .game-log__drive-stats {
-      font-size: 0.8em;
+      font-size: var(--wact-sys-typescale-body-small-size);
       color: var(--wact-comp-game-log-drive-stats-color);
       margin-top: 2px;
     }
 
     .game-log__chevron {
-      font-size: 0.8em;
-      transition: transform 200ms ease;
+      font-size: var(--wact-sys-typescale-body-small-size);
+      transition: transform var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
       color: var(--wact-comp-game-log-chevron-color);
     }
 
@@ -107,13 +107,13 @@ template.innerHTML = `
     .game-log__drive-plays {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 300ms ease, padding-bottom 300ms ease;
-      padding: 0 16px;
+      transition: max-height var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard), padding-bottom var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard);
+      padding: 0 var(--wact-sys-spacing-lg);
     }
 
     .game-log__drive-plays--expanded {
       max-height: 2000px;
-      padding: 0 16px 8px 16px;
+      padding: 0 var(--wact-sys-spacing-lg) var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
     }
 
     @keyframes fadeIn {
@@ -128,16 +128,16 @@ template.innerHTML = `
     }
 
     .game-log__play {
-      padding: 6px 0;
+      padding: var(--wact-sys-spacing-xs) 0;
       border-top: 1px solid var(--wact-comp-game-log-play-divider-color);
-      font-size: 0.85em;
+      font-size: var(--wact-sys-typescale-body-small-size);
       line-height: 1.4;
-      animation: fadeIn 200ms ease;
+      animation: fadeIn var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
     .game-log__play-context {
       color: var(--wact-comp-game-log-play-context-color);
-      font-size: 0.9em;
+      font-size: var(--wact-sys-typescale-body-medium-size);
     }
 
     .game-log__play-description {
@@ -146,7 +146,7 @@ template.innerHTML = `
     }
 
     .game-log__empty {
-      padding: 20px 16px;
+      padding: var(--wact-sys-spacing-xl) var(--wact-sys-spacing-lg);
       text-align: center;
       color: var(--wact-comp-game-log-empty-color);
       font-style: italic;

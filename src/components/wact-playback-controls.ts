@@ -7,35 +7,36 @@ template.innerHTML = `
 
     :host {
       display: block;
-      font-family: sans-serif;
-      --wact-comp-playback-controls-container-color:       var(--wact-sys-color-surface-raised);
-      --wact-comp-playback-controls-on-container-color:    var(--wact-sys-color-on-surface);
-      --wact-comp-playback-controls-speed-container-color: var(--wact-sys-color-interactive);
-      --wact-comp-playback-controls-speed-hover-color:     var(--wact-sys-color-interactive-hover);
-      --wact-comp-playback-controls-speed-active-color:    var(--wact-sys-color-interactive-active);
-      --wact-comp-playback-controls-menu-container-color:  var(--wact-sys-color-interactive);
-      --wact-comp-playback-controls-menu-label-color:      var(--wact-sys-color-on-surface-variant);
-      --wact-comp-playback-controls-menu-hover-color:      var(--wact-sys-color-interactive-hover);
+      font-family: var(--wact-sys-typescale-font-family);
+      --wact-comp-playback-controls-container-color:         var(--wact-sys-color-surface-raised);
+      --wact-comp-playback-controls-on-container-color:      var(--wact-sys-color-on-surface);
+      --wact-comp-playback-controls-speed-container-color:   var(--wact-sys-color-interactive);
+      --wact-comp-playback-controls-speed-hover-color:       var(--wact-sys-color-interactive-hover);
+      --wact-comp-playback-controls-speed-active-color:      var(--wact-sys-color-interactive-active);
+      --wact-comp-playback-controls-menu-container-color:    var(--wact-sys-color-interactive);
+      --wact-comp-playback-controls-menu-label-color:        var(--wact-sys-color-on-surface-variant);
+      --wact-comp-playback-controls-menu-hover-color:        var(--wact-sys-color-interactive-hover);
       --wact-comp-playback-controls-menu-active-label-color: var(--wact-sys-color-tertiary-status);
-      --wact-comp-playback-controls-container-shape:       var(--wact-sys-shape-corner-medium);
-      --wact-comp-playback-controls-menu-shadow:           var(--wact-sys-elevation-level1);
+      --wact-comp-playback-controls-container-shape:         var(--wact-sys-shape-corner-medium);
+      --wact-comp-playback-controls-menu-shadow:             var(--wact-sys-elevation-level1);
+      --wact-comp-playback-controls-menu-zindex:             var(--wact-sys-zindex-dropdown);
     }
 
     #playback__wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 16px;
+      padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
       background-color: var(--wact-comp-playback-controls-container-color);
       border-radius: var(--wact-comp-playback-controls-container-shape);
       color: var(--wact-comp-playback-controls-on-container-color);
-      gap: 12px;
+      gap: var(--wact-sys-spacing-md);
     }
 
     .playback__button {
-      font-size: 1.1em;
+      font-size: var(--wact-sys-typescale-body-large-size);
       --btn-padding: 6px 14px;
-      font-family: sans-serif;
+      font-family: var(--wact-sys-typescale-font-family);
     }
 
     #playback__play-pause {
@@ -64,12 +65,12 @@ template.innerHTML = `
       background-color: var(--wact-comp-playback-controls-speed-container-color);
       border: none;
       color: var(--wact-comp-playback-controls-on-container-color);
-      font-size: 1.1em;
-      padding: 6px 14px;
+      font-size: var(--wact-sys-typescale-body-large-size);
+      padding: var(--wact-sys-spacing-xs) 14px;
       border-radius: var(--wact-comp-playback-controls-container-shape);
       cursor: pointer;
       transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
-      font-family: sans-serif;
+      font-family: var(--wact-sys-typescale-font-family);
       min-width: 48px;
       text-align: center;
     }
@@ -95,12 +96,12 @@ template.innerHTML = `
       background-color: var(--wact-comp-playback-controls-menu-container-color);
       border: none;
       border-radius: var(--wact-comp-playback-controls-container-shape);
-      padding: 4px 0;
-      margin-bottom: 4px;
+      padding: var(--wact-sys-spacing-xs) 0;
+      margin-bottom: var(--wact-sys-spacing-xs);
       opacity: 0;
       visibility: hidden;
       transition: opacity var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard), visibility var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
-      z-index: 10;
+      z-index: var(--wact-comp-playback-controls-menu-zindex);
       min-width: 60px;
       box-shadow: var(--wact-comp-playback-controls-menu-shadow);
     }
@@ -113,14 +114,14 @@ template.innerHTML = `
     .playback__speed-option {
       display: block;
       width: 100%;
-      padding: 6px 12px;
+      padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
       background: none;
       border: none;
       color: var(--wact-comp-playback-controls-menu-label-color);
-      font-size: 0.95em;
+      font-size: var(--wact-sys-typescale-body-medium-size);
       cursor: pointer;
       text-align: center;
-      font-family: sans-serif;
+      font-family: var(--wact-sys-typescale-font-family);
       white-space: nowrap;
       transition: background-color var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
       border-radius: var(--wact-sys-shape-corner-extra-small);
@@ -138,18 +139,17 @@ template.innerHTML = `
 
     @media only screen and (max-width: 600px) {
       #playback__wrapper {
-        padding: 6px 10px;
+        padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
       }
 
       .playback__button {
-        font-size: 0.9em;
+        font-size: var(--wact-sys-typescale-body-medium-size);
         --btn-padding: 4px 10px;
       }
 
-
       #playback__speed-display {
-        font-size: 0.9em;
-        padding: 4px 10px;
+        font-size: var(--wact-sys-typescale-body-medium-size);
+        padding: var(--wact-sys-spacing-xs) 10px;
       }
     }
   </style>

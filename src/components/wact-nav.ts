@@ -6,11 +6,13 @@ template.innerHTML = `
     ${DESIGN_TOKENS_CSS}
 
     :host {
-      --wact-comp-nav-container-color: var(--wact-sys-color-nav);
+      --wact-comp-nav-container-color:  var(--wact-sys-color-nav);
+      --wact-comp-nav-container-height: 10vh;
+      --wact-comp-nav-container-zindex: var(--wact-sys-zindex-sticky);
     }
 
     .navbar-wrapper {
-      height: 10vh;
+      height: var(--wact-comp-nav-container-height);
       background-color: var(--wact-comp-nav-container-color);
       display: flex;
       text-align: center;
@@ -21,7 +23,7 @@ template.innerHTML = `
       left: 0;
       right: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: var(--wact-comp-nav-container-zindex);
     }
     ::slotted(img) {
       max-height: 100%;

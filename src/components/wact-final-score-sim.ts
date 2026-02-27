@@ -8,6 +8,10 @@ template.innerHTML = `
   <style>
     ${DESIGN_TOKENS_CSS}
 
+    :host {
+      --wact-comp-final-score-sim-button-font-size: var(--wact-sys-typescale-title-large-size);
+    }
+
     #final-score-sim__sim-button-wrapper {
       display: flex;
       align-items: center;
@@ -17,7 +21,7 @@ template.innerHTML = `
     #final-score-sim__sim-button {
       margin-top: 1%;
       width: 50%;
-      font-size: 1.5rem;
+      font-size: var(--wact-comp-final-score-sim-button-font-size);
     }
 
     #final-score-sim__result-wrapper {

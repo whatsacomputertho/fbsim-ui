@@ -13,6 +13,7 @@ template.innerHTML = `
       --wact-comp-feedback-ribbon-progress-color:     var(--wact-sys-color-feedback-progress);
       --wact-comp-feedback-ribbon-accent-color:       var(--wact-sys-color-feedback-accent);
       --wact-comp-feedback-ribbon-shadow:             var(--wact-sys-elevation-level2);
+      --wact-comp-feedback-ribbon-progress-height:    10px;
     }
 
     .feedback-ribbon__ribbon-progress-wrapper {
@@ -30,7 +31,7 @@ template.innerHTML = `
     }
 
     .feedback-ribbon__feedback-text-wrapper {
-      padding: 2%;
+      padding: var(--wact-sys-spacing-sm);
       color: var(--wact-comp-feedback-ribbon-on-container-color);
     }
 
@@ -45,16 +46,16 @@ template.innerHTML = `
     }
 
     .feedback-ribbon__progress-bar-wrapper {
-      height: 10px;
+      height: var(--wact-comp-feedback-ribbon-progress-height);
       background-color: var(--wact-comp-feedback-ribbon-progress-color);
     }
 
     .feedback-ribbon__progress-bar {
       background-color: var(--wact-comp-feedback-ribbon-accent-color);
-      height: 10px;
+      height: var(--wact-comp-feedback-ribbon-progress-height);
       width: 0px;
-      transition-duration: 1000ms;
-      transition-timing-function: linear;
+      transition-duration: var(--wact-sys-motion-duration-long2);
+      transition-timing-function: var(--wact-sys-motion-easing-linear);
     }
   </style>
   <div id="ribbon-progress-wrapper" class="feedback-ribbon__ribbon-progress-wrapper">

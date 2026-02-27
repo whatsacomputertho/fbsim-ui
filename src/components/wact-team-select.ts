@@ -7,9 +7,14 @@ template.innerHTML = `
     ${DESIGN_TOKENS_CSS}
 
     :host {
-      --wact-comp-team-select-on-surface-color:    var(--wact-sys-color-on-surface);
-      --wact-comp-team-select-input-outline-color: var(--wact-sys-color-outline);
-      --wact-comp-team-select-input-focus-color:   var(--wact-sys-color-primary);
+      --wact-comp-team-select-on-surface-color:           var(--wact-sys-color-on-surface);
+      --wact-comp-team-select-input-outline-color:        var(--wact-sys-color-outline);
+      --wact-comp-team-select-input-focus-color:          var(--wact-sys-color-primary);
+      --wact-comp-team-select-image-overlay-heavy-color:  var(--wact-sys-color-surface-image-overlay-heavy);
+      --wact-comp-team-select-image-overlay-light-color:  var(--wact-sys-color-surface-image-overlay-light);
+      --wact-comp-team-select-logo-input-bg-color:        var(--wact-sys-color-surface-image-overlay-medium);
+      --wact-comp-team-select-logo-input-on-color:        var(--wact-sys-color-on-image-overlay);
+      --wact-comp-team-select-logo-input-outline-color:   var(--wact-ref-palette-neutral50);
     }
 
     #team-select__header-wrapper {
@@ -23,7 +28,7 @@ template.innerHTML = `
     #team-select__name-input-label {
       width: 100%;
       font-weight: bold;
-      font-size: 2em;
+      font-size: var(--wact-sys-typescale-display-medium-size);
       color: var(--wact-comp-team-select-on-surface-color);
     }
 
@@ -45,12 +50,12 @@ template.innerHTML = `
     #team-select__image-wrapper {
       position: relative;
       height: 40vh;
-      background-color: rgba(0, 0, 0, 0.7);
-      transition: all 100ms ease-in-out;
+      background-color: var(--wact-comp-team-select-image-overlay-heavy-color);
+      transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
     }
 
     #team-select__image-wrapper:hover {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: var(--wact-comp-team-select-image-overlay-light-color);
     }
 
     #team-select__logo {
@@ -73,14 +78,14 @@ template.innerHTML = `
 
     #team-select__logo-url-input {
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: var(--wact-comp-team-select-logo-input-bg-color);
       border-style: solid;
-      border-color: gray;
+      border-color: var(--wact-comp-team-select-logo-input-outline-color);
       border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      color: white;
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      color: var(--wact-comp-team-select-logo-input-on-color);
       margin-left: 1%;
-      font-size: 1.25em;
+      font-size: var(--wact-sys-typescale-title-small-size);
     }
 
     #team-select__logo-url-input:focus, #team-select__logo-url-input:hover {
@@ -88,8 +93,8 @@ template.innerHTML = `
     }
 
     #team-select__logo-url-input-label {
-      color: white;
-      font-size: 1.25em;
+      color: var(--wact-comp-team-select-logo-input-on-color);
+      font-size: var(--wact-sys-typescale-title-small-size);
       margin-left: 1%;
     }
 
@@ -102,7 +107,7 @@ template.innerHTML = `
     }
 
     #team-select__offense-input-label {
-      font-size: 1.5em;
+      font-size: var(--wact-sys-typescale-title-large-size);
       color: var(--wact-comp-team-select-on-surface-color);
     }
 
@@ -129,7 +134,7 @@ template.innerHTML = `
     }
 
     #team-select__defense-input-label {
-      font-size: 1.5em;
+      font-size: var(--wact-sys-typescale-title-large-size);
       color: var(--wact-comp-team-select-on-surface-color);
     }
 

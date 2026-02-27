@@ -8,11 +8,16 @@ template.innerHTML = `
 
     :host {
       display: block;
-      font-family: sans-serif;
-      --wact-comp-field-display-surface-color:   var(--wact-sys-color-field);
-      --wact-comp-field-display-outline-color:   var(--wact-sys-color-outline-field);
-      --wact-comp-field-display-first-down-color: var(--wact-sys-color-tertiary);
-      --wact-comp-field-display-container-shape: var(--wact-sys-shape-corner-medium);
+      font-family: var(--wact-sys-typescale-font-family);
+      --wact-comp-field-display-surface-color:        var(--wact-sys-color-field);
+      --wact-comp-field-display-outline-color:        var(--wact-sys-color-outline-field);
+      --wact-comp-field-display-first-down-color:     var(--wact-sys-color-tertiary);
+      --wact-comp-field-display-container-shape:      var(--wact-sys-shape-corner-medium);
+      --wact-comp-field-display-on-field-color:       var(--wact-sys-color-on-field);
+      --wact-comp-field-display-field-line-color:     var(--wact-sys-color-field-line);
+      --wact-comp-field-display-field-label-color:    var(--wact-sys-color-field-label);
+      --wact-comp-field-display-ball-color:           var(--wact-sys-color-ball);
+      --wact-comp-field-display-ball-outline-color:   var(--wact-sys-color-on-ball);
     }
 
     #field__wrapper {
@@ -34,9 +39,9 @@ template.innerHTML = `
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7em;
+      font-size: var(--wact-sys-typescale-label-small-size);
       font-weight: bold;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--wact-comp-field-display-on-field-color);
       writing-mode: vertical-lr;
       text-orientation: mixed;
     }
@@ -50,9 +55,9 @@ template.innerHTML = `
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7em;
+      font-size: var(--wact-sys-typescale-label-small-size);
       font-weight: bold;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--wact-comp-field-display-on-field-color);
       writing-mode: vertical-lr;
       text-orientation: mixed;
     }
@@ -70,14 +75,14 @@ template.innerHTML = `
       top: 0;
       width: 1px;
       height: 100%;
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: var(--wact-comp-field-display-field-line-color);
     }
 
     .field__yard-label {
       position: absolute;
       bottom: 2px;
-      font-size: 0.6em;
-      color: rgba(255, 255, 255, 0.5);
+      font-size: var(--wact-sys-typescale-label-small-size);
+      color: var(--wact-comp-field-display-field-label-color);
       transform: translateX(-50%);
     }
 
@@ -89,21 +94,21 @@ template.innerHTML = `
       background-color: var(--wact-comp-field-display-first-down-color);
       display: none;
       z-index: 3;
-      transition: left 300ms ease;
+      transition: left var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard);
     }
 
     #field__ball-marker {
       position: absolute;
       width: 10px;
       height: 10px;
-      background-color: #8B4513;
-      border: 2px solid white;
-      border-radius: 50%;
+      background-color: var(--wact-comp-field-display-ball-color);
+      border: 2px solid var(--wact-comp-field-display-ball-outline-color);
+      border-radius: var(--wact-sys-shape-corner-full);
       top: 50%;
       transform: translate(-50%, -50%);
       display: none;
       z-index: 5;
-      transition: left 300ms ease;
+      transition: left var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard);
     }
 
     #field__drive-overlay {
@@ -121,7 +126,7 @@ template.innerHTML = `
       height: 70%;
       opacity: 0.5;
       border-radius: 2px;
-      transition: opacity 200ms ease;
+      transition: opacity var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
     @keyframes endzoneFlash {
@@ -192,7 +197,7 @@ template.innerHTML = `
       }
 
       .field__yard-label {
-        font-size: 0.5em;
+        font-size: 0.5em; /* below token floor; labels must compress on narrow screens */
       }
     }
   </style>

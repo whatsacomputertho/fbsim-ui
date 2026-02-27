@@ -6,8 +6,16 @@ template.innerHTML = `
     ${DESIGN_TOKENS_CSS}
 
     :host {
-      --wact-comp-box-score-overlay-color: var(--wact-sys-color-overlay);
-      --wact-comp-box-score-outline-color: var(--wact-sys-color-outline-variant);
+      --wact-comp-box-score-overlay-color:      var(--wact-sys-color-overlay);
+      --wact-comp-box-score-outline-color:      var(--wact-sys-color-outline-variant);
+      --wact-comp-box-score-on-overlay-color:   var(--wact-sys-color-on-image-overlay);
+      --wact-comp-box-score-accent-width:       16px;
+      --wact-comp-box-score-win-overlay-color:  var(--wact-sys-color-win-overlay);
+      --wact-comp-box-score-win-outline-color:  var(--wact-sys-color-win-outline);
+      --wact-comp-box-score-lose-overlay-color: var(--wact-sys-color-lose-overlay);
+      --wact-comp-box-score-lose-outline-color: var(--wact-sys-color-lose-outline);
+      --wact-comp-box-score-tie-overlay-color:  var(--wact-sys-color-tie-overlay);
+      --wact-comp-box-score-tie-outline-color:  var(--wact-sys-color-tie-outline);
     }
 
     #box-score__wrapper {
@@ -43,24 +51,24 @@ template.innerHTML = `
     }
 
     #box-score__home-score-wrapper {
-      border-width: 0 0 0 16px;
+      border-width: 0 0 0 var(--wact-comp-box-score-accent-width);
     }
 
     #box-score__away-score-wrapper {
-      border-width: 0 16px 0 0;
+      border-width: 0 var(--wact-comp-box-score-accent-width) 0 0;
     }
 
     #box-score__home-team, #box-score__away-team {
-      color: var(--bs-text);
-      font-size: 2em;
+      color: var(--wact-comp-box-score-on-overlay-color);
+      font-size: var(--wact-sys-typescale-display-medium-size);
       margin: 0;
       margin-left: 5%;
       margin-right: 5%;
     }
 
     #box-score__home-score, #box-score__away-score {
-      color: var(--bs-text);
-      font-size: 2em;
+      color: var(--wact-comp-box-score-on-overlay-color);
+      font-size: var(--wact-sys-typescale-display-medium-size);
       margin: 0;
       margin-left: 5%;
       margin-right: 5%;
@@ -72,7 +80,7 @@ template.innerHTML = `
       }
 
       #box-score__away-score-wrapper {
-        border-width: 0 0 0 16px;
+        border-width: 0 0 0 var(--wact-comp-box-score-accent-width);
       }
     }
   </style>
@@ -178,21 +186,29 @@ export class WACTBoxScore extends HTMLElement {
       'box-score__away-score-wrapper',
     ) as HTMLDivElement;
 
+    const style = getComputedStyle(this);
+    const winOverlay  = style.getPropertyValue('--wact-comp-box-score-win-overlay-color').trim();
+    const winOutline  = style.getPropertyValue('--wact-comp-box-score-win-outline-color').trim();
+    const loseOverlay = style.getPropertyValue('--wact-comp-box-score-lose-overlay-color').trim();
+    const loseOutline = style.getPropertyValue('--wact-comp-box-score-lose-outline-color').trim();
+    const tieOverlay  = style.getPropertyValue('--wact-comp-box-score-tie-overlay-color').trim();
+    const tieOutline  = style.getPropertyValue('--wact-comp-box-score-tie-outline-color').trim();
+
     if (homeScore > awayScore) {
-      homeWrapper.style.backgroundColor = 'rgba(0, 63, 0, 0.7)';
-      homeScoreWrapper.style.borderColor = 'lime';
-      awayWrapper.style.backgroundColor = 'rgba(63, 0, 0, 0.7)';
-      awayScoreWrapper.style.borderColor = 'red';
+      homeWrapper.style.backgroundColor = winOverlay;
+      homeScoreWrapper.style.borderColor = winOutline;
+      awayWrapper.style.backgroundColor = loseOverlay;
+      awayScoreWrapper.style.borderColor = loseOutline;
     } else if (awayScore > homeScore) {
-      homeWrapper.style.backgroundColor = 'rgba(63, 0, 0, 0.7)';
-      homeScoreWrapper.style.borderColor = 'red';
-      awayWrapper.style.backgroundColor = 'rgba(0, 63, 0, 0.7)';
-      awayScoreWrapper.style.borderColor = 'lime';
+      homeWrapper.style.backgroundColor = loseOverlay;
+      homeScoreWrapper.style.borderColor = loseOutline;
+      awayWrapper.style.backgroundColor = winOverlay;
+      awayScoreWrapper.style.borderColor = winOutline;
     } else {
-      homeWrapper.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-      homeScoreWrapper.style.borderColor = 'gray';
-      awayWrapper.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-      awayScoreWrapper.style.borderColor = 'gray';
+      homeWrapper.style.backgroundColor = tieOverlay;
+      homeScoreWrapper.style.borderColor = tieOutline;
+      awayWrapper.style.backgroundColor = tieOverlay;
+      awayScoreWrapper.style.borderColor = tieOutline;
     }
   }
 
