@@ -187,12 +187,12 @@ export class WACTBoxScore extends HTMLElement {
     ) as HTMLDivElement;
 
     const style = getComputedStyle(this);
-    const winOverlay  = style.getPropertyValue('--wact-comp-box-score-win-overlay-color').trim();
-    const winOutline  = style.getPropertyValue('--wact-comp-box-score-win-outline-color').trim();
+    const winOverlay = style.getPropertyValue('--wact-comp-box-score-win-overlay-color').trim();
+    const winOutline = style.getPropertyValue('--wact-comp-box-score-win-outline-color').trim();
     const loseOverlay = style.getPropertyValue('--wact-comp-box-score-lose-overlay-color').trim();
     const loseOutline = style.getPropertyValue('--wact-comp-box-score-lose-outline-color').trim();
-    const tieOverlay  = style.getPropertyValue('--wact-comp-box-score-tie-overlay-color').trim();
-    const tieOutline  = style.getPropertyValue('--wact-comp-box-score-tie-outline-color').trim();
+    const tieOverlay = style.getPropertyValue('--wact-comp-box-score-tie-overlay-color').trim();
+    const tieOutline = style.getPropertyValue('--wact-comp-box-score-tie-outline-color').trim();
 
     if (homeScore > awayScore) {
       homeWrapper.style.backgroundColor = winOverlay;
