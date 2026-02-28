@@ -19,18 +19,18 @@ template.innerHTML = `
     }
 
     #final-score-sim__sim-button {
-      margin-top: 1%;
-      width: 50%;
+      margin-top: 1%; // Should be design token
+      width: 50%; // Should be design token
       font-size: var(--wact-comp-final-score-sim-button-font-size);
     }
 
     #final-score-sim__result-wrapper {
       display: none;
-      margin-top: 1%;
+      margin-top: 1%; // Should be design token
     }
 
     #final-score-sim__wrapper {
-      margin-bottom: 3%;
+      margin-bottom: 3%; // Should be design token
     }
   </style>
   <div id="final-score-sim__wrapper" class="final-score-sim__wrapper">

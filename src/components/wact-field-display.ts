@@ -9,21 +9,36 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: var(--wact-sys-typescale-font-family);
-      --wact-comp-field-display-surface-color:        var(--wact-sys-color-field);
-      --wact-comp-field-display-outline-color:        var(--wact-sys-color-outline-field);
-      --wact-comp-field-display-first-down-color:     var(--wact-sys-color-tertiary);
-      --wact-comp-field-display-container-shape:      var(--wact-sys-shape-corner-medium);
-      --wact-comp-field-display-on-field-color:       var(--wact-sys-color-on-field);
-      --wact-comp-field-display-field-line-color:     var(--wact-sys-color-field-line);
-      --wact-comp-field-display-field-label-color:    var(--wact-sys-color-field-label);
-      --wact-comp-field-display-ball-color:           var(--wact-sys-color-ball);
-      --wact-comp-field-display-ball-outline-color:   var(--wact-sys-color-on-ball);
+      --wact-comp-field-display-surface-color:          var(--wact-sys-color-field);
+      --wact-comp-field-display-outline-color:          var(--wact-sys-color-outline-field);
+      --wact-comp-field-display-first-down-color:       var(--wact-sys-color-tertiary);
+      --wact-comp-field-display-container-shape:        var(--wact-sys-shape-corner-medium);
+      --wact-comp-field-display-on-field-color:         var(--wact-sys-color-on-field);
+      --wact-comp-field-display-field-line-color:       var(--wact-sys-color-field-line);
+      --wact-comp-field-display-field-label-color:      var(--wact-sys-color-field-label);
+      --wact-comp-field-display-ball-color:             var(--wact-sys-color-ball);
+      --wact-comp-field-display-ball-outline-color:     var(--wact-sys-color-on-ball);
+      --wact-comp-field-display-height:                 120px;
+      --wact-comp-field-display-height-mobile:          80px;
+      --wact-comp-field-display-end-zone-width:         8%;
+      --wact-comp-field-display-field-left:             8%;
+      --wact-comp-field-display-field-width:            84%;
+      --wact-comp-field-display-hash-width:             1px;
+      --wact-comp-field-display-line-width:             2px;
+      --wact-comp-field-display-ball-size:              10px;
+      --wact-comp-field-display-ball-height:            70%;
+      --wact-comp-field-display-ball-radius:            var(--wact-sys-shape-corner-micro);
+      --wact-comp-field-display-label-font-size:        var(--wact-sys-typescale-title-medium-size);
+      --wact-comp-field-display-label-font-size-mobile: 0.5em;
+      --wact-comp-field-display-z-index-play:           2;
+      --wact-comp-field-display-z-index-ball:           8;
+      --wact-comp-field-display-z-index-ball-emoji:     9;
     }
 
     #field__wrapper {
       position: relative;
       width: 100%;
-      height: 120px;
+      height: var(--wact-comp-field-display-height);
       background-color: var(--wact-comp-field-display-surface-color);
       border-radius: var(--wact-comp-field-display-container-shape);
       overflow: hidden;
@@ -34,13 +49,13 @@ template.innerHTML = `
       position: absolute;
       left: 0;
       top: 0;
-      width: 8%;
+      width: var(--wact-comp-field-display-end-zone-width);
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: var(--wact-sys-typescale-label-small-size);
-      font-weight: bold;
+      font-weight: var(--wact-sys-typescale-weight-bold);
       color: var(--wact-comp-field-display-on-field-color);
       writing-mode: vertical-lr;
       text-orientation: mixed;
@@ -50,13 +65,13 @@ template.innerHTML = `
       position: absolute;
       right: 0;
       top: 0;
-      width: 8%;
+      width: var(--wact-comp-field-display-end-zone-width);
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: var(--wact-sys-typescale-label-small-size);
-      font-weight: bold;
+      font-weight: var(--wact-sys-typescale-weight-bold);
       color: var(--wact-comp-field-display-on-field-color);
       writing-mode: vertical-lr;
       text-orientation: mixed;
@@ -64,16 +79,16 @@ template.innerHTML = `
 
     #field__playing-area {
       position: absolute;
-      left: 8%;
+      left: var(--wact-comp-field-display-field-left);
       top: 0;
-      width: 84%;
+      width: var(--wact-comp-field-display-field-width);
       height: 100%;
     }
 
     .field__yard-line {
       position: absolute;
       top: 0;
-      width: 1px;
+      width: var(--wact-comp-field-display-hash-width);
       height: 100%;
       background-color: var(--wact-comp-field-display-field-line-color);
     }
@@ -89,7 +104,7 @@ template.innerHTML = `
     #field__first-down-line {
       position: absolute;
       top: 0;
-      width: 2px;
+      width: var(--wact-comp-field-display-line-width);
       height: 100%;
       background-color: var(--wact-comp-field-display-first-down-color);
       display: none;
@@ -99,8 +114,8 @@ template.innerHTML = `
 
     #field__ball-marker {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: var(--wact-comp-field-display-ball-size);
+      height: var(--wact-comp-field-display-ball-size);
       background-color: var(--wact-comp-field-display-ball-color);
       border: 2px solid var(--wact-comp-field-display-ball-outline-color);
       border-radius: var(--wact-sys-shape-corner-full);
@@ -117,15 +132,15 @@ template.innerHTML = `
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 2;
+      z-index: var(--wact-comp-field-display-z-index-play);
     }
 
     .field__play-rect {
       position: absolute;
       top: 15%;
-      height: 70%;
+      height: var(--wact-comp-field-display-ball-height);
       opacity: 0.5;
-      border-radius: 2px;
+      border-radius: var(--wact-comp-field-display-ball-radius);
       transition: opacity var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
@@ -152,7 +167,7 @@ template.innerHTML = `
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 8;
+      z-index: var(--wact-comp-field-display-z-index-ball);
       pointer-events: none;
     }
 
@@ -161,10 +176,10 @@ template.innerHTML = `
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 9;
+      z-index: var(--wact-comp-field-display-z-index-ball-emoji);
       pointer-events: none;
-      font-size: 1.4em;
-      font-weight: bold;
+      font-size: var(--wact-comp-field-display-label-font-size);
+      font-weight: var(--wact-sys-typescale-weight-bold);
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
       white-space: nowrap;
       opacity: 0;
@@ -179,12 +194,12 @@ template.innerHTML = `
 
     .field__endzone-flash--home {
       left: 0;
-      width: 8%;
+      width: var(--wact-comp-field-display-end-zone-width);
     }
 
     .field__endzone-flash--away {
       right: 0;
-      width: 8%;
+      width: var(--wact-comp-field-display-end-zone-width);
     }
 
     .field__drive-fade-out {
@@ -193,11 +208,11 @@ template.innerHTML = `
 
     @media only screen and (max-width: 600px) {
       #field__wrapper {
-        height: 80px;
+        height: var(--wact-comp-field-display-height-mobile);
       }
 
       .field__yard-label {
-        font-size: 0.5em; /* below token floor; labels must compress on narrow screens */
+        font-size: var(--wact-comp-field-display-label-font-size-mobile);
       }
     }
   </style>

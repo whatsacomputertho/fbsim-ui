@@ -41,6 +41,10 @@ template.innerHTML = `
       --wact-comp-game-sim-error-label-color:           var(--wact-sys-color-error);
       --wact-comp-game-sim-error-container-color:       var(--wact-sys-color-error-container);
       --wact-comp-game-sim-container-shape:             var(--wact-sys-shape-corner-medium);
+      --wact-comp-game-sim-icon-size-lg:                44px;
+      --wact-comp-game-sim-icon-size-sm:                18px;
+      --wact-comp-game-sim-btn-padding-lg:              10px;
+      --wact-comp-game-sim-btn-padding-sm:              6px var(--wact-sys-spacing-lg);
     }
 
     #game-sim__wrapper {
@@ -101,7 +105,7 @@ template.innerHTML = `
 
     .game-sim__mode-card-title {
       font-size: var(--wact-sys-typescale-title-medium-size);
-      font-weight: bold;
+      font-weight: var(--wact-sys-typescale-weight-bold);
       margin-bottom: var(--wact-sys-spacing-xs);
       color: var(--wact-comp-game-sim-card-title-color);
     }
@@ -136,8 +140,8 @@ template.innerHTML = `
 
     .game-sim__mode-icon {
       flex-shrink: 0;
-      width: 44px;
-      height: 44px;
+      width: var(--wact-comp-game-sim-icon-size-lg);
+      height: var(--wact-comp-game-sim-icon-size-lg);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -148,7 +152,7 @@ template.innerHTML = `
     .game-sim__mode-card-icons {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
       flex-shrink: 0;
       margin-left: auto;
     }
@@ -158,8 +162,8 @@ template.innerHTML = `
     }
 
     .game-sim__card-spinner {
-      width: 18px;
-      height: 18px;
+      width: var(--wact-comp-game-sim-icon-size-sm);
+      height: var(--wact-comp-game-sim-icon-size-sm);
       border: 2px solid currentColor;
       border-top-color: transparent;
       border-radius: var(--wact-sys-shape-corner-full);
@@ -263,7 +267,7 @@ template.innerHTML = `
       display: block;
       width: 100%;
       font-size: var(--wact-sys-typescale-body-default-size);
-      --btn-padding: 10px;
+      --btn-padding: var(--wact-comp-game-sim-btn-padding-lg);
     }
 
     /* Stats view */
@@ -301,7 +305,7 @@ template.innerHTML = `
       display: block;
       margin: var(--wact-sys-spacing-md) auto 0 auto;
       font-size: var(--wact-sys-typescale-body-medium-size);
-      --btn-padding: 6px 16px;
+      --btn-padding: var(--wact-comp-game-sim-btn-padding-sm);
     }
 
     #game-sim__error {

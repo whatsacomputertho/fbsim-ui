@@ -42,7 +42,7 @@ template.innerHTML = `
 
     .feedback-ribbon__remove-button::part(button) {
       border-radius: 0;
-      height: 100%;
+      height: 100%; // Should be design token
     }
 
     .feedback-ribbon__progress-bar-wrapper {

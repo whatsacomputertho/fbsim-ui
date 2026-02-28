@@ -7,18 +7,22 @@ template.innerHTML = `
   <style>
     ${DESIGN_TOKENS_CSS}
 
+    :host {
+      --wact-comp-matchup-column-padding-h: 1%;
+    }
+
     #matchup-select__wrapper {
       display: flex;
     }
 
     #matchup-select__home {
       width: 100%;
-      padding-right: 1%;
+      padding-right: var(--wact-comp-matchup-column-padding-h);
     }
 
     #matchup-select__away {
       width: 100%;
-      padding-left: 1%;
+      padding-left: var(--wact-comp-matchup-column-padding-h);
     }
 
     @media only screen and (max-width: 600px) {

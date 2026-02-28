@@ -9,20 +9,25 @@ template.innerHTML = `
     :host {
       display: block;
       font-family: var(--wact-sys-typescale-font-family);
-      --wact-comp-game-log-container-color:        var(--wact-sys-color-surface);
-      --wact-comp-game-log-on-container-color:     var(--wact-sys-color-on-surface-variant);
-      --wact-comp-game-log-header-container-color: var(--wact-sys-color-interactive);
-      --wact-comp-game-log-on-header-color:        var(--wact-sys-color-on-surface);
-      --wact-comp-game-log-divider-color:          var(--wact-sys-color-outline);
-      --wact-comp-game-log-drive-hover-color:      var(--wact-sys-color-surface-recessed);
-      --wact-comp-game-log-drive-result-color:     var(--wact-sys-color-on-surface);
-      --wact-comp-game-log-drive-stats-color:      var(--wact-sys-color-on-surface-muted);
-      --wact-comp-game-log-chevron-color:          var(--wact-sys-color-on-surface-muted);
-      --wact-comp-game-log-play-divider-color:     var(--wact-sys-color-outline-card);
-      --wact-comp-game-log-play-context-color:     var(--wact-sys-color-on-surface-muted);
-      --wact-comp-game-log-play-desc-color:        var(--wact-sys-color-on-surface);
-      --wact-comp-game-log-empty-color:            var(--wact-sys-color-on-surface-muted);
-      --wact-comp-game-log-container-shape:        var(--wact-sys-shape-corner-medium);
+      --wact-comp-game-log-container-color:         var(--wact-sys-color-surface);
+      --wact-comp-game-log-on-container-color:      var(--wact-sys-color-on-surface-variant);
+      --wact-comp-game-log-header-container-color:  var(--wact-sys-color-interactive);
+      --wact-comp-game-log-on-header-color:         var(--wact-sys-color-on-surface);
+      --wact-comp-game-log-divider-color:           var(--wact-sys-color-outline);
+      --wact-comp-game-log-drive-hover-color:       var(--wact-sys-color-surface-recessed);
+      --wact-comp-game-log-drive-result-color:      var(--wact-sys-color-on-surface);
+      --wact-comp-game-log-drive-stats-color:       var(--wact-sys-color-on-surface-muted);
+      --wact-comp-game-log-chevron-color:           var(--wact-sys-color-on-surface-muted);
+      --wact-comp-game-log-play-divider-color:      var(--wact-sys-color-outline-card);
+      --wact-comp-game-log-play-context-color:      var(--wact-sys-color-on-surface-muted);
+      --wact-comp-game-log-play-desc-color:         var(--wact-sys-color-on-surface);
+      --wact-comp-game-log-empty-color:             var(--wact-sys-color-on-surface-muted);
+      --wact-comp-game-log-container-shape:         var(--wact-sys-shape-corner-medium);
+      --wact-comp-game-log-max-height:              400px;
+      --wact-comp-game-log-max-height-expanded:     2000px;
+      --wact-comp-game-log-icon-size:               28px;
+      --wact-comp-game-log-row-gap:                 2px;
+      --wact-comp-game-log-play-font-style:         italic;
     }
 
     #game-log__wrapper {
@@ -35,14 +40,14 @@ template.innerHTML = `
     #game-log__header {
       padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
       font-size: var(--wact-sys-typescale-body-large-size);
-      font-weight: bold;
+      font-weight: var(--wact-sys-typescale-weight-bold);
       color: var(--wact-comp-game-log-on-header-color);
       background-color: var(--wact-comp-game-log-header-container-color);
       border-bottom: 1px solid var(--wact-comp-game-log-divider-color);
     }
 
     #game-log__drives {
-      max-height: 400px;
+      max-height: var(--wact-comp-game-log-max-height);
       overflow-y: auto;
     }
 
@@ -70,8 +75,8 @@ template.innerHTML = `
     }
 
     .game-log__drive-logo {
-      width: 28px;
-      height: 28px;
+      width: var(--wact-comp-game-log-icon-size);
+      height: var(--wact-comp-game-log-icon-size);
       object-fit: contain;
       border-radius: var(--wact-sys-shape-corner-extra-small);
       flex-shrink: 0;
@@ -83,7 +88,7 @@ template.innerHTML = `
     }
 
     .game-log__drive-result {
-      font-weight: bold;
+      font-weight: var(--wact-sys-typescale-weight-bold);
       color: var(--wact-comp-game-log-drive-result-color);
       font-size: var(--wact-sys-typescale-body-medium-size);
     }
@@ -91,7 +96,7 @@ template.innerHTML = `
     .game-log__drive-stats {
       font-size: var(--wact-sys-typescale-body-small-size);
       color: var(--wact-comp-game-log-drive-stats-color);
-      margin-top: 2px;
+      margin-top: var(--wact-comp-game-log-row-gap);
     }
 
     .game-log__chevron {
@@ -112,7 +117,7 @@ template.innerHTML = `
     }
 
     .game-log__drive-plays--expanded {
-      max-height: 2000px;
+      max-height: var(--wact-comp-game-log-max-height-expanded);
       padding: 0 var(--wact-sys-spacing-lg) var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
     }
 
@@ -131,7 +136,7 @@ template.innerHTML = `
       padding: var(--wact-sys-spacing-xs) 0;
       border-top: 1px solid var(--wact-comp-game-log-play-divider-color);
       font-size: var(--wact-sys-typescale-body-small-size);
-      line-height: 1.4;
+      line-height: var(--wact-sys-typescale-line-height-body);
       animation: fadeIn var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
@@ -142,14 +147,14 @@ template.innerHTML = `
 
     .game-log__play-description {
       color: var(--wact-comp-game-log-play-desc-color);
-      margin-top: 2px;
+      margin-top: var(--wact-comp-game-log-row-gap);
     }
 
     .game-log__empty {
       padding: var(--wact-sys-spacing-xl) var(--wact-sys-spacing-lg);
       text-align: center;
       color: var(--wact-comp-game-log-empty-color);
-      font-style: italic;
+      font-style: var(--wact-comp-game-log-play-font-style);
     }
 
   </style>

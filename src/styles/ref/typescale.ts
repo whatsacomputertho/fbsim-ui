@@ -23,5 +23,8 @@ export const REF_TYPESCALE_CSS = `
   /* Display scale (scoreboard scores, large headings) */
   --wact-ref-typescale-display-small-size:  1.80em;
   --wact-ref-typescale-display-medium-size: 2.00em;
+
+  /* Line height */
+  --wact-ref-typescale-line-height-body: 1.4;
 }
 `;

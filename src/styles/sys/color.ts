@@ -84,6 +84,9 @@ export const SYS_COLOR_CSS = `
   --wact-sys-color-lose-outline:                   var(--wact-ref-palette-defeat-border);
   --wact-sys-color-tie-overlay:                    var(--wact-ref-palette-transparent70);
   --wact-sys-color-tie-outline:                    var(--wact-ref-palette-neutral50);
+
+  /* Transparent */
+  --wact-sys-color-transparent:                    var(--wact-ref-palette-transparent0);
 }
 
 /* ── Dark mode ─────────────────────────────────────────────────────────────── */

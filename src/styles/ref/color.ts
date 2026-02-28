@@ -66,7 +66,8 @@ export const REF_COLOR_CSS = `
   --wact-ref-palette-ball60:       #8b4513;
   --wact-ref-palette-ball-outline: #ffffff;
 
-  /* Overlay family (black semi-transparent) */
+  /* Overlay family (transparent / black semi-transparent) */
+  --wact-ref-palette-transparent0:  transparent;
   --wact-ref-palette-transparent20: rgba(0, 0, 0, 0.20);
   --wact-ref-palette-transparent50: rgba(0, 0, 0, 0.50);
   --wact-ref-palette-transparent70: rgba(0, 0, 0, 0.70);

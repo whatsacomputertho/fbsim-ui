@@ -17,6 +17,7 @@ template.innerHTML = `
       --wact-comp-button-tooltip-label-color:     var(--wact-sys-color-on-tooltip);
       --wact-comp-button-tooltip-label-size:      var(--wact-sys-typescale-label-medium-size);
       --wact-comp-button-tooltip-container-shape: var(--wact-sys-shape-corner-extra-small);
+      --wact-comp-button-icon-size:               1em;
     }
 
     :host([variant="primary"]) {
@@ -69,8 +70,8 @@ template.innerHTML = `
     }
 
     .spinner {
-      width: 1em;
-      height: 1em;
+      width: var(--wact-comp-button-icon-size);
+      height: var(--wact-comp-button-icon-size);
       border: 2px solid var(--wact-comp-button-label-color);
       border-top-color: transparent;
       border-radius: var(--wact-sys-shape-corner-full);

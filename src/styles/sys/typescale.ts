@@ -23,6 +23,9 @@ export const SYS_TYPESCALE_CSS = `
   /* Display scale */
   --wact-sys-typescale-display-small-size:    var(--wact-ref-typescale-display-small-size);
   --wact-sys-typescale-display-medium-size:   var(--wact-ref-typescale-display-medium-size);
+
+  /* Line height */
+  --wact-sys-typescale-line-height-body:      var(--wact-ref-typescale-line-height-body);
 }
 
 /* Larger viewports: bump display and title sizes for better visual hierarchy */

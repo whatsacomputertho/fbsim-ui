@@ -1,5 +1,6 @@
 export const SYS_SHAPE_CSS = `
 :host {
+  --wact-sys-shape-corner-micro:       var(--wact-ref-shape-corner-micro);
   --wact-sys-shape-corner-extra-small: var(--wact-ref-shape-corner-extra-small);
   --wact-sys-shape-corner-small:       var(--wact-ref-shape-corner-small);
   --wact-sys-shape-corner-medium:      var(--wact-ref-shape-corner-medium);
