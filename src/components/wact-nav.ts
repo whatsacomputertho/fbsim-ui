@@ -1,19 +1,21 @@
+import { COLOR_CSS, ELEVATION_CSS, LAYOUT_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      --nav-bg: #162267;
-    }
+    ${COLOR_CSS}
+    ${ELEVATION_CSS}
+    ${LAYOUT_CSS}
 
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --nav-bg: #020210;
-      }
+    :host {
+      --wact-comp-nav-container-color:  var(--wact-sys-color-nav);
+      --wact-comp-nav-container-height: var(--wact-ref-layout-vh-10);
+      --wact-comp-nav-container-zindex: var(--wact-sys-zindex-sticky);
     }
 
     .navbar-wrapper {
-      height: 10vh;
-      background-color: var(--nav-bg);
+      height: var(--wact-comp-nav-container-height);
+      background-color: var(--wact-comp-nav-container-color);
       display: flex;
       text-align: center;
       align-items: center;
@@ -22,11 +24,11 @@ template.innerHTML = `
       top: 0;
       left: 0;
       right: 0;
-      width: 100%;
-      z-index: 1000;
+      width: var(--wact-sys-layout-fit-container);
+      z-index: var(--wact-comp-nav-container-zindex);
     }
     ::slotted(img) {
-      max-height: 100%;
+      max-height: var(--wact-sys-layout-fit-container);
       object-fit: contain;
     }
   </style>

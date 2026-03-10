@@ -1,28 +1,35 @@
 import type { MatchupConfig } from '../services/types.js';
 import type { WACTTeamConfig } from './wact-team-config.js';
+import { LAYOUT_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${LAYOUT_CSS}
+
+    :host {
+      --wact-comp-matchup-column-padding-h: 1%;
+    }
+
     #matchup-config__wrapper {
       display: flex;
     }
 
     #matchup-config__home {
-      width: 100%;
-      padding-right: 1%;
+      width: var(--wact-sys-layout-fit-container);
+      padding-right: var(--wact-comp-matchup-column-padding-h);
     }
 
     #matchup-config__away {
       width: 100%;
-      padding-left: 1%;
+      padding-left: var(--wact-comp-matchup-column-padding-h);
     }
 
     @media only screen and (max-width: 600px) {
       #matchup-config__wrapper {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: var(--wact-sys-spacing-lg);
       }
       #matchup-config__home {
         padding-right: 0;

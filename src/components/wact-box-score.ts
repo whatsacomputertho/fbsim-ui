@@ -1,18 +1,43 @@
+import { COLOR_CSS } from '../styles/index.js';
+import { ELEVATION_CSS } from '../styles/index.js';
+import { LAYOUT_CSS } from '../styles/index.js';
+import { SPACING_CSS } from '../styles/index.js';
+import { TYPEFACE_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      --bs-overlay-bg: rgba(0, 0, 0, 0.7);
-      --bs-border-color: gray;
-      --bs-text: white;
-    }
+    ${COLOR_CSS}
+    ${ELEVATION_CSS}
+    ${LAYOUT_CSS}
+    ${SPACING_CSS}
+    ${TYPEFACE_CSS}
 
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --bs-overlay-bg: rgba(0, 0, 0, 0.7);
-        --bs-border-color: #666;
-        --bs-text: white;
-      }
+    :host {
+      /* Color palette */
+      --wact-comp-box-score-overlay-color:      var(--wact-sys-color-overlay);
+      --wact-comp-box-score-outline-color:      var(--wact-sys-color-outline-variant);
+      --wact-comp-box-score-on-overlay-color:   var(--wact-sys-color-on-image-overlay);
+      --wact-comp-box-score-win-overlay-color:  var(--wact-sys-color-win-overlay);
+      --wact-comp-box-score-win-outline-color:  var(--wact-sys-color-win-outline);
+      --wact-comp-box-score-lose-overlay-color: var(--wact-sys-color-lose-overlay);
+      --wact-comp-box-score-lose-outline-color: var(--wact-sys-color-lose-outline);
+      --wact-comp-box-score-tie-overlay-color:  var(--wact-sys-color-tie-overlay);
+      --wact-comp-box-score-tie-outline-color:  var(--wact-sys-color-tie-outline);
+
+      /* Layout */
+      --wact-comp-box-score-size:               var(--wact-ref-layout-fit-container);
+      --wact-comp-box-score-panel-height:       var(--wact-sys-layout-banner-large-height);
+      --wact-comp-box-score-panel-min-height:   var(--wact-sys-typeface-display-large-size);
+      --wact-comp-box-score-panel-max-height:   var(--wact-sys-layout-banner-large-max-height);
+      --wact-comp-box-score-text-margin:        var(--wact-ref-spacing-md);
+      --wact-comp-box-score-accent-width:       var(--wact-sys-spacing-lg);
+
+      /* Typeface */
+      --wact-comp-box-score-font-size:          var(--wact-sys-typeface-display-medium-size);
+
+      /* Elevation */
+      --wact-comp-box-score-z-index-logo:       var(--wact-sys-layer-neg-1);
     }
 
     #box-score__wrapper {
@@ -20,55 +45,57 @@ template.innerHTML = `
     }
 
     #box-score__home-wrapper, #box-score__away-wrapper {
-      position: relative;
-      width: 100%;
-      height: 20vh;
-      background-color: var(--bs-overlay-bg);
+      position:         relative;
+      width:            var(--wact-comp-box-score-size);
+      height:           var(--wact-comp-box-score-panel-height);
+      min-height:       var(--wact-comp-box-score-panel-min-height);
+      max-height:       var(--wact-comp-box-score-panel-max-height);
+      background-color: var(--wact-comp-box-score-overlay-color);
     }
 
     #box-score__home-logo, #box-score__away-logo {
-      width: 100%;
-      height: 100%;
+      position:   absolute;
       object-fit: cover;
-      position: absolute;
-      z-index: -1;
+      width:      var(--wact-comp-box-score-size);
+      height:     var(--wact-comp-box-score-size);
+      z-index:    var(--wact-comp-box-score-z-index-logo);
     }
 
     #box-score__home-score-wrapper, #box-score__away-score-wrapper {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-style: solid;
-      border-color: var(--bs-border-color);
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
+      display:            flex;
+      justify-content:    center;
+      align-items:        center;
+      width:              var(--wact-comp-box-score-size);
+      height:             var(--wact-comp-box-score-size);
+      border-style:       solid;
+      border-color:       var(--wact-comp-box-score-outline-color);
+      box-sizing:         border-box;
+      -moz-box-sizing:    border-box;
       -webkit-box-sizing: border-box;
     }
 
     #box-score__home-score-wrapper {
-      border-width: 0 0 0 16px;
+      border-width: 0 0 0 var(--wact-comp-box-score-accent-width);
     }
 
     #box-score__away-score-wrapper {
-      border-width: 0 16px 0 0;
+      border-width: 0 var(--wact-comp-box-score-accent-width) 0 0;
     }
 
     #box-score__home-team, #box-score__away-team {
-      color: var(--bs-text);
-      font-size: 2em;
-      margin: 0;
-      margin-left: 5%;
-      margin-right: 5%;
+      color:        var(--wact-comp-box-score-on-overlay-color);
+      font-size:    var(--wact-comp-box-score-font-size);
+      margin:       0;
+      margin-left:  var(--wact-comp-box-score-text-margin);
+      margin-right: var(--wact-comp-box-score-text-margin);
     }
 
     #box-score__home-score, #box-score__away-score {
-      color: var(--bs-text);
-      font-size: 2em;
-      margin: 0;
-      margin-left: 5%;
-      margin-right: 5%;
+      color:        var(--wact-comp-box-score-on-overlay-color);
+      font-size:    var(--wact-comp-box-score-font-size);
+      margin:       0;
+      margin-left:  var(--wact-comp-box-score-text-margin);
+      margin-right: var(--wact-comp-box-score-text-margin);
     }
 
     @media only screen and (max-width: 600px) {
@@ -77,7 +104,7 @@ template.innerHTML = `
       }
 
       #box-score__away-score-wrapper {
-        border-width: 0 0 0 16px;
+        border-width: 0 0 0 var(--wact-comp-box-score-accent-width);
       }
     }
   </style>
@@ -183,21 +210,29 @@ export class WACTBoxScore extends HTMLElement {
       'box-score__away-score-wrapper',
     ) as HTMLDivElement;
 
+    const style = getComputedStyle(this);
+    const winOverlay = style.getPropertyValue('--wact-comp-box-score-win-overlay-color').trim();
+    const winOutline = style.getPropertyValue('--wact-comp-box-score-win-outline-color').trim();
+    const loseOverlay = style.getPropertyValue('--wact-comp-box-score-lose-overlay-color').trim();
+    const loseOutline = style.getPropertyValue('--wact-comp-box-score-lose-outline-color').trim();
+    const tieOverlay = style.getPropertyValue('--wact-comp-box-score-tie-overlay-color').trim();
+    const tieOutline = style.getPropertyValue('--wact-comp-box-score-tie-outline-color').trim();
+
     if (homeScore > awayScore) {
-      homeWrapper.style.backgroundColor = 'rgba(0, 63, 0, 0.7)';
-      homeScoreWrapper.style.borderColor = 'lime';
-      awayWrapper.style.backgroundColor = 'rgba(63, 0, 0, 0.7)';
-      awayScoreWrapper.style.borderColor = 'red';
+      homeWrapper.style.backgroundColor = winOverlay;
+      homeScoreWrapper.style.borderColor = winOutline;
+      awayWrapper.style.backgroundColor = loseOverlay;
+      awayScoreWrapper.style.borderColor = loseOutline;
     } else if (awayScore > homeScore) {
-      homeWrapper.style.backgroundColor = 'rgba(63, 0, 0, 0.7)';
-      homeScoreWrapper.style.borderColor = 'red';
-      awayWrapper.style.backgroundColor = 'rgba(0, 63, 0, 0.7)';
-      awayScoreWrapper.style.borderColor = 'lime';
+      homeWrapper.style.backgroundColor = loseOverlay;
+      homeScoreWrapper.style.borderColor = loseOutline;
+      awayWrapper.style.backgroundColor = winOverlay;
+      awayScoreWrapper.style.borderColor = winOutline;
     } else {
-      homeWrapper.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-      homeScoreWrapper.style.borderColor = 'gray';
-      awayWrapper.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-      awayScoreWrapper.style.borderColor = 'gray';
+      homeWrapper.style.backgroundColor = tieOverlay;
+      homeScoreWrapper.style.borderColor = tieOutline;
+      awayWrapper.style.backgroundColor = tieOverlay;
+      awayScoreWrapper.style.borderColor = tieOutline;
     }
   }
 

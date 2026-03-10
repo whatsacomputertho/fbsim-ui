@@ -1,10 +1,19 @@
 import type { MatchupInput, SimService, SimResult } from '../services/types.js';
 import type { WACTMatchupSelect } from './wact-matchup-select.js';
 import type { WACTBoxScore } from './wact-box-score.js';
+import { DESIGN_TOKENS_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${DESIGN_TOKENS_CSS}
+
+    :host {
+      --wact-comp-final-score-sim-button-font-size: var(--wact-sys-typeface-title-large-size);
+      --wact-comp-final-score-sim-button-width:     50%;
+      --wact-comp-final-score-sim-spacing:          1%;
+    }
+
     #final-score-sim__sim-button-wrapper {
       display: flex;
       align-items: center;
@@ -12,18 +21,18 @@ template.innerHTML = `
     }
 
     #final-score-sim__sim-button {
-      margin-top: 1%;
-      width: 50%;
-      font-size: 1.5rem;
+      margin-top: var(--wact-comp-final-score-sim-spacing);
+      width: var(--wact-comp-final-score-sim-button-width);
+      font-size: var(--wact-comp-final-score-sim-button-font-size);
     }
 
     #final-score-sim__result-wrapper {
       display: none;
-      margin-top: 1%;
+      margin-top: var(--wact-comp-final-score-sim-spacing);
     }
 
     #final-score-sim__wrapper {
-      margin-bottom: 3%;
+      margin-bottom: var(--wact-comp-final-score-sim-spacing);
     }
   </style>
   <div id="final-score-sim__wrapper" class="final-score-sim__wrapper">

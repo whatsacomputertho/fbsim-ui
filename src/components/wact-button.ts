@@ -1,87 +1,97 @@
+import { COLOR_CSS } from '../styles';
+import { LAYOUT_CSS } from '../styles';
+import { MOTION_CSS } from '../styles';
+import { SHAPE_CSS } from '../styles';
+import { SPACING_CSS } from '../styles';
+import { STATE_CSS } from '../styles';
+import { TYPEFACE_CSS } from '../styles';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      display: inline-block;
-      --btn-bg: #dde0ed;
-      --btn-bg-hover: #cfd2e8;
-      --btn-bg-active: #b8bce0;
-      --btn-text: inherit;
-    }
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+    ${STATE_CSS}
+    ${TYPEFACE_CSS}
 
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --btn-bg: #2f2f3f;
-        --btn-bg-hover: #3f3f4f;
-        --btn-bg-active: #4f4f5f;
-        --btn-text: inherit;
-      }
+    :host {
+      /* Layout */
+      display: inline-block;
+      padding: 0;
+      --wact-comp-button-tooltip-label-size:      var(--wact-sys-typeface-label-medium-size);
+      --wact-comp-button-icon-size:               var(--wact-sys-typeface-body-large-size);
+
+      /* Color palette */
+      --wact-comp-button-container-color:         var(--wact-sys-color-interactive);
+      --wact-comp-button-container-color-hover:   var(--wact-sys-color-interactive-hover);
+      --wact-comp-button-container-color-active:  var(--wact-sys-color-interactive-active);
+      --wact-comp-button-label-color:             var(--wact-sys-color-on-surface);
+      --wact-comp-button-tooltip-container-color: var(--wact-sys-color-tooltip-container);
+      --wact-comp-button-tooltip-label-color:     var(--wact-sys-color-on-tooltip);
+
+      /* Shape */
+      --wact-comp-button-container-shape:         var(--wact-sys-shape-corner-medium);
+      --wact-comp-button-tooltip-container-shape: var(--wact-sys-shape-corner-extra-small);
     }
 
     :host([variant="primary"]) {
-      --btn-bg: #3a58b0;
-      --btn-bg-hover: #4a68c0;
-      --btn-bg-active: #5a78d0;
-      --btn-text: white;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host([variant="primary"]) {
-        --btn-bg: #2c4494;
-        --btn-bg-hover: #3c54a4;
-        --btn-bg-active: #4c64b4;
-        --btn-text: white;
-      }
+      --wact-comp-button-container-color:        var(--wact-sys-color-primary);
+      --wact-comp-button-container-color-hover:  var(--wact-sys-color-primary-hover);
+      --wact-comp-button-container-color-active: var(--wact-sys-color-primary-active);
+      --wact-comp-button-label-color:            var(--wact-sys-color-on-primary);
     }
 
     :host([variant="destructive"]) {
-      --btn-bg: #cc0000;
-      --btn-bg-hover: #a00000;
-      --btn-bg-active: #800000;
-      --btn-text: white;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host([variant="destructive"]) {
-        --btn-bg: #8b0000;
-        --btn-bg-hover: #a00000;
-        --btn-bg-active: #cc0000;
-        --btn-text: white;
-      }
+      --wact-comp-button-container-color:        var(--wact-sys-color-destructive);
+      --wact-comp-button-container-color-hover:  var(--wact-sys-color-destructive-hover);
+      --wact-comp-button-container-color-active: var(--wact-sys-color-destructive-active);
+      --wact-comp-button-label-color:            var(--wact-sys-color-on-destructive);
     }
 
     #btn {
-      display: block;
-      width: 100%;
+      /* Color palette */
+      color: var(--wact-comp-button-label-color);
+      background-color: var(--wact-comp-button-container-color);
+
+      /* Layout */
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      cursor: pointer;
+      margin: 0;
+      width: var(--wact-sys-layout-fit-container);
+      min-width: var(--wact-sys-layout-min-target-size);
+      min-height: var(--wact-sys-layout-min-target-size);
+      padding: var(--wact-sys-spacing-sm);
+
+      /* Typeface */
       font: inherit;
       font-size: inherit;
-      padding: var(--btn-padding, 8px);
-      margin: 0;
-      color: var(--btn-text);
-      background-color: var(--btn-bg);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 150ms ease;
-      box-sizing: border-box;
-      position: relative;
       line-height: inherit;
-    }
 
-    :host {
-      padding: 0;
+      /* Shape */
+      border: none;
+      border-radius: var(--wact-comp-button-container-shape);
+
+      /* Motion */
+      transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
     }
 
     #btn:hover:not(:disabled) {
-      background-color: var(--btn-bg-hover);
+      background-color: var(--wact-comp-button-container-color-hover);
     }
 
     #btn:active:not(:disabled) {
-      background-color: var(--btn-bg-active);
+      background-color: var(--wact-comp-button-container-color-active);
     }
 
     #btn:disabled {
-      opacity: 0.4;
+      opacity: var(--wact-sys-state-layer-opacity-disabled);
       cursor: not-allowed;
     }
 
@@ -90,12 +100,12 @@ template.innerHTML = `
     }
 
     .spinner {
-      width: 1em;
-      height: 1em;
-      border: 2px solid var(--btn-text);
+      width: var(--wact-comp-button-icon-size);
+      height: var(--wact-comp-button-icon-size);
+      border: 2px solid var(--wact-comp-button-label-color);
       border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 600ms linear infinite;
+      border-radius: var(--wact-sys-shape-corner-full);
+      animation: spin var(--wact-sys-motion-duration-long1) var(--wact-sys-motion-easing-linear) infinite;
       display: inline-block;
       vertical-align: middle;
     }
@@ -110,22 +120,16 @@ template.innerHTML = `
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      padding: 4px 8px;
-      background: #555;
-      color: white;
-      font-size: 0.75em;
-      border-radius: 4px;
+      padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-sm);
+      background: var(--wact-comp-button-tooltip-container-color);
+      color: var(--wact-comp-button-tooltip-label-color);
+      font-size: var(--wact-comp-button-tooltip-label-size);
+      border-radius: var(--wact-comp-button-tooltip-container-shape);
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 150ms ease;
-      margin-bottom: 4px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      #btn[data-tooltip]::after {
-        background: #333;
-      }
+      transition: opacity var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
+      margin-bottom: var(--wact-sys-spacing-xs);
     }
 
     #btn:hover:not(:disabled)[data-tooltip]::after {
