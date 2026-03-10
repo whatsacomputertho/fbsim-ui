@@ -1,53 +1,54 @@
+import { COLOR_CSS, ELEVATION_CSS, SHAPE_CSS, SPACING_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${COLOR_CSS}
+    ${ELEVATION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+
     :host {
       display: block;
-      font-family: sans-serif;
-      --pb-bg: #e8eaf6;
-      --pb-text: #1a1a2e;
-      --pb-speed-bg: #dde0ed;
-      --pb-speed-hover-bg: #cfd2e8;
-      --pb-speed-active-bg: #b8bce0;
-      --pb-menu-bg: #dde0ed;
-      --pb-menu-text: #555;
-      --pb-menu-hover-bg: #cfd2e8;
-      --pb-menu-active: #b8860b;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --pb-bg: #1a1a2e;
-        --pb-text: white;
-        --pb-speed-bg: #2f2f3f;
-        --pb-speed-hover-bg: #3f3f4f;
-        --pb-speed-active-bg: #4f4f5f;
-        --pb-menu-bg: #2f2f3f;
-        --pb-menu-text: #ccc;
-        --pb-menu-hover-bg: #3f3f4f;
-        --pb-menu-active: #ffd700;
-      }
+      font-family: var(--wact-sys-typeface-font-family);
+      --wact-comp-playback-controls-container-color:         var(--wact-sys-color-surface-raised);
+      --wact-comp-playback-controls-on-container-color:      var(--wact-sys-color-on-surface);
+      --wact-comp-playback-controls-speed-container-color:   var(--wact-sys-color-interactive);
+      --wact-comp-playback-controls-speed-hover-color:       var(--wact-sys-color-interactive-hover);
+      --wact-comp-playback-controls-speed-active-color:      var(--wact-sys-color-interactive-active);
+      --wact-comp-playback-controls-menu-container-color:    var(--wact-sys-color-interactive);
+      --wact-comp-playback-controls-menu-label-color:        var(--wact-sys-color-on-surface-variant);
+      --wact-comp-playback-controls-menu-hover-color:        var(--wact-sys-color-interactive-hover);
+      --wact-comp-playback-controls-menu-active-label-color: var(--wact-sys-color-tertiary-status);
+      --wact-comp-playback-controls-container-shape:         var(--wact-sys-shape-corner-medium);
+      --wact-comp-playback-controls-menu-shadow:             var(--wact-sys-elevation-level1);
+      --wact-comp-playback-controls-menu-zindex:             var(--wact-sys-zindex-dropdown);
+      --wact-comp-playback-controls-btn-size:                var(--wact-sys-layout-min-target-size);
+      --wact-comp-playback-controls-label-min-width:         var(--wact-ref-layout-px-64);
+      --wact-comp-playback-controls-btn-padding:             6px 14px;
+      --wact-comp-playback-controls-btn-padding-compact:     4px 10px;
+      --wact-comp-playback-controls-speed-padding-h:         10px;
     }
 
     #playback__wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 16px;
-      background-color: var(--pb-bg);
-      border-radius: 8px;
-      color: var(--pb-text);
-      gap: 12px;
+      padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
+      background-color: var(--wact-comp-playback-controls-container-color);
+      border-radius: var(--wact-comp-playback-controls-container-shape);
+      color: var(--wact-comp-playback-controls-on-container-color);
+      gap: var(--wact-sys-spacing-md);
     }
 
     .playback__button {
-      font-size: 1.1em;
-      --btn-padding: 6px 14px;
-      font-family: sans-serif;
+      font-size: var(--wact-sys-typeface-body-large-size);
+      --btn-padding: var(--wact-comp-playback-controls-btn-padding);
+      font-family: var(--wact-sys-typeface-font-family);
     }
 
     #playback__play-pause {
-      width: 48px;
+      width: var(--wact-comp-playback-controls-btn-size);
       text-align: center;
       box-sizing: border-box;
     }
@@ -55,13 +56,13 @@ template.innerHTML = `
     #playback__left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
     }
 
     #playback__right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
     }
 
     #playback__speed-wrapper {
@@ -69,48 +70,49 @@ template.innerHTML = `
     }
 
     #playback__speed-display {
-      background-color: var(--pb-speed-bg);
+      background-color: var(--wact-comp-playback-controls-speed-container-color);
       border: none;
-      color: var(--pb-text);
-      font-size: 1.1em;
-      padding: 6px 14px;
-      border-radius: 8px;
+      color: var(--wact-comp-playback-controls-on-container-color);
+      font-size: var(--wact-sys-typeface-body-large-size);
+      padding: var(--wact-comp-playback-controls-btn-padding);
+      border-radius: var(--wact-comp-playback-controls-container-shape);
       cursor: pointer;
-      transition: all 150ms ease;
-      font-family: sans-serif;
-      min-width: 48px;
+      transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
+      font-family: var(--wact-sys-typeface-font-family);
+      min-width: var(--wact-comp-playback-controls-btn-size);
+      height: var(--wact-comp-playback-controls-btn-size);
       text-align: center;
     }
 
     #playback__speed-display:hover:not(:disabled) {
-      background-color: var(--pb-speed-hover-bg);
+      background-color: var(--wact-comp-playback-controls-speed-hover-color);
     }
 
     #playback__speed-display:active:not(:disabled) {
-      background-color: var(--pb-speed-active-bg);
+      background-color: var(--wact-comp-playback-controls-speed-active-color);
     }
 
     #playback__speed-display:disabled {
-      opacity: 0.4;
+      opacity: var(--wact-sys-state-layer-opacity-disabled);
       cursor: not-allowed;
     }
 
     #playback__speed-menu {
       position: absolute;
-      bottom: 100%;
+      bottom: var(--wact-sys-layout-fit-container);
       left: 50%;
       transform: translateX(-50%);
-      background-color: var(--pb-menu-bg);
+      background-color: var(--wact-comp-playback-controls-menu-container-color);
       border: none;
-      border-radius: 8px;
-      padding: 4px 0;
-      margin-bottom: 4px;
+      border-radius: var(--wact-comp-playback-controls-container-shape);
+      padding: var(--wact-sys-spacing-xs) 0;
+      margin-bottom: var(--wact-sys-spacing-xs);
       opacity: 0;
       visibility: hidden;
-      transition: opacity 150ms ease, visibility 150ms ease;
-      z-index: 10;
-      min-width: 60px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transition: opacity var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard), visibility var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
+      z-index: var(--wact-comp-playback-controls-menu-zindex);
+      min-width: var(--wact-comp-playback-controls-label-min-width);
+      box-shadow: var(--wact-comp-playback-controls-menu-shadow);
     }
 
     #playback__speed-wrapper:hover #playback__speed-menu {
@@ -120,44 +122,43 @@ template.innerHTML = `
 
     .playback__speed-option {
       display: block;
-      width: 100%;
-      padding: 6px 12px;
+      width: var(--wact-sys-layout-fit-container);
+      padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
       background: none;
       border: none;
-      color: var(--pb-menu-text);
-      font-size: 0.95em;
+      color: var(--wact-comp-playback-controls-menu-label-color);
+      font-size: var(--wact-sys-typeface-body-medium-size);
       cursor: pointer;
       text-align: center;
-      font-family: sans-serif;
+      font-family: var(--wact-sys-typeface-font-family);
       white-space: nowrap;
-      transition: background-color 150ms ease;
-      border-radius: 4px;
+      transition: background-color var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
+      border-radius: var(--wact-sys-shape-corner-extra-small);
     }
 
     .playback__speed-option:hover {
-      background-color: var(--pb-menu-hover-bg);
-      color: var(--pb-menu-active);
+      background-color: var(--wact-comp-playback-controls-menu-hover-color);
+      color: var(--wact-comp-playback-controls-menu-active-label-color);
     }
 
     .playback__speed-option--active {
-      color: var(--pb-menu-active);
-      font-weight: bold;
+      color: var(--wact-comp-playback-controls-menu-active-label-color);
+      font-weight: var(--wact-sys-typeface-weight-bold);
     }
 
     @media only screen and (max-width: 600px) {
       #playback__wrapper {
-        padding: 6px 10px;
+        padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
       }
 
       .playback__button {
-        font-size: 0.9em;
-        --btn-padding: 4px 10px;
+        font-size: var(--wact-sys-typeface-body-medium-size);
+        --btn-padding: var(--wact-comp-playback-controls-btn-padding-compact);
       }
 
-
       #playback__speed-display {
-        font-size: 0.9em;
-        padding: 4px 10px;
+        font-size: var(--wact-sys-typeface-body-medium-size);
+        padding: var(--wact-comp-playback-controls-btn-padding-compact);
       }
     }
   </style>

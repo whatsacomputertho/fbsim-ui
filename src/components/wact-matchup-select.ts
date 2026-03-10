@@ -1,21 +1,28 @@
 import type { MatchupInput } from '../services/types.js';
 import type { WACTTeamSelect } from './wact-team-select.js';
+import { LAYOUT_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${LAYOUT_CSS}
+
+    :host {
+      --wact-comp-matchup-column-padding-h: 1%;
+    }
+
     #matchup-select__wrapper {
       display: flex;
     }
 
     #matchup-select__home {
-      width: 100%;
-      padding-right: 1%;
+      width: var(--wact-sys-layout-fit-container);
+      padding-right: var(--wact-comp-matchup-column-padding-h);
     }
 
     #matchup-select__away {
-      width: 100%;
-      padding-left: 1%;
+      width: var(--wact-sys-layout-fit-container);
+      padding-left: var(--wact-comp-matchup-column-padding-h);
     }
 
     @media only screen and (max-width: 600px) {

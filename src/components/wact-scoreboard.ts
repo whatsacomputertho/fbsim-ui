@@ -1,38 +1,35 @@
+import { COLOR_CSS, LAYOUT_CSS, MOTION_CSS, SHAPE_CSS, SPACING_CSS } from '../styles/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+
     :host {
       display: block;
-      font-family: sans-serif;
-      --sb-bg: #e8eaf6;
-      --sb-text: #1a1a2e;
-      --sb-context-bg: #cfd2e8;
-      --sb-context-text: #555;
-      --sb-divider: #bbb;
-      --sb-border: #bbb;
-      --sb-possession: #c5a200;
-      --sb-status: #b8860b;
-      --sb-flash: #c5a200;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --sb-bg: #1a1a2e;
-        --sb-text: white;
-        --sb-context-bg: #16213e;
-        --sb-context-text: #ccc;
-        --sb-divider: #333;
-        --sb-border: #333;
-        --sb-possession: #ffd700;
-        --sb-status: #ffd700;
-        --sb-flash: #ffd700;
-      }
+      font-family: var(--wact-sys-typeface-font-family);
+      --wact-comp-scoreboard-container-color:         var(--wact-sys-color-surface-raised);
+      --wact-comp-scoreboard-on-container-color:      var(--wact-sys-color-on-surface);
+      --wact-comp-scoreboard-context-container-color: var(--wact-sys-color-surface-recessed);
+      --wact-comp-scoreboard-on-context-color:        var(--wact-sys-color-on-surface-variant);
+      --wact-comp-scoreboard-divider-color:           var(--wact-sys-color-outline-variant);
+      --wact-comp-scoreboard-possession-color:        var(--wact-sys-color-tertiary);
+      --wact-comp-scoreboard-status-color:            var(--wact-sys-color-tertiary-status);
+      --wact-comp-scoreboard-container-shape:         var(--wact-sys-shape-corner-medium);
+      --wact-comp-scoreboard-logo-size:               var(--wact-ref-layout-px-48);
+      --wact-comp-scoreboard-icon-size:               var(--wact-ref-layout-px-32);
+      --wact-comp-scoreboard-divider-width:           var(--wact-ref-layout-px-2);
+      --wact-comp-scoreboard-accent-width:            var(--wact-ref-layout-px-4);
     }
 
     #scoreboard__wrapper {
-      background-color: var(--sb-bg);
-      color: var(--sb-text);
-      border-radius: 8px;
+      background-color: var(--wact-comp-scoreboard-container-color);
+      color: var(--wact-comp-scoreboard-on-container-color);
+      border-radius: var(--wact-comp-scoreboard-container-shape);
       overflow: hidden;
     }
 
@@ -46,10 +43,10 @@ template.innerHTML = `
       flex: 1;
       display: flex;
       align-items: center;
-      padding: 12px 16px;
-      gap: 12px;
-      border-left: 4px solid transparent;
-      transition: border-color 200ms ease-in-out;
+      padding: var(--wact-sys-spacing-md) var(--wact-sys-spacing-lg);
+      gap: var(--wact-sys-spacing-md);
+      border-left: var(--wact-comp-scoreboard-accent-width) solid var(--wact-sys-color-transparent);
+      transition: border-color var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
     .scoreboard__team--home {
@@ -60,30 +57,30 @@ template.innerHTML = `
       justify-content: flex-end;
       flex-direction: row-reverse;
       border-left: none;
-      border-right: 4px solid transparent;
+      border-right: var(--wact-comp-scoreboard-accent-width) solid var(--wact-sys-color-transparent);
     }
 
     .scoreboard__team--possession {
-      border-color: var(--sb-possession);
+      border-color: var(--wact-comp-scoreboard-possession-color);
     }
 
     .scoreboard__team-logo {
-      width: 40px;
-      height: 40px;
+      width: var(--wact-comp-scoreboard-logo-size);
+      height: var(--wact-comp-scoreboard-logo-size);
       object-fit: contain;
-      border-radius: 4px;
+      border-radius: var(--wact-sys-shape-corner-extra-small);
     }
 
     .scoreboard__team-name {
-      font-size: 1.1em;
-      font-weight: bold;
+      font-size: var(--wact-sys-typeface-body-large-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
     }
 
     .scoreboard__team-score {
-      font-size: 1.8em;
-      font-weight: bold;
+      font-size: var(--wact-sys-typeface-display-small-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
       margin-left: auto;
-      transition: color 300ms ease, text-shadow 300ms ease;
+      transition: color var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard), text-shadow var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard);
     }
 
     .scoreboard__team--away .scoreboard__team-score {
@@ -92,13 +89,13 @@ template.innerHTML = `
     }
 
     .scoreboard__team-score--flash {
-      color: var(--sb-flash);
-      text-shadow: 0 0 8px var(--sb-flash);
+      color: var(--wact-comp-scoreboard-possession-color);
+      text-shadow: 0 0 8px var(--wact-comp-scoreboard-possession-color);
     }
 
     #scoreboard__divider {
-      width: 2px;
-      background-color: var(--sb-divider);
+      width: var(--wact-comp-scoreboard-divider-width);
+      background-color: var(--wact-comp-scoreboard-divider-color);
       align-self: stretch;
     }
 
@@ -106,46 +103,46 @@ template.innerHTML = `
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 16px;
-      padding: 8px 16px;
-      background-color: var(--sb-context-bg);
-      font-size: 0.9em;
-      color: var(--sb-context-text);
-      border-top: 1px solid var(--sb-border);
+      gap: var(--wact-sys-spacing-lg);
+      padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
+      background-color: var(--wact-comp-scoreboard-context-container-color);
+      font-size: var(--wact-sys-typeface-body-medium-size);
+      color: var(--wact-comp-scoreboard-on-context-color);
+      border-top: 1px solid var(--wact-comp-scoreboard-divider-color);
     }
 
     .scoreboard__context-item {
       white-space: nowrap;
-      transition: opacity 150ms ease;
+      transition: opacity var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
     }
 
     #scoreboard__status {
-      font-weight: bold;
-      color: var(--sb-status);
+      font-weight: var(--wact-sys-typeface-weight-bold);
+      color: var(--wact-comp-scoreboard-status-color);
     }
 
     @media only screen and (max-width: 600px) {
       .scoreboard__team {
-        padding: 8px 10px;
-        gap: 8px;
+        padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-md);
+        gap: var(--wact-sys-spacing-sm);
       }
 
       .scoreboard__team-logo {
-        width: 28px;
-        height: 28px;
+        width: var(--wact-comp-scoreboard-icon-size);
+        height: var(--wact-comp-scoreboard-icon-size);
       }
 
       .scoreboard__team-name {
-        font-size: 0.9em;
+        font-size: var(--wact-sys-typeface-body-medium-size);
       }
 
       .scoreboard__team-score {
-        font-size: 1.4em;
+        font-size: var(--wact-sys-typeface-title-medium-size);
       }
 
       #scoreboard__context {
-        gap: 8px;
-        font-size: 0.8em;
+        gap: var(--wact-sys-spacing-sm);
+        font-size: var(--wact-sys-typeface-body-small-size);
         flex-wrap: wrap;
       }
     }

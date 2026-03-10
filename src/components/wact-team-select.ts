@@ -1,24 +1,33 @@
 import type { TeamInput } from '../services/types.js';
+import { COLOR_CSS, LAYOUT_CSS, MOTION_CSS, TYPEFACE_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host {
-      --ts-text: #000000;
-      --ts-input-border: black;
-      --ts-input-color: inherit;
-    }
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${TYPEFACE_CSS}
 
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --ts-text: #e0e0e0;
-        --ts-input-border: #888;
-        --ts-input-color: #e0e0e0;
-      }
+    :host {
+      --wact-comp-team-select-on-surface-color:           var(--wact-sys-color-on-surface);
+      --wact-comp-team-select-input-outline-color:        var(--wact-sys-color-outline);
+      --wact-comp-team-select-input-focus-color:          var(--wact-sys-color-primary);
+      --wact-comp-team-select-image-overlay-heavy-color:  var(--wact-sys-color-surface-image-overlay-heavy);
+      --wact-comp-team-select-image-overlay-light-color:  var(--wact-sys-color-surface-image-overlay-light);
+      --wact-comp-team-select-logo-input-bg-color:        var(--wact-sys-color-surface-image-overlay-medium);
+      --wact-comp-team-select-logo-input-on-color:        var(--wact-sys-color-on-image-overlay);
+      --wact-comp-team-select-logo-input-outline-color:   var(--wact-ref-palette-neutral50);
+      --wact-comp-team-select-banner-height:              var(--wact-ref-layout-vh-40);
+      --wact-comp-team-select-z-index-logo:               var(--wact-sys-layer-neg-1);
+      --wact-comp-team-select-z-index-content:            var(--wact-sys-layer-1);
+      --wact-comp-team-select-input-border-width:         3px;
+      --wact-comp-team-select-input-font-size:            var(--wact-sys-typeface-title-large-size);
+      --wact-comp-team-select-input-bg:                   var(--wact-sys-color-transparent);
     }
 
     #team-select__header-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       display: flex;
       justify-content: space-between;
       margin-top: 1%;
@@ -26,50 +35,50 @@ template.innerHTML = `
     }
 
     #team-select__name-input-label {
-      width: 100%;
-      font-weight: bold;
-      font-size: 2em;
-      color: var(--ts-text);
+      width: var(--wact-sys-layout-fit-container);
+      font-weight: var(--wact-sys-typeface-weight-bold);
+      font-size: var(--wact-sys-typeface-display-medium-size);
+      color: var(--wact-comp-team-select-on-surface-color);
     }
 
     #team-select__name-input {
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0);
+      width: var(--wact-sys-layout-fit-container);
+      background-color: var(--wact-comp-team-select-input-bg);
       border-style: solid;
-      border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      border-color: var(--ts-input-border);
-      color: var(--ts-input-color);
-      font-size: 1.5em;
+      border-width: 0 0 var(--wact-comp-team-select-input-border-width) 0;
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      border-color: var(--wact-comp-team-select-input-outline-color);
+      color: inherit;
+      font-size: var(--wact-comp-team-select-input-font-size);
     }
 
     #team-select__name-input:focus, #team-select__name-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
 
     #team-select__image-wrapper {
       position: relative;
-      height: 40vh;
-      background-color: rgba(0, 0, 0, 0.7);
-      transition: all 100ms ease-in-out;
+      height: var(--wact-comp-team-select-banner-height);
+      background-color: var(--wact-comp-team-select-image-overlay-heavy-color);
+      transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
     }
 
     #team-select__image-wrapper:hover {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: var(--wact-comp-team-select-image-overlay-light-color);
     }
 
     #team-select__logo {
-      width: 100%;
-      height: 100%;
+      width: var(--wact-sys-layout-fit-container);
+      height: var(--wact-sys-layout-fit-container);
       object-fit: cover;
       position: absolute;
-      z-index: -1;
+      z-index: var(--wact-comp-team-select-z-index-logo);
     }
 
     #team-select__logo-url-input-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       position: absolute;
-      z-index: 1;
+      z-index: var(--wact-comp-team-select-z-index-content);
       left: 0;
       bottom: 0;
       display: flex;
@@ -77,29 +86,29 @@ template.innerHTML = `
     }
 
     #team-select__logo-url-input {
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      width: var(--wact-sys-layout-fit-container);
+      background-color: var(--wact-comp-team-select-logo-input-bg-color);
       border-style: solid;
-      border-color: gray;
-      border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      color: white;
+      border-color: var(--wact-comp-team-select-logo-input-outline-color);
+      border-width: 0 0 var(--wact-comp-team-select-input-border-width) 0;
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      color: var(--wact-comp-team-select-logo-input-on-color);
       margin-left: 1%;
-      font-size: 1.25em;
+      font-size: var(--wact-sys-typeface-title-small-size);
     }
 
     #team-select__logo-url-input:focus, #team-select__logo-url-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
 
     #team-select__logo-url-input-label {
-      color: white;
-      font-size: 1.25em;
+      color: var(--wact-comp-team-select-logo-input-on-color);
+      font-size: var(--wact-sys-typeface-title-small-size);
       margin-left: 1%;
     }
 
     #team-select__offense-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       display: flex;
       justify-content: space-between;
       margin-top: 1%;
@@ -107,26 +116,26 @@ template.innerHTML = `
     }
 
     #team-select__offense-input-label {
-      font-size: 1.5em;
-      color: var(--ts-text);
+      font-size: var(--wact-sys-typeface-title-large-size);
+      color: var(--wact-comp-team-select-on-surface-color);
     }
 
     #team-select__offense-input {
-      background-color: rgba(0, 0, 0, 0);
+      background-color: var(--wact-comp-team-select-input-bg);
       border-style: solid;
-      border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      border-color: var(--ts-input-border);
-      color: var(--ts-input-color);
-      font-size: 1.5em;
+      border-width: 0 0 var(--wact-comp-team-select-input-border-width) 0;
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      border-color: var(--wact-comp-team-select-input-outline-color);
+      color: inherit;
+      font-size: var(--wact-comp-team-select-input-font-size);
     }
 
     #team-select__offense-input:focus, #team-select__offense-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
 
     #team-select__defense-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       display: flex;
       justify-content: space-between;
       margin-top: 1%;
@@ -134,22 +143,22 @@ template.innerHTML = `
     }
 
     #team-select__defense-input-label {
-      font-size: 1.5em;
-      color: var(--ts-text);
+      font-size: var(--wact-sys-typeface-title-large-size);
+      color: var(--wact-comp-team-select-on-surface-color);
     }
 
     #team-select__defense-input {
-      background-color: rgba(0, 0, 0, 0);
+      background-color: var(--wact-comp-team-select-input-bg);
       border-style: solid;
-      border-width: 0 0 3px 0;
-      transition: all 200ms ease-in-out;
-      border-color: var(--ts-input-border);
-      color: var(--ts-input-color);
-      font-size: 1.5em;
+      border-width: 0 0 var(--wact-comp-team-select-input-border-width) 0;
+      transition: all var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
+      border-color: var(--wact-comp-team-select-input-outline-color);
+      color: inherit;
+      font-size: var(--wact-comp-team-select-input-font-size);
     }
 
     #team-select__defense-input:focus, #team-select__defense-input:hover {
-      border-color: royalblue;
+      border-color: var(--wact-comp-team-select-input-focus-color);
     }
   </style>
   <div id="team-select__wrapper" class="team-select__wrapper">

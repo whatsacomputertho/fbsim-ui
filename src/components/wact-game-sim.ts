@@ -11,48 +11,53 @@ import type { WACTFieldDisplay } from './wact-field-display.js';
 import type { WACTPlaybackControls } from './wact-playback-controls.js';
 import type { WACTGameContext } from './wact-game-context.js';
 import type { WACTButton } from './wact-button.js';
+import {
+  COLOR_CSS,
+  LAYOUT_CSS,
+  MOTION_CSS,
+  SHAPE_CSS,
+  SPACING_CSS,
+  TYPEFACE_CSS,
+} from '../styles/index.js';
 
 type SimState = 'select' | 'config' | 'pregame' | 'playing' | 'paused' | 'postgame';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+    ${TYPEFACE_CSS}
+
     :host {
       display: block;
-      font-family: sans-serif;
-      --gs-postgame-bg: #f0f0f5;
-      --gs-postgame-text: #333;
-      --gs-postgame-score: #555;
-      --gs-stats-bg: #f0f0f5;
-      --gs-stats-text: #1a1a2e;
-      --gs-stats-border: #ccc;
-      --gs-stats-header: #b8860b;
-      --gs-error-text: #cc0000;
-      --gs-error-bg: #ffe6e6;
-      --gs-card-bg: #f0f0f5;
-      --gs-card-border: #d0d0d8;
-      --gs-card-hover-bg: #e8e8f0;
-      --gs-card-active-bg: #b8bce0;
-      --gs-card-placeholder: #aaa;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --gs-postgame-bg: #1a1a2e;
-        --gs-postgame-text: white;
-        --gs-postgame-score: #ccc;
-        --gs-stats-bg: #1a1a2e;
-        --gs-stats-text: white;
-        --gs-stats-border: #333;
-        --gs-stats-header: #ffd700;
-        --gs-error-text: #ff6666;
-        --gs-error-bg: #3a1a1a;
-        --gs-card-bg: #1e1e2e;
-        --gs-card-border: #3a3a4e;
-        --gs-card-hover-bg: #22223a;
-        --gs-card-active-bg: #4f4f5f;
-        --gs-card-placeholder: #555;
-      }
+      font-family: var(--wact-sys-typeface-font-family);
+      --wact-comp-game-sim-card-container-color:        var(--wact-sys-color-surface);
+      --wact-comp-game-sim-card-outline-color:          var(--wact-sys-color-outline-card);
+      --wact-comp-game-sim-card-hover-color:            var(--wact-sys-color-surface-container-hover);
+      --wact-comp-game-sim-card-active-color:           var(--wact-sys-color-interactive-active);
+      --wact-comp-game-sim-card-title-color:            var(--wact-sys-color-on-surface);
+      --wact-comp-game-sim-card-subtitle-color:         var(--wact-sys-color-on-surface-variant);
+      --wact-comp-game-sim-card-placeholder-color:      var(--wact-sys-color-on-surface-muted);
+      --wact-comp-game-sim-card-disabled-color:         var(--wact-sys-color-surface);
+      --wact-comp-game-sim-card-shape:                  var(--wact-sys-shape-corner-large);
+      --wact-comp-game-sim-postgame-container-color:    var(--wact-sys-color-surface);
+      --wact-comp-game-sim-postgame-on-container-color: var(--wact-sys-color-on-surface);
+      --wact-comp-game-sim-postgame-score-color:        var(--wact-sys-color-on-surface-variant);
+      --wact-comp-game-sim-stats-container-color:       var(--wact-sys-color-surface);
+      --wact-comp-game-sim-stats-on-container-color:    var(--wact-sys-color-on-surface);
+      --wact-comp-game-sim-stats-outline-color:         var(--wact-sys-color-outline);
+      --wact-comp-game-sim-stats-header-color:          var(--wact-sys-color-tertiary-status);
+      --wact-comp-game-sim-error-label-color:           var(--wact-sys-color-error);
+      --wact-comp-game-sim-error-container-color:       var(--wact-sys-color-error-container);
+      --wact-comp-game-sim-container-shape:             var(--wact-sys-shape-corner-medium);
+      --wact-comp-game-sim-icon-size-lg:                var(--wact-ref-layout-px-48);
+      --wact-comp-game-sim-icon-size-sm:                var(--wact-ref-layout-px-16);
+      --wact-comp-game-sim-btn-padding-lg:              var(--wact-sys-spacing-md);
+      --wact-comp-game-sim-btn-padding-sm:              var(--wact-sys-spacing-sm);
     }
 
     #game-sim__wrapper {
@@ -63,78 +68,82 @@ template.innerHTML = `
     #game-sim__select-view {
       display: flex;
       flex-direction: row;
-      gap: 20px;
-      padding: 24px;
+      gap: var(--wact-sys-spacing-xl);
+      padding: var(--wact-sys-spacing-2xl);
     }
 
     .game-sim__mode-card {
       flex: 1;
       flex-wrap: wrap;
-      border-radius: 12px;
-      padding: 20px 24px;
+      border-radius: var(--wact-comp-game-sim-card-shape);
+      padding: var(--wact-sys-spacing-xl) var(--wact-sys-spacing-2xl);
       cursor: default;
-      transition: background-color 0.15s;
+      transition: background-color var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
     }
 
     #game-sim__start-card {
-      background-color: var(--gs-card-bg);
+      background-color: var(--wact-comp-game-sim-card-container-color);
       cursor: pointer;
     }
 
     #game-sim__start-card:hover {
-      background-color: var(--gs-card-hover-bg);
+      background-color: var(--wact-comp-game-sim-card-hover-color);
     }
 
     #game-sim__start-card:active {
-      background-color: var(--gs-card-active-bg);
+      background-color: var(--wact-comp-game-sim-card-active-color);
     }
 
     #game-sim__replay-card {
-      background-color: var(--gs-card-bg);
+      background-color: var(--wact-comp-game-sim-card-disabled-color);
     }
 
     #game-sim__replay-card.game-sim__mode-card--active {
+      background-color: var(--wact-comp-game-sim-card-container-color);
       cursor: pointer;
     }
 
     #game-sim__replay-card.game-sim__mode-card--active:hover {
-      background-color: var(--gs-card-hover-bg);
+      background-color: var(--wact-comp-game-sim-card-hover-color);
     }
 
     #game-sim__replay-card.game-sim__mode-card--active:active {
-      background-color: var(--gs-card-active-bg);
+      background-color: var(--wact-comp-game-sim-card-active-color);
     }
 
     #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-title,
-    #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-subtitle,
+    #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-subtitle {
+      color: var(--wact-sys-color-on-surface-muted);
+    }
+
     #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-icon {
-      opacity: 0.45;
+      opacity: var(--wact-sys-state-layer-opacity-inactive);
     }
 
     .game-sim__mode-card-title {
-      font-size: 1.4rem;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: var(--gs-postgame-text);
+      font-size: var(--wact-sys-typeface-title-medium-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
+      margin-bottom: var(--wact-sys-spacing-xs);
+      color: var(--wact-comp-game-sim-card-title-color);
     }
 
     .game-sim__mode-card-subtitle {
-      font-size: 0.9rem;
-      color: var(--gs-postgame-score);
+      font-size: var(--wact-sys-typeface-body-medium-size);
+      color: var(--wact-comp-game-sim-card-subtitle-color);
     }
 
     .game-sim__mode-card-row {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-top: 12px;
+      gap: var(--wact-sys-spacing-lg);
+      margin-top: var(--wact-sys-spacing-md);
     }
 
     .game-sim__replay-status {
       flex: 1;
       min-width: 0;
-      font-size: 0.9rem;
-      color: var(--gs-card-placeholder);
+      font-size: var(--wact-sys-typeface-body-medium-size);
+      color: var(--wact-comp-game-sim-card-placeholder-color);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -142,25 +151,25 @@ template.innerHTML = `
 
     #game-sim__replay-upload-btn {
       flex-shrink: 0;
-      --btn-padding: 12px;
+      --btn-padding: var(--wact-comp-game-sim-btn-padding-lg);
       line-height: 0;
     }
 
     .game-sim__mode-icon {
       flex-shrink: 0;
-      width: 44px;
-      height: 44px;
+      width: var(--wact-comp-game-sim-icon-size-lg);
+      height: var(--wact-comp-game-sim-icon-size-lg);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gs-postgame-text);
+      color: var(--wact-comp-game-sim-card-title-color);
     }
 
     .game-sim__mode-card-icons {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
       flex-shrink: 0;
       margin-left: auto;
     }
@@ -170,22 +179,22 @@ template.innerHTML = `
     }
 
     .game-sim__card-spinner {
-      width: 18px;
-      height: 18px;
+      width: var(--wact-comp-game-sim-icon-size-sm);
+      height: var(--wact-comp-game-sim-icon-size-sm);
       border: 2px solid currentColor;
       border-top-color: transparent;
-      border-radius: 50%;
-      animation: game-sim-spin 600ms linear infinite;
+      border-radius: var(--wact-sys-shape-corner-full);
+      animation: game-sim-spin var(--wact-sys-motion-duration-long1) var(--wact-sys-motion-easing-linear) infinite;
     }
 
     #game-sim__file-error {
       display: none;
-      color: var(--gs-error-text);
-      font-size: 0.8em;
-      margin-top: 10px;
-      padding: 6px 10px;
-      background-color: var(--gs-error-bg);
-      border-radius: 6px;
+      color: var(--wact-comp-game-sim-error-label-color);
+      font-size: var(--wact-sys-typeface-body-small-size);
+      margin-top: var(--wact-sys-spacing-sm);
+      padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
+      background-color: var(--wact-comp-game-sim-error-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
     }
 
     /* Config view */
@@ -197,32 +206,32 @@ template.innerHTML = `
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 16px;
+      margin-top: var(--wact-sys-spacing-lg);
     }
 
     #game-sim__start-button {
       width: 50%;
-      font-size: 1.5rem;
-      --btn-padding: 8px;
+      font-size: var(--wact-sys-typeface-title-large-size);
+      --btn-padding: var(--wact-sys-spacing-sm);
     }
 
     /* Game view */
     #game-sim__game-view {
       display: none;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
     }
 
     #game-sim__game-layout {
       display: flex;
-      gap: 12px;
+      gap: var(--wact-sys-spacing-md);
     }
 
     #game-sim__game-left {
       flex: 2;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
     }
 
     #game-sim__game-right {
@@ -233,58 +242,58 @@ template.innerHTML = `
     /* Postgame overlay */
     #game-sim__postgame-overlay {
       display: none;
-      background-color: var(--gs-postgame-bg);
-      border-radius: 8px;
-      padding: 24px;
+      background-color: var(--wact-comp-game-sim-postgame-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
+      padding: var(--wact-sys-spacing-2xl);
       text-align: center;
-      color: var(--gs-postgame-text);
+      color: var(--wact-comp-game-sim-postgame-on-container-color);
     }
 
     #game-sim__winner-banner {
-      font-size: 1.6em;
+      font-size: var(--wact-sys-typeface-display-small-size);
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: var(--wact-sys-spacing-sm);
     }
 
     #game-sim__final-score {
-      font-size: 1.2em;
-      color: var(--gs-postgame-score);
-      margin-bottom: 20px;
+      font-size: var(--wact-sys-typeface-title-small-size);
+      color: var(--wact-comp-game-sim-postgame-score-color);
+      margin-bottom: var(--wact-sys-spacing-xl);
     }
 
     #game-sim__postgame-actions {
       display: flex;
-      gap: 8px;
+      gap: var(--wact-sys-spacing-sm);
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: var(--wact-sys-spacing-md);
     }
 
     .game-sim__postgame-icon-btn {
-      font-size: 0.95rem;
-      --btn-padding: 8px 14px;
+      font-size: var(--wact-sys-typeface-body-medium-size);
+      --btn-padding: var(--wact-sys-spacing-md);
     }
 
     .game-sim__postgame-icon-btn span {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: var(--wact-sys-spacing-xs);
       line-height: 1;
     }
 
     #game-sim__new-game-button {
       display: block;
-      width: 100%;
-      font-size: 1rem;
-      --btn-padding: 10px;
+      width: var(--wact-sys-layout-fit-container);
+      font-size: var(--wact-sys-typeface-body-default-size);
+      --btn-padding: var(--wact-comp-game-sim-btn-padding-lg);
     }
 
     /* Stats view */
     #game-sim__stats-view {
       display: none;
-      background-color: var(--gs-stats-bg);
-      border-radius: 8px;
-      padding: 16px;
-      color: var(--gs-stats-text);
+      background-color: var(--wact-comp-game-sim-stats-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
+      padding: var(--wact-sys-spacing-lg);
+      color: var(--wact-comp-game-sim-stats-on-container-color);
     }
 
     #game-sim__stats-view h3 {
@@ -293,37 +302,37 @@ template.innerHTML = `
     }
 
     #game-sim__stats-table {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       border-collapse: collapse;
-      font-size: 0.9em;
+      font-size: var(--wact-sys-typeface-body-medium-size);
     }
 
     #game-sim__stats-table th,
     #game-sim__stats-table td {
-      padding: 6px 12px;
+      padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
       text-align: center;
-      border-bottom: 1px solid var(--gs-stats-border);
+      border-bottom: 1px solid var(--wact-comp-game-sim-stats-outline-color);
     }
 
     #game-sim__stats-table th {
-      color: var(--gs-stats-header);
+      color: var(--wact-comp-game-sim-stats-header-color);
     }
 
     #game-sim__stats-back-button {
       display: block;
-      margin: 12px auto 0 auto;
-      font-size: 0.9rem;
-      --btn-padding: 6px 16px;
+      margin: var(--wact-sys-spacing-md) auto 0 auto;
+      font-size: var(--wact-sys-typeface-body-medium-size);
+      --btn-padding: var(--wact-comp-game-sim-btn-padding-sm);
     }
 
     #game-sim__error {
       display: none;
-      color: var(--gs-error-text);
-      font-size: 0.85em;
-      margin-top: 10px;
-      padding: 8px 12px;
-      background-color: var(--gs-error-bg);
-      border-radius: 6px;
+      color: var(--wact-comp-game-sim-error-label-color);
+      font-size: var(--wact-sys-typeface-body-small-size);
+      margin-top: var(--wact-sys-spacing-sm);
+      padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-md);
+      background-color: var(--wact-comp-game-sim-error-container-color);
+      border-radius: var(--wact-comp-game-sim-container-shape);
       text-align: center;
     }
 
