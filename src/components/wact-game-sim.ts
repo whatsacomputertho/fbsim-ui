@@ -11,18 +11,30 @@ import type { WACTFieldDisplay } from './wact-field-display.js';
 import type { WACTPlaybackControls } from './wact-playback-controls.js';
 import type { WACTGameContext } from './wact-game-context.js';
 import type { WACTButton } from './wact-button.js';
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import {
+  COLOR_CSS,
+  LAYOUT_CSS,
+  MOTION_CSS,
+  SHAPE_CSS,
+  SPACING_CSS,
+  TYPEFACE_CSS,
+} from '../styles/index.js';
 
 type SimState = 'select' | 'config' | 'pregame' | 'playing' | 'paused' | 'postgame';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+    ${TYPEFACE_CSS}
 
     :host {
       display: block;
-      font-family: var(--wact-sys-typescale-font-family);
+      font-family: var(--wact-sys-typeface-font-family);
       --wact-comp-game-sim-card-container-color:        var(--wact-sys-color-surface);
       --wact-comp-game-sim-card-outline-color:          var(--wact-sys-color-outline-card);
       --wact-comp-game-sim-card-hover-color:            var(--wact-sys-color-surface-container-hover);
@@ -41,10 +53,10 @@ template.innerHTML = `
       --wact-comp-game-sim-error-label-color:           var(--wact-sys-color-error);
       --wact-comp-game-sim-error-container-color:       var(--wact-sys-color-error-container);
       --wact-comp-game-sim-container-shape:             var(--wact-sys-shape-corner-medium);
-      --wact-comp-game-sim-icon-size-lg:                44px;
-      --wact-comp-game-sim-icon-size-sm:                18px;
-      --wact-comp-game-sim-btn-padding-lg:              10px;
-      --wact-comp-game-sim-btn-padding-sm:              6px var(--wact-sys-spacing-lg);
+      --wact-comp-game-sim-icon-size-lg:                var(--wact-ref-layout-px-48);
+      --wact-comp-game-sim-icon-size-sm:                var(--wact-ref-layout-px-16);
+      --wact-comp-game-sim-btn-padding-lg:              var(--wact-sys-spacing-md);
+      --wact-comp-game-sim-btn-padding-sm:              var(--wact-sys-spacing-sm);
     }
 
     #game-sim__wrapper {
@@ -104,14 +116,14 @@ template.innerHTML = `
     }
 
     .game-sim__mode-card-title {
-      font-size: var(--wact-sys-typescale-title-medium-size);
-      font-weight: var(--wact-sys-typescale-weight-bold);
+      font-size: var(--wact-sys-typeface-title-medium-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
       margin-bottom: var(--wact-sys-spacing-xs);
       color: var(--wact-comp-game-sim-card-title-color);
     }
 
     .game-sim__mode-card-subtitle {
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
       color: var(--wact-comp-game-sim-card-subtitle-color);
     }
 
@@ -125,7 +137,7 @@ template.innerHTML = `
     .game-sim__replay-status {
       flex: 1;
       min-width: 0;
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
       color: var(--wact-comp-game-sim-card-placeholder-color);
       overflow: hidden;
       text-overflow: ellipsis;
@@ -134,7 +146,7 @@ template.innerHTML = `
 
     #game-sim__replay-upload-btn {
       flex-shrink: 0;
-      --btn-padding: 12px;
+      --btn-padding: var(--wact-comp-game-sim-btn-padding-lg);
       line-height: 0;
     }
 
@@ -173,7 +185,7 @@ template.innerHTML = `
     #game-sim__file-error {
       display: none;
       color: var(--wact-comp-game-sim-error-label-color);
-      font-size: var(--wact-sys-typescale-body-small-size);
+      font-size: var(--wact-sys-typeface-body-small-size);
       margin-top: var(--wact-sys-spacing-sm);
       padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
       background-color: var(--wact-comp-game-sim-error-container-color);
@@ -194,8 +206,8 @@ template.innerHTML = `
 
     #game-sim__start-button {
       width: 50%;
-      font-size: var(--wact-sys-typescale-title-large-size);
-      --btn-padding: 8px;
+      font-size: var(--wact-sys-typeface-title-large-size);
+      --btn-padding: var(--wact-sys-spacing-sm);
     }
 
     /* Game view */
@@ -233,13 +245,13 @@ template.innerHTML = `
     }
 
     #game-sim__winner-banner {
-      font-size: var(--wact-sys-typescale-display-small-size);
+      font-size: var(--wact-sys-typeface-display-small-size);
       font-weight: bold;
       margin-bottom: var(--wact-sys-spacing-sm);
     }
 
     #game-sim__final-score {
-      font-size: var(--wact-sys-typescale-title-small-size);
+      font-size: var(--wact-sys-typeface-title-small-size);
       color: var(--wact-comp-game-sim-postgame-score-color);
       margin-bottom: var(--wact-sys-spacing-xl);
     }
@@ -252,8 +264,8 @@ template.innerHTML = `
     }
 
     .game-sim__postgame-icon-btn {
-      font-size: var(--wact-sys-typescale-body-medium-size);
-      --btn-padding: 8px 14px;
+      font-size: var(--wact-sys-typeface-body-medium-size);
+      --btn-padding: var(--wact-sys-spacing-md);
     }
 
     .game-sim__postgame-icon-btn span {
@@ -265,8 +277,8 @@ template.innerHTML = `
 
     #game-sim__new-game-button {
       display: block;
-      width: 100%;
-      font-size: var(--wact-sys-typescale-body-default-size);
+      width: var(--wact-sys-layout-fit-container);
+      font-size: var(--wact-sys-typeface-body-default-size);
       --btn-padding: var(--wact-comp-game-sim-btn-padding-lg);
     }
 
@@ -285,9 +297,9 @@ template.innerHTML = `
     }
 
     #game-sim__stats-table {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       border-collapse: collapse;
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
     }
 
     #game-sim__stats-table th,
@@ -304,14 +316,14 @@ template.innerHTML = `
     #game-sim__stats-back-button {
       display: block;
       margin: var(--wact-sys-spacing-md) auto 0 auto;
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
       --btn-padding: var(--wact-comp-game-sim-btn-padding-sm);
     }
 
     #game-sim__error {
       display: none;
       color: var(--wact-comp-game-sim-error-label-color);
-      font-size: var(--wact-sys-typescale-body-small-size);
+      font-size: var(--wact-sys-typeface-body-small-size);
       margin-top: var(--wact-sys-spacing-sm);
       padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-md);
       background-color: var(--wact-comp-game-sim-error-container-color);

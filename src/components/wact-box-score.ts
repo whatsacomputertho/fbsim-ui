@@ -1,24 +1,43 @@
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS } from '../styles/index.js';
+import { ELEVATION_CSS } from '../styles/index.js';
+import { LAYOUT_CSS } from '../styles/index.js';
+import { SPACING_CSS } from '../styles/index.js';
+import { TYPEFACE_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${ELEVATION_CSS}
+    ${LAYOUT_CSS}
+    ${SPACING_CSS}
+    ${TYPEFACE_CSS}
 
     :host {
+      /* Color palette */
       --wact-comp-box-score-overlay-color:      var(--wact-sys-color-overlay);
       --wact-comp-box-score-outline-color:      var(--wact-sys-color-outline-variant);
       --wact-comp-box-score-on-overlay-color:   var(--wact-sys-color-on-image-overlay);
-      --wact-comp-box-score-accent-width:       16px;
       --wact-comp-box-score-win-overlay-color:  var(--wact-sys-color-win-overlay);
       --wact-comp-box-score-win-outline-color:  var(--wact-sys-color-win-outline);
       --wact-comp-box-score-lose-overlay-color: var(--wact-sys-color-lose-overlay);
       --wact-comp-box-score-lose-outline-color: var(--wact-sys-color-lose-outline);
       --wact-comp-box-score-tie-overlay-color:  var(--wact-sys-color-tie-overlay);
       --wact-comp-box-score-tie-outline-color:  var(--wact-sys-color-tie-outline);
-      --wact-comp-box-score-panel-height:       20vh;
-      --wact-comp-box-score-z-index-logo:       -1;
-      --wact-comp-box-score-text-margin-h:      5%;
+
+      /* Layout */
+      --wact-comp-box-score-size:               var(--wact-ref-layout-fit-container);
+      --wact-comp-box-score-panel-height:       var(--wact-sys-layout-banner-large-height);
+      --wact-comp-box-score-panel-min-height:   var(--wact-sys-typeface-display-large-size);
+      --wact-comp-box-score-panel-max-height:   var(--wact-sys-layout-banner-large-max-height);
+      --wact-comp-box-score-text-margin:        var(--wact-ref-spacing-md);
+      --wact-comp-box-score-accent-width:       var(--wact-sys-spacing-lg);
+
+      /* Typeface */
+      --wact-comp-box-score-font-size:          var(--wact-sys-typeface-display-medium-size);
+
+      /* Elevation */
+      --wact-comp-box-score-z-index-logo:       var(--wact-ref-zindex-neg-1);
     }
 
     #box-score__wrapper {
@@ -26,30 +45,32 @@ template.innerHTML = `
     }
 
     #box-score__home-wrapper, #box-score__away-wrapper {
-      position: relative;
-      width: 100%;
-      height: var(--wact-comp-box-score-panel-height);
+      position:         relative;
+      width:            var(--wact-comp-box-score-size);
+      height:           var(--wact-comp-box-score-panel-height);
+      min-height:       var(--wact-comp-box-score-panel-min-height);
+      max-height:       var(--wact-comp-box-score-panel-max-height);
       background-color: var(--wact-comp-box-score-overlay-color);
     }
 
     #box-score__home-logo, #box-score__away-logo {
-      width: 100%;
-      height: 100%;
+      position:   absolute;
       object-fit: cover;
-      position: absolute;
-      z-index: var(--wact-comp-box-score-z-index-logo);
+      width:      var(--wact-comp-box-score-size);
+      height:     var(--wact-comp-box-score-size);
+      z-index:    var(--wact-comp-box-score-z-index-logo);
     }
 
     #box-score__home-score-wrapper, #box-score__away-score-wrapper {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-style: solid;
-      border-color: var(--wact-comp-box-score-outline-color);
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
+      display:            flex;
+      justify-content:    center;
+      align-items:        center;
+      width:              var(--wact-comp-box-score-size);
+      height:             var(--wact-comp-box-score-size);
+      border-style:       solid;
+      border-color:       var(--wact-comp-box-score-outline-color);
+      box-sizing:         border-box;
+      -moz-box-sizing:    border-box;
       -webkit-box-sizing: border-box;
     }
 
@@ -62,19 +83,19 @@ template.innerHTML = `
     }
 
     #box-score__home-team, #box-score__away-team {
-      color: var(--wact-comp-box-score-on-overlay-color);
-      font-size: var(--wact-sys-typescale-display-medium-size);
-      margin: 0;
-      margin-left: var(--wact-comp-box-score-text-margin-h);
-      margin-right: var(--wact-comp-box-score-text-margin-h);
+      color:        var(--wact-comp-box-score-on-overlay-color);
+      font-size:    var(--wact-comp-box-score-font-size);
+      margin:       0;
+      margin-left:  var(--wact-comp-box-score-text-margin);
+      margin-right: var(--wact-comp-box-score-text-margin);
     }
 
     #box-score__home-score, #box-score__away-score {
-      color: var(--wact-comp-box-score-on-overlay-color);
-      font-size: var(--wact-sys-typescale-display-medium-size);
-      margin: 0;
-      margin-left: var(--wact-comp-box-score-text-margin-h);
-      margin-right: var(--wact-comp-box-score-text-margin-h);
+      color:        var(--wact-comp-box-score-on-overlay-color);
+      font-size:    var(--wact-comp-box-score-font-size);
+      margin:       0;
+      margin-left:  var(--wact-comp-box-score-text-margin);
+      margin-right: var(--wact-comp-box-score-text-margin);
     }
 
     @media only screen and (max-width: 600px) {

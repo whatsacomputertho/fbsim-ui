@@ -1,9 +1,11 @@
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS, ELEVATION_CSS, LAYOUT_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${ELEVATION_CSS}
+    ${LAYOUT_CSS}
 
     :host {
       --wact-comp-nav-container-color:  var(--wact-sys-color-nav);
@@ -22,11 +24,11 @@ template.innerHTML = `
       top: 0;
       left: 0;
       right: 0;
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       z-index: var(--wact-comp-nav-container-zindex);
     }
     ::slotted(img) {
-      max-height: 100%;
+      max-height: var(--wact-sys-layout-fit-container);
       object-fit: contain;
     }
   </style>

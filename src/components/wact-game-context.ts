@@ -1,11 +1,11 @@
 import type { WACTScoreboard } from './wact-scoreboard.js';
 import type { WACTGameLog } from './wact-game-log.js';
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { SPACING_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${SPACING_CSS}
 
     :host {
       display: block;

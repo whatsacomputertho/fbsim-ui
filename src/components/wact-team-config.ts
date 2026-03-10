@@ -1,10 +1,22 @@
 import type { TeamConfig } from '../services/types.js';
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import {
+  COLOR_CSS,
+  LAYOUT_CSS,
+  MOTION_CSS,
+  SHAPE_CSS,
+  SPACING_CSS,
+  TYPEFACE_CSS,
+} from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+    ${TYPEFACE_CSS}
 
     :host {
       display: block;
@@ -31,12 +43,12 @@ template.innerHTML = `
       --wact-comp-team-config-z-index-logo:               0;
       --wact-comp-team-config-z-index-overlay:            1;
       --wact-comp-team-config-z-index-content:            2;
-      --wact-comp-team-config-row-gap:                    2px;
-      --wact-comp-team-config-input-padding:              var(--wact-sys-spacing-xs) 2px;
+      --wact-comp-team-config-row-gap:                    var(--wact-sys-spacing-xs);
+      --wact-comp-team-config-input-padding:              var(--wact-sys-spacing-xs);
       --wact-comp-team-config-input-font-size:            var(--wact-sys-typescale-body-default-size);
-      --wact-comp-team-config-input-height:               32px;
+      --wact-comp-team-config-input-height:               var(--wact-ref-layout-px-32);
       --wact-comp-team-config-btn-margin-top:             var(--wact-sys-spacing-sm);
-      --wact-comp-team-config-btn-padding:                6px var(--wact-sys-spacing-lg);
+      --wact-comp-team-config-btn-padding:                var(--wact-sys-spacing-lg);
       --wact-comp-team-config-btn-font-size:              var(--wact-sys-typescale-body-medium-size);
     }
 
@@ -48,7 +60,7 @@ template.innerHTML = `
     }
 
     #team-config__header-wrapper {
-      width: 100%;
+      width: var(--wact-ref-layout-fit-container);
       display: flex;
       justify-content: space-between;
       margin-bottom: var(--wact-sys-spacing-sm);
@@ -107,7 +119,7 @@ template.innerHTML = `
     }
 
     .team-config__input-group input[type="color"] {
-      width: 100%;
+      width: var(--wact-ref-layout-fit-container);
       height: var(--wact-comp-team-config-input-height);
       padding: 0;
       border: 2px solid var(--wact-comp-team-config-input-outline-color);
@@ -130,8 +142,8 @@ template.innerHTML = `
     }
 
     #team-config__logo {
-      width: 100%;
-      height: 100%;
+      width: var(--wact-ref-layout-fit-container);
+      height: var(--wact-ref-layout-fit-container);
       object-fit: cover;
       position: absolute;
       z-index: var(--wact-comp-team-config-z-index-logo);
@@ -141,8 +153,8 @@ template.innerHTML = `
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: var(--wact-ref-layout-fit-container);
+      height: var(--wact-ref-layout-fit-container);
       z-index: var(--wact-comp-team-config-z-index-overlay);
       background-color: var(--wact-comp-team-config-image-overlay-heavy-color);
       transition: background-color var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
@@ -154,7 +166,7 @@ template.innerHTML = `
     }
 
     #team-config__logo-url-wrapper {
-      width: 100%;
+      width: var(--wact-ref-layout-fit-container);
       position: absolute;
       z-index: var(--wact-comp-team-config-z-index-content);
       left: 0;

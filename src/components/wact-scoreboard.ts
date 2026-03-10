@@ -1,9 +1,13 @@
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS, LAYOUT_CSS, MOTION_CSS, SHAPE_CSS, SPACING_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
 
     :host {
       display: block;
@@ -16,10 +20,10 @@ template.innerHTML = `
       --wact-comp-scoreboard-possession-color:        var(--wact-sys-color-tertiary);
       --wact-comp-scoreboard-status-color:            var(--wact-sys-color-tertiary-status);
       --wact-comp-scoreboard-container-shape:         var(--wact-sys-shape-corner-medium);
-      --wact-comp-scoreboard-logo-size:               40px;
-      --wact-comp-scoreboard-icon-size:               28px;
-      --wact-comp-scoreboard-divider-width:           2px;
-      --wact-comp-scoreboard-accent-width:            4px;
+      --wact-comp-scoreboard-logo-size:               var(--wact-ref-layout-px-48);
+      --wact-comp-scoreboard-icon-size:               var(--wact-ref-layout-px-32);
+      --wact-comp-scoreboard-divider-width:           var(--wact-ref-layout-px-2);
+      --wact-comp-scoreboard-accent-width:            var(--wact-ref-layout-px-4);
     }
 
     #scoreboard__wrapper {

@@ -1,11 +1,11 @@
 import type { MatchupInput } from '../services/types.js';
 import type { WACTTeamSelect } from './wact-team-select.js';
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { LAYOUT_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${LAYOUT_CSS}
 
     :host {
       --wact-comp-matchup-column-padding-h: 1%;
@@ -16,12 +16,12 @@ template.innerHTML = `
     }
 
     #matchup-select__home {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       padding-right: var(--wact-comp-matchup-column-padding-h);
     }
 
     #matchup-select__away {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       padding-left: var(--wact-comp-matchup-column-padding-h);
     }
 

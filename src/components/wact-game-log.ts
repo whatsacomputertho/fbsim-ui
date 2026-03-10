@@ -1,14 +1,18 @@
 import type { Play, Drive } from '../services/types.js';
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS, MOTION_CSS, SHAPE_CSS, SPACING_CSS, TYPEFACE_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+    ${TYPEFACE_CSS}
 
     :host {
       display: block;
-      font-family: var(--wact-sys-typescale-font-family);
+      font-family: var(--wact-sys-typeface-font-family);
       --wact-comp-game-log-container-color:         var(--wact-sys-color-surface);
       --wact-comp-game-log-on-container-color:      var(--wact-sys-color-on-surface-variant);
       --wact-comp-game-log-header-container-color:  var(--wact-sys-color-interactive);
@@ -23,11 +27,11 @@ template.innerHTML = `
       --wact-comp-game-log-play-desc-color:         var(--wact-sys-color-on-surface);
       --wact-comp-game-log-empty-color:             var(--wact-sys-color-on-surface-muted);
       --wact-comp-game-log-container-shape:         var(--wact-sys-shape-corner-medium);
-      --wact-comp-game-log-max-height:              400px;
-      --wact-comp-game-log-max-height-expanded:     2000px;
-      --wact-comp-game-log-icon-size:               28px;
-      --wact-comp-game-log-row-gap:                 2px;
-      --wact-comp-game-log-play-font-style:         italic;
+      --wact-comp-game-log-max-height:              var(--wact-ref-layout-px-384);
+      --wact-comp-game-log-max-height-expanded:     var(--wact-ref-layout-px-2048);
+      --wact-comp-game-log-icon-size:               var(--wact-ref-layout-px-32);
+      --wact-comp-game-log-row-gap:                 var(--wact-sys-spacing-xs);
+      --wact-comp-game-log-play-font-style:         var(--wact-sys-typeface-weight-italic);
     }
 
     #game-log__wrapper {
@@ -39,8 +43,8 @@ template.innerHTML = `
 
     #game-log__header {
       padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
-      font-size: var(--wact-sys-typescale-body-large-size);
-      font-weight: var(--wact-sys-typescale-weight-bold);
+      font-size: var(--wact-sys-typeface-body-large-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
       color: var(--wact-comp-game-log-on-header-color);
       background-color: var(--wact-comp-game-log-header-container-color);
       border-bottom: 1px solid var(--wact-comp-game-log-divider-color);
@@ -88,19 +92,19 @@ template.innerHTML = `
     }
 
     .game-log__drive-result {
-      font-weight: var(--wact-sys-typescale-weight-bold);
+      font-weight: var(--wact-sys-typeface-weight-bold);
       color: var(--wact-comp-game-log-drive-result-color);
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
     }
 
     .game-log__drive-stats {
-      font-size: var(--wact-sys-typescale-body-small-size);
+      font-size: var(--wact-sys-typeface-body-small-size);
       color: var(--wact-comp-game-log-drive-stats-color);
       margin-top: var(--wact-comp-game-log-row-gap);
     }
 
     .game-log__chevron {
-      font-size: var(--wact-sys-typescale-body-small-size);
+      font-size: var(--wact-sys-typeface-body-small-size);
       transition: transform var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
       color: var(--wact-comp-game-log-chevron-color);
     }
@@ -135,14 +139,14 @@ template.innerHTML = `
     .game-log__play {
       padding: var(--wact-sys-spacing-xs) 0;
       border-top: 1px solid var(--wact-comp-game-log-play-divider-color);
-      font-size: var(--wact-sys-typescale-body-small-size);
-      line-height: var(--wact-sys-typescale-line-height-body);
+      font-size: var(--wact-sys-typeface-body-small-size);
+      line-height: var(--wact-sys-typeface-line-height-body);
       animation: fadeIn var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
     .game-log__play-context {
       color: var(--wact-comp-game-log-play-context-color);
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
     }
 
     .game-log__play-description {

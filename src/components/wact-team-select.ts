@@ -1,10 +1,13 @@
 import type { TeamInput } from '../services/types.js';
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS, LAYOUT_CSS, MOTION_CSS, TYPEFACE_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${TYPEFACE_CSS}
 
     :host {
       --wact-comp-team-select-on-surface-color:           var(--wact-sys-color-on-surface);
@@ -24,7 +27,7 @@ template.innerHTML = `
     }
 
     #team-select__header-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       display: flex;
       justify-content: space-between;
       margin-top: 1%;
@@ -32,14 +35,14 @@ template.innerHTML = `
     }
 
     #team-select__name-input-label {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       font-weight: var(--wact-sys-typescale-weight-bold);
       font-size: var(--wact-sys-typescale-display-medium-size);
       color: var(--wact-comp-team-select-on-surface-color);
     }
 
     #team-select__name-input {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       background-color: var(--wact-comp-team-select-input-bg);
       border-style: solid;
       border-width: 0 0 var(--wact-comp-team-select-input-border-width) 0;
@@ -65,15 +68,15 @@ template.innerHTML = `
     }
 
     #team-select__logo {
-      width: 100%;
-      height: 100%;
+      width: var(--wact-sys-layout-fit-container);
+      height: var(--wact-sys-layout-fit-container);
       object-fit: cover;
       position: absolute;
       z-index: var(--wact-comp-team-select-z-index-logo);
     }
 
     #team-select__logo-url-input-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       position: absolute;
       z-index: var(--wact-comp-team-select-z-index-content);
       left: 0;
@@ -83,7 +86,7 @@ template.innerHTML = `
     }
 
     #team-select__logo-url-input {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       background-color: var(--wact-comp-team-select-logo-input-bg-color);
       border-style: solid;
       border-color: var(--wact-comp-team-select-logo-input-outline-color);
@@ -105,7 +108,7 @@ template.innerHTML = `
     }
 
     #team-select__offense-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       display: flex;
       justify-content: space-between;
       margin-top: 1%;
@@ -132,7 +135,7 @@ template.innerHTML = `
     }
 
     #team-select__defense-wrapper {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       display: flex;
       justify-content: space-between;
       margin-top: 1%;

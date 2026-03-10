@@ -1,9 +1,12 @@
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS, ELEVATION_CSS, SHAPE_CSS, SPACING_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${ELEVATION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
 
     :host {
       display: block;
@@ -20,8 +23,8 @@ template.innerHTML = `
       --wact-comp-playback-controls-container-shape:         var(--wact-sys-shape-corner-medium);
       --wact-comp-playback-controls-menu-shadow:             var(--wact-sys-elevation-level1);
       --wact-comp-playback-controls-menu-zindex:             var(--wact-sys-zindex-dropdown);
-      --wact-comp-playback-controls-btn-size:                48px;
-      --wact-comp-playback-controls-label-min-width:         60px;
+      --wact-comp-playback-controls-btn-size:                var(--wact-sys-layout-min-target-size);
+      --wact-comp-playback-controls-label-min-width:         var(--wact-ref-layout-px-64);
       --wact-comp-playback-controls-btn-padding:             6px 14px;
       --wact-comp-playback-controls-btn-padding-compact:     4px 10px;
       --wact-comp-playback-controls-speed-padding-h:         10px;
@@ -77,6 +80,7 @@ template.innerHTML = `
       transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
       font-family: var(--wact-sys-typescale-font-family);
       min-width: var(--wact-comp-playback-controls-btn-size);
+      height: var(--wact-comp-playback-controls-btn-size);
       text-align: center;
     }
 
@@ -95,7 +99,7 @@ template.innerHTML = `
 
     #playback__speed-menu {
       position: absolute;
-      bottom: 100%;
+      bottom: var(--wact-sys-layout-fit-container);
       left: 50%;
       transform: translateX(-50%);
       background-color: var(--wact-comp-playback-controls-menu-container-color);
@@ -118,7 +122,7 @@ template.innerHTML = `
 
     .playback__speed-option {
       display: block;
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       padding: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
       background: none;
       border: none;

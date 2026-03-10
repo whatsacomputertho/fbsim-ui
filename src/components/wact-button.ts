@@ -1,23 +1,40 @@
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS } from '../styles';
+import { LAYOUT_CSS } from '../styles';
+import { MOTION_CSS } from '../styles';
+import { SHAPE_CSS } from '../styles';
+import { SPACING_CSS } from '../styles';
+import { STATE_CSS } from '../styles';
+import { TYPEFACE_CSS } from '../styles';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${SPACING_CSS}
+    ${STATE_CSS}
+    ${TYPEFACE_CSS}
 
     :host {
+      /* Layout */
       display: inline-block;
       padding: 0;
+      --wact-comp-button-tooltip-label-size:      var(--wact-sys-typeface-label-medium-size);
+      --wact-comp-button-icon-size:               var(--wact-sys-typeface-body-large-size);
+
+      /* Color palette */
       --wact-comp-button-container-color:         var(--wact-sys-color-interactive);
       --wact-comp-button-container-color-hover:   var(--wact-sys-color-interactive-hover);
       --wact-comp-button-container-color-active:  var(--wact-sys-color-interactive-active);
       --wact-comp-button-label-color:             var(--wact-sys-color-on-surface);
-      --wact-comp-button-container-shape:         var(--wact-sys-shape-corner-medium);
       --wact-comp-button-tooltip-container-color: var(--wact-sys-color-tooltip-container);
       --wact-comp-button-tooltip-label-color:     var(--wact-sys-color-on-tooltip);
-      --wact-comp-button-tooltip-label-size:      var(--wact-sys-typescale-label-medium-size);
+
+      /* Shape */
+      --wact-comp-button-container-shape:         var(--wact-sys-shape-corner-medium);
       --wact-comp-button-tooltip-container-shape: var(--wact-sys-shape-corner-extra-small);
-      --wact-comp-button-icon-size:               1em;
     }
 
     :host([variant="primary"]) {
@@ -35,21 +52,32 @@ template.innerHTML = `
     }
 
     #btn {
-      display: block;
-      width: 100%;
-      font: inherit;
-      font-size: inherit;
-      padding: var(--btn-padding, 8px);
-      margin: 0;
+      /* Color palette */
       color: var(--wact-comp-button-label-color);
       background-color: var(--wact-comp-button-container-color);
+
+      /* Layout */
+      position: relative;
+      display: block;
+      box-sizing: border-box;
+      cursor: pointer;
+      margin: 0;
+      width: var(--wact-sys-layout-fit-container);
+      min-width: var(--wact-sys-layout-min-target-size);
+      min-height: var(--wact-sys-layout-min-target-size);
+      padding: var(--wact-sys-spacing-sm);
+
+      /* Typeface */
+      font: inherit;
+      font-size: inherit;
+      line-height: inherit;
+
+      /* Shape */
       border: none;
       border-radius: var(--wact-comp-button-container-shape);
-      cursor: pointer;
+
+      /* Motion */
       transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
-      box-sizing: border-box;
-      position: relative;
-      line-height: inherit;
     }
 
     #btn:hover:not(:disabled) {

@@ -1,9 +1,13 @@
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { COLOR_CSS, ELEVATION_CSS, LAYOUT_CSS, MOTION_CSS, SPACING_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${COLOR_CSS}
+    ${ELEVATION_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SPACING_CSS}
 
     :host {
       display: block;
@@ -21,6 +25,7 @@ template.innerHTML = `
     }
 
     .feedback-ribbon__ribbon-wrapper {
+      min-height: var(--wact-sys-layout-min-target-size);
       display: grid;
       grid-template-columns: 2% 90% 8%;
       background-color: var(--wact-comp-feedback-ribbon-container-color);
@@ -31,6 +36,8 @@ template.innerHTML = `
     }
 
     .feedback-ribbon__feedback-text-wrapper {
+      display: flex;
+      align-items: center;
       padding: var(--wact-sys-spacing-sm);
       color: var(--wact-comp-feedback-ribbon-on-container-color);
     }
@@ -42,7 +49,7 @@ template.innerHTML = `
 
     .feedback-ribbon__remove-button::part(button) {
       border-radius: 0;
-      height: 100%; // Should be design token
+      height: 100%;
     }
 
     .feedback-ribbon__progress-bar-wrapper {

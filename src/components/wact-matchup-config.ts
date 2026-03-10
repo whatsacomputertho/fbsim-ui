@@ -1,11 +1,11 @@
 import type { MatchupConfig } from '../services/types.js';
 import type { WACTTeamConfig } from './wact-team-config.js';
-import { DESIGN_TOKENS_CSS } from '../styles/index.js';
+import { LAYOUT_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    ${DESIGN_TOKENS_CSS}
+    ${LAYOUT_CSS}
 
     :host {
       --wact-comp-matchup-column-padding-h: 1%;
@@ -16,7 +16,7 @@ template.innerHTML = `
     }
 
     #matchup-config__home {
-      width: 100%;
+      width: var(--wact-sys-layout-fit-container);
       padding-right: var(--wact-comp-matchup-column-padding-h);
     }
 
