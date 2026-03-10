@@ -1,42 +1,65 @@
 import type { Play, GameContext } from '../services/types.js';
+import { COLOR_CSS, LAYOUT_CSS, MOTION_CSS, SHAPE_CSS, TYPEFACE_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
+    ${COLOR_CSS}
+    ${LAYOUT_CSS}
+    ${MOTION_CSS}
+    ${SHAPE_CSS}
+    ${TYPEFACE_CSS}
+
     :host {
       display: block;
-      font-family: sans-serif;
-      --fd-border: #999;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        --fd-border: #444;
-      }
+      font-family: var(--wact-sys-typeface-font-family);
+      --wact-comp-field-display-surface-color:          var(--wact-sys-color-field);
+      --wact-comp-field-display-outline-color:          var(--wact-sys-color-outline-field);
+      --wact-comp-field-display-first-down-color:       var(--wact-sys-color-tertiary);
+      --wact-comp-field-display-container-shape:        var(--wact-sys-shape-corner-medium);
+      --wact-comp-field-display-on-field-color:         var(--wact-sys-color-on-field);
+      --wact-comp-field-display-field-line-color:       var(--wact-sys-color-field-line);
+      --wact-comp-field-display-field-label-color:      var(--wact-sys-color-field-label);
+      --wact-comp-field-display-ball-color:             var(--wact-sys-color-ball);
+      --wact-comp-field-display-ball-outline-color:     var(--wact-sys-color-on-ball);
+      --wact-comp-field-display-end-zone-width:         8%;
+      --wact-comp-field-display-field-left:             8%;
+      --wact-comp-field-display-field-width:            84%;
+      --wact-comp-field-display-hash-width:             var(--wact-ref-layout-px-1);
+      --wact-comp-field-display-line-width:             var(--wact-ref-layout-px-2);
+      --wact-comp-field-display-ball-size:              var(--wact-ref-layout-px-8);
+      --wact-comp-field-display-ball-height:            70%;
+      --wact-comp-field-display-ball-radius:            var(--wact-sys-shape-corner-micro);
+      --wact-comp-field-display-label-font-size:        var(--wact-sys-typeface-title-medium-size);
+      --wact-comp-field-display-layer-play:             var(--wact-sys-layer-2);
+      --wact-comp-field-display-layer-first-down-line:  var(--wact-sys-layer-3);
+      --wact-comp-field-display-layer-ball:             var(--wact-sys-layer-4);
+      --wact-comp-field-display-layer-ball-emoji:       var(--wact-sys-layer-5);
     }
 
     #field__wrapper {
       position: relative;
-      width: 100%;
-      height: 120px;
-      background-color: #2d7a2d;
-      border-radius: 8px;
+      width: var(--wact-ref-layout-fit-container);
+      height: var(--wact-sys-layout-field-height);
+      min-height: var(--wact-sys-layout-field-min-height);
+      background-color: var(--wact-comp-field-display-surface-color);
+      border-radius: var(--wact-comp-field-display-container-shape);
       overflow: hidden;
-      border: 2px solid var(--fd-border);
+      border: 2px solid var(--wact-comp-field-display-outline-color);
     }
 
     #field__endzone-home {
       position: absolute;
       left: 0;
       top: 0;
-      width: 8%;
-      height: 100%;
+      width: var(--wact-comp-field-display-end-zone-width);
+      height: var(--wact-ref-layout-fit-container);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7em;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: var(--wact-sys-typeface-label-small-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
+      color: var(--wact-comp-field-display-on-field-color);
       writing-mode: vertical-lr;
       text-orientation: mixed;
     }
@@ -45,83 +68,83 @@ template.innerHTML = `
       position: absolute;
       right: 0;
       top: 0;
-      width: 8%;
-      height: 100%;
+      width: var(--wact-comp-field-display-end-zone-width);
+      height: var(--wact-ref-layout-fit-container);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7em;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: var(--wact-sys-typeface-label-small-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
+      color: var(--wact-comp-field-display-on-field-color);
       writing-mode: vertical-lr;
       text-orientation: mixed;
     }
 
     #field__playing-area {
       position: absolute;
-      left: 8%;
+      left: var(--wact-comp-field-display-field-left);
       top: 0;
-      width: 84%;
-      height: 100%;
+      width: var(--wact-comp-field-display-field-width);
+      height: var(--wact-ref-layout-fit-container);
     }
 
     .field__yard-line {
       position: absolute;
       top: 0;
-      width: 1px;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.3);
+      width: var(--wact-comp-field-display-hash-width);
+      height: var(--wact-ref-layout-fit-container);
+      background-color: var(--wact-comp-field-display-field-line-color);
     }
 
     .field__yard-label {
       position: absolute;
       bottom: 2px;
-      font-size: 0.6em;
-      color: rgba(255, 255, 255, 0.5);
+      font-size: var(--wact-sys-typeface-label-small-size);
+      color: var(--wact-comp-field-display-field-label-color);
       transform: translateX(-50%);
     }
 
     #field__first-down-line {
       position: absolute;
       top: 0;
-      width: 2px;
-      height: 100%;
-      background-color: #ffd700;
+      width: var(--wact-comp-field-display-line-width);
+      height: var(--wact-ref-layout-fit-container);
+      background-color: var(--wact-comp-field-display-first-down-color);
       display: none;
-      z-index: 3;
-      transition: left 300ms ease;
+      z-index: var(--wact-comp-field-display-layer-first-down-line);
+      transition: left var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard);
     }
 
     #field__ball-marker {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: #8B4513;
-      border: 2px solid white;
-      border-radius: 50%;
+      width: var(--wact-comp-field-display-ball-size);
+      height: var(--wact-comp-field-display-ball-size);
+      background-color: var(--wact-comp-field-display-ball-color);
+      border: 2px solid var(--wact-comp-field-display-ball-outline-color);
+      border-radius: var(--wact-sys-shape-corner-full);
       top: 50%;
       transform: translate(-50%, -50%);
       display: none;
-      z-index: 5;
-      transition: left 300ms ease;
+      z-index: var(--wact-comp-field-display-layer-ball-emoji);
+      transition: left var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard);
     }
 
     #field__drive-overlay {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
+      width: var(--wact-ref-layout-fit-container);
+      height: var(--wact-ref-layout-fit-container);
+      z-index: var(--wact-comp-field-display-layer-play);
     }
 
     .field__play-rect {
       position: absolute;
       top: 15%;
-      height: 70%;
+      height: var(--wact-comp-field-display-ball-height);
       opacity: 0.5;
-      border-radius: 2px;
-      transition: opacity 200ms ease;
+      border-radius: var(--wact-comp-field-display-ball-radius);
+      transition: opacity var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
     @keyframes endzoneFlash {
@@ -145,9 +168,9 @@ template.innerHTML = `
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 8;
+      width: var(--wact-ref-layout-fit-container);
+      height: var(--wact-ref-layout-fit-container);
+      z-index: var(--wact-comp-field-display-layer-ball);
       pointer-events: none;
     }
 
@@ -156,10 +179,10 @@ template.innerHTML = `
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 9;
+      z-index: var(--wact-comp-field-display-layer-ball-emoji);
       pointer-events: none;
-      font-size: 1.4em;
-      font-weight: bold;
+      font-size: var(--wact-comp-field-display-label-font-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
       white-space: nowrap;
       opacity: 0;
@@ -168,32 +191,22 @@ template.innerHTML = `
     .field__endzone-flash {
       position: absolute;
       top: 0;
-      height: 100%;
+      height: var(--wact-ref-layout-fit-container);
       animation: endzoneFlash 1.2s ease forwards;
     }
 
     .field__endzone-flash--home {
       left: 0;
-      width: 8%;
+      width: var(--wact-comp-field-display-end-zone-width);
     }
 
     .field__endzone-flash--away {
       right: 0;
-      width: 8%;
+      width: var(--wact-comp-field-display-end-zone-width);
     }
 
     .field__drive-fade-out {
       animation: fadeOutRects 400ms ease forwards;
-    }
-
-    @media only screen and (max-width: 600px) {
-      #field__wrapper {
-        height: 80px;
-      }
-
-      .field__yard-label {
-        font-size: 0.5em;
-      }
     }
   </style>
   <div id="field__wrapper">

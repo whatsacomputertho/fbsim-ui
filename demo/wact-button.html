@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: wact-button</title>
+    <style>
+      body {
+        margin: auto;
+        background-color: #e0e0e0;
+        font-family: sans-serif;
+        color: #333;
+      }
+      a { color: #2c4494; }
+      @media (prefers-color-scheme: dark) {
+        body { background-color: #11111f; color: #e0e0e0; }
+        a { color: #7b9ef5; }
+      }
+      .demo-wrapper {
+        padding: 2em;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .button-row {
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 1em;
+      }
+      .narrow {
+        width: 200px;
+      }
+      code {
+        font-size: 0.85em;
+        background-color: rgba(0, 0, 0, 0.08);
+        padding: 0.1em 0.4em;
+        border-radius: 3px;
+      }
+      @media (prefers-color-scheme: dark) {
+        code { background-color: rgba(255, 255, 255, 0.12); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-wrapper">
+      <p><a href="/">&larr; Back to index</a></p>
+      <h2>wact-button</h2>
+      <p>
+        General-purpose button with three variants, disabled state, tooltip, and a loading/confirm
+        API: <code>startLoading()</code>, <code>stopLoading(confirmText?, duration?)</code>,
+        <code>reset()</code>.
+      </p>
+
+      <h3>Variants</h3>
+      <div class="button-row">
+        <wact-button>Default</wact-button>
+        <wact-button variant="primary">Primary</wact-button>
+        <wact-button variant="destructive">Destructive</wact-button>
+      </div>
+
+      <h3>Disabled</h3>
+      <div class="button-row">
+        <wact-button disabled>Default</wact-button>
+        <wact-button variant="primary" disabled>Primary</wact-button>
+        <wact-button variant="destructive" disabled>Destructive</wact-button>
+      </div>
+
+      <h3>Tooltip</h3>
+      <p>Hover over each button to see the tooltip.</p>
+      <div class="button-row">
+        <wact-button tooltip="This is a default button">Default</wact-button>
+        <wact-button variant="primary" tooltip="Saves your progress">Save</wact-button>
+        <wact-button variant="destructive" tooltip="Permanently deletes this item">Delete</wact-button>
+      </div>
+
+      <h3>Loading &amp; confirm</h3>
+      <p>
+        Click a button to start loading. After 2 seconds, <code>stopLoading()</code> is called.
+        The third button uses <code>duration: 0</code> to hold the confirm state indefinitely
+        &mdash; click <em>Reset</em> to restore it manually.
+      </p>
+      <div class="button-row">
+        <wact-button id="btn-load-reset" variant="primary">Load &rarr; reset</wact-button>
+        <wact-button id="btn-load-confirm" variant="primary">Load &rarr; confirm (1.5s)</wact-button>
+        <wact-button id="btn-load-confirm-long" variant="primary">Load &rarr; confirm (5s)</wact-button>
+        <wact-button id="btn-load-hold" variant="primary">Load &rarr; hold confirm</wact-button>
+        <wact-button id="btn-manual-reset">Reset</wact-button>
+      </div>
+
+      <h3>Custom padding</h3>
+      <p>Override internal padding with the <code>--btn-padding</code> CSS custom property.</p>
+      <div class="button-row">
+        <wact-button style="--btn-padding: 4px 8px">Compact</wact-button>
+        <wact-button>Default</wact-button>
+        <wact-button style="--btn-padding: 16px 32px">Large</wact-button>
+      </div>
+
+      <h3>Full width</h3>
+      <p>
+        <code>wact-button</code> is <code>inline-block</code> by default. Set
+        <code>display: block</code> on the host to fill its container.
+      </p>
+      <div class="narrow">
+        <wact-button variant="primary" style="display: block">Full-width button</wact-button>
+      </div>
+    </div>
+    <script type="module" src="/src/demo/wact-button.ts"></script>
+  </body>
+</html>

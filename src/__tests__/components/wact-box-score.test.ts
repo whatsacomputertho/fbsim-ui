@@ -49,10 +49,10 @@ describe('WACTBoxScore', () => {
     const awayScoreWrapper = el.root.getElementById(
       'box-score__away-score-wrapper',
     ) as HTMLDivElement;
-    expect(homeWrapper.style.backgroundColor).toBe('rgba(0, 63, 0, 0.7)');
-    expect(homeScoreWrapper.style.borderColor).toBe('lime');
-    expect(awayWrapper.style.backgroundColor).toBe('rgba(63, 0, 0, 0.7)');
-    expect(awayScoreWrapper.style.borderColor).toBe('red');
+    expect(homeWrapper.style.backgroundColor).toBe('rgba(0,  63,  0,  0.70)');
+    expect(homeScoreWrapper.style.borderColor).toBe('#00ff00');
+    expect(awayWrapper.style.backgroundColor).toBe('rgba(63,  0,  0,  0.70)');
+    expect(awayScoreWrapper.style.borderColor).toBe('#ff0000');
   });
 
   it('should update scores and calculate winner when away wins', () => {
@@ -66,10 +66,10 @@ describe('WACTBoxScore', () => {
     const awayScoreWrapper = el.root.getElementById(
       'box-score__away-score-wrapper',
     ) as HTMLDivElement;
-    expect(homeWrapper.style.backgroundColor).toBe('rgba(63, 0, 0, 0.7)');
-    expect(homeScoreWrapper.style.borderColor).toBe('red');
-    expect(awayWrapper.style.backgroundColor).toBe('rgba(0, 63, 0, 0.7)');
-    expect(awayScoreWrapper.style.borderColor).toBe('lime');
+    expect(homeWrapper.style.backgroundColor).toBe('rgba(63,  0,  0,  0.70)');
+    expect(homeScoreWrapper.style.borderColor).toBe('#ff0000');
+    expect(awayWrapper.style.backgroundColor).toBe('rgba(0,  63,  0,  0.70)');
+    expect(awayScoreWrapper.style.borderColor).toBe('#00ff00');
   });
 
   it('should show gray for tied scores', () => {
@@ -81,8 +81,8 @@ describe('WACTBoxScore', () => {
     const awayScoreWrapper = el.root.getElementById(
       'box-score__away-score-wrapper',
     ) as HTMLDivElement;
-    expect(homeScoreWrapper.style.borderColor).toBe('gray');
-    expect(awayScoreWrapper.style.borderColor).toBe('gray');
+    expect(homeScoreWrapper.style.borderColor).toBe('#808080');
+    expect(awayScoreWrapper.style.borderColor).toBe('#808080');
   });
 
   it('should update logo src when logo attribute changes', () => {
