@@ -10,7 +10,7 @@ template.innerHTML = `
 
     :host {
       display: block;
-      font-family: var(--wact-sys-typescale-font-family);
+      font-family: var(--wact-sys-typeface-font-family);
       --wact-comp-playback-controls-container-color:         var(--wact-sys-color-surface-raised);
       --wact-comp-playback-controls-on-container-color:      var(--wact-sys-color-on-surface);
       --wact-comp-playback-controls-speed-container-color:   var(--wact-sys-color-interactive);
@@ -42,9 +42,9 @@ template.innerHTML = `
     }
 
     .playback__button {
-      font-size: var(--wact-sys-typescale-body-large-size);
+      font-size: var(--wact-sys-typeface-body-large-size);
       --btn-padding: var(--wact-comp-playback-controls-btn-padding);
-      font-family: var(--wact-sys-typescale-font-family);
+      font-family: var(--wact-sys-typeface-font-family);
     }
 
     #playback__play-pause {
@@ -73,12 +73,12 @@ template.innerHTML = `
       background-color: var(--wact-comp-playback-controls-speed-container-color);
       border: none;
       color: var(--wact-comp-playback-controls-on-container-color);
-      font-size: var(--wact-sys-typescale-body-large-size);
+      font-size: var(--wact-sys-typeface-body-large-size);
       padding: var(--wact-comp-playback-controls-btn-padding);
       border-radius: var(--wact-comp-playback-controls-container-shape);
       cursor: pointer;
       transition: all var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
-      font-family: var(--wact-sys-typescale-font-family);
+      font-family: var(--wact-sys-typeface-font-family);
       min-width: var(--wact-comp-playback-controls-btn-size);
       height: var(--wact-comp-playback-controls-btn-size);
       text-align: center;
@@ -127,10 +127,10 @@ template.innerHTML = `
       background: none;
       border: none;
       color: var(--wact-comp-playback-controls-menu-label-color);
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
       cursor: pointer;
       text-align: center;
-      font-family: var(--wact-sys-typescale-font-family);
+      font-family: var(--wact-sys-typeface-font-family);
       white-space: nowrap;
       transition: background-color var(--wact-sys-motion-duration-short1) var(--wact-sys-motion-easing-standard);
       border-radius: var(--wact-sys-shape-corner-extra-small);
@@ -143,7 +143,7 @@ template.innerHTML = `
 
     .playback__speed-option--active {
       color: var(--wact-comp-playback-controls-menu-active-label-color);
-      font-weight: var(--wact-sys-typescale-weight-bold);
+      font-weight: var(--wact-sys-typeface-weight-bold);
     }
 
     @media only screen and (max-width: 600px) {
@@ -152,12 +152,12 @@ template.innerHTML = `
       }
 
       .playback__button {
-        font-size: var(--wact-sys-typescale-body-medium-size);
+        font-size: var(--wact-sys-typeface-body-medium-size);
         --btn-padding: var(--wact-comp-playback-controls-btn-padding-compact);
       }
 
       #playback__speed-display {
-        font-size: var(--wact-sys-typescale-body-medium-size);
+        font-size: var(--wact-sys-typeface-body-medium-size);
         padding: var(--wact-comp-playback-controls-btn-padding-compact);
       }
     }

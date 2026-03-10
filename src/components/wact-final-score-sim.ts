@@ -9,7 +9,7 @@ template.innerHTML = `
     ${DESIGN_TOKENS_CSS}
 
     :host {
-      --wact-comp-final-score-sim-button-font-size: var(--wact-sys-typescale-title-large-size);
+      --wact-comp-final-score-sim-button-font-size: var(--wact-sys-typeface-title-large-size);
       --wact-comp-final-score-sim-button-width:     50%;
       --wact-comp-final-score-sim-spacing:          1%;
     }

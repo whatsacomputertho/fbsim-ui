@@ -9,7 +9,7 @@ template.innerHTML = `
 
     :host {
       --wact-comp-nav-container-color:  var(--wact-sys-color-nav);
-      --wact-comp-nav-container-height: 10vh;
+      --wact-comp-nav-container-height: var(--wact-ref-layout-vh-10);
       --wact-comp-nav-container-zindex: var(--wact-sys-zindex-sticky);
     }
 

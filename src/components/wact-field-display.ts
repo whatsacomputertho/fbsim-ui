@@ -31,10 +31,10 @@ template.innerHTML = `
       --wact-comp-field-display-ball-height:            70%;
       --wact-comp-field-display-ball-radius:            var(--wact-sys-shape-corner-micro);
       --wact-comp-field-display-label-font-size:        var(--wact-sys-typeface-title-medium-size);
-      --wact-comp-field-display-layer-play:             var(--wact-ref-layer-2);
-      --wact-comp-field-display-layer-first-down-line:  var(--wact-ref-layer-3);
-      --wact-comp-field-display-layer-ball:             var(--wact-ref-layer-4);
-      --wact-comp-field-display-layer-ball-emoji:       var(--wact-ref-layer-5);
+      --wact-comp-field-display-layer-play:             var(--wact-sys-layer-2);
+      --wact-comp-field-display-layer-first-down-line:  var(--wact-sys-layer-3);
+      --wact-comp-field-display-layer-ball:             var(--wact-sys-layer-4);
+      --wact-comp-field-display-layer-ball-emoji:       var(--wact-sys-layer-5);
     }
 
     #field__wrapper {

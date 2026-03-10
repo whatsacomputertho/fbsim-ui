@@ -31,9 +31,19 @@ const SYS_ELEVATION_CSS = `
 :host {
   --wact-sys-elevation-level1: var(--wact-ref-elevation-level1);
   --wact-sys-elevation-level2: var(--wact-ref-elevation-level2);
+
+  /* Named z-index layers for UI surfaces */
   --wact-sys-zindex-dropdown: var(--wact-ref-layer-10);
   --wact-sys-zindex-overlay:  var(--wact-ref-layer-100);
   --wact-sys-zindex-sticky:   var(--wact-ref-layer-1000);
+
+  /* Generic internal component stacking layers */
+  --wact-sys-layer-neg-1: var(--wact-ref-layer-neg-1);
+  --wact-sys-layer-1:     var(--wact-ref-layer-1);
+  --wact-sys-layer-2:     var(--wact-ref-layer-2);
+  --wact-sys-layer-3:     var(--wact-ref-layer-3);
+  --wact-sys-layer-4:     var(--wact-ref-layer-4);
+  --wact-sys-layer-5:     var(--wact-ref-layer-5);
 }
 
 @media (prefers-color-scheme: dark) {

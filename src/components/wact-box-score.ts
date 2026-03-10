@@ -37,7 +37,7 @@ template.innerHTML = `
       --wact-comp-box-score-font-size:          var(--wact-sys-typeface-display-medium-size);
 
       /* Elevation */
-      --wact-comp-box-score-z-index-logo:       var(--wact-ref-zindex-neg-1);
+      --wact-comp-box-score-z-index-logo:       var(--wact-sys-layer-neg-1);
     }
 
     #box-score__wrapper {

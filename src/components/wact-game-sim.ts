@@ -42,6 +42,7 @@ template.innerHTML = `
       --wact-comp-game-sim-card-title-color:            var(--wact-sys-color-on-surface);
       --wact-comp-game-sim-card-subtitle-color:         var(--wact-sys-color-on-surface-variant);
       --wact-comp-game-sim-card-placeholder-color:      var(--wact-sys-color-on-surface-muted);
+      --wact-comp-game-sim-card-disabled-color:         var(--wact-sys-color-surface);
       --wact-comp-game-sim-card-shape:                  var(--wact-sys-shape-corner-large);
       --wact-comp-game-sim-postgame-container-color:    var(--wact-sys-color-surface);
       --wact-comp-game-sim-postgame-on-container-color: var(--wact-sys-color-on-surface);
@@ -94,10 +95,11 @@ template.innerHTML = `
     }
 
     #game-sim__replay-card {
-      background-color: var(--wact-comp-game-sim-card-container-color);
+      background-color: var(--wact-comp-game-sim-card-disabled-color);
     }
 
     #game-sim__replay-card.game-sim__mode-card--active {
+      background-color: var(--wact-comp-game-sim-card-container-color);
       cursor: pointer;
     }
 
@@ -110,7 +112,10 @@ template.innerHTML = `
     }
 
     #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-title,
-    #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-subtitle,
+    #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-card-subtitle {
+      color: var(--wact-sys-color-on-surface-muted);
+    }
+
     #game-sim__replay-card:not(.game-sim__mode-card--active) .game-sim__mode-icon {
       opacity: var(--wact-sys-state-layer-opacity-inactive);
     }

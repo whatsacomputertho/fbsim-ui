@@ -58,7 +58,9 @@ template.innerHTML = `
 
       /* Layout */
       position: relative;
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-sizing: border-box;
       cursor: pointer;
       margin: 0;

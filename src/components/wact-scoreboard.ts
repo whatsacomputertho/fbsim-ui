@@ -11,7 +11,7 @@ template.innerHTML = `
 
     :host {
       display: block;
-      font-family: var(--wact-sys-typescale-font-family);
+      font-family: var(--wact-sys-typeface-font-family);
       --wact-comp-scoreboard-container-color:         var(--wact-sys-color-surface-raised);
       --wact-comp-scoreboard-on-container-color:      var(--wact-sys-color-on-surface);
       --wact-comp-scoreboard-context-container-color: var(--wact-sys-color-surface-recessed);
@@ -72,13 +72,13 @@ template.innerHTML = `
     }
 
     .scoreboard__team-name {
-      font-size: var(--wact-sys-typescale-body-large-size);
-      font-weight: var(--wact-sys-typescale-weight-bold);
+      font-size: var(--wact-sys-typeface-body-large-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
     }
 
     .scoreboard__team-score {
-      font-size: var(--wact-sys-typescale-display-small-size);
-      font-weight: var(--wact-sys-typescale-weight-bold);
+      font-size: var(--wact-sys-typeface-display-small-size);
+      font-weight: var(--wact-sys-typeface-weight-bold);
       margin-left: auto;
       transition: color var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard), text-shadow var(--wact-sys-motion-duration-medium1) var(--wact-sys-motion-easing-standard);
     }
@@ -106,7 +106,7 @@ template.innerHTML = `
       gap: var(--wact-sys-spacing-lg);
       padding: var(--wact-sys-spacing-sm) var(--wact-sys-spacing-lg);
       background-color: var(--wact-comp-scoreboard-context-container-color);
-      font-size: var(--wact-sys-typescale-body-medium-size);
+      font-size: var(--wact-sys-typeface-body-medium-size);
       color: var(--wact-comp-scoreboard-on-context-color);
       border-top: 1px solid var(--wact-comp-scoreboard-divider-color);
     }
@@ -117,7 +117,7 @@ template.innerHTML = `
     }
 
     #scoreboard__status {
-      font-weight: var(--wact-sys-typescale-weight-bold);
+      font-weight: var(--wact-sys-typeface-weight-bold);
       color: var(--wact-comp-scoreboard-status-color);
     }
 
@@ -133,16 +133,16 @@ template.innerHTML = `
       }
 
       .scoreboard__team-name {
-        font-size: var(--wact-sys-typescale-body-medium-size);
+        font-size: var(--wact-sys-typeface-body-medium-size);
       }
 
       .scoreboard__team-score {
-        font-size: var(--wact-sys-typescale-title-medium-size);
+        font-size: var(--wact-sys-typeface-title-medium-size);
       }
 
       #scoreboard__context {
         gap: var(--wact-sys-spacing-sm);
-        font-size: var(--wact-sys-typescale-body-small-size);
+        font-size: var(--wact-sys-typeface-body-small-size);
         flex-wrap: wrap;
       }
     }
