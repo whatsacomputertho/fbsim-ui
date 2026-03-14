@@ -1,3 +1,4 @@
+import { WACTIcon } from './components/wact-icon.js';
 import { WACTButton } from './components/wact-button.js';
 import { WACTNav } from './components/wact-nav.js';
 import { WACTTeamSelect } from './components/wact-team-select.js';
@@ -15,6 +16,7 @@ import { WACTGameContext } from './components/wact-game-context.js';
 import { WACTGameSim } from './components/wact-game-sim.js';
 
 const components = [
+  WACTIcon,
   WACTButton,
   WACTNav,
   WACTTeamSelect,

@@ -1,6 +1,7 @@
 import type { TeamConfig } from '../services/types.js';
 import {
   COLOR_CSS,
+  ELEVATION_CSS,
   LAYOUT_CSS,
   MOTION_CSS,
   SHAPE_CSS,
@@ -12,6 +13,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <style>
     ${COLOR_CSS}
+    ${ELEVATION_CSS}
     ${LAYOUT_CSS}
     ${MOTION_CSS}
     ${SHAPE_CSS}
@@ -209,6 +211,7 @@ template.innerHTML = `
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: color var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
     .team-config__section-header:hover {
@@ -228,14 +231,21 @@ template.innerHTML = `
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--wact-sys-spacing-xs) var(--wact-sys-spacing-md);
+      max-height: var(--wact-ref-layout-px-512);
+      overflow: hidden;
+      transition: max-height var(--wact-sys-motion-duration-short2) var(--wact-sys-motion-easing-standard);
     }
 
     .team-config__section-content--collapsed {
-      display: none;
+      max-height: 0;
     }
 
     #team-config__load-btn {
-      margin-top: var(--wact-comp-team-config-btn-margin-top);
+      display: block;
+      width: fit-content;
+      margin: var(--wact-comp-team-config-btn-margin-top) auto 0;
+      position: relative;
+      z-index: var(--wact-sys-zindex-dropdown);
       --btn-padding: var(--wact-comp-team-config-btn-padding);
       font-size: var(--wact-comp-team-config-btn-font-size);
     }
@@ -290,7 +300,7 @@ template.innerHTML = `
         <input id="team-config__logo-url-input" type="text" value="https://official-flc.com/img/default-club-picture.png">
       </div>
     </div>
-    <wact-button id="team-config__load-btn">Load from File</wact-button>
+    <wact-button id="team-config__load-btn" tooltip="Load from file"><wact-icon icon="upload"></wact-icon></wact-button>
     <input id="team-config__file-input" type="file" accept=".json">
     <div id="team-config__error"></div>
 

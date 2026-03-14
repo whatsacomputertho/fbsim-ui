@@ -1,0 +1,1 @@
+export const chart = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="20" x2="22" y2="20"/><polyline points="4 16 10 9 16 13 22 7"/></svg>`;
