@@ -99,19 +99,8 @@ template.innerHTML = `
       display: none !important;
     }
 
-    .spinner {
-      width: var(--wact-comp-button-icon-size);
-      height: var(--wact-comp-button-icon-size);
-      border: 2px solid var(--wact-comp-button-label-color);
-      border-top-color: transparent;
-      border-radius: var(--wact-sys-shape-corner-full);
-      animation: spin var(--wact-sys-motion-duration-long1) var(--wact-sys-motion-easing-linear) infinite;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    #btn-spinner {
+      --wact-comp-icon-size: var(--wact-comp-button-icon-size);
     }
 
     #btn[data-tooltip]::after {
@@ -138,7 +127,7 @@ template.innerHTML = `
   </style>
   <button part="button" id="btn">
     <span id="btn-content"><slot></slot></span>
-    <span id="btn-spinner" class="spinner hidden"></span>
+    <wact-icon id="btn-spinner" icon="spinner" class="hidden"></wact-icon>
     <span id="btn-confirm" class="hidden"></span>
   </button>
 `;
