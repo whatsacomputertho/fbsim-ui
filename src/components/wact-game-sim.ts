@@ -164,6 +164,7 @@ template.innerHTML = `
       align-items: center;
       justify-content: center;
       color: var(--wact-comp-game-sim-card-title-color);
+      --wact-comp-icon-size: var(--wact-ref-layout-px-32);
     }
 
     .game-sim__mode-card-icons {
@@ -174,17 +175,8 @@ template.innerHTML = `
       margin-left: auto;
     }
 
-    @keyframes game-sim-spin {
-      to { transform: rotate(360deg); }
-    }
-
     .game-sim__card-spinner {
-      width: var(--wact-comp-game-sim-icon-size-sm);
-      height: var(--wact-comp-game-sim-icon-size-sm);
-      border: 2px solid currentColor;
-      border-top-color: transparent;
-      border-radius: var(--wact-sys-shape-corner-full);
-      animation: game-sim-spin var(--wact-sys-motion-duration-long1) var(--wact-sys-motion-easing-linear) infinite;
+      --wact-comp-icon-size: var(--wact-comp-game-sim-icon-size-sm);
     }
 
     #game-sim__file-error {
@@ -356,7 +348,7 @@ template.innerHTML = `
         <div class="game-sim__mode-card-row">
           <div class="game-sim__mode-card-icons">
             <div class="game-sim__mode-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <wact-icon icon="arrow-right"></wact-icon>
             </div>
           </div>
         </div>
@@ -368,15 +360,15 @@ template.innerHTML = `
         <div class="game-sim__mode-card-subtitle">Play-back a game that has already been simulated</div>
         <div class="game-sim__mode-card-row">
           <wact-button id="game-sim__replay-upload-btn" aria-label="Upload game file" tooltip="upload game">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <wact-icon icon="upload"></wact-icon>
           </wact-button>
           <span id="game-sim__replay-status" class="game-sim__replay-status">No game selected</span>
           <div class="game-sim__mode-card-icons">
             <div id="game-sim__replay-arrow" class="game-sim__mode-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <wact-icon icon="arrow-right"></wact-icon>
             </div>
             <div id="game-sim__replay-spinner" class="game-sim__mode-icon" aria-hidden="true" style="display:none">
-              <div class="game-sim__card-spinner"></div>
+              <wact-icon icon="spinner" class="game-sim__card-spinner"></wact-icon>
             </div>
           </div>
         </div>
@@ -410,13 +402,13 @@ template.innerHTML = `
             <div id="game-sim__postgame-actions">
               <wact-button id="game-sim__export-button" class="game-sim__postgame-icon-btn">
                 <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <wact-icon icon="upload"></wact-icon>
                   Export
                 </span>
               </wact-button>
               <wact-button id="game-sim__summary-button" class="game-sim__postgame-icon-btn">
                 <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="20" x2="22" y2="20"/><polyline points="4 16 10 9 16 13 22 7"/></svg>
+                  <wact-icon icon="chart"></wact-icon>
                   Game Summary
                 </span>
               </wact-button>

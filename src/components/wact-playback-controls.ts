@@ -1,10 +1,11 @@
-import { COLOR_CSS, ELEVATION_CSS, SHAPE_CSS, SPACING_CSS } from '../styles/index.js';
+import { COLOR_CSS, ELEVATION_CSS, LAYOUT_CSS, SHAPE_CSS, SPACING_CSS } from '../styles/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
     ${COLOR_CSS}
     ${ELEVATION_CSS}
+    ${LAYOUT_CSS}
     ${SHAPE_CSS}
     ${SPACING_CSS}
 
@@ -164,14 +165,14 @@ template.innerHTML = `
   </style>
   <div id="playback__wrapper">
     <div id="playback__left">
-      <wact-button id="playback__play-pause" class="playback__button" tooltip="Play">&#9654;</wact-button>
+      <wact-button id="playback__play-pause" class="playback__button" tooltip="Play"><wact-icon icon="play"></wact-icon></wact-button>
     </div>
     <div id="playback__right">
       <div id="playback__speed-wrapper">
         <button id="playback__speed-display">2x</button>
         <div id="playback__speed-menu"></div>
       </div>
-      <wact-button id="playback__skip" class="playback__button" tooltip="Skip to end">&#9197;</wact-button>
+      <wact-button id="playback__skip" class="playback__button" tooltip="Skip to end"><wact-icon icon="skip"></wact-icon></wact-button>
     </div>
   </div>
 `;
@@ -236,11 +237,12 @@ export class WACTPlaybackControls extends HTMLElement {
 
   private updatePlayPauseButton(): void {
     const button = this.root.getElementById('playback__play-pause') as HTMLElement;
+    const icon = button.querySelector('wact-icon') as HTMLElement;
     if (this.playing) {
-      button.innerHTML = '&#9208;';
+      icon.setAttribute('icon', 'pause');
       button.setAttribute('tooltip', 'Pause');
     } else {
-      button.innerHTML = '&#9654;';
+      icon.setAttribute('icon', 'play');
       button.setAttribute('tooltip', 'Play');
     }
   }
