@@ -1,0 +1,520 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0" version="29.6.1">
+  <diagram id="u0-gbHUy6Ys7JLm5Pgwx" name="Page-1">
+    <mxGraphModel dx="1226" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="m0" parent="1" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#444444;fontStyle=1;fontSize=11;rounded=1;" value="Mobile" vertex="1">
+          <mxGeometry height="600" width="380" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" parent="m0" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" value="" vertex="1">
+          <mxGeometry height="46" width="380" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m1a" parent="m0" style="text;fontSize=18;fontColor=#444444;align=left;spacingLeft=14;verticalAlign=middle;" value="☰" vertex="1">
+          <mxGeometry height="46" width="50" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m1b" parent="m0" style="text;fontSize=13;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" value="Bears" vertex="1">
+          <mxGeometry height="46" width="280" x="50" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" parent="m0" style="fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="100" width="380" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="m2e" parent="m0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="← Teams" vertex="1">
+          <mxGeometry height="20" width="120" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="m2a" parent="m0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="48" width="48" x="10" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m2b" parent="m0" style="text;fontSize=18;fontStyle=1;align=left;spacingLeft=4;verticalAlign=middle;" value="Bears" vertex="1">
+          <mxGeometry height="24" width="304" x="68" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m2c" parent="m0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=4;verticalAlign=middle;" value="6W · 2L · 0T" vertex="1">
+          <mxGeometry height="16" width="200" x="68" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="m2d" parent="m0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=4;verticalAlign=middle;" value="1 Championship" vertex="1">
+          <mxGeometry height="16" width="200" x="68" y="144" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" parent="m0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" value="TEAM HISTORY" vertex="1">
+          <mxGeometry height="16" width="140" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" parent="m0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="m4a" parent="m0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="Championship Record" vertex="1">
+          <mxGeometry height="28" width="200" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="m4b" parent="m0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="1W · 1 app." vertex="1">
+          <mxGeometry height="28" width="200" x="180" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" parent="m0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="m5a" parent="m0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="Playoff Record" vertex="1">
+          <mxGeometry height="28" width="200" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="m5b" parent="m0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="2W · 1L" vertex="1">
+          <mxGeometry height="28" width="200" x="180" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" parent="m0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="m6a" parent="m0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="Playoff Appearances" vertex="1">
+          <mxGeometry height="28" width="200" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="m6b" parent="m0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="2" vertex="1">
+          <mxGeometry height="28" width="200" x="180" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="m7" parent="m0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" value="SEASON LOG" vertex="1">
+          <mxGeometry height="16" width="120" y="296" as="geometry" />
+        </mxCell>
+        <mxCell id="m8" parent="m0" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" value="" vertex="1">
+          <mxGeometry height="26" width="380" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="m8a" parent="m0" style="text;fontSize=10;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="Year" vertex="1">
+          <mxGeometry height="26" width="60" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="m8b" parent="m0" style="text;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Record" vertex="1">
+          <mxGeometry height="26" width="90" x="60" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="m8c" parent="m0" style="text;fontSize=10;fontStyle=1;align=left;spacingLeft=6;verticalAlign=middle;" value="Result" vertex="1">
+          <mxGeometry height="26" width="230" x="150" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="m9" parent="m0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="m9a" parent="m0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2025" vertex="1">
+          <mxGeometry height="28" width="60" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="m9b" parent="m0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="4–0–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="m9c" parent="m0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Champion" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="m10" parent="m0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="m10a" parent="m0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2024" vertex="1">
+          <mxGeometry height="28" width="60" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="m10b" parent="m0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="3–1–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="m10c" parent="m0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Runner-up" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="m11" parent="m0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="m11a" parent="m0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2023" vertex="1">
+          <mxGeometry height="28" width="60" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="m11b" parent="m0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="2–2–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="m11c" parent="m0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Playoff exit (R1)" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="m12" parent="m0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="m12a" parent="m0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2022" vertex="1">
+          <mxGeometry height="28" width="60" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="m12b" parent="m0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="2–2–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="m12c" parent="m0" style="text;fontSize=11;fontColor=#999999;align=left;spacingLeft=6;verticalAlign=middle;" value="Missed playoffs" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="m13" parent="m0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" value="SKILLS" vertex="1">
+          <mxGeometry height="16" width="80" y="466" as="geometry" />
+        </mxCell>
+        <mxCell id="m14" parent="m0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Offense" vertex="1">
+          <mxGeometry height="34" width="380" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="m15" parent="m0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Defense" vertex="1">
+          <mxGeometry height="34" width="380" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="m16" parent="m0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Coach" vertex="1">
+          <mxGeometry height="34" width="380" y="556" as="geometry" />
+        </mxCell>
+        <mxCell id="d0" parent="1" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#444444;fontStyle=1;fontSize=11;rounded=1;" value="Desktop" vertex="1">
+          <mxGeometry height="572" width="620" x="420" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="d0" style="fillColor=#3a3a3a;strokeColor=#3a3a3a;" value="" vertex="1">
+          <mxGeometry height="548" width="160" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="d0" style="fillColor=#2a2a2a;strokeColor=#2a2a2a;" value="" vertex="1">
+          <mxGeometry height="50" width="160" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" parent="d0" style="fillColor=#666666;strokeColor=#666666;rounded=1;" value="" vertex="1">
+          <mxGeometry height="28" width="28" x="10" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" parent="d0" style="text;fontSize=12;fontStyle=1;fontColor=#ffffff;align=left;verticalAlign=middle;" value="FootballSim" vertex="1">
+          <mxGeometry height="28" width="108" x="44" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" parent="d0" style="text;fontSize=12;fontColor=#888888;align=left;spacingLeft=12;verticalAlign=middle;" value="Game" vertex="1">
+          <mxGeometry height="34" width="148" x="6" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="d6" parent="d0" style="rounded=1;fillColor=#555555;strokeColor=#555555;" value="" vertex="1">
+          <mxGeometry height="34" width="148" x="6" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="d7" parent="d0" style="text;fontSize=12;fontStyle=1;fontColor=#ffffff;align=left;spacingLeft=12;verticalAlign=middle;" value="League" vertex="1">
+          <mxGeometry height="34" width="148" x="6" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="d8" parent="d0" style="fillColor=#ffffff;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="548" width="460" x="160" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="d9" parent="d0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=12;verticalAlign=middle;" value="← Teams   /   Bears" vertex="1">
+          <mxGeometry height="22" width="280" x="160" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="d10" parent="d0" style="fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="76" width="460" x="160" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="d10a" parent="d0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="48" width="48" x="170" y="64" as="geometry" />
+        </mxCell>
+        <mxCell id="d10b" parent="d0" style="text;fontSize=18;fontStyle=1;align=left;spacingLeft=4;verticalAlign=middle;" value="Bears" vertex="1">
+          <mxGeometry height="24" width="380" x="228" y="64" as="geometry" />
+        </mxCell>
+        <mxCell id="d10c" parent="d0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=4;verticalAlign=middle;" value="6W · 2L · 0T" vertex="1">
+          <mxGeometry height="16" width="200" x="228" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d10d" parent="d0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=4;verticalAlign=middle;" value="1 Championship" vertex="1">
+          <mxGeometry height="16" width="200" x="228" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="d11" parent="d0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;" value="TEAM HISTORY" vertex="1">
+          <mxGeometry height="16" width="140" x="170" y="146" as="geometry" />
+        </mxCell>
+        <mxCell id="d12" parent="d0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="460" x="160" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="d12a" parent="d0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=12;verticalAlign=middle;" value="Championship Record" vertex="1">
+          <mxGeometry height="28" width="260" x="160" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="d12b" parent="d0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=12;verticalAlign=middle;" value="1W · 1 app." vertex="1">
+          <mxGeometry height="28" width="200" x="420" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="d13" parent="d0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="460" x="160" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="d13a" parent="d0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=12;verticalAlign=middle;" value="Playoff Record" vertex="1">
+          <mxGeometry height="28" width="260" x="160" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="d13b" parent="d0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=12;verticalAlign=middle;" value="2W · 1L" vertex="1">
+          <mxGeometry height="28" width="200" x="420" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="d14" parent="d0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="460" x="160" y="218" as="geometry" />
+        </mxCell>
+        <mxCell id="d14a" parent="d0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=12;verticalAlign=middle;" value="Playoff Appearances" vertex="1">
+          <mxGeometry height="28" width="260" x="160" y="218" as="geometry" />
+        </mxCell>
+        <mxCell id="d14b" parent="d0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=12;verticalAlign=middle;" value="2" vertex="1">
+          <mxGeometry height="28" width="200" x="420" y="218" as="geometry" />
+        </mxCell>
+        <mxCell id="d15" parent="d0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;" value="SEASON LOG" vertex="1">
+          <mxGeometry height="16" width="120" x="170" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="d16" parent="d0" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" value="" vertex="1">
+          <mxGeometry height="26" width="460" x="160" y="278" as="geometry" />
+        </mxCell>
+        <mxCell id="d16a" parent="d0" style="text;fontSize=10;fontStyle=1;align=left;spacingLeft=12;verticalAlign=middle;" value="Year" vertex="1">
+          <mxGeometry height="26" width="80" x="160" y="278" as="geometry" />
+        </mxCell>
+        <mxCell id="d16b" parent="d0" style="text;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Record" vertex="1">
+          <mxGeometry height="26" width="100" x="240" y="278" as="geometry" />
+        </mxCell>
+        <mxCell id="d16c" parent="d0" style="text;fontSize=10;fontStyle=1;align=left;spacingLeft=6;verticalAlign=middle;" value="Result" vertex="1">
+          <mxGeometry height="26" width="280" x="340" y="278" as="geometry" />
+        </mxCell>
+        <mxCell id="d17" parent="d0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="460" x="160" y="304" as="geometry" />
+        </mxCell>
+        <mxCell id="d17a" parent="d0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=12;verticalAlign=middle;" value="2025" vertex="1">
+          <mxGeometry height="28" width="80" x="160" y="304" as="geometry" />
+        </mxCell>
+        <mxCell id="d17b" parent="d0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="4–0–0" vertex="1">
+          <mxGeometry height="28" width="100" x="240" y="304" as="geometry" />
+        </mxCell>
+        <mxCell id="d17c" parent="d0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Champion" vertex="1">
+          <mxGeometry height="28" width="280" x="340" y="304" as="geometry" />
+        </mxCell>
+        <mxCell id="d18" parent="d0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="460" x="160" y="332" as="geometry" />
+        </mxCell>
+        <mxCell id="d18a" parent="d0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=12;verticalAlign=middle;" value="2024" vertex="1">
+          <mxGeometry height="28" width="80" x="160" y="332" as="geometry" />
+        </mxCell>
+        <mxCell id="d18b" parent="d0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="3–1–0" vertex="1">
+          <mxGeometry height="28" width="100" x="240" y="332" as="geometry" />
+        </mxCell>
+        <mxCell id="d18c" parent="d0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Runner-up" vertex="1">
+          <mxGeometry height="28" width="280" x="340" y="332" as="geometry" />
+        </mxCell>
+        <mxCell id="d19" parent="d0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="460" x="160" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="d19a" parent="d0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=12;verticalAlign=middle;" value="2023" vertex="1">
+          <mxGeometry height="28" width="80" x="160" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="d19b" parent="d0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="2–2–0" vertex="1">
+          <mxGeometry height="28" width="100" x="240" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="d19c" parent="d0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Playoff exit (R1)" vertex="1">
+          <mxGeometry height="28" width="280" x="340" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="d20" parent="d0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="460" x="160" y="388" as="geometry" />
+        </mxCell>
+        <mxCell id="d20a" parent="d0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=12;verticalAlign=middle;" value="2022" vertex="1">
+          <mxGeometry height="28" width="80" x="160" y="388" as="geometry" />
+        </mxCell>
+        <mxCell id="d20b" parent="d0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="2–2–0" vertex="1">
+          <mxGeometry height="28" width="100" x="240" y="388" as="geometry" />
+        </mxCell>
+        <mxCell id="d20c" parent="d0" style="text;fontSize=11;fontColor=#999999;align=left;spacingLeft=6;verticalAlign=middle;" value="Missed playoffs" vertex="1">
+          <mxGeometry height="28" width="280" x="340" y="388" as="geometry" />
+        </mxCell>
+        <mxCell id="d21" parent="d0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;" value="SKILLS" vertex="1">
+          <mxGeometry height="16" width="80" x="170" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="d22" parent="d0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Offense" vertex="1">
+          <mxGeometry height="34" width="460" x="160" y="448" as="geometry" />
+        </mxCell>
+        <mxCell id="d23" parent="d0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Defense" vertex="1">
+          <mxGeometry height="34" width="460" x="160" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="d24" parent="d0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Coach" vertex="1">
+          <mxGeometry height="34" width="460" x="160" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="mo0" parent="1" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#444444;fontStyle=1;fontSize=11;rounded=1;" value="Mobile — Menu Open" vertex="1">
+          <mxGeometry height="600" width="380" x="20" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_nav" parent="mo0" style="fillColor=#eeeeee;strokeColor=#cccccc;" value="" vertex="1">
+          <mxGeometry height="46" width="380" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_header" parent="mo0" style="rounded=1;fillColor=#f5f5f5;strokeColor=#e0e0e0;" value="" vertex="1">
+          <mxGeometry height="100" width="380" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_c1" parent="mo0" style="fillColor=#f5f5f5;strokeColor=#e0e0e0;" value="" vertex="1">
+          <mxGeometry height="84" width="380" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_c2" parent="mo0" style="fillColor=#f5f5f5;strokeColor=#e0e0e0;" value="" vertex="1">
+          <mxGeometry height="170" width="380" y="296" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_c3" parent="mo0" style="fillColor=#f5f5f5;strokeColor=#e0e0e0;" value="" vertex="1">
+          <mxGeometry height="104" width="380" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_scrim" parent="mo0" style="fillColor=#888888;strokeColor=#888888;opacity=50;" value="" vertex="1">
+          <mxGeometry height="552" width="160" x="220" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_drawer" parent="mo0" style="fillColor=#3a3a3a;strokeColor=#3a3a3a;" value="" vertex="1">
+          <mxGeometry height="552" width="220" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_logobar" parent="mo0" style="fillColor=#2a2a2a;strokeColor=#2a2a2a;" value="" vertex="1">
+          <mxGeometry height="50" width="220" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_icon" parent="mo0" style="fillColor=#666666;strokeColor=#666666;rounded=1;" value="" vertex="1">
+          <mxGeometry height="28" width="28" x="10" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_logo" parent="mo0" style="text;fontSize=12;fontStyle=1;fontColor=#ffffff;align=left;verticalAlign=middle;" value="FootballSim" vertex="1">
+          <mxGeometry height="28" width="110" x="44" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_close" parent="mo0" style="text;fontSize=14;fontColor=#888888;align=right;spacingRight=14;verticalAlign=middle;" value="✕" vertex="1">
+          <mxGeometry height="50" width="70" x="150" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_game" parent="mo0" style="text;fontSize=12;fontColor=#888888;align=left;spacingLeft=12;verticalAlign=middle;" value="Game" vertex="1">
+          <mxGeometry height="34" width="208" x="6" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_league_bg" parent="mo0" style="rounded=1;fillColor=#555555;strokeColor=#555555;" value="" vertex="1">
+          <mxGeometry height="34" width="208" x="6" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="mo_league" parent="mo0" style="text;fontSize=12;fontStyle=1;fontColor=#ffffff;align=left;spacingLeft=12;verticalAlign=middle;" value="League" vertex="1">
+          <mxGeometry height="34" width="208" x="6" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="oe0" parent="1" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#444444;fontStyle=1;fontSize=11;rounded=1;" value="Mobile — Offense Expanded" vertex="1">
+          <mxGeometry height="690" width="380" x="420" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="oe1" parent="oe0" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" value="" vertex="1">
+          <mxGeometry height="46" width="380" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="oe1a" parent="oe0" style="text;fontSize=18;fontColor=#444444;align=left;spacingLeft=14;verticalAlign=middle;" value="☰" vertex="1">
+          <mxGeometry height="46" width="50" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="oe1b" parent="oe0" style="text;fontSize=13;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" value="Bears" vertex="1">
+          <mxGeometry height="46" width="280" x="50" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="oe2" parent="oe0" style="fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="100" width="380" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="oe2e" parent="oe0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="← Teams" vertex="1">
+          <mxGeometry height="20" width="120" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="oe2a" parent="oe0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="48" width="48" x="10" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="oe2b" parent="oe0" style="text;fontSize=18;fontStyle=1;align=left;spacingLeft=4;verticalAlign=middle;" value="Bears" vertex="1">
+          <mxGeometry height="24" width="304" x="68" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="oe2c" parent="oe0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=4;verticalAlign=middle;" value="6W · 2L · 0T" vertex="1">
+          <mxGeometry height="16" width="200" x="68" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="oe2d" parent="oe0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=4;verticalAlign=middle;" value="1 Championship" vertex="1">
+          <mxGeometry height="16" width="200" x="68" y="144" as="geometry" />
+        </mxCell>
+        <mxCell id="oe3" parent="oe0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" value="TEAM HISTORY" vertex="1">
+          <mxGeometry height="16" width="140" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="oe4" parent="oe0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="oe4a" parent="oe0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="Championship Record" vertex="1">
+          <mxGeometry height="28" width="200" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="oe4b" parent="oe0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="1W · 1 app." vertex="1">
+          <mxGeometry height="28" width="200" x="180" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="oe5" parent="oe0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="oe5a" parent="oe0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="Playoff Record" vertex="1">
+          <mxGeometry height="28" width="200" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="oe5b" parent="oe0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="2W · 1L" vertex="1">
+          <mxGeometry height="28" width="200" x="180" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="oe6" parent="oe0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="oe6a" parent="oe0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="Playoff Appearances" vertex="1">
+          <mxGeometry height="28" width="200" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="oe6b" parent="oe0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="2" vertex="1">
+          <mxGeometry height="28" width="200" x="180" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="oe7" parent="oe0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" value="SEASON LOG" vertex="1">
+          <mxGeometry height="16" width="120" y="296" as="geometry" />
+        </mxCell>
+        <mxCell id="oe8" parent="oe0" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" value="" vertex="1">
+          <mxGeometry height="26" width="380" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="oe8a" parent="oe0" style="text;fontSize=10;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="Year" vertex="1">
+          <mxGeometry height="26" width="60" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="oe8b" parent="oe0" style="text;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" value="Record" vertex="1">
+          <mxGeometry height="26" width="90" x="60" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="oe8c" parent="oe0" style="text;fontSize=10;fontStyle=1;align=left;spacingLeft=6;verticalAlign=middle;" value="Result" vertex="1">
+          <mxGeometry height="26" width="230" x="150" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="oe9" parent="oe0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="oe9a" parent="oe0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2025" vertex="1">
+          <mxGeometry height="28" width="60" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="oe9b" parent="oe0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="4–0–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="oe9c" parent="oe0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Champion" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="oe10" parent="oe0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="oe10a" parent="oe0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2024" vertex="1">
+          <mxGeometry height="28" width="60" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="oe10b" parent="oe0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="3–1–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="oe10c" parent="oe0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Runner-up" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="oe11" parent="oe0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="oe11a" parent="oe0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2023" vertex="1">
+          <mxGeometry height="28" width="60" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="oe11b" parent="oe0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="2–2–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="oe11c" parent="oe0" style="text;fontSize=11;align=left;spacingLeft=6;verticalAlign=middle;" value="Playoff exit (R1)" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="oe12" parent="oe0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="28" width="380" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="oe12a" parent="oe0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=10;verticalAlign=middle;" value="2022" vertex="1">
+          <mxGeometry height="28" width="60" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="oe12b" parent="oe0" style="text;fontSize=11;align=center;verticalAlign=middle;" value="2–2–0" vertex="1">
+          <mxGeometry height="28" width="90" x="60" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="oe12c" parent="oe0" style="text;fontSize=11;fontColor=#999999;align=left;spacingLeft=6;verticalAlign=middle;" value="Missed playoffs" vertex="1">
+          <mxGeometry height="28" width="230" x="150" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="oe13" parent="oe0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" value="SKILLS" vertex="1">
+          <mxGeometry height="16" width="80" y="466" as="geometry" />
+        </mxCell>
+        <mxCell id="oe14" parent="oe0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▼  Offense" vertex="1">
+          <mxGeometry height="34" width="380" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="oe15" parent="oe0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="32" width="380" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="oe15a" parent="oe0" style="text;fontSize=11;align=left;spacingLeft=14;verticalAlign=middle;" value="QB" vertex="1">
+          <mxGeometry height="32" width="40" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="oe15t" parent="oe0" style="fillColor=#cccccc;strokeColor=#cccccc;" value="" vertex="1">
+          <mxGeometry height="8" width="240" x="48" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="oe15f" parent="oe0" style="fillColor=#555555;strokeColor=#555555;" value="" vertex="1">
+          <mxGeometry height="8" width="187" x="48" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="oe15v" parent="oe0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="78" vertex="1">
+          <mxGeometry height="32" width="84" x="296" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="oe16" parent="oe0" style="fillColor=#f8f8f8;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="32" width="380" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="oe16a" parent="oe0" style="text;fontSize=11;align=left;spacingLeft=14;verticalAlign=middle;" value="RB" vertex="1">
+          <mxGeometry height="32" width="40" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="oe16t" parent="oe0" style="fillColor=#cccccc;strokeColor=#cccccc;" value="" vertex="1">
+          <mxGeometry height="8" width="240" x="48" y="562" as="geometry" />
+        </mxCell>
+        <mxCell id="oe16f" parent="oe0" style="fillColor=#555555;strokeColor=#555555;" value="" vertex="1">
+          <mxGeometry height="8" width="163" x="48" y="562" as="geometry" />
+        </mxCell>
+        <mxCell id="oe16v" parent="oe0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="68" vertex="1">
+          <mxGeometry height="32" width="84" x="296" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="oe17" parent="oe0" style="fillColor=#ffffff;strokeColor=#eeeeee;" value="" vertex="1">
+          <mxGeometry height="32" width="380" y="582" as="geometry" />
+        </mxCell>
+        <mxCell id="oe17a" parent="oe0" style="text;fontSize=11;align=left;spacingLeft=14;verticalAlign=middle;" value="WR" vertex="1">
+          <mxGeometry height="32" width="40" y="582" as="geometry" />
+        </mxCell>
+        <mxCell id="oe17t" parent="oe0" style="fillColor=#cccccc;strokeColor=#cccccc;" value="" vertex="1">
+          <mxGeometry height="8" width="240" x="48" y="594" as="geometry" />
+        </mxCell>
+        <mxCell id="oe17f" parent="oe0" style="fillColor=#555555;strokeColor=#555555;" value="" vertex="1">
+          <mxGeometry height="8" width="206" x="48" y="594" as="geometry" />
+        </mxCell>
+        <mxCell id="oe17v" parent="oe0" style="text;fontSize=11;fontStyle=1;align=right;spacingRight=10;verticalAlign=middle;" value="86" vertex="1">
+          <mxGeometry height="32" width="84" x="296" y="582" as="geometry" />
+        </mxCell>
+        <mxCell id="oe18" parent="oe0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Defense" vertex="1">
+          <mxGeometry height="34" width="380" y="614" as="geometry" />
+        </mxCell>
+        <mxCell id="oe19" parent="oe0" style="fillColor=#e8e8e8;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=12;" value="▶  Coach" vertex="1">
+          <mxGeometry height="34" width="380" y="650" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

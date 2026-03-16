@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="700" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="600" value="6. Season — Playoffs" style="swimlane;startSize=28;fillColor=#ffffff;strokeColor=#444444;fontStyle=1;fontSize=12;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="20" y="20" width="380" height="540" as="geometry" />
+    </mxCell>
+    <!-- Nav -->
+    <mxCell id="601" value="← Dashboard   Season 2" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;align=left;spacingLeft=12;fontStyle=1;fontSize=11;" vertex="1" parent="600">
+      <mxGeometry x="0" y="28" width="380" height="46" as="geometry" />
+    </mxCell>
+    <!-- Tabs -->
+    <mxCell id="602a" value="Schedule" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;fontSize=11;" vertex="1" parent="600">
+      <mxGeometry x="0" y="74" width="127" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="602b" value="Standings" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;fontSize=11;" vertex="1" parent="600">
+      <mxGeometry x="127" y="74" width="126" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="602c" value="Playoffs" style="fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=11;" vertex="1" parent="600">
+      <mxGeometry x="253" y="74" width="127" height="36" as="geometry" />
+    </mxCell>
+    <!-- Column labels -->
+    <mxCell id="603" value="SEMIFINALS" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=center;" vertex="1" parent="600">
+      <mxGeometry x="10" y="120" width="160" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="604" value="FINAL" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=center;" vertex="1" parent="600">
+      <mxGeometry x="210" y="120" width="160" height="16" as="geometry" />
+    </mxCell>
+    <!-- SF matchup 1 -->
+    <mxCell id="605" value="(1) Bears&#xa;vs&#xa;(4) Vikings" style="fillColor=#f0f0f0;strokeColor=#aaaaaa;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="600">
+      <mxGeometry x="10" y="144" width="140" height="70" as="geometry" />
+    </mxCell>
+    <!-- SF matchup 2 -->
+    <mxCell id="606" value="(2) Packers&#xa;vs&#xa;(3) Lions" style="fillColor=#f0f0f0;strokeColor=#aaaaaa;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="600">
+      <mxGeometry x="10" y="240" width="140" height="70" as="geometry" />
+    </mxCell>
+    <!-- Bracket connector lines -->
+    <mxCell id="607" value="" style="fillColor=#aaaaaa;strokeColor=#aaaaaa;" vertex="1" parent="600">
+      <mxGeometry x="150" y="174" width="30" height="4" as="geometry" />
+    </mxCell>
+    <mxCell id="608" value="" style="fillColor=#aaaaaa;strokeColor=#aaaaaa;" vertex="1" parent="600">
+      <mxGeometry x="150" y="270" width="30" height="4" as="geometry" />
+    </mxCell>
+    <mxCell id="609" value="" style="fillColor=#aaaaaa;strokeColor=#aaaaaa;" vertex="1" parent="600">
+      <mxGeometry x="178" y="174" width="4" height="100" as="geometry" />
+    </mxCell>
+    <mxCell id="611" value="" style="fillColor=#aaaaaa;strokeColor=#aaaaaa;" vertex="1" parent="600">
+      <mxGeometry x="182" y="222" width="28" height="4" as="geometry" />
+    </mxCell>
+    <!-- Championship Final box -->
+    <mxCell id="610" value="Championship Final&#xa;TBD vs TBD&#xa;&#xa;Simulate to reveal →" style="fillColor=#f0f0f0;strokeColor=#444444;strokeWidth=2;fontSize=11;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="600">
+      <mxGeometry x="210" y="180" width="150" height="90" as="geometry" />
+    </mxCell>
+    <!-- Simulate playoffs button -->
+    <mxCell id="612" value="Simulate Playoffs" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=12;" vertex="1" parent="600">
+      <mxGeometry x="90" y="390" width="200" height="38" as="geometry" />
+    </mxCell>
+    <!-- Note -->
+    <mxCell id="613" value="Top 2 seeds advance from regular season standings" style="text;fontSize=10;fontColor=#aaaaaa;align=center;" vertex="1" parent="600">
+      <mxGeometry x="20" y="440" width="340" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
