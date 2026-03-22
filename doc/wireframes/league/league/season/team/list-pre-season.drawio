@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ROW 1: MOBILE BASE (x=20) + DESKTOP BASE (x=420)       -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+
+    <!-- MOBILE BASE: Pre-Season Teams -->
+    <mxCell id="m0" value="Pre-Season Teams" style="swimlane;startSize=24;" vertex="1" parent="1">
+      <mxGeometry x="20" y="20" width="380" height="560" as="geometry" />
+    </mxCell>
+    <!-- Mobile nav bar -->
+    <mxCell id="m_nav" value="" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" vertex="1" parent="m0">
+      <mxGeometry x="0" y="24" width="380" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="m_nav_h" value="☰" style="text;fontSize=18;fontColor=#444444;align=left;spacingLeft=14;verticalAlign=middle;" vertex="1" parent="m0">
+      <mxGeometry x="0" y="24" width="50" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="m_nav_t" value="FootballSim" style="text;fontSize=13;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="m0">
+      <mxGeometry x="50" y="24" width="280" height="46" as="geometry" />
+    </mxCell>
+    <!-- Content -->
+    <mxCell id="m1" value="← Seasons / 2025 / Teams" style="text;fontSize=10;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="m0">
+      <mxGeometry x="0" y="70" width="380" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="m2a" value="2025 Season" style="text;fontSize=14;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="m0">
+      <mxGeometry x="0" y="90" width="380" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="m2b" value="Pre-Season" style="text;fontSize=11;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="m0">
+      <mxGeometry x="0" y="114" width="380" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="m3a" value="TEAMS" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="m0">
+      <mxGeometry x="0" y="144" width="120" height="16" as="geometry" />
+    </mxCell>
+    <!-- DEFAULT CONFERENCE header -->
+    <mxCell id="m_cDbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="m0">
+      <mxGeometry x="10" y="168" width="360" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="m_cDl" value="Default Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="m0">
+      <mxGeometry x="10" y="168" width="220" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="m_cDa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="m0">
+      <mxGeometry x="262" y="172" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- Team card: Bears -->
+    <mxCell id="m4a" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="m0">
+      <mxGeometry x="10" y="204" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="m4a_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="m0">
+      <mxGeometry x="22" y="216" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="m4a_n" value="Bears" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="m0">
+      <mxGeometry x="78" y="224" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- Team card: Vikings -->
+    <mxCell id="m4b" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="m0">
+      <mxGeometry x="10" y="280" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="m4b_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="m0">
+      <mxGeometry x="22" y="292" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="m4b_n" value="Vikings" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="m0">
+      <mxGeometry x="78" y="300" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- Team card: Lions -->
+    <mxCell id="m4c" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="m0">
+      <mxGeometry x="10" y="356" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="m4c_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="m0">
+      <mxGeometry x="22" y="368" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="m4c_n" value="Lions" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="m0">
+      <mxGeometry x="78" y="376" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- Team card: Packers -->
+    <mxCell id="m4d" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="m0">
+      <mxGeometry x="10" y="432" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="m4d_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="m0">
+      <mxGeometry x="22" y="444" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="m4d_n" value="Packers" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="m0">
+      <mxGeometry x="78" y="452" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- + Add Conference primary button -->
+    <mxCell id="m_addC" value="+ Add Conference" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="m0">
+      <mxGeometry x="120" y="514" width="140" height="28" as="geometry" />
+    </mxCell>
+
+    <!-- DESKTOP BASE: Pre-Season Teams -->
+    <mxCell id="d0" value="Pre-Season Teams" style="swimlane;startSize=24;" vertex="1" parent="1">
+      <mxGeometry x="420" y="20" width="620" height="490" as="geometry" />
+    </mxCell>
+    <!-- Sidebar -->
+    <mxCell id="d0_sb" value="" style="fillColor=#3a3a3a;strokeColor=#3a3a3a;" vertex="1" parent="d0">
+      <mxGeometry x="0" y="0" width="160" height="490" as="geometry" />
+    </mxCell>
+    <mxCell id="d0_lb" value="FootballSim" style="fillColor=#2a2a2a;strokeColor=#2a2a2a;fontColor=#ffffff;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="0" y="0" width="160" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="d0_ng" value="Game" style="text;fontColor=#aaaaaa;fontSize=11;align=left;spacingLeft=20;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="0" y="56" width="160" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="d0_nl" value="League" style="fillColor=#555555;strokeColor=#555555;fontColor=#ffffff;fontSize=11;fontStyle=1;align=left;spacingLeft=20;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="0" y="92" width="160" height="36" as="geometry" />
+    </mxCell>
+    <!-- Content -->
+    <mxCell id="d1" value="← Seasons / 2025 / Teams" style="text;fontSize=10;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="d0">
+      <mxGeometry x="160" y="30" width="450" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="d2a" value="2025 Season" style="text;fontSize=14;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="d0">
+      <mxGeometry x="160" y="50" width="440" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="d2b" value="Pre-Season" style="text;fontSize=11;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="d0">
+      <mxGeometry x="160" y="74" width="440" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="d3a" value="TEAMS" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="d0">
+      <mxGeometry x="160" y="104" width="120" height="16" as="geometry" />
+    </mxCell>
+    <!-- DEFAULT CONFERENCE header -->
+    <mxCell id="d_cDbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="d0">
+      <mxGeometry x="170" y="128" width="440" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="d_cDl" value="Default Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="170" y="128" width="300" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="d_cDa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="d0">
+      <mxGeometry x="512" y="132" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- Row 1: Bears | Vikings -->
+    <mxCell id="d4a" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="d0">
+      <mxGeometry x="170" y="164" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="d4a_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="d0">
+      <mxGeometry x="182" y="180" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="d4a_n" value="Bears" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="228" y="182" width="140" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="d4b" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="d0">
+      <mxGeometry x="390" y="164" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="d4b_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="d0">
+      <mxGeometry x="402" y="180" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="d4b_n" value="Vikings" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="448" y="182" width="140" height="20" as="geometry" />
+    </mxCell>
+    <!-- Row 2: Lions | Packers -->
+    <mxCell id="d4c" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="d0">
+      <mxGeometry x="170" y="254" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="d4c_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="d0">
+      <mxGeometry x="182" y="270" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="d4c_n" value="Lions" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="228" y="272" width="140" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="d4d" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="d0">
+      <mxGeometry x="390" y="254" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="d4d_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="d0">
+      <mxGeometry x="402" y="270" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="d4d_n" value="Packers" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="448" y="272" width="140" height="20" as="geometry" />
+    </mxCell>
+    <!-- Row 3: Steelers | Patriots -->
+    <mxCell id="d4e" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="d0">
+      <mxGeometry x="170" y="344" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="d4e_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="d0">
+      <mxGeometry x="182" y="360" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="d4e_n" value="Steelers" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="228" y="362" width="140" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="d4f" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="d0">
+      <mxGeometry x="390" y="344" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="d4f_l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="d0">
+      <mxGeometry x="402" y="360" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="d4f_n" value="Patriots" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="d0">
+      <mxGeometry x="448" y="362" width="140" height="20" as="geometry" />
+    </mxCell>
+    <!-- + Add Conference primary button -->
+    <mxCell id="d_addC" value="+ Add Conference" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="d0">
+      <mxGeometry x="320" y="438" width="140" height="28" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- ROW 2: MOBILE MULTI-CONF (x=20) + DESKTOP MULTI-CONF (x=420)  -->
+    <!-- Canvas y = 20 + 560 + 50 = 630                                 -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- MOBILE MULTI-CONFERENCE: Pre-Season Teams (Multi-Conference) -->
+    <mxCell id="mc0" value="Pre-Season Teams (Multi-Conference)" style="swimlane;startSize=24;" vertex="1" parent="1">
+      <mxGeometry x="20" y="630" width="380" height="610" as="geometry" />
+    </mxCell>
+    <!-- Mobile nav bar -->
+    <mxCell id="mc_nav" value="" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" vertex="1" parent="mc0">
+      <mxGeometry x="0" y="24" width="380" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_nav_h" value="☰" style="text;fontSize=18;fontColor=#444444;align=left;spacingLeft=14;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="0" y="24" width="50" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_nav_t" value="FootballSim" style="text;fontSize=13;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="50" y="24" width="280" height="46" as="geometry" />
+    </mxCell>
+    <!-- Content -->
+    <mxCell id="mc1" value="← Seasons / 2025 / Teams" style="text;fontSize=10;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="mc0">
+      <mxGeometry x="0" y="70" width="380" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="mc2a" value="2025 Season" style="text;fontSize=14;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="mc0">
+      <mxGeometry x="0" y="90" width="380" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="mc2b" value="Pre-Season" style="text;fontSize=11;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="mc0">
+      <mxGeometry x="0" y="114" width="380" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="mc3a" value="TEAMS" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="mc0">
+      <mxGeometry x="0" y="144" width="120" height="16" as="geometry" />
+    </mxCell>
+    <!-- EAST CONFERENCE header -->
+    <mxCell id="mc_cEbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="168" width="360" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_cEl" value="East Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="168" width="220" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_cEa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="mc0">
+      <mxGeometry x="262" y="172" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- East: Bears -->
+    <mxCell id="mc_t1" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="204" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t1l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="mc0">
+      <mxGeometry x="22" y="216" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t1n" value="Bears" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="78" y="224" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- East: Vikings -->
+    <mxCell id="mc_t2" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="280" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t2l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="mc0">
+      <mxGeometry x="22" y="292" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t2n" value="Vikings" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="78" y="300" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- WEST CONFERENCE header -->
+    <mxCell id="mc_cWbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="360" width="360" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_cWl" value="West Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="360" width="220" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_cWa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="mc0">
+      <mxGeometry x="262" y="364" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- West: Lions -->
+    <mxCell id="mc_t3" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="396" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t3l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="mc0">
+      <mxGeometry x="22" y="408" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t3n" value="Lions" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="78" y="416" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- West: Packers -->
+    <mxCell id="mc_t4" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="mc0">
+      <mxGeometry x="10" y="472" width="360" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t4l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="mc0">
+      <mxGeometry x="22" y="484" width="44" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="mc_t4n" value="Packers" style="text;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="mc0">
+      <mxGeometry x="78" y="492" width="280" height="22" as="geometry" />
+    </mxCell>
+    <!-- + Add Conference primary button -->
+    <mxCell id="mc_addC" value="+ Add Conference" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="mc0">
+      <mxGeometry x="120" y="554" width="140" height="28" as="geometry" />
+    </mxCell>
+
+    <!-- DESKTOP MULTI-CONFERENCE: Pre-Season Teams (Multi-Conference) -->
+    <mxCell id="dc0" value="Pre-Season Teams (Multi-Conference)" style="swimlane;startSize=24;" vertex="1" parent="1">
+      <mxGeometry x="420" y="630" width="620" height="440" as="geometry" />
+    </mxCell>
+    <!-- Sidebar -->
+    <mxCell id="dc0_sb" value="" style="fillColor=#3a3a3a;strokeColor=#3a3a3a;" vertex="1" parent="dc0">
+      <mxGeometry x="0" y="0" width="160" height="440" as="geometry" />
+    </mxCell>
+    <mxCell id="dc0_lb" value="FootballSim" style="fillColor=#2a2a2a;strokeColor=#2a2a2a;fontColor=#ffffff;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="0" y="0" width="160" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="dc0_ng" value="Game" style="text;fontColor=#aaaaaa;fontSize=11;align=left;spacingLeft=20;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="0" y="56" width="160" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="dc0_nl" value="League" style="fillColor=#555555;strokeColor=#555555;fontColor=#ffffff;fontSize=11;fontStyle=1;align=left;spacingLeft=20;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="0" y="92" width="160" height="36" as="geometry" />
+    </mxCell>
+    <!-- Content -->
+    <mxCell id="dc1" value="← Seasons / 2025 / Teams" style="text;fontSize=10;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="dc0">
+      <mxGeometry x="160" y="30" width="450" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="dc2a" value="2025 Season" style="text;fontSize=14;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="dc0">
+      <mxGeometry x="160" y="50" width="440" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="dc2b" value="Pre-Season" style="text;fontSize=11;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="dc0">
+      <mxGeometry x="160" y="74" width="440" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="dc3a" value="TEAMS" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="dc0">
+      <mxGeometry x="160" y="104" width="120" height="16" as="geometry" />
+    </mxCell>
+    <!-- EAST CONFERENCE header -->
+    <mxCell id="dc_cEbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="dc0">
+      <mxGeometry x="170" y="128" width="440" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_cEl" value="East Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="170" y="128" width="300" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_cEa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="dc0">
+      <mxGeometry x="512" y="132" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- East: Bears | Vikings -->
+    <mxCell id="dc_t1" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="dc0">
+      <mxGeometry x="170" y="164" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t1l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="dc0">
+      <mxGeometry x="182" y="180" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t1n" value="Bears" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="228" y="182" width="140" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t2" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="dc0">
+      <mxGeometry x="390" y="164" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t2l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="dc0">
+      <mxGeometry x="402" y="180" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t2n" value="Vikings" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="448" y="182" width="140" height="20" as="geometry" />
+    </mxCell>
+    <!-- WEST CONFERENCE header -->
+    <mxCell id="dc_cWbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="dc0">
+      <mxGeometry x="170" y="256" width="440" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_cWl" value="West Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="170" y="256" width="300" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_cWa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="dc0">
+      <mxGeometry x="512" y="260" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- West: Lions | Packers -->
+    <mxCell id="dc_t3" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="dc0">
+      <mxGeometry x="170" y="292" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t3l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="dc0">
+      <mxGeometry x="182" y="308" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t3n" value="Lions" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="228" y="310" width="140" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t4" value="" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" vertex="1" parent="dc0">
+      <mxGeometry x="390" y="292" width="210" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t4l" value="" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" vertex="1" parent="dc0">
+      <mxGeometry x="402" y="308" width="36" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="dc_t4n" value="Packers" style="text;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="dc0">
+      <mxGeometry x="448" y="310" width="140" height="20" as="geometry" />
+    </mxCell>
+    <!-- + Add Conference primary button -->
+    <mxCell id="dc_addC" value="+ Add Conference" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="dc0">
+      <mxGeometry x="320" y="386" width="140" height="28" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- ROW 3: MOBILE EMPTY STATE (x=20) + DESKTOP EMPTY STATE (x=420) -->
+    <!-- Canvas y = 630 + 610 + 50 = 1290                               -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- MOBILE EMPTY STATE: Pre-Season Teams (No Teams Added) -->
+    <mxCell id="me0" value="Pre-Season Teams (Empty State)" style="swimlane;startSize=24;" vertex="1" parent="1">
+      <mxGeometry x="20" y="1290" width="380" height="330" as="geometry" />
+    </mxCell>
+    <!-- Mobile nav bar -->
+    <mxCell id="me_nav" value="" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" vertex="1" parent="me0">
+      <mxGeometry x="0" y="24" width="380" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="me_nav_h" value="☰" style="text;fontSize=18;fontColor=#444444;align=left;spacingLeft=14;verticalAlign=middle;" vertex="1" parent="me0">
+      <mxGeometry x="0" y="24" width="50" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="me_nav_t" value="FootballSim" style="text;fontSize=13;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="me0">
+      <mxGeometry x="50" y="24" width="280" height="46" as="geometry" />
+    </mxCell>
+    <!-- Content -->
+    <mxCell id="me1" value="← Seasons / 2025 / Teams" style="text;fontSize=10;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="me0">
+      <mxGeometry x="0" y="70" width="380" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="me2a" value="2025 Season" style="text;fontSize=14;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="me0">
+      <mxGeometry x="0" y="90" width="380" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="me2b" value="Pre-Season" style="text;fontSize=11;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="me0">
+      <mxGeometry x="0" y="114" width="380" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="me3a" value="TEAMS" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="me0">
+      <mxGeometry x="0" y="144" width="120" height="16" as="geometry" />
+    </mxCell>
+    <!-- DEFAULT CONFERENCE header -->
+    <mxCell id="me_cDbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="me0">
+      <mxGeometry x="10" y="168" width="360" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="me_cDl" value="Default Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="me0">
+      <mxGeometry x="10" y="168" width="220" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="me_cDa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="me0">
+      <mxGeometry x="262" y="172" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- Empty state placeholder -->
+    <mxCell id="me_empty" value="" style="fillColor=#fafafa;strokeColor=#eeeeee;dashed=1;" vertex="1" parent="me0">
+      <mxGeometry x="10" y="204" width="360" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="me_emptyl" value="No teams added yet" style="text;fontSize=11;fontColor=#bbbbbb;align=center;verticalAlign=middle;" vertex="1" parent="me0">
+      <mxGeometry x="10" y="204" width="360" height="60" as="geometry" />
+    </mxCell>
+    <!-- + Add Conference primary button -->
+    <mxCell id="me_addC" value="+ Add Conference" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="me0">
+      <mxGeometry x="120" y="278" width="140" height="28" as="geometry" />
+    </mxCell>
+
+    <!-- DESKTOP EMPTY STATE: Pre-Season Teams (No Teams Added) -->
+    <mxCell id="de0" value="Pre-Season Teams (Empty State)" style="swimlane;startSize=24;" vertex="1" parent="1">
+      <mxGeometry x="420" y="1290" width="620" height="290" as="geometry" />
+    </mxCell>
+    <!-- Sidebar -->
+    <mxCell id="de0_sb" value="" style="fillColor=#3a3a3a;strokeColor=#3a3a3a;" vertex="1" parent="de0">
+      <mxGeometry x="0" y="0" width="160" height="290" as="geometry" />
+    </mxCell>
+    <mxCell id="de0_lb" value="FootballSim" style="fillColor=#2a2a2a;strokeColor=#2a2a2a;fontColor=#ffffff;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="de0">
+      <mxGeometry x="0" y="0" width="160" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="de0_ng" value="Game" style="text;fontColor=#aaaaaa;fontSize=11;align=left;spacingLeft=20;verticalAlign=middle;" vertex="1" parent="de0">
+      <mxGeometry x="0" y="56" width="160" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="de0_nl" value="League" style="fillColor=#555555;strokeColor=#555555;fontColor=#ffffff;fontSize=11;fontStyle=1;align=left;spacingLeft=20;verticalAlign=middle;" vertex="1" parent="de0">
+      <mxGeometry x="0" y="92" width="160" height="36" as="geometry" />
+    </mxCell>
+    <!-- Content -->
+    <mxCell id="de1" value="← Seasons / 2025 / Teams" style="text;fontSize=10;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="de0">
+      <mxGeometry x="160" y="30" width="450" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="de2a" value="2025 Season" style="text;fontSize=14;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="de0">
+      <mxGeometry x="160" y="50" width="440" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="de2b" value="Pre-Season" style="text;fontSize=11;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="de0">
+      <mxGeometry x="160" y="74" width="440" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="de3a" value="TEAMS" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;" vertex="1" parent="de0">
+      <mxGeometry x="160" y="104" width="120" height="16" as="geometry" />
+    </mxCell>
+    <!-- DEFAULT CONFERENCE header -->
+    <mxCell id="de_cDbg" value="" style="fillColor=#e8e8e8;strokeColor=#cccccc;" vertex="1" parent="de0">
+      <mxGeometry x="170" y="128" width="440" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="de_cDl" value="Default Conference" style="text;fontSize=10;fontStyle=1;fontColor=#666666;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="de0">
+      <mxGeometry x="170" y="128" width="300" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="de_cDa" value="+ Add Team" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="de0">
+      <mxGeometry x="512" y="132" width="98" height="20" as="geometry" />
+    </mxCell>
+    <!-- Empty state placeholder -->
+    <mxCell id="de_empty" value="" style="fillColor=#fafafa;strokeColor=#eeeeee;dashed=1;" vertex="1" parent="de0">
+      <mxGeometry x="170" y="164" width="440" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="de_emptyl" value="No teams added yet" style="text;fontSize=11;fontColor=#bbbbbb;align=center;verticalAlign=middle;" vertex="1" parent="de0">
+      <mxGeometry x="170" y="164" width="440" height="60" as="geometry" />
+    </mxCell>
+    <!-- + Add Conference primary button -->
+    <mxCell id="de_addC" value="+ Add Conference" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=10;" vertex="1" parent="de0">
+      <mxGeometry x="320" y="238" width="140" height="28" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
