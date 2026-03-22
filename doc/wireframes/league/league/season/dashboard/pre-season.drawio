@@ -1,0 +1,223 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0" version="29.6.3">
+  <diagram id="MqEH_wD9R1hSCwPVGz0n" name="Page-1">
+    <mxGraphModel dx="1042" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ps0" parent="1" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#444444;fontStyle=1;fontSize=11;rounded=1;" value="Mobile — Pre-season" vertex="1">
+          <mxGeometry height="520" width="380" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ps1" parent="ps0" style="fillColor=#e0e0e0;strokeColor=#aaaaaa;" value="" vertex="1">
+          <mxGeometry height="46" width="380" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="ps1a" parent="ps0" style="text;fontSize=18;fontColor=#444444;align=left;spacingLeft=14;verticalAlign=middle;" value="☰" vertex="1">
+          <mxGeometry height="46" width="50" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="ps1b" parent="ps0" style="text;fontSize=13;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" value="FootballSim" vertex="1">
+          <mxGeometry height="46" width="280" x="50" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="ps2" parent="ps0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=middle;" value="← Seasons   /   2025" vertex="1">
+          <mxGeometry height="36" width="380" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ps3a" parent="ps0" style="text;fontSize=18;fontStyle=1;align=left;spacingLeft=14;verticalAlign=middle;" value="2025 Season" vertex="1">
+          <mxGeometry height="70" width="200" y="106" as="geometry" />
+        </mxCell>
+        <mxCell id="ps3b" parent="ps0" style="text;fontSize=11;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Pre-season" vertex="1">
+          <mxGeometry height="20" width="182" x="190" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="ps3c" parent="ps0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="No schedule generated" vertex="1">
+          <mxGeometry height="16" width="182" x="190" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ps4h" parent="ps0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;verticalAlign=middle;" value="TEAMS" vertex="1">
+          <mxGeometry height="24" width="200" y="184" as="geometry" />
+        </mxCell>
+        <mxCell id="ps4b" parent="ps0" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=11;" value="+ Add Team" vertex="1">
+          <mxGeometry height="22" width="98" x="272" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r1" parent="ps0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="68" width="185" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r1a" parent="ps0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="8" y="234" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r1b" parent="ps0" style="text;fontSize=12;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Bears" vertex="1">
+          <mxGeometry height="18" width="139" x="38" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r1c" parent="ps0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="14" width="139" x="38" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r2" parent="ps0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="68" width="185" x="195" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r2a" parent="ps0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="203" y="234" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r2b" parent="ps0" style="text;fontSize=12;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Lions" vertex="1">
+          <mxGeometry height="18" width="139" x="233" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r2c" parent="ps0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="14" width="139" x="233" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r3" parent="ps0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="68" width="185" y="288" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r3a" parent="ps0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="8" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r3b" parent="ps0" style="text;fontSize=12;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Packers" vertex="1">
+          <mxGeometry height="18" width="139" x="38" y="302" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r3c" parent="ps0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="14" width="139" x="38" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r4" parent="ps0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="68" width="185" x="195" y="288" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r4a" parent="ps0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="203" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r4b" parent="ps0" style="text;fontSize=12;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Vikings" vertex="1">
+          <mxGeometry height="18" width="139" x="233" y="302" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5r4c" parent="ps0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="14" width="139" x="233" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="ps5more" parent="ps0" style="text;fontSize=11;fontColor=#555555;align=center;spacingRight=10;verticalAlign=middle;" value="View all teams →" vertex="1">
+          <mxGeometry height="24" width="380" y="364" as="geometry" />
+        </mxCell>
+        <mxCell id="ps6h" parent="ps0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=10;verticalAlign=middle;" value="SCHEDULE" vertex="1">
+          <mxGeometry height="20" width="380" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="ps6p" parent="ps0" style="rounded=1;fillColor=#f8f8f8;strokeColor=#cccccc;dashed=1;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="72" width="380" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="ps6pa" parent="ps0" style="text;fontSize=11;fontColor=#aaaaaa;align=center;verticalAlign=middle;" value="No schedule yet" vertex="1">
+          <mxGeometry height="18" width="380" y="428" as="geometry" />
+        </mxCell>
+        <mxCell id="ps6pb" parent="ps0" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=11;" value="Generate Schedule" vertex="1">
+          <mxGeometry height="28" width="150" x="115" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="dp0" parent="1" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#444444;fontStyle=1;fontSize=11;rounded=1;" value="Desktop — Pre-season" vertex="1">
+          <mxGeometry height="540" width="620" x="420" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dp1" parent="dp0" style="fillColor=#3a3a3a;strokeColor=#3a3a3a;" value="" vertex="1">
+          <mxGeometry height="516" width="160" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="dp2" parent="dp0" style="fillColor=#2a2a2a;strokeColor=#2a2a2a;" value="" vertex="1">
+          <mxGeometry height="50" width="160" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="dp3" parent="dp0" style="fillColor=#666666;strokeColor=#666666;rounded=1;" value="" vertex="1">
+          <mxGeometry height="28" width="28" x="10" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dp4" parent="dp0" style="text;fontSize=12;fontStyle=1;fontColor=#ffffff;align=left;verticalAlign=middle;" value="FootballSim" vertex="1">
+          <mxGeometry height="28" width="108" x="44" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dp5" parent="dp0" style="text;fontSize=12;fontColor=#888888;align=left;spacingLeft=12;verticalAlign=middle;" value="Game" vertex="1">
+          <mxGeometry height="34" width="148" x="6" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="dp6" parent="dp0" style="rounded=1;fillColor=#555555;strokeColor=#555555;" value="" vertex="1">
+          <mxGeometry height="34" width="148" x="6" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="dp7" parent="dp0" style="text;fontSize=12;fontStyle=1;fontColor=#ffffff;align=left;spacingLeft=12;verticalAlign=middle;" value="League" vertex="1">
+          <mxGeometry height="34" width="148" x="6" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="dp8" parent="dp0" style="fillColor=#ffffff;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="516" width="460" x="160" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="dp9" parent="dp0" style="text;fontSize=11;fontColor=#555555;align=left;spacingLeft=12;verticalAlign=middle;" value="← Seasons   /   2025" vertex="1">
+          <mxGeometry height="22" width="440" x="160" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dp10a" parent="dp0" style="text;fontSize=16;fontStyle=1;align=left;spacingLeft=14;verticalAlign=middle;" value="2025 Season" vertex="1">
+          <mxGeometry height="70" width="200" x="170" y="58" as="geometry" />
+        </mxCell>
+        <mxCell id="dp10b" parent="dp0" style="text;fontSize=12;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Pre-season" vertex="1">
+          <mxGeometry height="22" width="220" x="376" y="66" as="geometry" />
+        </mxCell>
+        <mxCell id="dp10c" parent="dp0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="No schedule generated" vertex="1">
+          <mxGeometry height="16" width="220" x="376" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dp11h" parent="dp0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=8;verticalAlign=middle;" value="TEAMS" vertex="1">
+          <mxGeometry height="24" width="320" x="170" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="dp11b" parent="dp0" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=11;" value="+ Add Team" vertex="1">
+          <mxGeometry height="22" width="110" x="490" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r1" parent="dp0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="90" width="215" x="170" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r1a" parent="dp0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="36" width="36" x="178" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r1b" parent="dp0" style="text;fontSize=13;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Bears" vertex="1">
+          <mxGeometry height="20" width="155" x="222" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r1c" parent="dp0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="16" width="155" x="222" y="206" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r1d" parent="dp0" style="text;fontSize=18;fontColor=#aaaaaa;align=right;spacingRight=10;verticalAlign=middle;" value="→" vertex="1">
+          <mxGeometry height="90" width="215" x="170" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r2" parent="dp0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="90" width="215" x="395" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r2a" parent="dp0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="36" width="36" x="403" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r2b" parent="dp0" style="text;fontSize=13;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Lions" vertex="1">
+          <mxGeometry height="20" width="155" x="447" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r2c" parent="dp0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="16" width="155" x="447" y="206" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r2d" parent="dp0" style="text;fontSize=18;fontColor=#aaaaaa;align=right;spacingRight=10;verticalAlign=middle;" value="→" vertex="1">
+          <mxGeometry height="90" width="215" x="395" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r3" parent="dp0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="90" width="215" x="170" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r3a" parent="dp0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="36" width="36" x="178" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r3b" parent="dp0" style="text;fontSize=13;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Packers" vertex="1">
+          <mxGeometry height="20" width="155" x="222" y="282" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r3c" parent="dp0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="16" width="155" x="222" y="306" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r3d" parent="dp0" style="text;fontSize=18;fontColor=#aaaaaa;align=right;spacingRight=10;verticalAlign=middle;" value="→" vertex="1">
+          <mxGeometry height="90" width="215" x="170" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r4" parent="dp0" style="rounded=1;fillColor=#f0f0f0;strokeColor=#dddddd;" value="" vertex="1">
+          <mxGeometry height="90" width="215" x="395" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r4a" parent="dp0" style="rounded=1;fillColor=#cccccc;strokeColor=#bbbbbb;" value="" vertex="1">
+          <mxGeometry height="36" width="36" x="403" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r4b" parent="dp0" style="text;fontSize=13;fontStyle=1;align=left;spacingLeft=8;verticalAlign=middle;" value="Vikings" vertex="1">
+          <mxGeometry height="20" width="155" x="447" y="282" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r4c" parent="dp0" style="text;fontSize=10;fontColor=#777777;align=left;spacingLeft=8;verticalAlign=middle;" value="0-0-0" vertex="1">
+          <mxGeometry height="16" width="155" x="447" y="306" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12r4d" parent="dp0" style="text;fontSize=18;fontColor=#aaaaaa;align=right;spacingRight=10;verticalAlign=middle;" value="→" vertex="1">
+          <mxGeometry height="90" width="215" x="395" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="dp12more" parent="dp0" style="text;fontSize=11;fontColor=#555555;align=center;spacingRight=8;verticalAlign=middle;" value="View all teams →" vertex="1">
+          <mxGeometry height="22" width="440" x="170" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="dp13h" parent="dp0" style="text;fontSize=10;fontStyle=1;fontColor=#888888;align=left;spacingLeft=8;verticalAlign=middle;" value="SCHEDULE" vertex="1">
+          <mxGeometry height="20" width="440" x="170" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="dp13p" parent="dp0" style="rounded=1;fillColor=#f8f8f8;strokeColor=#cccccc;dashed=1;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="72" width="440" x="170" y="424" as="geometry" />
+        </mxCell>
+        <mxCell id="dp13pa" parent="dp0" style="text;fontSize=11;fontColor=#aaaaaa;align=center;verticalAlign=middle;" value="No schedule yet" vertex="1">
+          <mxGeometry height="18" width="440" x="170" y="432" as="geometry" />
+        </mxCell>
+        <mxCell id="dp13pb" parent="dp0" style="rounded=1;fillColor=#333333;strokeColor=#333333;fontColor=#ffffff;fontStyle=1;fontSize=11;" value="Generate Schedule" vertex="1">
+          <mxGeometry height="28" width="150" x="315" y="454" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
